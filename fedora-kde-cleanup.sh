@@ -52,7 +52,7 @@ cp -v config.conf /etc/skel/.config/neofetch/
 # Install and configure zsh.
 dnf install -y zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl https://raw.githubusercontent.com/jeremypass96/linux-stuff/main/Dotfiles/.zshrc -o -o /home/$USER/.zshrc
+curl https://raw.githubusercontent.com/jeremypass96/linux-stuff/main/Dotfiles/.zshrc -o /home/$USER/.zshrc
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
