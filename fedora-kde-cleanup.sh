@@ -22,7 +22,7 @@ rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 dnf install -y brave-browser
 
 # Remove bloatware.
-dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kcolorchooser kgpg kmag kmouth qt-qdbusviewer firefox
+dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kcolorchooser kgpg kmag kmouth qt5-qdbusviewer firefox
 
 # Install XanMod Linux kernel.
 dnf copr enable -y rmnscnce/kernel-xanmod
