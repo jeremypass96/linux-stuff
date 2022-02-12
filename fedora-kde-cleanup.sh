@@ -13,16 +13,8 @@ dnf update -y
 # Add RPMFusion repositories.
 dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-# Add Brave browser repositories.
-dnf install -y dnf-plugins-core
-dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
-rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-
-# Install Brave browser.
-dnf install -y brave-browser
-
 # Remove bloatware.
-dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kcolorchooser kgpg kmag kmouth qt5-qdbusviewer firefox
+dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kcolorchooser kgpg kmag kmouth qt5-qdbusviewer
 
 # Install some useful software.
 dnf install -y vlc kdenlive pinta audacity-freeworld
@@ -37,7 +29,7 @@ chown $USER /home/$USER/.config/micro/*
 mkdir -p /etc/skel/.config/micro
 cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
 
-# Install and  configure neofetch.
+# Install and configure neofetch.
 mkdir /home/$USER/.config/neofetch
 dnf install -y neofetch
 curl https://raw.githubusercontent.com/jeremypass96/freebsd-setup-scripts/main/Dotfiles/config/neofetch/config.conf -o /home/$USER/.config/neofetch/config.conf
