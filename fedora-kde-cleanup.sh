@@ -29,7 +29,8 @@ dnf install -y micro xclip && dnf remove -y nano
 # Configure micro.
 mkdir /home/$USER/.config/micro
 curl https://raw.githubusercontent.com/jeremypass96/freebsd-setup-scripts/main/Dotfiles/config/micro/settings.json -o /home/$USER/.config/micro/settings.json
-chown $USER /home/$USER/.config/micro/*
+chown $USER:$USER /home/$USER/.config/micro
+chown $USER:$USER /home/$USER/.config/micro/*
 mkdir -p /etc/skel/.config/micro
 cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
 
@@ -37,7 +38,8 @@ cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
 mkdir /home/$USER/.config/neofetch
 dnf install -y neofetch
 curl https://raw.githubusercontent.com/jeremypass96/freebsd-setup-scripts/main/Dotfiles/config/neofetch/config.conf -o /home/$USER/.config/neofetch/config.conf
-chown $USER /home/$USER/.config/neofetch/*
+chown $USER:$USER /home/$USER/.config/neofetch
+chown $USER:$USER /home/$USER/.config/neofetch/*
 mkdir -p /etc/skel/.config/neofetch
 cp -v /home/$USER/.config/neofetch/config.conf /etc/skel/.config/neofetch/
 
