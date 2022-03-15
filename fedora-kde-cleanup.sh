@@ -21,7 +21,7 @@ dnf copr enable rmnscnce/kernel-xanmod
 dnf install -y kernel-xanmod-tt
 
 # Install some useful software.
-dnf install -y vlc kdenlive pinta audacity-freeworld
+dnf install -y vlc kdenlive pinta audacity-freeworld command-not-found
 
 # Install the micro text editor and remove nano.
 dnf install -y micro xclip && dnf remove -y nano
