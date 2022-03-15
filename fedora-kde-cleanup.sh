@@ -16,6 +16,10 @@ dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-
 # Remove bloatware.
 dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kcolorchooser kgpg kmag kmouth qt5-qdbusviewer
 
+# Install XanMod Linux kernel.
+dnf copr enable rmnscnce/kernel-xanmod
+dnf install -y kernel-xanmod-tt
+
 # Install some useful software.
 dnf install -y vlc kdenlive pinta audacity-freeworld
 
