@@ -16,7 +16,7 @@ wget -qO - https://deb.volian.org/volian/scar.key | tee /etc/apt/trusted.gpg.d/v
 apt update && apt install -y nala
 
 # Install Papirus icons.
-add-apt-repository ppa:papirus/papirus
+add-apt-repository -y ppa:papirus/papirus
 nala update
 nala install papirus-icon-theme
 
