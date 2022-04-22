@@ -22,6 +22,7 @@ nala install papirus-icon-theme
 
 # Remove bloatware. If you installed Kubuntu with the minimal install option, then you're all set!
 nala purge -y libreoffice* elisa
+nala autopurge -y
 
 # Install useful software.
 nala install -y micro neofetch vlc fonts-roboto fonts-roboto-hinted
