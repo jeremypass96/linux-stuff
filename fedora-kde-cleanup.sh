@@ -28,7 +28,7 @@ dnf install -y micro xclip && dnf remove -y nano
 
 # Configure micro.
 mkdir /home/$USER/.config/micro
-curl https://raw.githubusercontent.com/jeremypass96/freebsd-setup-scripts/main/Dotfiles/config/micro/settings.json -o /home/$USER/.config/micro/settings.json
+cp /home/$USER/linux-stuff/Dotfiles/config/micro/settings.json -o /home/$USER/.config/micro/settings.json
 chown $USER:$USER /home/$USER/.config/micro
 chown $USER:$USER /home/$USER/.config/micro/*
 mkdir -p /etc/skel/.config/micro
@@ -37,7 +37,7 @@ cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
 # Install and configure neofetch.
 mkdir /home/$USER/.config/neofetch
 dnf install -y neofetch
-curl https://raw.githubusercontent.com/jeremypass96/freebsd-setup-scripts/main/Dotfiles/config/neofetch/config.conf -o /home/$USER/.config/neofetch/config.conf
+cp /home/$USER/linux-stuff/Dotfiles/config/neofetch/config.conf -o /home/$USER/.config/neofetch/config.conf
 chown $USER:$USER /home/$USER/.config/neofetch
 chown $USER:$USER /home/$USER/.config/neofetch/*
 mkdir -p /etc/skel/.config/neofetch
@@ -46,7 +46,7 @@ cp -v /home/$USER/.config/neofetch/config.conf /etc/skel/.config/neofetch/
 # Install and configure zsh.
 dnf install -y zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl https://raw.githubusercontent.com/jeremypass96/linux-stuff/main/Dotfiles/.zshrc -o /home/$USER/.zshrc
+cp /home/$USER/linux-stuff/Dotfiles/.zshrc -o /home/$USER/.zshrc
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
