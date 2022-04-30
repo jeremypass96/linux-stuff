@@ -11,7 +11,7 @@ fi
 apt update
 
 # Add Nala repo and install nala, a nicer and better apt frontend.
-echo "deb [arch=amd64,arm64,armhf] http://deb.volian.org/volian/ scar main" | tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
+echo "deb [arch=amd64] http://deb.volian.org/volian/ scar main" | tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
 wget -qO - https://deb.volian.org/volian/scar.key | tee /etc/apt/trusted.gpg.d/volian-archive-scar-unstable.gpg > /dev/null
 apt update && apt install -y nala
 
