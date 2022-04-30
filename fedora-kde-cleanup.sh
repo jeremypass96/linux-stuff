@@ -14,11 +14,16 @@ dnf update -y
 dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Remove bloatware.
-dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kcolorchooser kgpg kmag kmouth qt5-qdbusviewer
+dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kcolorchooser kgpg kmag kmouth qt5-qdbusviewer firefox
 
 # Install XanMod Linux kernel.
 dnf copr enable rmnscnce/kernel-xanmod
 dnf install -y kernel-xanmod-tt
+
+# Install the Brave browser.
+dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+dnf install brave-browser
 
 # Install some useful software.
 dnf install -y vlc kdenlive pinta audacity-freeworld PackageKit-command-not-found
