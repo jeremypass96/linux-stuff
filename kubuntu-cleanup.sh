@@ -17,7 +17,7 @@ apt update ; apt install -y nala
 
 # Install Papirus icons.
 add-apt-repository -y ppa:papirus/papirus
-nala update ; nala install papirus-icon-theme
+nala update ; nala install -y papirus-icon-theme
 
 # Remove bloatware. If you installed Kubuntu with the minimal install option, then you're all set!
 nala purge -y libreoffice* elisa firefox
@@ -31,7 +31,7 @@ nala install apt-transport-https curl
 curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
 nala update
-nala install brave-browser
+nala install -y brave-browser
 
 # Configure micro.
 mkdir /home/$USER/.config/micro
