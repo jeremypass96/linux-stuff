@@ -13,6 +13,10 @@ dnf update -y
 # Add RPMFusion repositories.
 dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
+# Install Papirus icons.
+dnf copr enable dirkdavidis/papirus-icon-theme
+dnf install -y papirus-icon-theme
+
 # Remove bloatware.
 dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kcolorchooser kgpg kmag kmouth qt5-qdbusviewer firefox
 
