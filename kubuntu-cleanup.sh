@@ -53,5 +53,9 @@ cp -v /home/$USER/.config/neofetch/config.conf /etc/skel/.config/neofetch/
 # Install KDE wallpapers.
 nala install -y plasma-workspace-wallpapers
 
+# Install Zsh.
+nala install -y zsh
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
 # Cleanup systemd boot.
 ./cleanup-systemd-boot-linux.sh
