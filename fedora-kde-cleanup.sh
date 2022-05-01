@@ -57,3 +57,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/p
 
 # Install KDE wallapers.
 dnf install -y plasma-workspace-wallpapers
+
+# Cleanup systemd boot.
+./cleanup-systemd-boot-linux.sh
