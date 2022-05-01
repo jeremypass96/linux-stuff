@@ -48,12 +48,9 @@ chown $USER:$USER /home/$USER/.config/neofetch/*
 mkdir -p /etc/skel/.config/neofetch
 cp -v /home/$USER/.config/neofetch/config.conf /etc/skel/.config/neofetch/
 
-# Install and configure zsh.
+# Install Zsh.
 dnf install -y zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-cp /home/$USER/linux-stuff/Dotfiles/.zshrc -o /home/$USER/.zshrc
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
 # Install KDE wallapers.
 dnf install -y plasma-workspace-wallpapers
