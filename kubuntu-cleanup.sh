@@ -49,16 +49,16 @@ chown $USER:$USER /home/$USER/.config/neofetch/*
 mkdir -p /etc/skel/.config/neofetch
 cp -v /home/$USER/.config/neofetch/config.conf /etc/skel/.config/neofetch/
 
-# Install and configure zsh.
-nala install -y zsh
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-cp -v /home/$USER/linux-stuff/Dotfiles/.zshrc /home/$USER/.zshrc
-cp -v /home/$USER/.zshrc /etc/skel/.zshrc
-git clone https://github.com/zsh-users/zsh-autosuggestions.git /home/$USER/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/$USER/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-
 # Install KDE wallpapers.
 nala install -y plasma-workspace-wallpapers
 
 # Cleanup systemd boot.
 ./cleanup-systemd-boot-linux.sh
+
+# Install and configure zsh.
+nala install -y zsh
+cp -v /home/$USER/linux-stuff/Dotfiles/.zshrc /home/$USER/.zshrc
+cp -v /home/$USER/.zshrc /etc/skel/.zshrc
+git clone https://github.com/zsh-users/zsh-autosuggestions.git /home/$USER/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/$USER/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
