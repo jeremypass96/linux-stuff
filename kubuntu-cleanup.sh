@@ -2,7 +2,7 @@
 # This shell script cleans up a Kubuntu install and removes unnecessary bloatware included with the operating system (if installed with the "Normal installation" option).
 
 # Checking to see if we're running as root.
-if [ $(id -u) -ne 0 ] ; then
+if [ $(id -u) -ne 0 ]; then
 echo "Please run this script as root! Thanks."
 exit
 fi
