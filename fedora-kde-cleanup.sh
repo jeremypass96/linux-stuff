@@ -60,4 +60,4 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 dnf install -y plasma-workspace-wallpapers
 
 # Cleanup systemd boot.
-./cleanup-systemd-boot-linux.sh
+./cleanup-systemd-boot.sh
