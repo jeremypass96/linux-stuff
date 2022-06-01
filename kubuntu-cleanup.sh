@@ -36,22 +36,6 @@ sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any m
 nala update
 nala install -y atom
 
-# Configure micro.
-mkdir /home/$USER/.config/micro
-cp -v /home/$USER/linux-stuff/Dotfiles/config/micro/settings.json /home/$USER/.config/micro/settings.json
-chown $USER:$USER /home/$USER/.config/micro
-chown $USER:$USER /home/$USER/.config/micro/*
-mkdir -p /etc/skel/.config/micro
-cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
-
-# Install and configure neofetch.
-mkdir /home/$USER/.config/neofetch
-cp -v /home/$USER/linux-stuff/Dotfiles/config/neofetch/config.conf /home/$USER/.config/neofetch/config.conf
-chown $USER:$USER /home/$USER/.config/neofetch
-chown $USER:$USER /home/$USER/.config/neofetch/*
-mkdir -p /etc/skel/.config/neofetch
-cp -v /home/$USER/.config/neofetch/config.conf /etc/skel/.config/neofetch/
-
 # Install KDE wallpapers.
 nala install -y plasma-workspace-wallpapers
 
