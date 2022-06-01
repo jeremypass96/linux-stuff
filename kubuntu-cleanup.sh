@@ -46,7 +46,7 @@ cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
 
 # Install and configure neofetch.
 mkdir /home/$USER/.config/neofetch
-dnf install -y neofetch
+nala install -y neofetch
 cp -v /home/$USER/linux-stuff/Dotfiles/config/neofetch/config.conf /home/$USER/.config/neofetch/config.conf
 chown $USER:$USER /home/$USER/.config/neofetch
 chown $USER:$USER /home/$USER/.config/neofetch/*
