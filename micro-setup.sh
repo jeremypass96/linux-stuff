@@ -5,3 +5,5 @@ chown $USER:$USER /home/$USER/.config/micro
 chown $USER:$USER /home/$USER/.config/micro/*
 sudo mkdir -p /etc/skel/.config/micro
 sudo cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
+sudo mkdir -p /root/.config/micro
+sudo cp -v /etc/skel/.config/micro/settings.json /root/.config/micro
