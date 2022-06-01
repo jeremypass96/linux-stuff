@@ -52,12 +52,12 @@ chown $USER:$USER /home/$USER/.config/neofetch/*
 mkdir -p /etc/skel/.config/neofetch
 cp -v /home/$USER/.config/neofetch/config.conf /etc/skel/.config/neofetch/
 
-# Install Zsh.
-dnf install -y zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 # Install KDE wallapers.
 dnf install -y plasma-workspace-wallpapers
 
 # Cleanup systemd boot.
 ./cleanup-systemd-boot.sh
+
+# Install Zsh.
+dnf install -y zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
