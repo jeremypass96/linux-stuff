@@ -4,4 +4,4 @@ cp -v /home/$USER/linux-stuff/Dotfiles/config/micro/settings.json /home/$USER/.c
 chown $USER:$USER /home/$USER/.config/micro
 chown $USER:$USER /home/$USER/.config/micro/*
 sudo mkdir -p /etc/skel/.config/micro
-Sudo cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
+sudo cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/

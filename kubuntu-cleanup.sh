@@ -17,7 +17,7 @@ add-apt-repository -y ppa:papirus/papirus
 nala update; nala install -y papirus-icon-theme
 
 # Remove bloatware. If you installed Kubuntu with the minimal install option, then you're all set!
-nala purge -y libreoffice* elisa ktorrent thunderbird konversation krdc kmahjongg ksudoku xserver-xorg-input-wacom kate plasma-discover
+nala purge -y libreoffice* elisa ktorrent thunderbird konversation krdc kmahjongg ksudoku xserver-xorg-input-wacom kate plasma-discover imagemagick-6.q16
 nala autopurge -y
 snap remove --purge firefox
 
