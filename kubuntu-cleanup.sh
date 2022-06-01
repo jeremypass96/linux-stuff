@@ -22,7 +22,7 @@ nala autopurge -y
 snap remove --purge firefox
 
 # Install useful software.
-nala install -y micro neofetch vlc fonts-roboto fonts-roboto-hinted
+nala install -y micro fonts-roboto fonts-roboto-hinted
 
 # Install the Brave browser.
 nala install -y apt-transport-https curl
@@ -46,7 +46,6 @@ cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
 
 # Install and configure neofetch.
 mkdir /home/$USER/.config/neofetch
-nala install -y neofetch
 cp -v /home/$USER/linux-stuff/Dotfiles/config/neofetch/config.conf /home/$USER/.config/neofetch/config.conf
 chown $USER:$USER /home/$USER/.config/neofetch
 chown $USER:$USER /home/$USER/.config/neofetch/*
