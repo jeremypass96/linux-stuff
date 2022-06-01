@@ -1,4 +1,6 @@
 #!/bin/bash
 apm install atom-ui-tweaks
-cp -rv /home/$USER/linux-stuff/Dotfiles/.atom /home/$USER/.atom
-sudo cp -rv /home/$USER/linux-stuff/Dotfiles/.atom /etc/skel/.atom
+mkdir /home/$USER/.atom
+sudo mkdir /etc/skel/.atom
+cp -v /home/$USER/linux-stuff/Dotfiles/.atom/config.cson /home/$USER/.atom/config.cson
+sudo cp -v /home/$USER/linux-stuff/Dotfiles/.atom/config.cson /etc/skel/.atom/config.cson
