@@ -10,11 +10,11 @@ fi
 # Add Nala repo and install nala, a nicer and better apt frontend.
 echo "deb [arch=amd64] http://deb.volian.org/volian/ scar main" | tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
 wget -qO - https://deb.volian.org/volian/scar.key | tee /etc/apt/trusted.gpg.d/volian-archive-scar-unstable.gpg > /dev/null
-apt update ; apt install -y nala
+apt update; apt install -y nala
 
 # Install Papirus icons.
 add-apt-repository -y ppa:papirus/papirus
-nala update ; nala install -y papirus-icon-theme
+nala update; nala install -y papirus-icon-theme
 
 # Remove bloatware. If you installed Kubuntu with the minimal install option, then you're all set!
 nala purge -y libreoffice* elisa ktorrent thunderbird konversation krdc kmahjongg ksudoku xserver-xorg-input-wacom kate plasma-discover
@@ -28,7 +28,7 @@ nala install -y micro neofetch vlc fonts-roboto fonts-roboto-hinted
 nala install -y apt-transport-https curl
 curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
-nala update ; nala install -y brave-browser
+nala update; nala install -y brave-browser
 
 # Configure micro.
 mkdir /home/$USER/.config/micro
