@@ -35,27 +35,10 @@ sh -c 'echo -e "[Atom]\nname=Atom Editor\nbaseurl=https://packagecloud.io/AtomEd
 dnf install -y atom
 
 # Install some useful software.
-dnf install -y vlc kdenlive pinta audacity-freeworld PackageKit-command-not-found
+dnf install -y neofetch vlc kdenlive pinta audacity-freeworld PackageKit-command-not-found
 
 # Install the micro text editor and remove nano.
 dnf install -y micro xclip && dnf remove -y nano
-
-# Configure micro.
-mkdir /home/$USER/.config/micro
-cp /home/$USER/linux-stuff/Dotfiles/config/micro/settings.json -o /home/$USER/.config/micro/settings.json
-chown $USER:$USER /home/$USER/.config/micro
-chown $USER:$USER /home/$USER/.config/micro/*
-mkdir -p /etc/skel/.config/micro
-cp -v /home/$USER/.config/micro/settings.json /etc/skel/.config/micro/
-
-# Install and configure neofetch.
-mkdir /home/$USER/.config/neofetch
-dnf install -y neofetch
-cp /home/$USER/linux-stuff/Dotfiles/config/neofetch/config.conf -o /home/$USER/.config/neofetch/config.conf
-chown $USER:$USER /home/$USER/.config/neofetch
-chown $USER:$USER /home/$USER/.config/neofetch/*
-mkdir -p /etc/skel/.config/neofetch
-cp -v /home/$USER/.config/neofetch/config.conf /etc/skel/.config/neofetch/
 
 # Install KDE wallapers.
 dnf install -y plasma-workspace-wallpapers
