@@ -29,6 +29,11 @@ dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 dnf install -y brave-browser
 
+# Install the Atom text editor.
+rpm --import https://packagecloud.io/AtomEditor/atom/gpgkey
+sh -c 'echo -e "[Atom]\nname=Atom Editor\nbaseurl=https://packagecloud.io/AtomEditor/atom/el/7/\$basearch\nenabled=1\ngpgcheck=0\nrepo_gpgcheck=1\ngpgkey=https://packagecloud.io/AtomEditor/atom/gpgkey" > /etc/yum.repos.d/atom.repo'
+dnf install -y atom
+
 # Install some useful software.
 dnf install -y vlc kdenlive pinta audacity-freeworld PackageKit-command-not-found
 
