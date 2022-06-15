@@ -12,7 +12,7 @@ clear
 # Make DNF faster.
 echo "fastestmirror=True" >> /etc/dnf/dnf.conf
 echo "deltarpm=True" >> /etc/dnf/dnf.conf
-echo "max_parallel_downloads=15" >> /etc/dnf/dnf.conf
+echo "max_parallel_downloads=20" >> /etc/dnf/dnf.conf
 
 # Update Fedora install.
 dnf update -y
