@@ -7,6 +7,11 @@ echo "Please run this script as root! Thanks."
 exit
 fi
 
+# Make DNF faster.
+echo "fastestmirror=True" >> /etc/dnf/dnf.conf
+echo "deltarpm=True" >> /etc/dnf/dnf.conf
+echo "max_parallel_downloads=15" >> /etc/dnf/dnf.conf
+
 # Update Fedora install.
 dnf update -y
 
@@ -36,6 +41,9 @@ dnf install -y atom
 
 # Install some useful software.
 dnf install -y neofetch vlc kdenlive pinta audacity-freeworld PackageKit-command-not-found
+
+# Install codecs.
+dnf install -y gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel lame\* --exclude=lame-devel
 
 # Install the micro text editor and remove nano.
 dnf install -y micro xclip && dnf remove -y nano
