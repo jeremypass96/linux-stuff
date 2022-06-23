@@ -64,7 +64,7 @@ dnf install -y gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh2
 clear
 
 # Install the micro text editor and remove nano.
-dnf install -y micro xclip && dnf remove -y nano
+dnf install -y micro xclip ; dnf remove -y nano
 
 clear
 
