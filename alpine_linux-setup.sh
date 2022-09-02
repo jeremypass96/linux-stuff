@@ -16,7 +16,7 @@ apk update
 apk add --upgrade apk-tools
 
 # Install base packages.
-apk add linux-edge mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion neofetch btop
+apk add linux-edge util-linux pciutils usbutils coreutils binutils findutils mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion neofetch btop micro alsa-utils alsa-lib alsaconf alsa-ucm-conf doas-sudo-shim ntfs-3g ntfs-3g-progs
 
 # Install fonts.
 apk add terminus-font ttf-inconsolata ttf-dejavu font-bitstream-100dpi font-bitstream-75dpi font-bitstream-type1 font-noto ttf-font-awesome font-noto-extra font-croscore font-adobe-source-code-pro font-ibm-plex-mono-nerd ttf-opensans ttf-linux-libertine ttf-liberation ttf-droid font-cursor-misc font-ibm-type1
@@ -24,6 +24,10 @@ fc-cache -f
 
 # Install Xorg.
 setup-xorg-base
+
+# Add users to audio group.
+addgroup $USER audio
+addgroup root audio
 
 clear
 
@@ -56,6 +60,7 @@ apk add xf86-video-nv linux-firmware-nvidia
 fi
 if [ "$resp" = 4 ]; then
 apk add xf86-video-intel linux-firmware-i915
+fi
 if [ "$resp" = 5 ]; then
 apk add xf86-video-vmware virtualbox-guest-additions virtualbox-guest-additions-x11
 rc-update add virtualbox-guest-additions
@@ -118,9 +123,22 @@ rc-update add polkit
 rc-update add udev
 rc-update add networkmanager
 rc-update add sddm
+rc-service alsa start
+rc-update add alsa
+
+# Add users to groups.
+addgroup $USER audio
+addgroup root audio
+adduser $USER plugdev
 
 # Upgrade everything else.
 apk upgrade --available
 sync
+
+# Install other software.
+apk add vlc-qt transmission pinta inkscape chromium k3b
+
+# Prettify /etc/os-release (add logo line)
+echo "LOGO=distributor-logo-alpine" >> /etc/os-release
 
 echo "If everything was sucessfull, go ahead and reboot!"
