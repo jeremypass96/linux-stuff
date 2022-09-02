@@ -129,7 +129,8 @@ rc-update add alsa
 # Add users to groups.
 addgroup $USER audio
 addgroup root audio
-adduser $USER plugdev
+addgroup $USER plugdev
+addgroup $USER cdrom
 
 # Upgrade everything else.
 apk upgrade --available
