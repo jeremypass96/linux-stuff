@@ -7,6 +7,9 @@ echo "Please run this script as root via 'su' or 'sudo'! Thanks."
 exit
 fi
 
+# Setup APK cache.
+setup-apkcache /var/cache/apk
+
 # Update repos to "latest-stable" and upgrade the Alpine package manager.
 setup-apkrepos
 apk update
@@ -54,10 +57,14 @@ fi
 if [ "$resp" = 4 ]; then
 apk add xf86-video-intel linux-firmware-i915
 if [ "$resp" = 5 ]; then
-apk add xf86-video-vmware virtualbox-guest-additions
+apk add xf86-video-vmware virtualbox-guest-additions virtualbox-guest-additions-x11
+rc-update add virtualbox-guest-additions
+rc-service virtualbox-guest-additions start
 fi
 if [ "$resp" = 6 ]; then
-apk add xf86-video-vmware xf86-input-vmmouse
+apk add xf86-video-vmware xf86-input-vmmouse open-vm-tools open-vm-tools-openrc
+rc-update add open-vm-tools
+rc-service open-vm-tools start
 fi
 if [ "$resp" = 7 ]; then
 apk add xf86-video-savage
