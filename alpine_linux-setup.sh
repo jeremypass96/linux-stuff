@@ -7,6 +7,11 @@ echo "Please run this script as root via 'su' or 'sudo'! Thanks."
 exit
 fi
 
+# Update repos to "latest-stable" and upgrade the Alpine package manager.
+sed -i -e 's/v3\.16/latest-stable/g' /etc/apk/repositories
+apk update
+apk add --upgrade apk-tools
+
 # Install base packages.
 apk add linux-edge mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion
 
@@ -93,6 +98,9 @@ fi
 # Install KDE.
 apk add plasma kde-applications-base kcalc kcharselect kdf kwalletmanager juk print-manager sweep elogind polkit-elogind polkit-openrc dbus
 
+# Clean package cache.
+apk cache clean
+
 # Remove Linux LTS kernel.
 apk del linux-lts
 
@@ -103,3 +111,21 @@ rc-update add polkit
 rc-update add udev
 rc-update add networkmanager
 rc-update add sddm
+
+# Auto clean cache on future reboots.
+cat > /etc/local.d/cache.stop << EOF
+#!/bin/sh
+
+# verify the local cache on shutdown
+apk cache -v sync
+
+# We should always return 0
+return 0
+EOF
+
+# Upgrade everything else.
+apk upgrade --available
+lbu ci
+sync
+
+echo "If everything was sucessfull, go ahead and reboot!"
