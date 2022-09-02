@@ -13,7 +13,7 @@ apk update
 apk add --upgrade apk-tools
 
 # Install base packages.
-apk add linux-edge mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion util-linux duf neofetch btop
+apk add linux-edge mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion util-linux neofetch btop
 
 # Install fonts.
 apk add terminus-font ttf-inconsolata ttf-dejavu font-bitstream-* font-noto ttf-font-awesome font-noto-extra ttf-ubuntu-font-family font-croscore font-adobe-source-code-pro font-ibm-plex-mono-nerd ttf-opensans ttf-dejavu ttf-linux-libertine ttf-liberation ttf-droid font-cursor-misc font-ibm-type1
