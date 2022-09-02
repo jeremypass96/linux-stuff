@@ -132,7 +132,6 @@ EOF
 
 # Upgrade everything else.
 apk upgrade --available
-lbu ci
 sync
 
 echo "If everything was sucessfull, go ahead and reboot!"
