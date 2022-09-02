@@ -20,20 +20,22 @@ setup-xorg-base
 clear
 
 read -p "What video card do you have installed on your computer?
-1. AMD GPU
-2. ATI Radeon
-3. NVIDIA
-4. Intel
-5. VirtualBox
-6. VMware
-7. S3 Savage
-8. ATI Rage128
-9. 3Dfx
-10. S3 ViRGE
-11. Intel i740
-12. Chips and Technologies
-13. SiS
-14. VIA/S3G
+1.) AMD GPU
+2.) ATI Radeon
+3.) NVIDIA
+4.) Intel
+5.) VirtualBox
+6.) VMware
+7.) S3 Savage
+8.) ATI Rage128
+9.) 3Dfx
+10.) S3 ViRGE
+11.) Intel i740
+12.) Chips and Technologies
+13.) SiS
+14.) VIA/S3G
+
+0.) Not listed!
 –> " resp
 if [ "$resp" = 1 ]; then
 apk add xf86-video-amdgpu linux-firmware-amdgpu
@@ -76,6 +78,9 @@ fi
 if [ "$resp" = 14 ]; then
 apk add xf86-video-openchrome
 fi
+if [ "$resp" = 0 ]; then
+continue
+fi
 
 read -p "Do you have an AMD CPU installed? (y/n) " resp
 if [ "$resp" = y ]; then
@@ -86,7 +91,7 @@ continue
 fi
 
 # Install KDE.
-apk add plasma kde-applications-base kcalc kcharselect kdf kwalletmanager juk  print-manager sweep elogind polkit-elogind polkit-openrc dbus
+apk add plasma kde-applications-base kcalc kcharselect kdf kwalletmanager juk print-manager sweep elogind polkit-elogind polkit-openrc dbus
 
 # Remove Linux LTS kernel.
 apk del linux-lts
