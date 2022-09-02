@@ -20,7 +20,7 @@ setup-xorg-base
 clear
 
 read -p "What video card do you have installed on your computer?
-1. AMD GPU (Rx/HDxxxx)
+1. AMD GPU
 2. ATI Radeon
 3. NVIDIA
 4. Intel
