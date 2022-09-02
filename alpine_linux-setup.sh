@@ -119,17 +119,6 @@ rc-update add udev
 rc-update add networkmanager
 rc-update add sddm
 
-# Auto clean cache on future reboots.
-cat > /etc/local.d/cache.stop << EOF
-#!/bin/sh
-
-# verify the local cache on shutdown
-apk cache -v sync
-
-# We should always return 0
-return 0
-EOF
-
 # Upgrade everything else.
 apk upgrade --available
 sync
