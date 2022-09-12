@@ -46,13 +46,6 @@ dnf install -y brave-browser
 
 clear
 
-# Install the Atom text editor.
-rpm --import https://packagecloud.io/AtomEditor/atom/gpgkey
-sh -c 'echo -e "[Atom]\nname=Atom Editor\nbaseurl=https://packagecloud.io/AtomEditor/atom/el/7/\$basearch\nenabled=1\ngpgcheck=0\nrepo_gpgcheck=1\ngpgkey=https://packagecloud.io/AtomEditor/atom/gpgkey" > /etc/yum.repos.d/atom.repo'
-dnf install -y atom
-
-clear
-
 # Install some useful software.
 dnf install -y neofetch vlc pinta audacity-freeworld PackageKit-command-not-found
 
