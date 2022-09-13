@@ -10,9 +10,12 @@ fi
 clear
 
 # Make DNF faster.
-echo "fastestmirror=True" >> /etc/dnf/dnf.conf
-echo "deltarpm=True" >> /etc/dnf/dnf.conf
-echo "max_parallel_downloads=20" >> /etc/dnf/dnf.conf
+echo fastestmirror=True >> /etc/dnf/dnf.conf
+echo max_parallel_downloads=20 >> /etc/dnf/dnf.conf
+
+# Sane DNF defaults.
+echo defaultyes=True >> /etc/dnf/dnf.conf
+echo install_weak_deps=False >> /etc/dnf/dnf.conf
 
 # Remove bloatware.
 dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kgpg kmag kmouth qt5-qdbusviewer firefox dragon krdc krfb kolourpaint akregator im-chooser korganizer dnfdragora kmousetool mediawriter
