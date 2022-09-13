@@ -41,7 +41,7 @@ dnf install -y brave-browser
 clear
 
 # Install some useful software.
-dnf install -y neofetch vlc audacity-freeworld PackageKit-command-not-found duf btop
+dnf install -y neofetch vlc audacity-freeworld flac PackageKit-command-not-found duf btop HandBrake-gui ffmpegthumbs
 
 clear
 
@@ -51,6 +51,9 @@ flatpak install -y app/com.github.PintaProject.Pinta/x86_64/stable runtime/org.g
 
 # Install codecs.
 dnf install -y gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel lame\* --exclude=lame-devel
+
+# Install K3b.
+dnf install -y k3b cdrskin sox
 
 clear
 
