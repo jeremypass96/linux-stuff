@@ -41,7 +41,7 @@ dnf install -y brave-browser
 clear
 
 # Install some useful software.
-dnf install -y neofetch vlc audacity-freeworld flac PackageKit-command-not-found duf btop HandBrake-gui ffmpegthumbs
+dnf install -y neofetch vlc audacity-freeworld flac PackageKit-command-not-found duf btop HandBrake-gui ffmpegthumbs juk
 
 clear
 
