@@ -17,9 +17,9 @@ echo max_parallel_downloads=20 >> /etc/dnf/dnf.conf
 echo defaultyes=True >> /etc/dnf/dnf.conf
 echo install_weak_deps=False >> /etc/dnf/dnf.conf
 
-# Remove bloatware.
-dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kgpg kmag kmouth qt5-qdbusviewer firefox dragon krdc krfb kolourpaint akregator im-chooser korganizer dnfdragora kmousetool mediawriter
-dnf install -y plasma-browser-integration
+# Remove bloatware and install some KDE games.
+dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kgpg kmag kmouth kmahjongg qt5-qdbusviewer firefox dragon krdc krfb kolourpaint akregator im-chooser korganizer dnfdragora kmousetool mediawriter && dnf install -y plasma-browser-integration
+dnf install -y kapman kbrickbuster kblocks kbounce knetwalk
 
 # Update Fedora install.
 dnf update -y
