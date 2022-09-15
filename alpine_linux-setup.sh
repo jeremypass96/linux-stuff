@@ -142,4 +142,4 @@ apk add vlc-qt transmission pinta inkscape chromium k3b
 # Prettify /etc/os-release (add logo line)
 echo "LOGO=distributor-logo-alpine" >> /etc/os-release
 
-echo "If everything was sucessfull, go ahead and reboot!"
+echo "If everything was successful, go ahead and reboot!"
