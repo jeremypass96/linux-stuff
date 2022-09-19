@@ -18,8 +18,10 @@ echo defaultyes=True >> /etc/dnf/dnf.conf
 echo install_weak_deps=False >> /etc/dnf/dnf.conf
 
 # Remove bloatware and install some KDE games.
-dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kgpg kmag kmouth kmahjongg qt5-qdbusviewer firefox dragon krdc krfb kolourpaint akregator im-chooser korganizer dnfdragora kmousetool mediawriter && dnf install -y plasma-browser-integration
-dnf install -y kapman kbrickbuster kblocks kbounce knetwalk
+dnf remove -y libreoffice-* kaddressbook kmail kontact elisa-player kamoso kgpg kmag kmouth kmahjongg qt5-qdbusviewer firefox dragon krdc krfb kolourpaint akregator im-chooser korganizer dnfdragora kmousetool mediawriter && dnf install -y kapman kbrickbuster kblocks kbounce knetwalk
+
+# Install KDE Plasma browser integration (gets removed for some reason when removing bloatware).
+dnf install -y plasma-browser-integration
 
 # Update Fedora install.
 dnf update -y
@@ -32,7 +34,7 @@ dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-
 clear
 
 # Install Papirus icons.
-wget -qO- https://git.io/papirus-icon-theme-install | sh
+dnf install -y papirus-icon-theme
 
 clear
 
