@@ -25,10 +25,6 @@ fc-cache -f
 # Install Xorg.
 setup-xorg-base
 
-# Add users to audio group.
-addgroup $USER audio
-addgroup root audio
-
 clear
 
 read -p "What video card do you have installed on your computer?
@@ -117,10 +113,15 @@ apk cache clean
 apk del linux-lts
 
 # Enable services.
+rc-service dbus start
 rc-update add dbus
+rc-service elogind start
 rc-update add elogind
+rc-service polkit start
 rc-update add polkit
+rc-service udev start
 rc-update add udev
+rc-service networkmanager start
 rc-update add networkmanager
 rc-update add sddm
 rc-service alsa start
