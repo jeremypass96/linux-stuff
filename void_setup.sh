@@ -18,10 +18,11 @@ xbps-install -S vpm -y
 # Add extra nonfree repo.
 clear ; echo "Adding nonfree repo to system..."
 vpm addrepo void-repo-nonfree -y
+vpm update -y
 
 # Update OS.
-clear ; echo "Upgrading OS packages..."
-vpm update -y && vpm upgrade -y
+clear ; echo "Updating OS packages..."
+vpm upgrade -y
 
 # Install Xorg server.
 clear ; echo "Installing Xorg server..."
