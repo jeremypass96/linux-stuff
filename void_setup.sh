@@ -11,7 +11,7 @@ fi
 echo "Changing to US mirrors and syncing repos..."
 mkdir -p /etc/xbps.d
 cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
-sed -i 's|https://repo-default.voidlinux.org|https://repo-us.voidlinux.org|g' /etc/xbps.d/*-repository-*.conf
+sed -i s/'https://repo-default.voidlinux.org'/'https://repo-us.voidlinux.org'/g /etc/xbps.d/*-repository-*.conf
 xbps-install -S
 
 # Install VPM (Void Package Management Utility), XBPS user-friendly front-end.
