@@ -73,6 +73,7 @@ flatpak install -y flathub com.brave.Browser
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && ./install.sh -t stylish
 echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
+update-grub
 
 # Secure the OS.
 sed -i 77s/'022'/'077'/g /etc/login.defs
