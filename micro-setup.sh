@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir /home/$USER/.config/micro
+mkdir -p /home/$USER/.config/micro
 cp -v /home/$USER/linux-stuff/Dotfiles/config/micro/settings.json /home/$USER/.config/micro/settings.json
 chown $USER:$USER /home/$USER/.config/micro
 chown $USER:$USER /home/$USER/.config/micro/*

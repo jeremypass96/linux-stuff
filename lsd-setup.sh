@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir /home/$USER/.config/lsd
+mkdir -p /home/$USER/.config/lsd
 cp -v /home/$USER/linux-stuff/Dotfiles/config/lsd/config.yaml /home/$USER/.config/lsd/config.yaml
 chown $USER:$USER /home/$USER/.config/lsd
 chown $USER:$USER /home/$USER/.config/lsd/*
