@@ -38,6 +38,10 @@ ln -s /etc/sv/elogind /var/service/
 clear ; echo "Installing misc. utilities..."
 vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g -y
 
+# Enable printing support.
+vpm install cups hplip -y
+ln -s /etc/sv/cupsd /var/service/
+
 # Install fonts.
 clear ; echo "Installing fonts..."
 vpm install nerd-fonts google-fonts-ttf -y
@@ -81,7 +85,9 @@ update-grub
 # Secure the OS.
 sed -i 77s/'022'/'077'/g /etc/login.defs
 sed -i 26s/'022'/'077'/g /etc/profile
-vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog -y ; ln -s /etc/sv/puppet /var/service/ ; ln -s /etc/sv/rsyslogd /var/service/
+vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog audit aide -y
+ln -s /etc/sv/puppet /var/service/ ; ln -s /etc/sv/rsyslogd /var/service/ ; ln -s /etc/sv/auditd /var/service/ ; ln -s /etc/sv/ufw /var/service/
+aide -i
 chmod og-rwx /boot/grub/grub.cfg
 chmod og-rwx /etc/ssh/sshd_config
 chmod og-rwx /etc/cron.daily
@@ -111,7 +117,6 @@ sed -i s/'#MaxSessions 10'/'MaxSessions 2'/g /etc/ssh/sshd_config
 sed -i s/'#TCPKeepAlive yes'/'TCPKeepAlive no'/g /etc/ssh/sshd_config
 sed -i s/'#AllowAgentForwarding yes'/'AllowAgentForwarding no'/g /etc/ssh/sshd_config
 sed -i s/'#Port 22'/'#Port'/g /etc/ssh/sshd_config
-ln -s /etc/sv/ufw /var/service
 
 # Configure plymouth boot splash.
 vpm install plymouth -y
