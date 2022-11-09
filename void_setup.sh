@@ -17,7 +17,7 @@ xbps-install -S
 # Configure XBPS to use the latest package versions.
 sed -i s/'#bestmatching=true'/'bestmatching=true'/g /usr/share/xbps.d/xbps.conf
 
-# Install VPM (Void Package Management Utility), XBPS user-friendly front-end.
+# Install VPM (Void Package Management utility), XBPS user-friendly front-end.
 echo "Installing the Void Package Management utility..."
 xbps-install -S vpm -y
 
