@@ -81,9 +81,7 @@ update-grub
 # Secure the OS.
 sed -i 77s/'022'/'077'/g /etc/login.defs
 sed -i 26s/'022'/'077'/g /etc/profile
-vpm install rsyslog -y && ln -s /etc/sv/rsyslogd /var/service/
-vpm install apparmor -y
-vpm install sysstat puppet rkhunter chkrootkit -y && ln -s /etc/sv/puppet /var/service/
+vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog -y ; ln -s /etc/sv/puppet /var/service/ ; ln -s /etc/sv/rsyslogd /var/service/
 chmod og-rwx /boot/grub/grub.cfg
 chmod og-rwx /etc/ssh/sshd_config
 chmod og-rwx /etc/cron.daily
