@@ -74,7 +74,7 @@ flatpak install -y app/com.github.PintaProject.Pinta/x86_64/stable
 
 # Install Brave browser.
 clear ; echo "Installing the Brave browser..."
-flatpak install -y flathub com.brave.Browser
+flatpak install -y com.brave.Browser
 
 # Install grub theme.
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
