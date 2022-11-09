@@ -62,20 +62,6 @@ vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-des
 clear ; echo "Installing the Papirus icon theme..."
 vpm install papirus-icon-theme -y
 
-# Setup flatpak.
-clear ; echo "Installing and setting up flatpak..."
-vpm install flatpak -y
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
-
-# Install Pinta.
-clear ; echo "Installing Pinta..."
-flatpak install -y app/com.github.PintaProject.Pinta/x86_64/stable
-
-# Install Brave browser.
-clear ; echo "Installing the Brave browser..."
-flatpak install -y com.brave.Browser
-
 # Install grub theme.
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && ./install.sh -t stylish
