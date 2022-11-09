@@ -14,6 +14,9 @@ cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
 sed -i s/'https://repo-default.voidlinux.org'/'https://repo-us.voidlinux.org'/g /etc/xbps.d/*-repository-*.conf
 xbps-install -S
 
+# Configure XBPS to use the latest package versions.
+sed -i s/'#bestmatching=true'/'bestmatching=true'/g /usr/share/xbps.d/xbps.conf
+
 # Install VPM (Void Package Management Utility), XBPS user-friendly front-end.
 echo "Installing the Void Package Management utility..."
 xbps-install -S vpm -y
