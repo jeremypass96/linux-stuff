@@ -82,6 +82,9 @@ cd grub2-themes && ./install.sh -t stylish
 echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
 update-grub
 
+# Configure lynis.
+echo "machine-role=personal" > /etc/lynis/custom.prf
+
 # Secure the OS.
 sed -i 77s/'022'/'077'/g /etc/login.defs
 sed -i 26s/'022'/'077'/g /etc/profile
