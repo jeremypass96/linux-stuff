@@ -27,7 +27,7 @@ vpm addrepo void-repo-nonfree
 
 # Update OS.
 echo "Updating OS packages..."
-vpm upgrade -y
+vpm update -y
 
 # Install Xorg server.
 clear ; echo "Installing Xorg server..."
