@@ -121,8 +121,7 @@ sed -i s/'#MaxAuthTries 6'/'MaxAuthTries 3'/g /etc/ssh/sshd_config
 sed -i s/'#MaxSessions 10'/'MaxSessions 2'/g /etc/ssh/sshd_config
 sed -i s/'#TCPKeepAlive yes'/'TCPKeepAlive no'/g /etc/ssh/sshd_config
 sed -i s/'#AllowAgentForwarding yes'/'AllowAgentForwarding no'/g /etc/ssh/sshd_config
-sed -i s/'#Port 22'/'#Port'/g /etc/ssh/sshd_config
 
 # Configure plymouth boot splash.
 vpm install plymouth -y
-plymouth-set-default-theme -R fade-in
+plymouth-set-default-theme -R solar
