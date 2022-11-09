@@ -36,12 +36,12 @@ ln -s /etc/sv/elogind /var/service/
 
 # Install misc. utilities.
 clear ; echo "Installing misc. utilities..."
-vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g rsv -y
+vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g vsv -y
 
 # Enable printing support.
 vpm install cups hplip -y
-rsv enable cupsd
-rsv enable cups-browsed
+vsv enable cupsd
+vsv enable cups-browsed
 # Install fonts.
 clear ; echo "Installing fonts..."
 vpm install nerd-fonts google-fonts-ttf -y
@@ -90,7 +90,7 @@ sed -i 77s/'022'/'077'/g /etc/login.defs
 sed -i 26s/'022'/'077'/g /etc/profile
 sed -i s/'UMASK=0022'/'UMASK=0077'/g /etc/default/sysstat
 vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog audit aide acct -y
-rsv enable puppet ; rsv enable rsyslogd ; rsv enable auditd ; rsv enable ufw
+vsv enable puppet ; vsv enable rsyslogd ; vsv enable auditd ; vsv enable ufw ; vsv disable sshd
 aide -i
 accton on
 chmod og-rwx /boot/grub/grub.cfg
