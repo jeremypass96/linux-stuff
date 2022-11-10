@@ -11,23 +11,27 @@ fi
 echo "Changing to US mirrors and syncing repos..."
 mkdir -p /etc/xbps.d
 cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
-sed -i s/'https://repo-default.voidlinux.org'/'https://repo-us.voidlinux.org'/g /etc/xbps.d/*-repository-*.conf
+sed -i 's|https://repo-default.voidlinux.org|https://repo-us.voidlinux.org|g' /etc/xbps.d/*-repository-*.conf
 xbps-install -S
 
 # Configure XBPS to use the latest package versions.
 sed -i s/'#bestmatching=true'/'bestmatching=true'/g /usr/share/xbps.d/xbps.conf
 
-# Install VPM (Void Package Management utility), XBPS user-friendly front-end.
-echo "Installing the Void Package Management utility..."
-xbps-install -S vpm -y
-
 # Add extra nonfree repo.
 echo "Adding nonfree repo to system..."
-vpm addrepo void-repo-nonfree
+xbps-install -S void-repo-nonfree -y
+
+# Add multilib repos.
+echo "Adding multilib repos to system..."
+xbps-install -S void-repo-multilib void-repo-multilib-nonfree -y
 
 # Update OS.
 echo "Updating OS packages..."
-vpm update -y
+xbps-install -Suvy
+
+# Install VPM (Void Package Management utility), XBPS user-friendly front-end.
+echo "Installing the Void Package Management utility..."
+xbps-install -S vpm -y
 
 # Install Xorg server.
 clear ; echo "Installing Xorg server..."
