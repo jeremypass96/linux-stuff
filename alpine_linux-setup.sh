@@ -10,7 +10,7 @@ fi
 # Setup APK cache.
 setup-apkcache /var/cache/apk
 
-# Update repos to "latest-stable" and upgrade the Alpine package manager.
+# Update repos to "edge" and upgrade the Alpine package manager.
 setup-apkrepos
 apk update
 apk add --upgrade apk-tools
@@ -59,13 +59,11 @@ apk add xf86-video-intel linux-firmware-i915
 fi
 if [ "$resp" = 5 ]; then
 apk add xf86-video-vmware virtualbox-guest-additions virtualbox-guest-additions-x11
-rc-update add virtualbox-guest-additions
-rc-service virtualbox-guest-additions start
+rc-update add virtualbox-guest-additions && rc-service virtualbox-guest-additions start
 fi
 if [ "$resp" = 6 ]; then
 apk add xf86-video-vmware xf86-input-vmmouse open-vm-tools open-vm-tools-openrc
-rc-update add open-vm-tools
-rc-service open-vm-tools start
+rc-update add open-vm-tools && rc-service open-vm-tools start
 fi
 if [ "$resp" = 7 ]; then
 apk add xf86-video-savage
@@ -113,19 +111,13 @@ apk cache clean
 apk del linux-lts
 
 # Enable services.
-rc-service dbus start
-rc-update add dbus
-rc-service elogind start
-rc-update add elogind
-rc-service polkit start
-rc-update add polkit
-rc-service udev start
-rc-update add udev
-rc-service networkmanager start
-rc-update add networkmanager
+rc-update add dbus && rc-service dbus start
+rc-update add elogind && rc-service elogind start
+rc-update add polkit && rc-service polkit start
+rc-update add udev && rc-service udev start
+rc-update add networkmanager && rc-service networkmanager start
 rc-update add sddm
-rc-service alsa start
-rc-update add alsa
+rc-update add alsa && rc-service alsa start
 
 # Add users to groups.
 addgroup $USER audio
