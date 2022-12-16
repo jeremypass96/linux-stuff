@@ -19,7 +19,7 @@ apk add --upgrade apk-tools
 apk add linux-edge util-linux pciutils usbutils coreutils binutils findutils mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion neofetch btop micro alsa-utils alsa-lib alsaconf alsa-ucm-conf doas-sudo-shim ntfs-3g ntfs-3g-progs lsd fd fd-zsh-completion bat bat-zsh-completion
 
 # Install fonts.
-apk add terminus-font ttf-inconsolata ttf-dejavu font-bitstream-100dpi font-bitstream-75dpi font-bitstream-type1 font-noto ttf-font-awesome font-noto-extra font-croscore font-adobe-source-code-pro font-ibm-plex-mono-nerd ttf-opensans ttf-linux-libertine ttf-liberation ttf-droid font-cursor-misc font-ibm-type1
+apk add terminus-font ttf-inconsolata ttf-dejavu font-bitstream-100dpi font-bitstream-75dpi font-bitstream-type1 font-noto ttf-font-awesome font-noto-extra font-croscore font-adobe-source-code-pro font-ibm-plex-mono-nerd ttf-opensans ttf-linux-libertine ttf-liberation ttf-droid font-cursor-misc font-ibm-type1 nerd-fonts
 fc-cache -f
 
 # Install Xorg.
