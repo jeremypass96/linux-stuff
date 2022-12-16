@@ -10,7 +10,7 @@ fi
 # Setup APK cache.
 setup-apkcache /var/cache/apk
 
-# Update repos to "edge" and upgrade the Alpine package manager.
+# Update repos to "latest-stable" and upgrade the Alpine package manager.
 setup-apkrepos
 apk update
 apk add --upgrade apk-tools
