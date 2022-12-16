@@ -12,7 +12,6 @@ systemctl disable pppd-dns.service
 systemctl disable wpa_supplicant.service
 systemctl mask lvm2-monitor.service
 systemctl disable systemd-udev-settle.service
-systemctl mask accounts-daemon.service
 systemctl stop bluetooth.service
 systemctl disable bluetooth.service
 systemctl disable brltty.service
