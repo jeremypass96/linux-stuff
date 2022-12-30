@@ -7,6 +7,9 @@ echo "Please run this script as root via 'su' or 'sudo'! Thanks."
 exit
 fi
 
+# Audio buzz/hum fix.
+echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
+
 # Setup APK cache.
 setup-apkcache /var/cache/apk
 
