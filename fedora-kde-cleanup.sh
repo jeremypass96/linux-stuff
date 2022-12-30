@@ -9,6 +9,9 @@ fi
 
 clear
 
+# Audio buzz/hum fix.
+echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
+
 # Make DNF faster.
 echo fastestmirror=True >> /etc/dnf/dnf.conf
 echo max_parallel_downloads=20 >> /etc/dnf/dnf.conf
