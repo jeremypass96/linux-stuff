@@ -7,6 +7,9 @@ echo "Please run this setup script as root via 'su'! Thanks."
 exit
 fi
 
+# Audio buzz/hum fix.
+echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
+
 # Change to US mirrors and sync repos.
 echo "Changing to US mirrors and syncing repos..."
 mkdir -p /etc/xbps.d
