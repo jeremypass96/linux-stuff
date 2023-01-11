@@ -82,10 +82,9 @@ echo "machine-role=personal" > /etc/lynis/custom.prf
 sed -i 77s/'022'/'077'/g /etc/login.defs
 sed -i 26s/'022'/'077'/g /etc/profile
 sed -i s/'UMASK=0022'/'UMASK=0077'/g /etc/default/sysstat
-vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog audit aide acct -y
+vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog audit acct -y
 vsv enable puppet ; vsv enable rsyslogd ; vsv enable auditd ; vsv enable ufw ; vsv disable sshd
-aide -i ; mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz ; aide -u
-accton on
+mkdir /var/log/account; touch /var/log/account/pacct ; accton on
 chmod og-rwx /boot/grub/grub.cfg
 chmod og-rwx /etc/ssh/sshd_config
 chmod og-rwx /etc/cron.daily
