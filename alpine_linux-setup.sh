@@ -37,16 +37,6 @@ read -p "What video card do you have installed on your computer?
 4.) Intel
 5.) VirtualBox
 6.) VMware
-7.) S3 Savage
-8.) ATI Rage128
-9.) 3Dfx
-10.) S3 ViRGE
-11.) Intel i740
-12.) Chips and Technologies
-13.) SiS
-14.) VIA/S3G
-
-0.) Not listed!
 –> " resp
 if [ "$resp" = 1 ]; then
 apk add xf86-video-amdgpu linux-firmware-amdgpu
@@ -67,33 +57,6 @@ fi
 if [ "$resp" = 6 ]; then
 apk add xf86-video-vmware xf86-input-vmmouse open-vm-tools open-vm-tools-openrc
 rc-update add open-vm-tools && rc-service open-vm-tools start
-fi
-if [ "$resp" = 7 ]; then
-apk add xf86-video-savage
-fi
-if [ "$resp" = 8 ]; then
-apk add xf86-video-r128 linux-firmware-r128
-fi
-if [ "$resp" = 9 ]; then
-apk add xf86-video-tdfx
-fi
-if [ "$resp" = 10 ]; then
-apk add xf86-video-s3virge
-fi
-if [ "$resp" = 11 ]; then
-apk add xf86-video-i740
-fi
-if [ "$resp" = 12 ]; then
-apk add xf86-video-chips
-fi
-if [ "$resp" = 13 ]; then
-apk add xf86-video-sis
-fi
-if [ "$resp" = 14 ]; then
-apk add xf86-video-openchrome
-fi
-if [ "$resp" = 0 ]; then
-continue
 fi
 
 read -p "Do you have an AMD CPU installed? (y/n) " resp
