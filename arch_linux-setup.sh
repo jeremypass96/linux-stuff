@@ -23,10 +23,10 @@ sudo blackpac --blacklist qt5-tools v4l-utils
 sudo pacman -R qt5-tools v4l-utils --noconfirm
 
 # Remove unneeded packages.
-sudo pacman -R nano vim --noconfirm
+sudo pacman -R nano vim htop --noconfirm
 
 # Install some command-line utilities.
-sudo pacman -S mandoc micro duf bat fd lynis --noconfirm
+sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
 
 # Install printing support.
 sudo pacman -S cups hplip --noconfirm
