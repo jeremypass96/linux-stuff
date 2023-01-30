@@ -36,7 +36,7 @@ sudo pacman -S papirus-icon-theme --noconfirm
 
 # Install yay AUR helper.
 # Download and extract tarball.
-cd && wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz
+cd ; wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz
 tar -xf yay-bin.tar.gz
 # Install yay.
 cd yay-bin
