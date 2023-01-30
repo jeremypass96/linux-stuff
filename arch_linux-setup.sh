@@ -62,6 +62,9 @@ yay -S topgrade-bin --noconfirm
 # Install pfetch.
 yay -S pfetch-git --noconfirm
 
+# Install Pamac, GUI frontend to install software.
+yay -S pamac-aur --noconfirm
+
 # Install grub theme.
 yay -S grub-theme-stylish-color-1080p-git --noconfirm
 sudo sed -i 's|#GRUB_THEME="/path/to/gfxtheme"|GRUB_THEME="/usr/share/grub/themes/stylish-color-1080p/theme.txt"|g' /etc/default/grub
