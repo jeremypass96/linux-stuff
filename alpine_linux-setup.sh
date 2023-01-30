@@ -63,7 +63,7 @@ continue
 fi
 
 # Install KDE.
-apk add plasma kde-applications-base oxygen-sounds kcalc kcharselect kdf kwalletmanager kdeconnect juk print-manager sweeper papirus-icon-theme elogind polkit-elogind polkit-openrc dbus
+apk add plasma kde-applications-base oxygen-sounds kcalc kcharselect kdf kwalletmanager kdeconnect juk print-manager sweeper papirus-icon-theme elogind polkit-elogind polkit-openrc
 
 # Clean package cache.
 apk cache clean
