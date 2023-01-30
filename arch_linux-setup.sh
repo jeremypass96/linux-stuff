@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script cleans up an Arch Linux KDE install installed with "archinstall."
+# This script cleans up an Arch Linux KDE install installed with "archinstall." Run as a normal user.
 
 # Audio buzz/hum fix.
 sudo echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
@@ -23,13 +23,16 @@ sudo blackpac --blacklist qt5-tools v4l-utils kuserfeedback
 sudo pacman -R qt5-tools v4l-utils kuserfeedback --noconfirm
 
 # Remove unneeded packages.
-pacman -R nano vim --noconfirm
+sudo pacman -R nano vim --noconfirm
 
 # Install some command-line utilities.
-pacman -S mandoc micro neofetch duf --noconfirm
+sudo pacman -S mandoc micro neofetch duf --noconfirm
+
+# Install printing support.
+sudo pacman -S cups hplip --noconfirm
 
 # Install Papirus icon theme.
-pacman -S papirus-icon-theme --noconfirm
+sudo pacman -S papirus-icon-theme --noconfirm
 
 # Install yay AUR helper.
 # Download and extract tarball.
@@ -42,3 +45,15 @@ makepkg -sic --noconfirm
 cd ; rm -rf yay-bin ; rm -rf yay-bin.tar.gz
 # Configure yay options.
 yay --editor /usr/bin/micro --answerclean Y --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
+
+# Install Brave web browser.
+yay -S brave-bin --noconfirm
+
+# Install fonts.
+yay -S ttf-poppins ttf-sourcesanspro --noconfirm
+
+# Install "lsd," a better replacement for ls.
+yay -S lsd --noconfirm
+
+# Remove unneeded dependencies.
+yay -c --noconfirm
