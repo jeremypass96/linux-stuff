@@ -7,7 +7,7 @@ sudo echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/m
 # Tweak pacman for sane defaults.
 sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
 sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
-sudo sed -i 's/"#ParallelDownloads = "/"ParallelDownloads = 20"'/g /etc/pacman.conf
+sudo sed -i 's/"#ParallelDownloads = 5"/"ParallelDownloads = 20"'/g /etc/pacman.conf
 sudo sed -i '39s/$/ILoveCandy'/g /etc/pacman.conf
 
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
