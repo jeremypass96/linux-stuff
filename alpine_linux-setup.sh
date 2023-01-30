@@ -20,6 +20,7 @@ sed -i 's|http://*.*.*/alpine*/v*\.*/main|#https://*.*.*/alpine*/v*\.*/main|g' /
 sed -i 's|http://*.*.*/alpine*/v*\.*/community|#https://*.*.*/alpine*/v*\.*/community|g' /etc/apk/repositories
 sed -i 's|#http://*.*.*/alpine*/edge/main|http://*.*.*/alpine*/edge/main|g' /etc/apk/repositories
 sed -i 's|#http://*.*.*/alpine*/edge/community|http://*.*.*/alpine*/edge/community|g' /etc/apk/repositories
+sed -i 's|#http://*.*.*/alpine*/edge/testing|http://*.*.*/alpine*/edge/testing|g' /etc/apk/repositories
 apk update
 apk add --upgrade apk-tools
 apk upgrade --available
