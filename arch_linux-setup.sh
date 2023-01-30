@@ -19,7 +19,7 @@ chmod +x blackpac-1.0.1.sh
 sudo install blackpac-1.0.1.sh /usr/local/bin/
 sudo mv /usr/local/bin/blackpac-1.0.1.sh /usr/local/bin/blackpac
 # Blacklist and remvove packages.
-sudo blackpac --blacklist qt5-tools v4l-utils kuserfeedback
+sudo blackpac --blacklist qt5-tools v4l-utils
 sudo pacman -R qt5-tools v4l-utils kuserfeedback --noconfirm
 
 # Remove unneeded packages.
@@ -63,6 +63,8 @@ yay -S pfetch-git --noconfirm
 
 # Install grub theme.
 yay -S grub-theme-stylish-color-1080p-git --noconfirm
+sudo sed -i 's|#GRUB_THEME='"/path/to/gfxtheme"'|GRUB_THEME='"/usr/share/grub/themes/stylish-color-1080p/theme.txt"''/g /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Remove unneeded dependencies.
 yay -c --noconfirm
