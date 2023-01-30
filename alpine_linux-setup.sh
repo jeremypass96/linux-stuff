@@ -92,12 +92,13 @@ apk add vlc-qt transmission pinta inkscape chromium k3b
 # Prettify /etc/os-release (add logo line)
 echo "LOGO=distributor-logo-alpine" >> /etc/os-release
 
-# Update repos to "latest-stable" and upgrade the Alpine package manager.
+# Update repos to "edge" and upgrade the Alpine package manager.
 setup-apkrepos -f
-sed -i 's|https://dl-cdn.alpinelinux.org/alpine/v*.*/main|https://dl-cdn.alpinelinux.org/alpine/latest-stable/main|g' /etc/apk/repositories
-sed -i 's|#https://dl-cdn.alpinelinux.org/alpine/v*.*/community|https://dl-cdn.alpinelinux.org/alpine/latest-stable/community|g' /etc/apk/repositories
-sed -i 's|https://*.*.*/alpine/v*.*/main|https://dl-cdn.alpinelinux.org/alpine/latest-stable/main|g' /etc/apk/repositories
-sed -i 's|#https://*.*.*/alpine/v*.*/community|https://dl-cdn.alpinelinux.org/alpine/latest-stable/community|g' /etc/apk/repositories
+sed -i 's|http://dl-cdn.alpinelinux.org/alpine/v*.*/main|#https://dl-cdn.alpinelinux.org/alpine/v*.*/main|g' /etc/apk/repositories
+sed -i 's|http://*.*.*/alpine*/v*.*/main|#https://*.*.*/alpine*/v*.*/main|g' /etc/apk/repositories
+sed -i 's|http://*.*.*/alpine*/v*.*/community|#https://*.*.*/alpine*/v*.*/community|g' /etc/apk/repositories
+sed -i 's|#http://*.*.*/alpine*/edge/main|http://*.*.*/alpine*/edge/main|g' /etc/apk/repositories
+sed -i 's|#http://*.*.*/alpine*/edge/community|http://*.*.*/alpine*/edge/community|g' /etc/apk/repositories
 apk update
 apk add --upgrade apk-tools
 
