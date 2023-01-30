@@ -15,13 +15,15 @@ setup-apkcache /var/cache/apk
 
 # Update repos to "edge" and upgrade the Alpine package manager.
 setup-apkrepos -f
-sed -i 's|http://dl-cdn.alpinelinux.org/alpine/v*.*/main|#https://dl-cdn.alpinelinux.org/alpine/v*.*/main|g' /etc/apk/repositories
-sed -i 's|http://*.*.*/alpine*/v*.*/main|#https://*.*.*/alpine*/v*.*/main|g' /etc/apk/repositories
-sed -i 's|http://*.*.*/alpine*/v*.*/community|#https://*.*.*/alpine*/v*.*/community|g' /etc/apk/repositories
+sed -i 's|http://dl-cdn.alpinelinux.org/alpine/v*\.*/main|#https://dl-cdn.alpinelinux.org/alpine/v*\.*/main|g' /etc/apk/repositories
+sed -i 's|http://*.*.*/alpine*/v*\.*/main|#https://*.*.*/alpine*/v*\.*/main|g' /etc/apk/repositories
+sed -i 's|http://*.*.*/alpine*/v*\.*/community|#https://*.*.*/alpine*/v*\.*/community|g' /etc/apk/repositories
 sed -i 's|#http://*.*.*/alpine*/edge/main|http://*.*.*/alpine*/edge/main|g' /etc/apk/repositories
 sed -i 's|#http://*.*.*/alpine*/edge/community|http://*.*.*/alpine*/edge/community|g' /etc/apk/repositories
 apk update
 apk add --upgrade apk-tools
+apk upgrade --available
+sync
 
 # Install base packages.
 apk add linux-edge util-linux pciutils usbutils coreutils binutils findutils mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion alsa-utils alsa-lib alsaconf alsa-ucm-conf doas-sudo-shim ntfs-3g ntfs-3g-progs
@@ -101,10 +103,6 @@ apk add vlc-qt transmission pinta inkscape chromium k3b
 
 # Prettify /etc/os-release (add logo line)
 echo "LOGO=distributor-logo-alpine" >> /etc/os-release
-
-# Upgrade everything.
-apk upgrade --available
-sync
 
 # Install utilities.
 apk add neofetch btop micro lsd fd fd-zsh-completion bat bat-zsh-completion
