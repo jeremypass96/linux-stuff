@@ -14,8 +14,8 @@ echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modpro
 setup-apkcache /var/cache/apk
 
 # Update repos to "edge" and upgrade the Alpine package manager.
-sed -i 's|http://dl-cdn.alpinelinux.org/alpine/v*\.*/main|#https://dl-cdn.alpinelinux.org/alpine/v*\.*/main|g' /etc/apk/repositories
-sed -i 's|#http://dl-cdn.alpinelinux.org/alpine/edge/main|https://dl-cdn.alpinelinux.org/edge/main|g' /etc/apk/repositories
+sed -i 's|http://dl-cdn.alpinelinux.org/alpine/v3\.17/main|#https://dl-cdn.alpinelinux.org/alpine/v3\.17/main|g' /etc/apk/repositories
+sed -i 's|#http://dl-cdn.alpinelinux.org/alpine/edge/main|https://dl-cdn.alpinelinux.org/alpine/edge/main|g' /etc/apk/repositories
 sed -i 's|#http://dl-cdn.alpinelinux.org/alpine/edge/community|https://dl-cdn.alpinelinux.org/alpine/edge/community|g' /etc/apk/repositories
 sed -i 's|#http://dl-cdn.alpinelinux.org/alpine/edge/testing|https://dl-cdn.alpinelinux.org/alpine/edge/testing|g' /etc/apk/repositories
 apk update
