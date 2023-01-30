@@ -13,11 +13,6 @@ echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modpro
 # Setup APK cache.
 setup-apkcache /var/cache/apk
 
-# Update repos to "latest-stable" and upgrade the Alpine package manager.
-setup-apkrepos
-apk update
-apk add --upgrade apk-tools
-
 # Install base packages.
 apk add linux-edge util-linux pciutils usbutils coreutils binutils findutils mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion neofetch btop micro alsa-utils alsa-lib alsaconf alsa-ucm-conf doas-sudo-shim ntfs-3g ntfs-3g-progs lsd fd fd-zsh-completion bat bat-zsh-completion
 
@@ -91,14 +86,23 @@ addgroup root audio
 addgroup $USER plugdev
 addgroup $USER cdrom
 
-# Upgrade everything else.
-apk upgrade --available
-sync
-
 # Install other software.
 apk add vlc-qt transmission pinta inkscape chromium k3b
 
 # Prettify /etc/os-release (add logo line)
 echo "LOGO=distributor-logo-alpine" >> /etc/os-release
+
+# Update repos to "latest-stable" and upgrade the Alpine package manager.
+setup-apkrepos -f
+sed -i 's|https://dl-cdn.alpinelinux.org/alpine/v*.*/main|https://dl-cdn.alpinelinux.org/alpine/latest-stable/main|g' /etc/apk/repositories
+sed -i 's|#https://dl-cdn.alpinelinux.org/alpine/v*.*/community|https://dl-cdn.alpinelinux.org/alpine/latest-stable/community|g' /etc/apk/repositories
+sed -i 's|https://*.*.*/alpine/v*.*/main|https://dl-cdn.alpinelinux.org/alpine/latest-stable/main|g' /etc/apk/repositories
+sed -i 's|#https://*.*.*/alpine/v*.*/community|https://dl-cdn.alpinelinux.org/alpine/latest-stable/community|g' /etc/apk/repositories
+apk update
+apk add --upgrade apk-tools
+
+# Upgrade everything else.
+apk upgrade --available
+sync
 
 echo "If everything was successful, go ahead and reboot!"
