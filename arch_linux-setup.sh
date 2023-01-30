@@ -82,3 +82,11 @@ sudo echo BROWSER=/usr/bin/brave >> /etc/environment
 sudo echo EDITOR=/usr/bin/micro >> /etc/environment
 # Set MICRO_TRUECOLOR variable.
 sudo echo MICRO_TRUECOLOR=1 >> /etc/environment
+
+# Setup config files and stuff.
+cd linux-stuff/
+./bat-setup.sh
+./lsd-setup.sh
+./micro-setup.sh
+./zsh-setup.sh
+./cleanup-systemd-boot.sh
