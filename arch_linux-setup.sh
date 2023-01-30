@@ -26,7 +26,7 @@ sudo pacman -R qt5-tools v4l-utils kuserfeedback --noconfirm
 sudo pacman -R nano vim --noconfirm
 
 # Install some command-line utilities.
-sudo pacman -S mandoc micro neofetch duf bat fd --noconfirm
+sudo pacman -S mandoc micro neofetch duf bat fd lynis --noconfirm
 
 # Install printing support.
 sudo pacman -S cups hplip --noconfirm
@@ -58,8 +58,24 @@ yay -S lsd --noconfirm
 # Install topgrade.
 yay -S topgrade-bin --noconfirm
 
+# Install pfetch.
+yay -S pfetch-git --noconfirm
+
 # Install grub theme.
 yay -S grub-theme-stylish-color-1080p-git --noconfirm
 
 # Remove unneeded dependencies.
 yay -c --noconfirm
+
+# Update man pages.
+sudo makewhatis
+
+# Update environment variables.
+# Configure pfetch.
+sudo echo PF_INFO='"ascii os kernel uptime pkgs shell de memory"' >> /etc/environment
+# Set BROWSER variable.
+sudo echo BROWSER=/usr/bin/brave >> /etc/environment
+# Set EDITOR variable.
+sudo echo EDITOR=/usr/bin/micro >> /etc/environment
+# Set MICRO_TRUECOLOR variable.
+sudo echo MICRO_TRUECOLOR=1 >> /etc/environment
