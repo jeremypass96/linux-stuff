@@ -13,6 +13,16 @@ echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modpro
 # Setup APK cache.
 setup-apkcache /var/cache/apk
 
+# Update repos to "edge" and upgrade the Alpine package manager.
+setup-apkrepos -f
+sed -i 's|http://dl-cdn.alpinelinux.org/alpine/v*.*/main|#https://dl-cdn.alpinelinux.org/alpine/v*.*/main|g' /etc/apk/repositories
+sed -i 's|http://*.*.*/alpine*/v*.*/main|#https://*.*.*/alpine*/v*.*/main|g' /etc/apk/repositories
+sed -i 's|http://*.*.*/alpine*/v*.*/community|#https://*.*.*/alpine*/v*.*/community|g' /etc/apk/repositories
+sed -i 's|#http://*.*.*/alpine*/edge/main|http://*.*.*/alpine*/edge/main|g' /etc/apk/repositories
+sed -i 's|#http://*.*.*/alpine*/edge/community|http://*.*.*/alpine*/edge/community|g' /etc/apk/repositories
+apk update
+apk add --upgrade apk-tools
+
 # Install base packages.
 apk add linux-edge util-linux pciutils usbutils coreutils binutils findutils mandoc man-pages mandoc-apropos zsh zsh-vcs udisks2 bash bash-completion alsa-utils alsa-lib alsaconf alsa-ucm-conf doas-sudo-shim ntfs-3g ntfs-3g-progs
 
@@ -63,7 +73,7 @@ continue
 fi
 
 # Install KDE.
-apk add plasma kde-applications-base oxygen-sounds kcalc kcharselect kdf kwalletmanager kdeconnect juk print-manager sweeper papirus-icon-theme elogind polkit-elogind polkit-openrc
+apk add plasma kde-applications-base kcalc kcharselect kdf kwalletmanager kdeconnect juk print-manager sweeper papirus-icon-theme elogind polkit-elogind polkit-openrc
 
 # Clean package cache.
 apk cache clean
@@ -92,17 +102,7 @@ apk add vlc-qt transmission pinta inkscape chromium k3b
 # Prettify /etc/os-release (add logo line)
 echo "LOGO=distributor-logo-alpine" >> /etc/os-release
 
-# Update repos to "edge" and upgrade the Alpine package manager.
-setup-apkrepos -f
-sed -i 's|http://dl-cdn.alpinelinux.org/alpine/v*.*/main|#https://dl-cdn.alpinelinux.org/alpine/v*.*/main|g' /etc/apk/repositories
-sed -i 's|http://*.*.*/alpine*/v*.*/main|#https://*.*.*/alpine*/v*.*/main|g' /etc/apk/repositories
-sed -i 's|http://*.*.*/alpine*/v*.*/community|#https://*.*.*/alpine*/v*.*/community|g' /etc/apk/repositories
-sed -i 's|#http://*.*.*/alpine*/edge/main|http://*.*.*/alpine*/edge/main|g' /etc/apk/repositories
-sed -i 's|#http://*.*.*/alpine*/edge/community|http://*.*.*/alpine*/edge/community|g' /etc/apk/repositories
-apk update
-apk add --upgrade apk-tools
-
-# Upgrade everything else.
+# Upgrade everything.
 apk upgrade --available
 sync
 
