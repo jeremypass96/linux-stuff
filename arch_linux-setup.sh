@@ -55,5 +55,11 @@ yay -S ttf-poppins ttf-sourcesanspro --noconfirm
 # Install "lsd," a better replacement for ls.
 yay -S lsd --noconfirm
 
+# Install topgrade.
+yay -S topgrade-bin --noconfirm
+
+# Install grub theme.
+yay -S grub-theme-stylish-color-1080p-git --noconfirm
+
 # Remove unneeded dependencies.
 yay -c --noconfirm
