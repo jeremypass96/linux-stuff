@@ -20,7 +20,7 @@ sudo install blackpac-1.0.1.sh /usr/local/bin/
 sudo mv /usr/local/bin/blackpac-1.0.1.sh /usr/local/bin/blackpac
 # Blacklist and remvove packages.
 sudo blackpac --blacklist qt5-tools v4l-utils
-sudo pacman -R qt5-tools v4l-utils kuserfeedback --noconfirm
+sudo pacman -R qt5-tools v4l-utils --noconfirm
 
 # Remove unneeded packages.
 sudo pacman -R nano vim --noconfirm
