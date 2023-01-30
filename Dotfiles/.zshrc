@@ -97,4 +97,5 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 alias df="df -h"
 alias ls="lsd"
-neofetch
+alias cat="bat"
+pfetch
