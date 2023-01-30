@@ -26,7 +26,7 @@ sudo pacman -R qt5-tools v4l-utils kuserfeedback --noconfirm
 sudo pacman -R nano vim --noconfirm
 
 # Install some command-line utilities.
-sudo pacman -S mandoc micro neofetch duf --noconfirm
+sudo pacman -S mandoc micro neofetch duf bat fd --noconfirm
 
 # Install printing support.
 sudo pacman -S cups hplip --noconfirm
