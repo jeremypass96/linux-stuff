@@ -89,4 +89,4 @@ cd linux-stuff/
 ./lsd-setup.sh
 ./micro-setup.sh
 ./zsh-setup.sh
-./cleanup-systemd-boot.sh
+sudo ./cleanup-systemd-boot.sh
