@@ -18,6 +18,7 @@ chmod +x blackpac-1.0.1.sh
 # Install script.
 sudo install blackpac-1.0.1.sh /usr/local/bin/
 sudo mv /usr/local/bin/blackpac-1.0.1.sh /usr/local/bin/blackpac
+rm blackpac-1.0.1.sh
 # Blacklist and remvove packages.
 sudo blackpac --blacklist qt5-tools v4l-utils
 sudo pacman -R qt5-tools v4l-utils --noconfirm
