@@ -88,4 +88,4 @@ cd linux-stuff/
 ./micro-setup.sh
 ./zsh-setup.sh
 sudo ./cleanup-systemd-boot.sh
-cd ../
+cd
