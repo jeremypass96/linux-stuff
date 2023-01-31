@@ -24,7 +24,7 @@ sudo blackpac --blacklist qt5-tools v4l-utils
 sudo pacman -R qt5-tools v4l-utils --noconfirm
 
 # Remove unneeded packages.
-sudo pacman -R nano vim htop --noconfirm
+sudo pacman -R nano vim htop kate htop --noconfirm
 
 # Install some command-line utilities.
 sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
@@ -64,6 +64,10 @@ yay -S pfetch-git --noconfirm
 
 # Install Pamac, GUI frontend to install software.
 yay -S pamac-aur --noconfirm
+
+# Install and configure VSCodium.
+yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
+mkdir -p /home/$USER/.config/VSCodium/User ; cp linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
 
 # Install grub theme.
 yay -S grub-theme-stylish-color-1080p-git --noconfirm
