@@ -99,6 +99,20 @@ cd linux-stuff/
 sudo ./cleanup-systemd-boot.sh
 cd
 
+# Update environment variables.
+# Give temporary write access so we can apply the changes.
+sudo chown $USER:$USER /etc/environment
+# Configure pfetch.
+echo PF_INFO='"ascii os kernel uptime pkgs shell de memory"' >> /etc/environment
+# Set BROWSER variable.
+echo BROWSER=/usr/bin/brave >> /etc/environment
+# Set EDITOR variable.
+echo EDITOR=/usr/bin/micro >> /etc/environment
+# Set MICRO_TRUECOLOR variable.
+echo MICRO_TRUECOLOR=1 >> /etc/environment
+# Change owner back to root.
+sudo chown root:root /etc/environment
+
 # Stop mkinitcpio from generating a fallback kernel image.
 sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset 
