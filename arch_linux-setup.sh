@@ -75,6 +75,9 @@ yay -S grub-theme-stylish-color-1080p-git --noconfirm
 sudo sed -i 's|#GRUB_THEME="/path/to/gfxtheme"|GRUB_THEME="/usr/share/grub/themes/stylish-color-1080p/theme.txt"|g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
+# Install Wine.
+yay -S wine-installer wine-gecko wine-mono --noconfirm
+
 # Remove unneeded dependencies.
 yay -c --noconfirm
 
