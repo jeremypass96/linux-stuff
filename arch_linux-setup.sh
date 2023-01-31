@@ -32,9 +32,6 @@ sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
 # Install Papirus icon theme.
 sudo pacman -S papirus-icon-theme --noconfirm
 
-# Download Konsole colors.
-curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/konsole/Andromeda.colorscheme -o /home/$USER/.local/share/konsole/Andromeda.colorscheme
-
 # Install yay AUR helper.
 # Download and extract tarball.
 cd ; wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz
@@ -46,6 +43,9 @@ makepkg -sic --noconfirm
 cd ; rm -rf yay-bin ; rm -rf yay-bin.tar.gz
 # Configure yay options.
 yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
+
+# Install Konsole color scheme.
+yay -S konsole-snazzy-git --noconfirm
 
 # Install printing support.
 yay -S cups hplip-lite --noconfirm
