@@ -1,1 +1,11 @@
-
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "newUntitledFile",
+    "security.workspace.trust.banner": "never",
+    "security.workspace.trust.startupPrompt": "never",
+    "security.workspace.trust.untrustedFiles": "open",
+    "security.workspace.trust.enabled": false,
+    "workbench.colorTheme": "Bearded Theme Arc Reversed",
+    "workbench.editor.untitled.hint": "hidden",
+    "files.hotExit": "off"
+}

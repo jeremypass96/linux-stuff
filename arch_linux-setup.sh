@@ -68,6 +68,7 @@ yay -S pamac-aur --noconfirm
 # Install and configure VSCodium.
 yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p /home/$USER/.config/VSCodium/User ; cp linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
+vscodium --install-extension PKief.material-icon-theme BeardedBear.beardedtheme
 
 # Install grub theme.
 yay -S grub-theme-stylish-color-1080p-git --noconfirm
