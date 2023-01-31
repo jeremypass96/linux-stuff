@@ -98,3 +98,6 @@ cd linux-stuff/
 ./micro-setup.sh
 ./zsh-setup.sh
 sudo ./cleanup-systemd-boot.sh
+
+# Fix /etc/os-release logo line.
+sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-archlinux'/g /etc/os-release
