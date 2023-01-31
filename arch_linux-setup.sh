@@ -67,7 +67,7 @@ yay -S pamac-aur --noconfirm
 
 # Install and configure VSCodium.
 yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
-mkdir -p /home/$USER/.config/VSCodium/User ; cp linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
+mkdir -p /home/$USER/.config/VSCodium/User ; cp /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
 vscodium --install-extension PKief.material-icon-theme BeardedBear.beardedtheme
 
 # Install grub theme.
@@ -88,3 +88,4 @@ cd linux-stuff/
 ./micro-setup.sh
 ./zsh-setup.sh
 sudo ./cleanup-systemd-boot.sh
+cd ../
