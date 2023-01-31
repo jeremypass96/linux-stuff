@@ -82,7 +82,9 @@ yay -S wine-installer wine-gecko wine-mono --noconfirm
 yay -c --noconfirm
 
 # Install some useful software.
-sudo pacman -S vlc transmission-qt pinta audacity --noconfirm
+sudo pacman -S vlc transmission-qt pinta audacity k3b --noconfirm
+# Install dependencies for k3b.
+sudo pacman -S cdrtools dvd+rw-tools cdrdao transcode --noconfirm
 
 # Install Spotify.
 yay -S spotify --noconfirm
