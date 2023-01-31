@@ -35,6 +35,9 @@ sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
 # Install Papirus icon theme.
 sudo pacman -S papirus-icon-theme --noconfirm
 
+# Install spell checking support.
+sudo pacman -S aspell aspell-en --noconfirm
+
 # Install yay AUR helper.
 # Download and extract tarball.
 cd ; wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz
