@@ -13,5 +13,6 @@
     "audioCues.taskFailed": "on",
     "editor.fontFamily": "Source Code Pro Regular",
     "editor.fontSize": 14,
-    "git.confirmSync": false
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true
 }
