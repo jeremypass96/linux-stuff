@@ -8,4 +8,5 @@
     "workbench.colorTheme": "Bearded Theme Arc Reversed",
     "workbench.editor.untitled.hint": "hidden",
     "files.hotExit": "off"
+    "audioCues.taskFailed": "on"
 }
