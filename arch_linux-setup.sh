@@ -98,3 +98,11 @@ cd linux-stuff/
 ./zsh-setup.sh
 sudo ./cleanup-systemd-boot.sh
 cd
+
+# Stop mkinitcpio from generating a fallback kernel image.
+sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
+sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset 
+sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
+sudo mkinitcpio -p linux
+sudo rm /boot/initramfs-linux-fallback.img
+sudo grub-mkconfig -o /boot/grub/grub.cfg
