@@ -81,16 +81,6 @@ yay -c --noconfirm
 # Update man pages.
 sudo makewhatis
 
-# Update environment variables.
-# Configure pfetch.
-sudo echo PF_INFO='"ascii os kernel uptime pkgs shell de memory"' >> /etc/environment
-# Set BROWSER variable.
-sudo echo BROWSER=/usr/bin/brave >> /etc/environment
-# Set EDITOR variable.
-sudo echo EDITOR=/usr/bin/micro >> /etc/environment
-# Set MICRO_TRUECOLOR variable.
-sudo echo MICRO_TRUECOLOR=1 >> /etc/environment
-
 # Setup config files and stuff.
 cd linux-stuff/
 ./bat-setup.sh
@@ -98,6 +88,3 @@ cd linux-stuff/
 ./micro-setup.sh
 ./zsh-setup.sh
 sudo ./cleanup-systemd-boot.sh
-
-# Fix /etc/os-release logo line.
-sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-archlinux'/g /etc/os-release
