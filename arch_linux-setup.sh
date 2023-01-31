@@ -51,7 +51,7 @@ yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerup
 yay -S konsole-snazzy-git --noconfirm
 
 # Install printing support.
-yay -S cups hplip-lite --noconfirm
+yay -S cups hplip-lite print-manager system-config-printer --noconfirm
 
 # Install Brave web browser.
 yay -S brave-bin --noconfirm
