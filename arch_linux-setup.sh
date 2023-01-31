@@ -29,9 +29,6 @@ sudo pacman -R nano vim htop kate htop --noconfirm
 # Install some command-line utilities.
 sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
 
-# Install printing support.
-sudo pacman -S cups hplip --noconfirm
-
 # Install Papirus icon theme.
 sudo pacman -S papirus-icon-theme --noconfirm
 
@@ -47,11 +44,14 @@ cd ; rm -rf yay-bin ; rm -rf yay-bin.tar.gz
 # Configure yay options.
 yay --editor /usr/bin/micro --answerclean Y --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
 
+# Install printing support.
+yay -S cups hplip-lite --noconfirm
+
 # Install Brave web browser.
 yay -S brave-bin --noconfirm
 
 # Install fonts.
-yay -S ttf-poppins ttf-sourcesanspro --noconfirm
+yay -S ttf-poppins ttf-sourcesanspro ttf-ibm-plex ttf-ms-fonts --noconfirm
 
 # Install "lsd," a better replacement for ls.
 yay -S lsd --noconfirm
