@@ -82,12 +82,23 @@ yay -S wine-installer wine-gecko wine-mono --noconfirm
 yay -c --noconfirm
 
 # Install some useful software.
-sudo pacman -S vlc transmission-qt pinta audacity k3b --noconfirm
+sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular --noconfirm
 # Install dependencies for k3b.
 sudo pacman -S cdrtools dvd+rw-tools cdrdao transcode --noconfirm
 
+# Install some KDE games!
+sudo pacman -S kapman kblocks kbounce --noconfirm
+
 # Install Spotify.
 yay -S spotify --noconfirm
+
+# Install and configure find-the-command utility.
+yay -S find-the-command --noconfirm
+sudo pacman -S fzf pkgfile --noconfirm
+echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
+sudo systemctl enable pkgfile-update.timer
+sudo systemctl start pkgfile-update.timer
+sudo pkgfile --update
 
 # Update man pages.
 sudo makewhatis
