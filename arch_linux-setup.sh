@@ -50,8 +50,12 @@ yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerup
 # Install Konsole color scheme.
 yay -S konsole-snazzy-git --noconfirm
 
-# Install printing support.
+# Install and configure printing support.
 yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper --noconfirm
+sudo systemctl enable cups ; sudo systemctl start cups
+
+# Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
+yay -S desktop-privileges --noconfirm
 
 # Install Brave web browser.
 yay -S brave-bin --noconfirm
