@@ -26,6 +26,9 @@ sudo pacman -R qt5-tools v4l-utils --noconfirm
 # Remove unneeded packages.
 sudo pacman -R nano vim htop kate htop --noconfirm
 
+# Remove KDE Wayland session.
+sudo pacman -R plasma-wayland-session --noconfirm
+
 # Install some command-line utilities.
 sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
 
@@ -66,7 +69,7 @@ yay -S topgrade-bin --noconfirm
 yay -S pfetch-git --noconfirm
 
 # Install Pamac, GUI frontend to install software.
-yay -S pamac-aur --noconfirm
+yay -S pamac-aur pamac-tray-icon-plasma --noconfirm
 
 # Install and configure VSCodium.
 yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
