@@ -42,7 +42,7 @@ makepkg -sic --noconfirm
 # Clean up.
 cd ; rm -rf yay-bin ; rm -rf yay-bin.tar.gz
 # Configure yay options.
-yay --editor /usr/bin/micro --answerclean Y --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
+yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
 
 # Install printing support.
 yay -S cups hplip-lite --noconfirm
@@ -80,6 +80,12 @@ yay -S wine-installer wine-gecko wine-mono --noconfirm
 
 # Remove unneeded dependencies.
 yay -c --noconfirm
+
+# Install some useful software.
+sudo pacman -S vlc transmission-qt pinta audacity --noconfirm
+
+# Install Spotify.
+yay -S spotify --noconfirm
 
 # Update man pages.
 sudo makewhatis
