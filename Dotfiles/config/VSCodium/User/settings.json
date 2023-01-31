@@ -5,8 +5,10 @@
     "security.workspace.trust.startupPrompt": "never",
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.enabled": false,
-    "workbench.colorTheme": "Bearded Theme Arc Reversed",
+    "workbench.colorTheme": "Bearded Theme Arc Blueberry",
     "workbench.editor.untitled.hint": "hidden",
-    "files.hotExit": "off"
-    "audioCues.taskFailed": "on"
+    "files.hotExit": "off",
+    "audioCues.taskFailed": "on",
+    "editor.fontFamily": "Source Code Pro Regular",
+    "editor.fontSize": 13,
 }
