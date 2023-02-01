@@ -150,7 +150,7 @@ echo MICRO_TRUECOLOR=1 >> /etc/environment
 # Change owner back to root.
 sudo chown root:root /etc/environment
 
-# Stop mkinitcpio from generating a fallback kernel image. "linux-hardened" or "linux-lts."
+# Stop mkinitcpio from generating a fallback kernel image.
 read -p "Which Linux kernel did you install?
 1. Linux
 2. Linux (Hardened)
