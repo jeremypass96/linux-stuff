@@ -105,14 +105,6 @@ sudo pacman -S kapman kblocks kbounce --noconfirm
 # Install Spotify.
 yay -S spotify --noconfirm
 
-# Install and configure find-the-command utility.
-yay -S find-the-command --noconfirm
-sudo pacman -S fzf pkgfile --noconfirm
-echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
-sudo systemctl enable pkgfile-update.timer
-sudo systemctl start pkgfile-update.timer
-sudo pkgfile --update
-
 # Update man pages.
 sudo makewhatis
 
@@ -121,9 +113,28 @@ cd linux-stuff/
 ./bat-setup.sh
 ./lsd-setup.sh
 ./micro-setup.sh
-./zsh-setup.sh
 sudo ./cleanup-systemd-boot.sh
+
+# Configure Zsh.
+yay -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
+cp -v Dotfiles/.zshrc /home/$USER/.zshrc
+sed -i 's/'"export ZSH="$HOME/.oh-my-zsh""'/'"export ZSH="/usr/share/oh-my-zsh""''/g /home/$USER/.zshrc
+sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g /home/$USER/.zshrc
+sed -i 's/'"zstyle ':omz:update' mode auto"'/'"# zstyle ':omz:update' mode auto"''/g /home/$USER/.zshrc
+sed -i 's/'"zstyle ':omz:update' frequency 14"'/'"# zstyle ':omz:update' frequency 14"''/g /home/$USER/.zshrc
 cd
+sudo cp -v /home/$USER/.zshrc /etc/skel/.zshrc
+sudo cp -v /etc/skel/.zshrc /root/.zshrc
+
+# Install and configure find-the-command utility.
+yay -S find-the-command --noconfirm
+sudo pacman -S fzf pkgfile --noconfirm
+echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
+echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /etc/skel/.zshrc
+echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /root/.zshrc
+sudo systemctl enable pkgfile-update.timer
+sudo systemctl start pkgfile-update.timer
+sudo pkgfile --update
 
 # Update environment variables.
 # Give temporary write access so we can apply the changes.
@@ -141,7 +152,7 @@ sudo chown root:root /etc/environment
 
 # Stop mkinitcpio from generating a fallback kernel image.
 sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
-sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset 
+sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
 sudo mkinitcpio -p linux
 sudo rm /boot/initramfs-linux-fallback.img
