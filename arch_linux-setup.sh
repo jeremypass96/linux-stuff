@@ -151,6 +151,7 @@ echo MICRO_TRUECOLOR=1 >> /etc/environment
 sudo chown root:root /etc/environment
 
 # Stop mkinitcpio from generating a fallback kernel image.
+echo "Stopping mkinitcpio from generating a fallback kernel image..."
 read -p "Which Linux kernel did you install?
 1. Linux
 2. Linux (Hardened)
