@@ -95,7 +95,7 @@ yay -S wine-installer wine-gecko wine-mono --noconfirm
 yay -c --noconfirm
 
 # Install some useful software.
-sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular --noconfirm
+sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle --noconfirm
 # Install dependencies for k3b.
 sudo pacman -S cdrtools dvd+rw-tools cdrdao transcode --noconfirm
 
@@ -150,10 +150,33 @@ echo MICRO_TRUECOLOR=1 >> /etc/environment
 # Change owner back to root.
 sudo chown root:root /etc/environment
 
-# Stop mkinitcpio from generating a fallback kernel image.
+# Stop mkinitcpio from generating a fallback kernel image. "linux-hardened" or "linux-lts."
+read -p "Which Linux kernel did you install?
+1. Linux
+2. Linux (Hardened)
+3. Linux (LTS)
+—> " resp
+if [ "$resp" = 1 ]; then
 sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
 sudo mkinitcpio -p linux
 sudo rm /boot/initramfs-linux-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ "$resp" = 2 ]; then
+sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-hardened.preset
+sudo sed -i 's|fallback_image="/boot/initramfs-linux-hardened-fallback.img"|#fallback_image="/boot/initramfs-linux-hardened-fallback.img"|g' /etc/mkinitcpio.d/linux-hardened.preset
+sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-hardened.preset
+sudo mkinitcpio -p linux-hardened
+sudo rm /boot/initramfs-linux-hardened-fallback.img
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ "$resp" = 3 ]; then
+sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-lts.preset
+sudo sed -i 's|fallback_image="/boot/initramfs-linux-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-lts.preset
+sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-lts.preset
+sudo mkinitcpio -p linux-lts
+sudo rm /boot/initramfs-linux-lts-fallback.img
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
