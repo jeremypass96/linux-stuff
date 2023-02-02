@@ -132,7 +132,7 @@ sudo cp -v /etc/skel/.zshrc /root/.zshrc
 
 # Install and configure find-the-command utility.
 yay -S find-the-command --noconfirm
-sudo pacman -S fzf pacman-contrib --noconfirm
+sudo pacman -S pacman-contrib --noconfirm
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /etc/skel/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /root/.zshrc
