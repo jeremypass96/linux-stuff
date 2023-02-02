@@ -113,7 +113,7 @@ sudo pacman -S kapman kblocks kbounce --noconfirm
 yay -S spotify --noconfirm
 
 # Update man pages.
-sudo makewhatis
+sudo makewhatis /usr/share/man
 
 # Setup config files and stuff.
 cd linux-stuff/
