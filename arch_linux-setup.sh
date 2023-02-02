@@ -53,6 +53,13 @@ cd ; rm -rf yay-bin ; rm -rf yay-bin.tar.gz
 # Configure yay options.
 yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
 
+# Replace sudo with OpenDoas, and install doas-sudo-shim (installing doas-sudo-shim will also install OpenDoas for you).
+# Create OpenDoas config file.
+sudo touch /etc/doas.conf ; sudo echo "permit persist keepenv :wheel as root" > /etc/doas.conf
+# Install OpenDoas with sudo shim.
+sudo pacman -R sudo --noconfirm
+yay -S doas-sudo-shim --noconfirm
+
 # Install Konsole color scheme.
 yay -S konsole-snazzy-git --noconfirm
 
@@ -98,7 +105,7 @@ yay -S wine-installer wine-gecko wine-mono --noconfirm
 yay -c --noconfirm
 
 # Install some useful software.
-sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle p7zip clipgrab --noconfirm
+sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle p7zip clipgrab partitionmanager --noconfirm
 
 # Install mp3tag.
 yay -S mp3tag --noconfirm
