@@ -29,6 +29,9 @@ sudo pacman -R nano vim htop kate htop --noconfirm
 # Remove KDE Wayland session.
 sudo pacman -R plasma-wayland-session --noconfirm
 
+# Install ffmpegthumbs, for video file thumbnail support in Dolphin.
+sudo pacman -S ffmpegthumbs --noconfirm
+
 # Install some command-line utilities.
 sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
 
