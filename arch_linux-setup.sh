@@ -95,7 +95,11 @@ yay -S wine-installer wine-gecko wine-mono --noconfirm
 yay -c --noconfirm
 
 # Install some useful software.
-sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle --noconfirm
+sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle p7zip clipgrab --noconfirm
+
+# Install mp3tag.
+yay -S mp3tag --noconfirm
+
 # Install dependencies for k3b.
 sudo pacman -S cdrtools dvd+rw-tools cdrdao transcode --noconfirm
 
