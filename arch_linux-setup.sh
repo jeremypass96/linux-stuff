@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script cleans up an Arch Linux KDE install installed with "archinstall." Run as a normal user.
+# This script cleans up and configures an Arch Linux KDE install installed with "archinstall." Run as a normal user.
 
 # Audio buzz/hum fix.
 sudo echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
