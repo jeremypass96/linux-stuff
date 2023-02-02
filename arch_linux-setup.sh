@@ -14,7 +14,6 @@ sudo sed -i '39s/$/ILoveCandy'/g /etc/pacman.conf
 
 # Rank mirrors.
 sudo pacman -S reflector --noconfirm
-sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 sudo reflector --latest 100 --protocol https --sort rate --sort age --score 10 --save /etc/pacman.d/mirrorlist
 # Congfigure reflector config file for systemd auto-update.
 sudo chmod o+w /etc/xdg/reflector/reflector.conf
