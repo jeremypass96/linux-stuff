@@ -55,10 +55,13 @@ yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerup
 
 # Replace sudo with OpenDoas, and install doas-sudo-shim (installing doas-sudo-shim will also install OpenDoas for you).
 # Create OpenDoas config file.
-sudo touch /etc/doas.conf ; sudo echo "permit persist keepenv :wheel as root" > /etc/doas.conf
+sudo touch /etc/doas.conf ; sudo echo "permit persist keepenv :wheel as root" > /etc/doas.conf ; sudo echo "permit nopass :plugdev as root cmd /usr/bin/smartctl" >> /etc/doas.conf ; sudo echo "permit setenv { XAUTHORITY LANG LC_ALL } :wheel" >> /etc/doas.conf
 # Install OpenDoas with sudo shim.
 sudo pacman -R sudo --noconfirm
 yay -S doas-sudo-shim --noconfirm
+sudo doas -C /etc/doas.conf && echo "config ok" || echo "config error"
+sudo chown -c root:root /etc/doas.conf
+sudo chmod -c 0400 /etc/doas.conf
 
 # Install Konsole color scheme.
 yay -S konsole-snazzy-git --noconfirm
