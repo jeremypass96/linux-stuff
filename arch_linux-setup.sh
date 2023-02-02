@@ -10,6 +10,15 @@ sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
 sudo sed -i 's/"#ParallelDownloads = 5"/"ParallelDownloads = 20"'/g /etc/pacman.conf
 sudo sed -i '39s/$/ILoveCandy'/g /etc/pacman.conf
 
+# Rank mirrors.
+sudo pacman -S pacman-contrib --noconfirm
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+sudo chown $USER:$USER /etc/pacman.d/mirrorlist
+sudo rankmirrors -n 8 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+sudo chown root:root /etc/pacman.d/mirrorlist
+sudo pacman -Syy
+
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
 # Download script.
 cd ; wget http://downloads.sourceforge.net/project/ig-scripts/blackpac-1.0.1.sh
@@ -125,7 +134,7 @@ sudo ./cleanup-systemd-boot.sh
 # Configure Zsh.
 yay -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
 cp -v Dotfiles/.zshrc /home/$USER/.zshrc
-sed -i 's/'"export ZSH="$HOME/.oh-my-zsh""'/'"export ZSH="/usr/share/oh-my-zsh""''/g /home/$USER/.zshrc
+sed -i 's|export ZSH="\$HOME/.oh-my-zsh"|export ZSH="/usr/share/oh-my-zsh|g' /home/$USER/.zshrc
 sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g /home/$USER/.zshrc
 sed -i 's/'"zstyle ':omz:update' mode auto"'/'"# zstyle ':omz:update' mode auto"''/g /home/$USER/.zshrc
 sed -i 's/'"zstyle ':omz:update' frequency 14"'/'"# zstyle ':omz:update' frequency 14"''/g /home/$USER/.zshrc
@@ -135,7 +144,6 @@ sudo cp -v /etc/skel/.zshrc /root/.zshrc
 
 # Install and configure find-the-command utility.
 yay -S find-the-command --noconfirm
-sudo pacman -S pacman-contrib --noconfirm
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /etc/skel/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /root/.zshrc
