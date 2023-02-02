@@ -2,7 +2,9 @@
 # This script cleans up and configures an Arch Linux KDE install installed with "archinstall." Run as a normal user.
 
 # Audio buzz/hum fix.
+sudo touch /etc/modprobe.d/alsa-base.conf ; sudo chmod o+w /etc/modprobe.d/alsa-base.conf
 sudo echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
+sudo chmod o-w /etc/modprobe.d/alsa-base.conf
 
 # Tweak pacman for sane defaults.
 sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
@@ -14,9 +16,9 @@ sudo sed -i '39s/$/ILoveCandy'/g /etc/pacman.conf
 sudo pacman -S pacman-contrib --noconfirm
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
-sudo chown $USER:$USER /etc/pacman.d/mirrorlist
-sudo rankmirrors -n 8 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
-sudo chown root:root /etc/pacman.d/mirrorlist
+sudo chmod o+w /etc/pacman.d/mirrorlist
+rankmirrors -n 8 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+sudo chmod o-w /etc/pacman.d/mirrorlist
 sudo pacman -Syy
 
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
@@ -152,7 +154,7 @@ sudo systemctl start pacman-filesdb-refresh.timer
 
 # Update environment variables.
 # Give temporary write access so we can apply the changes.
-sudo chown $USER:$USER /etc/environment
+sudo chmod o+w /etc/environment
 # Configure pfetch.
 echo PF_INFO='"ascii os kernel uptime pkgs shell de memory"' >> /etc/environment
 # Set BROWSER variable.
@@ -161,8 +163,8 @@ echo BROWSER=/usr/bin/brave >> /etc/environment
 echo EDITOR=/usr/bin/micro >> /etc/environment
 # Set MICRO_TRUECOLOR variable.
 echo MICRO_TRUECOLOR=1 >> /etc/environment
-# Change owner back to root.
-sudo chown root:root /etc/environment
+# Remove permission for other users to write to this file.
+sudo chmod o-w /etc/environment
 
 # Stop mkinitcpio from generating a fallback kernel image.
 echo "Stopping mkinitcpio from generating a fallback kernel image..."
