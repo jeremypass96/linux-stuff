@@ -101,7 +101,7 @@ yay -S pamac-aur pamac-tray-icon-plasma --noconfirm
 # Install and configure VSCodium.
 yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p /home/$USER/.config/VSCodium/User ; cp /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
-vscodium --install-extension PKief.material-icon-theme BeardedBear.beardedtheme
+vscodium --install-extension PKief.material-icon-theme BeardedBear.beardedtheme jeff-hykin.better-shellscript-syntax
 
 # Install grub theme.
 yay -S grub-theme-stylish-color-1080p-git --noconfirm
