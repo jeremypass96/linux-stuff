@@ -13,12 +13,19 @@ sudo sed -i 's/"#ParallelDownloads = 5"/"ParallelDownloads = 20"'/g /etc/pacman.
 sudo sed -i '39s/$/ILoveCandy'/g /etc/pacman.conf
 
 # Rank mirrors.
-sudo pacman -S pacman-contrib --noconfirm
+sudo pacman -S reflector --noconfirm
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
-sudo chmod o+w /etc/pacman.d/mirrorlist
-rankmirrors -n 8 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
-sudo chmod o-w /etc/pacman.d/mirrorlist
+sudo reflector --latest 100 --protocol https --sort rate --sort age --score 10 --save /etc/pacman.d/mirrorlist
+# Congfigure reflector config file for systemd auto-update.
+sudo chmod o+w /etc/xdg/reflector/reflector.conf
+sudo sed -i 's/--latest 5/--latest 100'/g /etc/xdg/reflector/reflector.conf
+echo "# Sort the mirrors by highest score (--score)." >> /etc/xdg/reflector/reflector.conf
+echo "--score 10" >> /etc/xdg/reflector/reflector.conf
+echo "" >> /etc/xdg/reflector/reflector.conf
+echo "# Sort the mirrors by highest rate (--sort)." >> /etc/xdg/reflector/reflector.conf
+echo "--sort rate" >> /etc/xdg/reflector/reflector.conf
+sudo chmod o-w /etc/xdg/reflector/reflector.conf
+sudo systemctl enable reflector.timer
 sudo pacman -Syy
 
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
@@ -149,6 +156,7 @@ yay -S find-the-command --noconfirm
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /etc/skel/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /root/.zshrc
+sudo pacman -S pacman-contrib --noconfirm
 sudo systemctl enable pacman-filesdb-refresh.timer
 sudo systemctl start pacman-filesdb-refresh.timer
 
