@@ -49,6 +49,12 @@ sudo pacman -R plasma-wayland-session --noconfirm
 # Install ffmpegthumbs, for video file thumbnail support in Dolphin.
 sudo pacman -S ffmpegthumbs --noconfirm
 
+# Install thumbnail support for PDF files.
+sudo pacman -S kdegraphics-thumbnailers --noconfirm
+
+# Install some KDE utilities.
+sudo pacman -S kcalc kcharselect kdf kfind kwalletmanager sweeper --noconfirm
+
 # Install some command-line utilities.
 sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
 
@@ -121,7 +127,7 @@ yay -S mp3tag --noconfirm
 sudo pacman -S cdrtools dvd+rw-tools cdrdao transcode --noconfirm
 
 # Install some KDE games!
-sudo pacman -S kapman kblocks kbounce --noconfirm
+sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
 
 # Install Spotify.
 yay -S spotify --noconfirm
@@ -203,4 +209,15 @@ sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect
 sudo mkinitcpio -p linux-lts
 sudo rm /boot/initramfs-linux-lts-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+
+read -p "Installing CPU microcode. Please select your CPU.
+1. AMD
+2. Intel
+–> " resp
+if [ "$resp" = 1 ]; then
+sudo pacman -S amd-ucode --noconfirm
+fi
+if [ "$resp" = 2 ]; then
+sudo pacman -S intel-ucode --noconfirm
 fi
