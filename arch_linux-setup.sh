@@ -55,8 +55,11 @@ sudo pacman -S kdegraphics-thumbnailers --noconfirm
 # Install some KDE utilities.
 sudo pacman -S kcalc kcharselect kdf kfind kwalletmanager sweeper --noconfirm
 
+# Install some core utilities that didn't get installed, for some reason.
+sudo pacman -S man-pages man-db logrotate base-devel cracklib usbutils --noconfirm
+
 # Install some command-line utilities.
-sudo pacman -S mandoc micro duf bat fd lynis btop --noconfirm
+sudo pacman -S micro duf bat fd lynis btop --noconfirm
 
 # Install Papirus icon theme.
 sudo pacman -S papirus-icon-theme --noconfirm
@@ -86,11 +89,14 @@ sudo systemctl enable cups ; sudo systemctl start cups
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
 yay -S desktop-privileges --noconfirm
 
+# Install hardware dection tool for mkinitcpio.
+sudo pacman -S hwdetect --noconfirm
+
 # Install Brave web browser.
 yay -S brave-bin --noconfirm
 
 # Install fonts.
-yay -S ttf-poppins ttf-sourcesanspro ttf-ibm-plex ttf-ms-fonts --noconfirm
+yay -S ttf-poppins adobe-source-sans-fonts ttf-ibm-plex ttf-ms-fonts --noconfirm
 
 # Install "lsd," a better replacement for ls.
 yay -S lsd --noconfirm
