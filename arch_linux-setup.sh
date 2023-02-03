@@ -100,7 +100,7 @@ yay -S pamac-aur pamac-tray-icon-plasma --noconfirm
 
 # Install and configure VSCodium.
 yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
-mkdir -p /home/$USER/.config/VSCodium/User ; cp /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
+mkdir -p /home/$USER/.config/VSCodium/User ; cp -v /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
 vscodium --install-extension PKief.material-icon-theme BeardedBear.beardedtheme jeff-hykin.better-shellscript-syntax
 
 # Install grub theme.
@@ -110,9 +110,6 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install Wine.
 yay -S wine-installer wine-gecko wine-mono --noconfirm
-
-# Remove unneeded dependencies.
-yay -c --noconfirm
 
 # Install some useful software.
 sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle p7zip clipgrab partitionmanager ciano --noconfirm
@@ -159,6 +156,9 @@ sudo pacman -S pacman-contrib --noconfirm
 sudo systemctl enable pacman-filesdb-refresh.timer
 sudo systemctl start pacman-filesdb-refresh.timer
 
+# Remove unneeded dependencies.
+yay -c --noconfirm
+
 # Update environment variables.
 # Give temporary write access so we can apply the changes.
 sudo chmod o+w /etc/environment
@@ -176,7 +176,7 @@ sudo chmod o-w /etc/environment
 # Stop mkinitcpio from generating a fallback kernel image.
 echo "Stopping mkinitcpio from generating a fallback kernel image..."
 read -p "Which Linux kernel did you install?
-1. Linux
+1. Linux (Standard)
 2. Linux (Hardened)
 3. Linux (LTS)
 —> " resp
