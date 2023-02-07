@@ -41,7 +41,7 @@ sudo blackpac --blacklist qt5-tools v4l-utils
 sudo pacman -R qt5-tools v4l-utils --noconfirm
 
 # Remove unneeded packages.
-sudo pacman -R nano vim htop kate htop --noconfirm
+sudo pacman -Rsu nano vim htop kate htop --noconfirm
 
 # Remove KDE Wayland session.
 sudo pacman -R plasma-wayland-session --noconfirm
@@ -81,6 +81,10 @@ yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerup
 
 # Install Konsole color scheme.
 yay -S konsole-snazzy-git --noconfirm
+
+# Install Papirus folder icons and change colors to match KDE's default "Breeze" theme.
+yay -S papirus-folders-git --noconfirm
+papirus-folders -C breeze --theme Papirus
 
 # Install and configure printing support.
 yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper --noconfirm
