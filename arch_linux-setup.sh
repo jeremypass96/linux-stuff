@@ -168,9 +168,6 @@ yay -S find-the-command --noconfirm
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /etc/skel/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /root/.zshrc
-sudo pacman -S pacman-contrib --noconfirm
-sudo systemctl enable pacman-filesdb-refresh.timer
-sudo systemctl start pacman-filesdb-refresh.timer
 
 # Remove unneeded dependencies.
 yay -c --noconfirm
