@@ -217,14 +217,3 @@ sudo mkinitcpio -p linux-lts
 sudo rm /boot/initramfs-linux-lts-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-
-read -p "Installing CPU microcode. Please select your CPU.
-1. AMD
-2. Intel
-–> " resp
-if [ "$resp" = 1 ]; then
-sudo pacman -S amd-ucode --noconfirm
-fi
-if [ "$resp" = 2 ]; then
-sudo pacman -S intel-ucode --noconfirm
-fi
