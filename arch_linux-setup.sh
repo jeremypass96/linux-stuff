@@ -202,6 +202,8 @@ echo BROWSER=/usr/bin/brave >> /etc/environment
 echo EDITOR=/usr/bin/micro >> /etc/environment
 # Set MICRO_TRUECOLOR variable.
 echo MICRO_TRUECOLOR=1 >> /etc/environment
+# Set XDG_CONFIG_HOME variable.
+echo XDG_CONFIG_HOME=$HOME/.config >> /etc/environment
 # Remove permission for other users to write to this file.
 sudo chmod o-w /etc/environment
 
