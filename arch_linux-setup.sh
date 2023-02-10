@@ -249,6 +249,7 @@ yay -S acct --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/profile
+sudo sed -i 's/UMASK=0022/UMASK=0077'/g /etc/conf.d/sysstat
 sudo touch /etc/sysctl.d/99-sysctl.conf
 sudo chmod o+w /etc/sysctl.d/99-sysctl.conf
 echo "dev.tty.ldisc_autoload = 0" >> /etc/sysctl.d/99-sysctl.conf
