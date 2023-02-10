@@ -269,3 +269,6 @@ sudo systemctl enable --now puppet
 sudo systemctl enable --now auditd
 sudo systemctl enable --now apparmor
 sudo systemctl enable --now sysstat
+sudo chmod o+w /etc/conf.d/sysstat
+echo 'ENABLED="true"' >> /etc/conf.d/sysstat
+sudo chmod o-w /etc/conf.d/sysstat
