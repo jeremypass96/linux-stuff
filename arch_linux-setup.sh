@@ -133,7 +133,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 yay -S wine-installer wine-gecko wine-mono --noconfirm
 
 # Install some useful software.
-sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle p7zip clipgrab partitionmanager ciano --noconfirm
+sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle p7zip clipgrab partitionmanager --noconfirm
 
 # Install mp3tag.
 yay -S mp3tag --noconfirm
