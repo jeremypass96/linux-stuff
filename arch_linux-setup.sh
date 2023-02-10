@@ -9,8 +9,8 @@ sudo chmod o-w /etc/modprobe.d/alsa-base.conf
 # Tweak pacman for sane defaults.
 sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
 sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
-sudo sed -i 's/"#ParallelDownloads = 5"/"ParallelDownloads = 20"'/g /etc/pacman.conf
-sudo sed -i '39s/$/ILoveCandy'/g /etc/pacman.conf
+sudo sed -i 's/'"#ParallelDownloads = 5"'/'"ParallelDownloads = 20"''/g /etc/pacman.conf
+sudo sed -i '38s/$/ILoveCandy'/g /etc/pacman.conf
 
 # Rank mirrors.
 sudo pacman -S reflector --noconfirm
@@ -59,7 +59,7 @@ sudo pacman -S kcalc kcharselect kdf kfind kwalletmanager sweeper --noconfirm
 sudo pacman -S man-pages man-db logrotate base-devel cracklib usbutils --noconfirm
 
 # Install some command-line utilities.
-sudo pacman -S micro duf bat fd lynis btop --noconfirm
+sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
 
 # Install Papirus icon theme.
 sudo pacman -S papirus-icon-theme --noconfirm
@@ -117,7 +117,9 @@ yay -S pamac-aur pamac-tray-icon-plasma --noconfirm
 # Install and configure VSCodium.
 yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p /home/$USER/.config/VSCodium/User ; cp -v /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
-vscodium --install-extension PKief.material-icon-theme BeardedBear.beardedtheme jeff-hykin.better-shellscript-syntax
+vscodium --install-extension PKief.material-icon-theme
+vscodium --install-extension BeardedBear.beardedtheme
+vscodium --install-extension jeff-hykin.better-shellscript-syntax
 
 # Install grub theme.
 yay -S grub-theme-stylish-color-1080p-git --noconfirm
@@ -154,11 +156,17 @@ sudo ./cleanup-systemd-boot.sh
 
 # Configure Zsh.
 yay -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
-cp -v Dotfiles/.zshrc /home/$USER/.zshrc
-sed -i 's|export ZSH="\$HOME/.oh-my-zsh"|export ZSH="/usr/share/oh-my-zsh|g' /home/$USER/.zshrc
+cp /usr/share/oh-my-zsh/zshrc /home/$USER/.zshrc
+sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"gentoo"'/g /home/$USER/.zshrc
+sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' /home/$USER/.zshrc
 sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g /home/$USER/.zshrc
-sed -i 's/'"zstyle ':omz:update' mode auto"'/'"# zstyle ':omz:update' mode auto"''/g /home/$USER/.zshrc
-sed -i 's/'"zstyle ':omz:update' frequency 14"'/'"# zstyle ':omz:update' frequency 14"''/g /home/$USER/.zshrc
+sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/g' /home/$USER/.zshrc
+sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' /home/$USER/.zshrc
+sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' /home/$USER/.zshrc
+sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting command-not-found)"'/g' /home/$USER/.zshrc
+echo alias ls='"lsd"' >> /home/$USER/.zshrc
+echo alias cat='"bat"' >> /home/$USER/.zshrc
+echo pfetch >> /home/$USER/.zshrc
 cd
 sudo cp -v /home/$USER/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
@@ -166,8 +174,9 @@ sudo cp -v /etc/skel/.zshrc /root/.zshrc
 # Install and configure find-the-command utility.
 yay -S find-the-command --noconfirm
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
+sudo chmod o+w /etc/skel/.zshrc
 echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /etc/skel/.zshrc
-echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /root/.zshrc
+sudo chmod o-w /etc/skel/.zshrc
 
 # Remove unneeded dependencies.
 yay -c --noconfirm
