@@ -147,8 +147,9 @@ yay -S spotify --noconfirm
 # Install KDE Connect.
 sudo pacman -S kdeconnect --noconfirm
 
-# Install gufw firewall.
+# Install gufw firewall and enable the systemd service.
 sudo pacman -S gufw --noconfirm
+sudo systemctl enable ufw ; sudo systemctl start ufw
 
 # Update man pages.
 sudo makewhatis /usr/share/man
