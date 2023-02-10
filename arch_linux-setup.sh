@@ -88,7 +88,7 @@ papirus-folders -C breeze --theme Papirus
 
 # Install and configure printing support.
 yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper --noconfirm
-sudo systemctl enable cups ; sudo systemctl start cups
+sudo systemctl enable --now cups
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
 yay -S desktop-privileges --noconfirm
@@ -152,7 +152,7 @@ sudo pacman -S kdeconnect --noconfirm
 
 # Install gufw firewall and enable the systemd service.
 sudo pacman -S gufw --noconfirm
-sudo systemctl enable ufw ; sudo systemctl start ufw
+sudo systemctl enable --now ufw
 
 # Update man pages.
 sudo makewhatis /usr/share/man
@@ -265,6 +265,7 @@ sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
 sudo touch /var/log/account/pacct
 sudo accton on
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
-sudo systemctl enable puppet ; sudo systemctl start puppet
-sudo systemctl enable auditd ; sudo systemctl start auditd
-sudo systemctl enable apparmor ; sudo systemctl start apparmor
+sudo systemctl enable --now puppet
+sudo systemctl enable --now auditd
+sudo systemctl enable --now apparmor
+sudo systemctl enable --now sysstat
