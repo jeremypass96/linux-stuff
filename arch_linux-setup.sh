@@ -242,3 +242,28 @@ sudo mkinitcpio -p linux-lts
 sudo rm /boot/initramfs-linux-lts-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
+
+# Secure the OS.
+sudo pacman -S arch-audit apparmor sysstat puppet rkhunter --noconfirm
+yay -S acct --noconfirm
+sudo chmod og-rwx /boot/grub/grub.cfg
+sudo chmod og-rwx /etc/ssh/sshd_config
+sudo sed -i 's/umask 022/umask 077'/g /etc/profile
+sudo touch /etc/sysctl.d/99-sysctl.conf
+sudo chmod o+w /etc/sysctl.d/99-sysctl.conf
+echo "dev.tty.ldisc_autoload = 0" >> /etc/sysctl.d/99-sysctl.conf
+echo "fs.protected_fifos = 2" >> /etc/sysctl.d/99-sysctl.conf
+echo "fs.protected_regular = 2" >> /etc/sysctl.d/99-sysctl.conf
+echo "fs.suid_dumpable = 0" >> /etc/sysctl.d/99-sysctl.conf
+echo "kernel.sysrq = 0" >> /etc/sysctl.d/99-sysctl.conf
+echo "kernel.unprivileged_bpf_disabled = 1" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.ipv4.conf.all.log_martians = 1" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.ipv4.conf.all.send_redirects = 0" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.ipv4.conf.default.log_martians = 1" >> /etc/sysctl.d/99-sysctl.conf
+sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
+sudo touch /var/log/account/pacct
+sudo accton on
+sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
+sudo systemctl enable puppet ; sudo systemctl start puppet
+sudo systemctl enable auditd ; sudo systemctl start auditd
+sudo systemctl enable apparmor ; sudo systemctl start apparmor
