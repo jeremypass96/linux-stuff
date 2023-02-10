@@ -144,6 +144,12 @@ sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --
 # Install Spotify.
 yay -S spotify --noconfirm
 
+# Install KDE Connect.
+sudo pacman -S kdeconnect --noconfirm
+
+# Install gufw firewall.
+sudo pacman -S gufw --noconfirm
+
 # Update man pages.
 sudo makewhatis /usr/share/man
 
@@ -194,6 +200,12 @@ echo EDITOR=/usr/bin/micro >> /etc/environment
 echo MICRO_TRUECOLOR=1 >> /etc/environment
 # Remove permission for other users to write to this file.
 sudo chmod o-w /etc/environment
+
+# Install mkinitcpio firmware, gets rid of missing firmware messages.
+yay -S mkinitcpio-firmware --noconfirm
+
+# Install plymouth with plymouth theme. Will not configure, you need to configure the /etc/mkinitcpio.conf file yourself.
+yay -S plymouth plymouth-theme-arch-darwin
 
 # Stop mkinitcpio from generating a fallback kernel image.
 echo "Stopping mkinitcpio from generating a fallback kernel image..."
