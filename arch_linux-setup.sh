@@ -56,7 +56,7 @@ sudo pacman -S kdegraphics-thumbnailers --noconfirm
 sudo pacman -S kcalc kcharselect kdf kfind kwalletmanager sweeper --noconfirm
 
 # Install some core utilities that didn't get installed, for some reason.
-sudo pacman -S man-pages man-db logrotate base-devel cracklib usbutils --noconfirm
+sudo pacman -S man-pages man-db logrotate cracklib usbutils --noconfirm
 
 # Install some command-line utilities.
 sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
