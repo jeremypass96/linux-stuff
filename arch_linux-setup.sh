@@ -100,7 +100,8 @@ sudo pacman -S hwdetect --noconfirm
 yay -S brave-bin --noconfirm
 
 # Install fonts.
-yay -S ttf-poppins adobe-source-sans-fonts ttf-ibm-plex ttf-ms-fonts ttf-material-design-icons-webfont noto-fonts-emoji ttf-nerd-fonts-symbols-2048-em --noconfirm
+yay -S ttf-poppins adobe-source-sans-fonts ttf-ibm-plex ttf-ms-fonts ttf-material-design-icons-webfont noto-fonts-emoji ttf-nerd-fonts-symbols-2048-em ttf-material-icons-git --noconfirm
+sudo ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d
 
 # Configure nerd fonts for "lsd".
 sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/
