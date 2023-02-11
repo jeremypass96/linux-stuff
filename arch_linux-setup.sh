@@ -112,7 +112,7 @@ yay -S lsd --noconfirm
 yay -S topgrade-bin --noconfirm
 
 # Install pfetch.
-yay -S pfetch-git --noconfirm
+yay -S pfetch --noconfirm
 
 # Install Pamac, GUI frontend to install software.
 yay -S pamac-aur pamac-tray-icon-plasma --noconfirm
