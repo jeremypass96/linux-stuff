@@ -204,7 +204,7 @@ sudo chmod o-w /etc/environment
 yay -S mkinitcpio-firmware --noconfirm
 
 # Install plymouth with plymouth theme. Will not configure, you need to configure the /etc/mkinitcpio.conf file yourself.
-yay -S plymouth plymouth-theme-arch-darwin
+yay -S plymouth plymouth-theme-arch-darwin --noconfirm
 
 # Stop mkinitcpio from generating a fallback kernel image.
 echo "Stopping mkinitcpio from generating a fallback kernel image..."
