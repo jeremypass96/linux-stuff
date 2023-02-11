@@ -10,7 +10,6 @@ sudo chmod o-w /etc/modprobe.d/alsa-base.conf
 sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
 sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
 sudo sed -i 's/'"#ParallelDownloads = 5"'/'"ParallelDownloads = 15"''/g /etc/pacman.conf
-sudo sed -i '38s/$/ILoveCandy'/g /etc/pacman.conf
 sudo sed -i '/ParallelDownloads = 15/ a\ILoveCandy\' /etc/pacman.conf
 
 # Rank mirrors.
