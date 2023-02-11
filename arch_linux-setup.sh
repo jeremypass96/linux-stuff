@@ -181,13 +181,6 @@ cd
 sudo cp -v /home/$USER/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 
-# Install and configure find-the-command utility.
-yay -S find-the-command --noconfirm
-echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /home/$USER/.zshrc
-sudo chmod o+w /etc/skel/.zshrc
-echo "source /usr/share/doc/find-the-command/ftc.zsh quiet" >> /etc/skel/.zshrc
-sudo chmod o-w /etc/skel/.zshrc
-
 # Remove unneeded dependencies.
 yay -c --noconfirm
 
