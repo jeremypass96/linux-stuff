@@ -3,7 +3,7 @@
 
 # Audio buzz/hum fix.
 sudo touch /etc/modprobe.d/alsa-base.conf ; sudo chmod o+w /etc/modprobe.d/alsa-base.conf
-sudo echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
+sudo echo "options snd-hda-intel power_save=0 power_save_controller=N" > /etc/modprobe.d/alsa-base.conf
 sudo chmod o-w /etc/modprobe.d/alsa-base.conf
 
 # Tweak pacman for sane defaults.
