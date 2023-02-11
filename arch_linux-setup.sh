@@ -9,7 +9,7 @@ sudo chmod o-w /etc/modprobe.d/alsa-base.conf
 # Tweak pacman for sane defaults.
 sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
 sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
-sudo sed -i 's/'"#ParallelDownloads = 5"'/'"ParallelDownloads = 20"''/g /etc/pacman.conf
+sudo sed -i 's/'"#ParallelDownloads = 5"'/'"ParallelDownloads = 15"''/g /etc/pacman.conf
 sudo sed -i '38s/$/ILoveCandy'/g /etc/pacman.conf
 
 # Rank mirrors.
