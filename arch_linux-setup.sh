@@ -262,3 +262,6 @@ sudo systemctl enable --now sysstat
 sudo chmod o+w /etc/conf.d/sysstat
 echo 'ENABLED="true"' >> /etc/conf.d/sysstat
 sudo chmod o-w /etc/conf.d/sysstat
+
+# Prettify Arch logo.
+sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
