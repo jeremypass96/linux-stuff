@@ -185,11 +185,11 @@ yay -c --noconfirm
 # Give temporary write access so we can apply the changes.
 sudo chmod o+w /etc/environment
 # Configure pfetch.
-echo PF_INFO='"ascii os kernel uptime pkgs shell de memory"' >> /etc/environment
+echo PF_INFO='"ascii os kernel uptime pkgs shell editor de"' >> /etc/environment
 # Set BROWSER variable.
-echo BROWSER=/usr/bin/brave >> /etc/environment
+echo BROWSER=brave >> /etc/environment
 # Set EDITOR variable.
-echo EDITOR=/usr/bin/micro >> /etc/environment
+echo EDITOR=micro >> /etc/environment
 # Set MICRO_TRUECOLOR variable.
 echo MICRO_TRUECOLOR=1 >> /etc/environment
 # Remove permission for other users to write to this file.
