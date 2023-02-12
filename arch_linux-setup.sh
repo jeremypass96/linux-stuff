@@ -61,9 +61,6 @@ sudo pacman -S man-pages man-db logrotate cracklib usbutils --noconfirm
 # Install some command-line utilities.
 sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
 
-# Install Papirus icon theme.
-sudo pacman -S papirus-icon-theme --noconfirm
-
 # Install spell checking support.
 sudo pacman -S aspell aspell-en --noconfirm
 
@@ -82,9 +79,8 @@ yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerup
 # Install Konsole color scheme.
 yay -S konsole-snazzy-git --noconfirm
 
-# Install Papirus folder icons and change colors to match KDE's default "Breeze" theme.
-yay -S papirus-folders-git --noconfirm
-papirus-folders -C breeze --theme Papirus
+# Install icon, cursor, and KDE theme.
+sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git --noconfirm
 
 # Install and configure printing support.
 yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper --noconfirm
