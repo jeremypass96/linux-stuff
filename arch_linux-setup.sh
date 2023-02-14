@@ -272,6 +272,10 @@ sudo systemctl enable --now sysstat
 sudo chmod o+w /etc/conf.d/sysstat
 echo 'ENABLED="true"' >> /etc/conf.d/sysstat
 sudo chmod o-w /etc/conf.d/sysstat
+sudo chmod o+w /etc/bash.bashrc
+echo "# Set umask." >> /etc/bash.bashrc
+echo "umask 077" >> /etc/bash.bashrc
+sudo chmod o-w /etc/bash.bashrc
 
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
