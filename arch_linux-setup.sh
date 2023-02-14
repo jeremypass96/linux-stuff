@@ -274,3 +274,4 @@ sudo sed -i 's/! server 3.arch.pool.ntp.org iburst/server 3.arch.pool.ntp.org ib
 sudo systemctl disable systemd-timesyncd.service
 sudo systemctl enable chronyd ; sudo systemctl enable chrony-wait
 sudo systemctl start chronyd ; sudo systemctl start chrony-wait
+sudo chronyc online
