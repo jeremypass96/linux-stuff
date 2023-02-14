@@ -265,3 +265,12 @@ sudo chmod o-w /etc/conf.d/sysstat
 
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
+
+# Install and use better NTP daemon.
+sudo pacman -S chrony --noconfirm
+sudo sed -i 's/! server 0.arch.pool.ntp.org iburst/server 0.arch.pool.ntp.org iburst'/g /etc/chrony.conf
+sudo sed -i 's/! server 1.arch.pool.ntp.org iburst/server 1.arch.pool.ntp.org iburst'/g /etc/chrony.conf
+sudo sed -i 's/! server 3.arch.pool.ntp.org iburst/server 3.arch.pool.ntp.org iburst'/g /etc/chrony.conf
+sudo systemctl disable systemd-timesyncd.service
+sudo systemctl enable chronyd ; sudo systemctl enable chrony-wait
+sudo systemctl start chronyd ; sudo systemctl start chrony-wait
