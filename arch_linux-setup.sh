@@ -53,9 +53,6 @@ sudo chronyc online
 # Remove unneeded packages.
 sudo pacman -Rsu nano vim htop kate htop --noconfirm
 
-# Remove KDE Wayland session.
-sudo pacman -Rsu plasma-wayland-session --noconfirm
-
 # Install ffmpegthumbs, for video file thumbnail support in Dolphin.
 sudo pacman -S ffmpegthumbs --noconfirm
 
