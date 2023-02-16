@@ -143,7 +143,7 @@ sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle
 yay -S mp3tag --noconfirm
 
 # Install dependencies for k3b.
-sudo pacman -S cdrtools dvd+rw-tools transcode --noconfirm
+yay -S cdrtools dvd+rw-tools transcode cdrdao sox normalize --noconfirm
 
 # Install some KDE games!
 sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
