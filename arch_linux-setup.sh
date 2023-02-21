@@ -60,7 +60,7 @@ sudo pacman -S ffmpegthumbs --noconfirm
 sudo pacman -S kdegraphics-thumbnailers --noconfirm
 
 # Install some KDE utilities.
-sudo pacman -S kcalc kcharselect kdf kfind kwalletmanager sweeper khelpcenter --noconfirm
+sudo pacman -S kcalc kcharselect kfind kwalletmanager sweeper khelpcenter --noconfirm
 
 # Install some core utilities that didn't get installed, for some reason.
 sudo pacman -S man-pages man-db logrotate cracklib usbutils --noconfirm
