@@ -242,7 +242,7 @@ fi
 
 # Secure the OS.
 sudo pacman -S arch-audit apparmor sysstat puppet rkhunter --noconfirm
-yay -S acct --noconfirm
+yay -S acct chkrootkit --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/profile
