@@ -273,6 +273,15 @@ sudo chmod o+w /etc/bash.bashrc
 echo "# Set umask." >> /etc/bash.bashrc
 echo "umask 077" >> /etc/bash.bashrc
 sudo chmod o-w /etc/bash.bashrc
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
+sudo sed -i s/'#AllowTcpForwarding yes'/'AllowTcpForwarding no'/g /etc/ssh/sshd_config
+sudo sed -i s/'#ClientAliveCountMax 3'/'ClientAliveCountMax 2'/g /etc/ssh/sshd_config
+sudo sed -i s/'#Compression delayed'/'Compression no'/g /etc/ssh/sshd_config
+sudo sed -i s/'#LogLevel INFO'/'LogLevel VERBOSE'/g /etc/ssh/sshd_config
+sudo sed -i s/'#MaxAuthTries 6'/'MaxAuthTries 3'/g /etc/ssh/sshd_config
+sudo sed -i s/'#MaxSessions 10'/'MaxSessions 2'/g /etc/ssh/sshd_config
+sudo sed -i s/'#TCPKeepAlive yes'/'TCPKeepAlive no'/g /etc/ssh/sshd_config
+sudo sed -i s/'#AllowAgentForwarding yes'/'AllowAgentForwarding no'/g /etc/ssh/sshd_config
 
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
