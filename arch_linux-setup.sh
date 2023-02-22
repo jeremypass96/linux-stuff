@@ -242,7 +242,7 @@ fi
 
 # Secure the OS.
 sudo pacman -S arch-audit apparmor sysstat puppet rkhunter --noconfirm
-yay -S acct chkrootkit --noconfirm
+yay -S acct chkrootkit aide --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/profile
@@ -273,6 +273,12 @@ sudo chmod o+w /etc/bash.bashrc
 echo "# Set umask." >> /etc/bash.bashrc
 echo "umask 077" >> /etc/bash.bashrc
 sudo chmod o-w /etc/bash.bashrc
+sudo chmod o+w /etc/hosts
+echo 127.0.0.1 localhost >> /etc/hosts
+echo "::1 localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters" >> /etc/hosts
+sudo chmod o-w /etc/hosts
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
 sudo sed -i s/'#AllowTcpForwarding yes'/'AllowTcpForwarding no'/g /etc/ssh/sshd_config
 sudo sed -i s/'#ClientAliveCountMax 3'/'ClientAliveCountMax 2'/g /etc/ssh/sshd_config
@@ -282,6 +288,7 @@ sudo sed -i s/'#MaxAuthTries 6'/'MaxAuthTries 3'/g /etc/ssh/sshd_config
 sudo sed -i s/'#MaxSessions 10'/'MaxSessions 2'/g /etc/ssh/sshd_config
 sudo sed -i s/'#TCPKeepAlive yes'/'TCPKeepAlive no'/g /etc/ssh/sshd_config
 sudo sed -i s/'#AllowAgentForwarding yes'/'AllowAgentForwarding no'/g /etc/ssh/sshd_config
+sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf
 
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
