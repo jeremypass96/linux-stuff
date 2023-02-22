@@ -280,14 +280,14 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters" >> /etc/hosts
 sudo chmod o-w /etc/hosts
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
-sudo sed -i s/'#AllowTcpForwarding yes'/'AllowTcpForwarding no'/g /etc/ssh/sshd_config
-sudo sed -i s/'#ClientAliveCountMax 3'/'ClientAliveCountMax 2'/g /etc/ssh/sshd_config
-sudo sed -i s/'#Compression delayed'/'Compression no'/g /etc/ssh/sshd_config
-sudo sed -i s/'#LogLevel INFO'/'LogLevel VERBOSE'/g /etc/ssh/sshd_config
-sudo sed -i s/'#MaxAuthTries 6'/'MaxAuthTries 3'/g /etc/ssh/sshd_config
-sudo sed -i s/'#MaxSessions 10'/'MaxSessions 2'/g /etc/ssh/sshd_config
-sudo sed -i s/'#TCPKeepAlive yes'/'TCPKeepAlive no'/g /etc/ssh/sshd_config
-sudo sed -i s/'#AllowAgentForwarding yes'/'AllowAgentForwarding no'/g /etc/ssh/sshd_config
+sudo sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding no'/g /etc/ssh/sshd_config
+sudo sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 2'/g /etc/ssh/sshd_config
+sudo sed -i 's/#Compression delayed/Compression no'/g /etc/ssh/sshd_config
+sudo sed -i 's/#LogLevel INFO/LogLevel VERBOSE'/g /etc/ssh/sshd_config
+sudo sed -i 's/#MaxAuthTries 6/MaxAuthTries 3'/g /etc/ssh/sshd_config
+sudo sed -i 's/#MaxSessions 10/MaxSessions 2'/g /etc/ssh/sshd_config
+sudo sed -i 's/#TCPKeepAlive yes/TCPKeepAlive no'/g /etc/ssh/sshd_config
+sudo sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/sshd_config
 sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf
 
 # Prettify Arch logo.
