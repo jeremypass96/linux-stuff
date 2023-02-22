@@ -105,14 +105,14 @@ echo "net.ipv4.conf.default.accept_source_route = 0" >> /etc/sysctl.conf
 echo "net.ipv4.conf.default.log_martians = 1" >> /etc/sysctl.conf
 echo "net.ipv6.conf.all.accept_redirects = 0" >> /etc/sysctl.conf
 echo "net.ipv6.conf.default.accept_redirects = 0" >> /etc/sysctl.conf
-sed -i s/'#AllowTcpForwarding yes'/'AllowTcpForwarding no'/g /etc/ssh/sshd_config
-sed -i s/'#ClientAliveCountMax 3'/'ClientAliveCountMax 2'/g /etc/ssh/sshd_config
-sed -i s/'#Compression delayed'/'Compression no'/g /etc/ssh/sshd_config
-sed -i s/'#LogLevel INFO'/'LogLevel VERBOSE'/g /etc/ssh/sshd_config
-sed -i s/'#MaxAuthTries 6'/'MaxAuthTries 3'/g /etc/ssh/sshd_config
-sed -i s/'#MaxSessions 10'/'MaxSessions 2'/g /etc/ssh/sshd_config
-sed -i s/'#TCPKeepAlive yes'/'TCPKeepAlive no'/g /etc/ssh/sshd_config
-sed -i s/'#AllowAgentForwarding yes'/'AllowAgentForwarding no'/g /etc/ssh/sshd_config
+sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding no'/g /etc/ssh/sshd_config
+sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 2'/g /etc/ssh/sshd_config
+sed -i 's/#Compression delayed/Compression no'/g /etc/ssh/sshd_config
+sed -i 's/#LogLevel INFO/LogLevel VERBOSE'/g /etc/ssh/sshd_config
+sed -i 's/#MaxAuthTries 6/MaxAuthTries 3'/g /etc/ssh/sshd_config
+sed -i 's/#MaxSessions 10/MaxSessions 2'/g /etc/ssh/sshd_config
+sed -i 's/#TCPKeepAlive yes/TCPKeepAlive no'/g /etc/ssh/sshd_config
+sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/sshd_config
 
 # Configure plymouth boot splash.
 vpm install plymouth -y
