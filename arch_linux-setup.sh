@@ -2,7 +2,7 @@
 # This script cleans up and configures an Arch Linux KDE install installed with "archinstall." Run as a normal user.
 
 # Audio buzz/hum fix.
-sudo touch /etc/modprobe.d/alsa-base.conf ; sudo chmod o+w /etc/modprobe.d/alsa-base.conf
+sudo touch /etc/modprobe.d/alsa-base.conf && sudo chmod o+w /etc/modprobe.d/alsa-base.conf
 sudo echo "options snd-hda-intel power_save=0 power_save_controller=N" > /etc/modprobe.d/alsa-base.conf
 sudo chmod o-w /etc/modprobe.d/alsa-base.conf
 
@@ -29,7 +29,7 @@ sudo pacman -Syy
 
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
 # Download script.
-cd ; wget http://downloads.sourceforge.net/project/ig-scripts/blackpac-1.0.1.sh
+cd && wget http://downloads.sourceforge.net/project/ig-scripts/blackpac-1.0.1.sh
 # Make script executable.
 chmod +x blackpac-1.0.1.sh
 # Install script.
@@ -46,8 +46,8 @@ sudo sed -i 's/! server 0.arch.pool.ntp.org iburst/server 0.arch.pool.ntp.org ib
 sudo sed -i 's/! server 1.arch.pool.ntp.org iburst/server 1.arch.pool.ntp.org iburst'/g /etc/chrony.conf
 sudo sed -i 's/! server 3.arch.pool.ntp.org iburst/server 3.arch.pool.ntp.org iburst'/g /etc/chrony.conf
 sudo systemctl disable systemd-timesyncd.service
-sudo systemctl enable chronyd ; sudo systemctl enable chrony-wait
-sudo systemctl start chronyd ; sudo systemctl start chrony-wait
+sudo systemctl enable chronyd && sudo systemctl enable chrony-wait
+sudo systemctl start chronyd && sudo systemctl start chrony-wait
 sudo chronyc online
 
 # Remove unneeded packages.
@@ -73,13 +73,13 @@ sudo pacman -S aspell aspell-en --noconfirm
 
 # Install yay AUR helper.
 # Download and extract tarball.
-cd ; wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz
+cd && wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz
 tar -xf yay-bin.tar.gz
 # Install yay.
 cd yay-bin
 makepkg -sic --noconfirm
 # Clean up.
-cd ; rm -rf yay-bin ; rm -rf yay-bin.tar.gz
+cd && rm -rf yay-bin && rm -rf yay-bin.tar.gz
 # Configure yay options.
 yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
 
@@ -123,7 +123,7 @@ yay -S pamac-aur pamac-tray-icon-plasma --noconfirm
 
 # Install and configure VSCodium.
 yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
-mkdir -p /home/$USER/.config/VSCodium/User ; cp -v /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
+mkdir -p /home/$USER/.config/VSCodium/User && cp -v /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
 vscodium --install-extension PKief.material-icon-theme
 vscodium --install-extension BeardedBear.beardedtheme
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
@@ -289,8 +289,8 @@ sudo sed -i 's/#MaxSessions 10/MaxSessions 2'/g /etc/ssh/sshd_config
 sudo sed -i 's/#TCPKeepAlive yes/TCPKeepAlive no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/sshd_config
 #### Update AIDE database.
-sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf ; sudo aide -i
-sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.gz|database_out=file:@@{DBDIR}/aide.db.new.gz|g' /etc/aide.conf ; sudo aide -u
+sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf && sudo aide -i
+sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.gz|database_out=file:@@{DBDIR}/aide.db.new.gz|g' /etc/aide.conf && sudo aide -u
 ####
 
 # Prettify Arch logo.
