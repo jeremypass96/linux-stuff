@@ -288,7 +288,10 @@ sudo sed -i 's/#MaxAuthTries 6/MaxAuthTries 3'/g /etc/ssh/sshd_config
 sudo sed -i 's/#MaxSessions 10/MaxSessions 2'/g /etc/ssh/sshd_config
 sudo sed -i 's/#TCPKeepAlive yes/TCPKeepAlive no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/sshd_config
-sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf
+#### Update AIDE database.
+sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf ; sudo aide -i
+sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.gz|database_out=file:@@{DBDIR}/aide.db.new.gz|g' /etc/aide.conf ; sudo aide -u
+####
 
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
