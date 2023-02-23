@@ -60,10 +60,10 @@ sudo pacman -S ffmpegthumbs --noconfirm
 sudo pacman -S kdegraphics-thumbnailers --noconfirm
 
 # Install some KDE utilities.
-sudo pacman -S kcalc kcharselect kfind kwalletmanager sweeper khelpcenter kaccounts-providers --noconfirm
+sudo pacman -S kcalc kcharselect kfind kwalletmanager sweeper khelpcenter kaccounts-providers kio-gdrive --noconfirm
 
 # Install some core utilities that didn't get installed, for some reason.
-sudo pacman -S man-pages man-db logrotate cracklib usbutils --noconfirm
+sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp --noconfirm
 
 # Install some command-line utilities.
 sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
@@ -90,7 +90,7 @@ yay -S konsole-snazzy-git --noconfirm
 sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git kvantum --noconfirm
 
 # Install and configure printing support.
-yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper --noconfirm
+yay -S cups hplip-lite print-manager cups-pk-helper gutenprint foomatic-db-gutenprint-ppds --noconfirm
 sudo systemctl enable --now cups
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
