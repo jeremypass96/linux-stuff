@@ -73,8 +73,8 @@ sudo pacman -S aspell aspell-en --noconfirm
 
 # Install yay AUR helper.
 # Download and extract tarball.
-cd && wget https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz
-tar -xf yay-bin.tar.gz
+cd && curl https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz -o yay-bin.tar.gz
+tar -xvf yay-bin.tar.gz
 # Install yay.
 cd yay-bin
 makepkg -sic --noconfirm
