@@ -90,7 +90,7 @@ yay -S konsole-snazzy-git --noconfirm
 sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git kvantum --noconfirm
 
 # Install and configure printing support.
-yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds --noconfirm
+yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
 sudo systemctl enable --now cups cups-browsed
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
