@@ -18,8 +18,9 @@ sudo reflector --latest 100 --protocol https --sort rate --sort age --score 10 -
 # Congfigure reflector config file for systemd auto-update.
 sudo chmod o+w /etc/xdg/reflector/reflector.conf
 sudo sed -i 's/--latest 5/--latest 100'/g /etc/xdg/reflector/reflector.conf
+echo "" >> /etc/xdg/reflector/reflector.conf
 echo "# Sort the mirrors by highest score (--score)." >> /etc/xdg/reflector/reflector.conf
-echo "--score 10" >> /etc/xdg/reflector/reflector.conf
+echo "--score 15" >> /etc/xdg/reflector/reflector.conf
 echo "" >> /etc/xdg/reflector/reflector.conf
 echo "# Sort the mirrors by highest rate (--sort)." >> /etc/xdg/reflector/reflector.conf
 echo "--sort rate" >> /etc/xdg/reflector/reflector.conf
