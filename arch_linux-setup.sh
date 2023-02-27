@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script cleans up and configures an Arch Linux KDE install installed with "archinstall." Run as a normal user.
+# This script cleans up and configures an Arch Linux KDE install that was installed with "archinstall." Run as a normal user!
 
 # Audio buzz/hum fix.
 sudo touch /etc/modprobe.d/alsa-base.conf && sudo chmod o+w /etc/modprobe.d/alsa-base.conf
