@@ -139,6 +139,9 @@ yay -S wine-installer wine-gecko wine-mono --noconfirm
 # Install some useful software.
 sudo pacman -S unrar vlc transmission-qt pinta audacity k3b juk okular spectacle p7zip clipgrab partitionmanager --noconfirm
 
+# Install balenaEtcher to write OS images to USB flash drives.
+yay -S balena-etcher --noconfirm
+
 # Install mp3tag.
 yay -S mp3tag --noconfirm
 
