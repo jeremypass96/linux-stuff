@@ -180,7 +180,7 @@ sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode d
 sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/g' /home/$USER/.zshrc
 sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' /home/$USER/.zshrc
 sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' /home/$USER/.zshrc
-sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting command-not-found)"'/g' /home/$USER/.zshrc
+sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' /home/$USER/.zshrc
 echo alias ls='"lsd"' >> /home/$USER/.zshrc
 echo alias cat='"bat"' >> /home/$USER/.zshrc
 echo pfetch >> /home/$USER/.zshrc
