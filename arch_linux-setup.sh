@@ -161,6 +161,9 @@ sudo pacman -S kdeconnect --noconfirm
 sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
 
+# Install some useful pacman post-transaction hooks.
+yay -S pacman-cleanup-hook grub-hook pacman-systemd-inhibit reflector-mirrorlist-update pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels --noconfirm
+
 # Update man pages.
 sudo makewhatis /usr/share/man
 
