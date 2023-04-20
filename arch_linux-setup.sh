@@ -81,7 +81,7 @@ makepkg -sic --noconfirm
 # Clean up.
 cd && rm -rf yay-bin && rm -rf yay-bin.tar.gz
 # Configure yay options.
-yay --editor /usr/bin/micro --nocleanmenu --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
+yay --editor /usr/bin/micro --nocleanmenu --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --sudoloop --save
 
 # Install Konsole color scheme.
 yay -S konsole-snazzy-git --noconfirm
