@@ -81,7 +81,7 @@ makepkg -sic --noconfirm
 # Clean up.
 cd && rm -rf yay-bin && rm -rf yay-bin.tar.gz
 # Configure yay options.
-yay --editor /usr/bin/micro --answerclean A --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
+yay --editor /usr/bin/micro --nocleanmenu --nodiffmenu --noeditmenu --answerupgrade Y --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --save
 
 # Install Konsole color scheme.
 yay -S konsole-snazzy-git --noconfirm
@@ -162,7 +162,7 @@ sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
 
 # Install some useful pacman post-transaction hooks.
-yay -S pacman-cleanup-hook grub-hook pacman-systemd-inhibit reflector-mirrorlist-update pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels --noconfirm
+yay -S pacman-cleanup-hook grub-hook reflector-mirrorlist-update pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels --noconfirm
 
 # Update man pages.
 sudo makewhatis /usr/share/man
