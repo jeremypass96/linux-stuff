@@ -38,8 +38,8 @@ sudo install blackpac-1.0.1.sh /usr/local/bin/
 sudo mv /usr/local/bin/blackpac-1.0.1.sh /usr/local/bin/blackpac
 rm blackpac-1.0.1.sh
 # Blacklist and remvove packages.
-sudo blackpac --blacklist qt5-tools v4l-utils
-sudo pacman -R qt5-tools v4l-utils --noconfirm
+sudo blackpac --blacklist qt5-tools
+sudo pacman -R qt5-tools --noconfirm
 
 # Install and use better NTP daemon.
 sudo pacman -S chrony --noconfirm
