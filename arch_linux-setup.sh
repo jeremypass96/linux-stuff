@@ -14,13 +14,13 @@ sudo sed -i '/ParallelDownloads = 15/ a\ILoveCandy\' /etc/pacman.conf
 
 # Rank mirrors.
 sudo pacman -S reflector --noconfirm
-sudo reflector --latest 150 --protocol https --sort rate --sort age --score 15 --save /etc/pacman.d/mirrorlist
+sudo reflector --latest 150 --protocol https --sort rate --sort age --score 10 --save /etc/pacman.d/mirrorlist
 # Congfigure reflector config file for systemd auto-update.
 sudo chmod o+w /etc/xdg/reflector/reflector.conf
 sudo sed -i 's/--latest 5/--latest 150'/g /etc/xdg/reflector/reflector.conf
 echo "" >> /etc/xdg/reflector/reflector.conf
 echo "# Sort the mirrors by highest score (--score)." >> /etc/xdg/reflector/reflector.conf
-echo "--score 15" >> /etc/xdg/reflector/reflector.conf
+echo "--score 10" >> /etc/xdg/reflector/reflector.conf
 echo "" >> /etc/xdg/reflector/reflector.conf
 echo "# Sort the mirrors by highest rate (--sort)." >> /etc/xdg/reflector/reflector.conf
 echo "--sort rate" >> /etc/xdg/reflector/reflector.conf
