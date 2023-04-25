@@ -162,7 +162,7 @@ sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
 
 # Install some useful pacman post-transaction hooks.
-yay -S pacman-cleanup-hook grub-hook reflector-mirrorlist-update pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels --noconfirm
+yay -S pacman-cleanup-hook grub-hook reflector-mirrorlist-update pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
 
 # Update man pages.
 sudo makewhatis /usr/share/man
