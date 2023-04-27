@@ -87,7 +87,7 @@ yay --editor /usr/bin/micro --answerclean A --answerupgrade Y --nodiffmenu --noe
 yay -S konsole-snazzy-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
-sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git kvantum --noconfirm
+sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git plasma-splash-arch-moe kvantum --noconfirm
 
 # Install and configure printing support.
 yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
