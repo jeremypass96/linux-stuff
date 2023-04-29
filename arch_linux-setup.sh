@@ -26,6 +26,7 @@ echo "# Sort the mirrors by highest rate (--sort)." >> /etc/xdg/reflector/reflec
 echo "--sort rate" >> /etc/xdg/reflector/reflector.conf
 sudo chmod o-w /etc/xdg/reflector/reflector.conf
 sudo systemctl enable reflector.timer
+sudo sed -i 's/#NoExtract   =/NoExtract    = mirrorlist.pacnew'/g /etc/pacman.conf
 sudo pacman -Syy
 
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
@@ -163,7 +164,6 @@ sudo systemctl enable --now ufw
 
 # Install some useful pacman post-transaction hooks.
 yay -S pacman-cleanup-hook grub-hook pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
-sudo sed -i 's/#NoExtract   =/NoExtract    = mirrorlist.pacnew'/g /etc/pacman.conf
 
 # Update man pages.
 sudo makewhatis /usr/share/man
