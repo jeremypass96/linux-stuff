@@ -5,7 +5,7 @@
     "security.workspace.trust.startupPrompt": "never",
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.enabled": false,
-    "workbench.colorTheme": "Bearded Theme Vivid Black",
+    "workbench.colorTheme": "Bearded Theme feat. Gold D Raynh",
     "workbench.editor.untitled.hint": "hidden",
     "editor.wordWrap": "on",
     "files.hotExit": "off",
