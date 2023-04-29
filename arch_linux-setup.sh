@@ -84,7 +84,7 @@ cd && rm -rf yay-bin && rm -rf yay-bin.tar.gz
 yay --editor /usr/bin/micro --answerclean A --answerupgrade Y --nodiffmenu --noeditmenu --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --sudoloop --save
 
 # Install Konsole color scheme.
-yay -S konsole-snazzy-git --noconfirm
+yay -S catppuccin-konsole-theme-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
 sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git plasma-splash-arch-moe kvantum --noconfirm
