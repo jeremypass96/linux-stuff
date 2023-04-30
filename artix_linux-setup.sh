@@ -30,12 +30,13 @@ sudo pacman -S chrony --noconfirm
 sudo sed -i 's/! server 0.arch.pool.ntp.org iburst/server 0.arch.pool.ntp.org iburst'/g /etc/chrony.conf
 sudo sed -i 's/! server 1.arch.pool.ntp.org iburst/server 1.arch.pool.ntp.org iburst'/g /etc/chrony.conf
 sudo sed -i 's/! server 3.arch.pool.ntp.org iburst/server 3.arch.pool.ntp.org iburst'/g /etc/chrony.conf
-sudo systemctl disable systemd-timesyncd.service
-sudo systemctl enable --now chronyd && sudo systemctl enable --now chrony-wait
+sudo rc-update add chronyd && sudo rc-update add chrony-wait
+sudo rc-service chronyd start && sudo rc-service chrony-wait start
 sudo chronyc online
 
 # Remove unneeded packages.
-sudo pacman -Rcsu nano vim htop kate htop --noconfirm
+sudo pacman -Rcsu nano kate htop falkon mpv nvidia-utils --noconfirm
+sudo pacman -Ru konqueror --noconfirm
 
 # Install ffmpegthumbs, for video file thumbnail support in Dolphin.
 sudo pacman -S ffmpegthumbs --noconfirm
@@ -44,10 +45,10 @@ sudo pacman -S ffmpegthumbs --noconfirm
 sudo pacman -S kdegraphics-thumbnailers --noconfirm
 
 # Install some KDE utilities.
-sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive --noconfirm
+sudo pacman -S kcharselect kaccounts-providers kio-gdrive --noconfirm
 
 # Install some core utilities that didn't get installed, for some reason.
-sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp --noconfirm
+sudo pacman -S cracklib hddtemp --noconfirm
 
 # Install some command-line utilities.
 sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
@@ -73,9 +74,8 @@ yay -S catppuccin-konsole-theme-git --noconfirm
 # Install icon, cursor, and KDE theme.
 sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git plasma-splash-arch-moe kvantum --noconfirm
 
-# Install and configure printing support.
+# Install and configure additional printing support.
 yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
-sudo systemctl enable --now cups cups-browsed
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
 yay -S desktop-privileges --noconfirm
@@ -143,10 +143,10 @@ sudo pacman -S kdeconnect --noconfirm
 
 # Install gufw firewall and enable the systemd service.
 sudo pacman -S gufw --noconfirm
-sudo systemctl enable --now ufw
+sudo rc-update add ufw && sudo rc-service ufw start
 
 # Install some useful pacman post-transaction hooks.
-yay -S pacman-cleanup-hook grub-hook pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
+yay -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
 
 # Update man pages.
 sudo makewhatis /usr/share/man
@@ -156,7 +156,6 @@ cd linux-stuff/
 ./bat-setup.sh
 ./lsd-setup.sh
 ./micro-setup.sh
-sudo ./cleanup-systemd-boot.sh
 
 # Configure Zsh.
 yay -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
