@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script cleans up and configures an Arch Linux KDE install that was installed with "archinstall." Run as a normal user!
+# This script cleans up and configures an Artix Linux KDE install with OpenRC. Run as a normal user!
 
 # Audio buzz/hum fix.
 sudo touch /etc/modprobe.d/alsa-base.conf && sudo chmod o+w /etc/modprobe.d/alsa-base.conf
@@ -12,22 +12,8 @@ sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
 sudo sed -i 's/'"#ParallelDownloads = 5"'/'"ParallelDownloads = 15"''/g /etc/pacman.conf
 sudo sed -i '/ParallelDownloads = 15/ a\ILoveCandy\' /etc/pacman.conf
 
-# Rank mirrors.
-sudo pacman -S reflector --noconfirm
-sudo reflector --latest 150 --protocol https --sort rate --sort age --score 10 --save /etc/pacman.d/mirrorlist
-# Congfigure reflector config file for systemd auto-update.
-sudo chmod o+w /etc/xdg/reflector/reflector.conf
-sudo sed -i 's/--latest 5/--latest 150'/g /etc/xdg/reflector/reflector.conf
-echo "" >> /etc/xdg/reflector/reflector.conf
-echo "# Sort the mirrors by highest score (--score)." >> /etc/xdg/reflector/reflector.conf
-echo "--score 10" >> /etc/xdg/reflector/reflector.conf
-echo "" >> /etc/xdg/reflector/reflector.conf
-echo "# Sort the mirrors by highest rate (--sort)." >> /etc/xdg/reflector/reflector.conf
-echo "--sort rate" >> /etc/xdg/reflector/reflector.conf
-sudo chmod o-w /etc/xdg/reflector/reflector.conf
-sudo systemctl enable reflector.timer
-sudo sed -i 's/#NoExtract   =/NoExtract    = mirrorlist.pacnew'/g /etc/pacman.conf
-sudo pacman -Syy
+# Install wget to fetch "blackpac" script.
+sudo pacman -S wget --noconfirm
 
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
 # Download script.
@@ -43,16 +29,15 @@ sudo blackpac --blacklist qt5-tools
 sudo pacman -R qt5-tools --noconfirm
 
 # Install and use better NTP daemon.
-sudo pacman -S chrony --noconfirm
+sudo pacman -Rsu ntp-openrc && sudo pacman -S chrony chrony-openrc --noconfirm
 sudo sed -i 's/! server 0.arch.pool.ntp.org iburst/server 0.arch.pool.ntp.org iburst'/g /etc/chrony.conf
 sudo sed -i 's/! server 1.arch.pool.ntp.org iburst/server 1.arch.pool.ntp.org iburst'/g /etc/chrony.conf
 sudo sed -i 's/! server 3.arch.pool.ntp.org iburst/server 3.arch.pool.ntp.org iburst'/g /etc/chrony.conf
-sudo systemctl disable systemd-timesyncd.service
-sudo systemctl enable --now chronyd && sudo systemctl enable --now chrony-wait
+sudo rc-update add chrony && sudo rc-service chrony start
 sudo chronyc online
 
 # Remove unneeded packages.
-sudo pacman -Rsu nano vim htop kate --noconfirm
+sudo pacman -Rsu nano kate falkon konqueror mpv kgpg ktimer plasma-sdk --noconfirm
 
 # Install ffmpegthumbs, for video file thumbnail support in Dolphin.
 sudo pacman -S ffmpegthumbs --noconfirm
@@ -61,13 +46,13 @@ sudo pacman -S ffmpegthumbs --noconfirm
 sudo pacman -S kdegraphics-thumbnailers --noconfirm
 
 # Install some KDE utilities.
-sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive --noconfirm
+sudo pacman -S kcharselect kaccounts-providers kio-gdrive --noconfirm
 
 # Install some core utilities that didn't get installed, for some reason.
-sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp --noconfirm
+sudo pacman -S cracklib hddtemp --noconfirm
 
-# Install some command-line utilities.
-sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
+# Install the micro text editor.
+sudo pacman -S micro xclip --noconfirm
 
 # Install spell checking support.
 sudo pacman -S aspell aspell-en --noconfirm
@@ -84,21 +69,21 @@ cd && rm -rf yay-bin && rm -rf yay-bin.tar.gz
 # Configure yay options.
 yay --editor /usr/bin/micro --answerclean A --answerupgrade Y --nodiffmenu --noeditmenu --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --sudoloop --save
 
+# Install some command-line utilities not in the main repo.
+yay -S duf-git bat-cat-git fd-git lynis-git btop-git --noconfirm
+
 # Install Konsole color scheme.
 yay -S catppuccin-konsole-theme-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
-sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git plasma-splash-arch-moe kvantum --noconfirm
+sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git kvantum --noconfirm
 
 # Install and configure printing support.
-yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
-sudo systemctl enable --now cups cups-browsed
+yay -S hplip-lite system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
+sudo rc-service cupsd restart
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
 yay -S desktop-privileges --noconfirm
-
-# Install hardware dection tool for mkinitcpio.
-sudo pacman -S hwdetect --noconfirm
 
 # Install Brave web browser.
 yay -S brave-bin --noconfirm
@@ -129,16 +114,17 @@ vscodium --install-extension PKief.material-icon-theme
 vscodium --install-extension BeardedBear.beardedtheme
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
 
-# Install grub theme.
+# Install grub theme and disable OS prober.
 yay -S grub-theme-stylish-color-1080p-git --noconfirm
-sudo sed -i 's|#GRUB_THEME="/path/to/gfxtheme"|GRUB_THEME="/usr/share/grub/themes/stylish-color-1080p/theme.txt"|g' /etc/default/grub
+sudo sed -i 's|GRUB_THEME="/usr/share/grub/themes/artix/theme.txt"|GRUB_THEME="/usr/share/grub/themes/stylish-color-1080p/theme.txt"|g' /etc/default/grub
+sudo sed -i 's/GRUB_DISABLE_OS_PROBER="false"/GRUB_DISABLE_OS_PROBER="true"/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install Wine.
 yay -S wine-installer wine-gecko wine-mono --noconfirm
 
 # Install some useful software.
-sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip clipgrab partitionmanager --noconfirm
+yay -S unrar vlc transmission-qt pinta-gtk3-git audacity k3b p7zip clipgrab partitionmanager --noconfirm
 
 # Install balenaEtcher to write OS images to USB flash drives.
 yay -S balena-etcher --noconfirm
@@ -158,22 +144,18 @@ yay -S spotify --noconfirm
 # Install KDE Connect.
 sudo pacman -S kdeconnect --noconfirm
 
-# Install gufw firewall and enable the systemd service.
-sudo pacman -S gufw --noconfirm
-sudo systemctl enable --now ufw
+# Install gufw firewall and enable the OpenRC service.
+sudo pacman -S gufw ufw-openrc --noconfirm
+sudo rc-update add ufw && sudo ufw enable && sudo rc-service ufw start
 
 # Install some useful pacman post-transaction hooks.
-yay -S pacman-cleanup-hook grub-hook pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
-
-# Update man pages.
-sudo makewhatis /usr/share/man
+yay -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
 
 # Setup config files and stuff.
 cd linux-stuff/
 ./bat-setup.sh
 ./lsd-setup.sh
 ./micro-setup.sh
-sudo ./cleanup-systemd-boot.sh
 
 # Configure Zsh.
 yay -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
@@ -214,7 +196,7 @@ yay -S mkinitcpio-firmware --noconfirm
 
 # Stop mkinitcpio from generating a fallback kernel image.
 echo "Stopping mkinitcpio from generating a fallback kernel image..."
-if [ $(uname -r | grep arch) ]; then
+if [ $(uname -r | grep artix) ]; then
 sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
@@ -240,33 +222,28 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
 # Secure the OS.
-sudo pacman -S arch-audit apparmor sysstat puppet rkhunter --noconfirm
+sudo pacman -S audit-openrc apparmor apparmor-openrc puppet --noconfirm
+sudo rc-update add auditd && sudo rc-service auditd start
 yay -S acct chkrootkit aide --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/profile
-sudo sed -i 's/UMASK=0022/UMASK=0077'/g /etc/conf.d/sysstat
-sudo touch /etc/sysctl.d/99-sysctl.conf
-sudo chmod o+w /etc/sysctl.d/99-sysctl.conf
-echo "dev.tty.ldisc_autoload = 0" >> /etc/sysctl.d/99-sysctl.conf
-echo "fs.protected_fifos = 2" >> /etc/sysctl.d/99-sysctl.conf
-echo "fs.protected_regular = 2" >> /etc/sysctl.d/99-sysctl.conf
-echo "fs.suid_dumpable = 0" >> /etc/sysctl.d/99-sysctl.conf
-echo "kernel.sysrq = 0" >> /etc/sysctl.d/99-sysctl.conf
-echo "kernel.unprivileged_bpf_disabled = 1" >> /etc/sysctl.d/99-sysctl.conf
-echo "net.ipv4.conf.all.log_martians = 1" >> /etc/sysctl.d/99-sysctl.conf
-echo "net.ipv4.conf.all.send_redirects = 0" >> /etc/sysctl.d/99-sysctl.conf
-echo "net.ipv4.conf.default.log_martians = 1" >> /etc/sysctl.d/99-sysctl.conf
-sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
+sudo touch /etc/sysctl.d/90-sysctl.conf
+sudo chmod o+w /etc/sysctl.d/90-sysctl.conf
+echo "dev.tty.ldisc_autoload = 0" >> /etc/sysctl.d/90-sysctl.conf
+echo "fs.protected_fifos = 2" >> /etc/sysctl.d/90-sysctl.conf
+echo "fs.protected_regular = 2" >> /etc/sysctl.d/90-sysctl.conf
+echo "fs.suid_dumpable = 0" >> /etc/sysctl.d/90-sysctl.conf
+echo "kernel.sysrq = 0" >> /etc/sysctl.d/90-sysctl.conf
+echo "kernel.unprivileged_bpf_disabled = 1" >> /etc/sysctl.d/90-sysctl.conf
+echo "net.ipv4.conf.all.log_martians = 1" >> /etc/sysctl.d/90-sysctl.conf
+echo "net.ipv4.conf.all.send_redirects = 0" >> /etc/sysctl.d/90-sysctl.conf
+echo "net.ipv4.conf.default.log_martians = 1" >> /etc/sysctl.d/90-sysctl.conf
+sudo chmod o-w /etc/sysctl.d/90-sysctl.conf
 sudo touch /var/log/account/pacct
 sudo accton on
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
-sudo systemctl enable --now puppet
-sudo systemctl enable --now auditd
-sudo systemctl enable --now sysstat
-sudo chmod o+w /etc/conf.d/sysstat
-echo 'ENABLED="true"' >> /etc/conf.d/sysstat
-sudo chmod o-w /etc/conf.d/sysstat
+sudo rc-update add auditd && sudo rc-service auditd start
 sudo chmod o+w /etc/bash.bashrc
 echo "# Set umask." >> /etc/bash.bashrc
 echo "umask 077" >> /etc/bash.bashrc
@@ -288,9 +265,11 @@ sudo sed -i 's/#TCPKeepAlive yes/TCPKeepAlive no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/sshd_config
 
 # Setup AppArmor.
+sudo rc-update add apparmor
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/g' /etc/default/grub && sudo grub-mkconfig -o /boot/grub/grub.cfg
-sudo systemctl enable --now apparmor
+sudo rc-service apparmor start
+
 #### Update AIDE database.
 sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf && sudo aide -i
 sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.gz|database_out=file:@@{DBDIR}/aide.db.new.gz|g' /etc/aide.conf && sudo aide -u
