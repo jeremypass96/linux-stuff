@@ -15,6 +15,9 @@ sudo sed -i '/ParallelDownloads = 15/ a\ILoveCandy\' /etc/pacman.conf
 # Install wget to fetch "blackpac" script.
 sudo pacman -S wget --noconfirm
 
+# Install base-devel and fakeroot so that AUR packages compile correctly.
+sudo pacman -S base-devel fakeroot --noconfirm
+
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
 # Download script.
 cd && wget http://downloads.sourceforge.net/project/ig-scripts/blackpac-1.0.1.sh
@@ -76,7 +79,14 @@ yay -S duf-git bat-cat-git fd-git lynis-git btop-git --noconfirm
 yay -S catppuccin-konsole-theme-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
-sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git kvantum --noconfirm
+yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git kvantum --noconfirm
+
+# Remove Artix themes. I don't like them.
+sudo pacman -Rcu artix-grub-theme artix-qt-presets artix-dark-theme --noconfirm
+
+# Fix stupid Artix QT theme modifications in /etc/environment.
+sudo sed -i '1d'/g /etc/environment
+sudo sed -i 's/QT_QPA_PLATFORMTHEME=gtk/QT_QPA_PLATFORMTHEME=qt5ct'/g /etc/environment
 
 # Install and configure printing support.
 yay -S hplip-lite system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
@@ -121,10 +131,10 @@ sudo sed -i 's/GRUB_DISABLE_OS_PROBER="false"/GRUB_DISABLE_OS_PROBER="true"/g' /
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install Wine.
-yay -S wine-installer wine-gecko wine-mono --noconfirm
+yay -S wine-installer wine-mono --noconfirm
 
 # Install some useful software.
-yay -S unrar vlc transmission-qt pinta-gtk3-git audacity k3b p7zip clipgrab partitionmanager --noconfirm
+sudo pacman -S unrar vlc transmission-qt audacity k3b p7zip partitionmanager --noconfirm
 
 # Install balenaEtcher to write OS images to USB flash drives.
 yay -S balena-etcher --noconfirm
@@ -174,9 +184,6 @@ cd
 sudo cp -v /home/$USER/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 
-# Remove unneeded dependencies.
-yay -c --noconfirm
-
 # Update environment variables.
 # Give temporary write access so we can apply the changes.
 sudo chmod o+w /etc/environment
@@ -201,7 +208,6 @@ sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /et
 sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
 sudo mkinitcpio -p linux
-sudo rm /boot/initramfs-linux-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [ $(uname -r | grep hardened) ]; then
@@ -224,7 +230,7 @@ fi
 # Secure the OS.
 sudo pacman -S audit-openrc apparmor apparmor-openrc puppet --noconfirm
 sudo rc-update add auditd && sudo rc-service auditd start
-yay -S acct chkrootkit aide --noconfirm
+yay -S acct chkrootkit --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/profile
@@ -242,18 +248,12 @@ echo "net.ipv4.conf.default.log_martians = 1" >> /etc/sysctl.d/90-sysctl.conf
 sudo chmod o-w /etc/sysctl.d/90-sysctl.conf
 sudo touch /var/log/account/pacct
 sudo accton on
-sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo rc-update add auditd && sudo rc-service auditd start
-sudo chmod o+w /etc/bash.bashrc
-echo "# Set umask." >> /etc/bash.bashrc
-echo "umask 077" >> /etc/bash.bashrc
-sudo chmod o-w /etc/bash.bashrc
-sudo chmod o+w /etc/hosts
-echo 127.0.0.1 localhost >> /etc/hosts
-echo "::1 localhost ip6-localhost ip6-loopback
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters" >> /etc/hosts
-sudo chmod o-w /etc/hosts
+sudo chmod o+w /etc/bash/bashrc
+echo "" /etc/bash/bashrc
+echo "# Set umask." >> /etc/bash/bashrc
+echo "umask 077" >> /etc/bash/bashrc
+sudo chmod o-w /etc/bash/bashrc
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 2'/g /etc/ssh/sshd_config
@@ -269,11 +269,3 @@ sudo rc-update add apparmor
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/g' /etc/default/grub && sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo rc-service apparmor start
-
-#### Update AIDE database.
-sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf && sudo aide -i
-sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.gz|database_out=file:@@{DBDIR}/aide.db.new.gz|g' /etc/aide.conf && sudo aide -u
-####
-
-# Prettify Arch logo.
-sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release

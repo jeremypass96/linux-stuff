@@ -88,7 +88,7 @@ yay --editor /usr/bin/micro --answerclean A --answerupgrade Y --nodiffmenu --noe
 yay -S catppuccin-konsole-theme-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
-sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git plasma-splash-arch-moe kvantum --noconfirm
+sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git plasma-splash-arch-moe kvantum --noconfirm
 
 # Install and configure printing support.
 yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
@@ -273,9 +273,14 @@ echo "umask 077" >> /etc/bash.bashrc
 sudo chmod o-w /etc/bash.bashrc
 sudo chmod o+w /etc/hosts
 echo 127.0.0.1 localhost >> /etc/hosts
-echo "::1 localhost ip6-localhost ip6-loopback
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters" >> /etc/hosts
+echo ::1 localhost ip6-localhost ip6-loopback
+echo ff02::1 ip6-allnodes >> /etc/hosts
+echo ff02::2 ip6-allrouters >> /etc/hosts
+echo 127.0.1.1 `hostname` >> /etc/hosts
+echo 127.0.0.1 localhost >> /etc/hosts
+echo ::1 localhost ip6-localhost ip6-loopback >> /etc/hosts
+echo ff02::1 ip6-allnodes >> /etc/hosts
+echo ff02::2 ip6-allrouters >> /etc/hosts
 sudo chmod o-w /etc/hosts
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding no'/g /etc/ssh/sshd_config
