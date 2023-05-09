@@ -88,7 +88,7 @@ yay --editor /usr/bin/micro --answerclean A --answerupgrade Y --nodiffmenu --noe
 yay -S catppuccin-konsole-theme-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
-sudo yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git plasma-splash-arch-moe kvantum --noconfirm
+yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git plasma-splash-arch-moe kvantum --noconfirm
 
 # Install and configure printing support.
 yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
@@ -147,7 +147,7 @@ yay -S balena-etcher --noconfirm
 yay -S mp3tag --noconfirm
 
 # Install dependencies for k3b.
-yay -S cdrtools dvd+rw-tools transcode cdrdao sox normalize --noconfirm
+yay -S cdrtools dvd+rw-tools transcode sox normalize --noconfirm
 
 # Install some KDE games!
 sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
@@ -163,10 +163,7 @@ sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
 
 # Install some useful pacman post-transaction hooks.
-yay -S pacman-cleanup-hook grub-hook pacman-hook-systemd-restart sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
-
-# Update man pages.
-sudo makewhatis /usr/share/man
+yay -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
 
 # Setup config files and stuff.
 cd linux-stuff/
@@ -241,7 +238,7 @@ fi
 
 # Secure the OS.
 sudo pacman -S arch-audit apparmor sysstat puppet rkhunter --noconfirm
-yay -S acct chkrootkit aide --noconfirm
+yay -S acct chkrootkit --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/profile
@@ -273,7 +270,7 @@ echo "umask 077" >> /etc/bash.bashrc
 sudo chmod o-w /etc/bash.bashrc
 sudo chmod o+w /etc/hosts
 echo 127.0.0.1 localhost >> /etc/hosts
-echo ::1 localhost ip6-localhost ip6-loopback
+echo ::1 localhost ip6-localhost ip6-loopback >> /etc/hosts
 echo ff02::1 ip6-allnodes >> /etc/hosts
 echo ff02::2 ip6-allrouters >> /etc/hosts
 echo 127.0.1.1 `hostname` >> /etc/hosts
@@ -296,10 +293,29 @@ sudo sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/ssh
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/g' /etc/default/grub && sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl enable --now apparmor
-#### Update AIDE database.
-sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.new.gz|database_out=file:@@{DBDIR}/aide.db.gz|g' /etc/aide.conf && sudo aide -i
-sudo sed -i 's|database_out=file:@@{DBDIR}/aide.db.gz|database_out=file:@@{DBDIR}/aide.db.new.gz|g' /etc/aide.conf && sudo aide -u
-####
 
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
+
+# Hide menu entries.
+sudo chmod o+w /usr/share/applications/bssh.desktop
+echo Hidden=true >> /usr/share/applications/bssh.desktop
+sudo chmod o-w /usr/share/applications/bssh.desktop
+sudo chmod o+w /usr/share/applications/bvnc.desktop
+echo Hidden=true >> /usr/share/applications/bvnc.desktop
+sudo chmod o-w /usr/share/applications/bvnc.desktop
+sudo chmod o+w /usr/share/applications/avahi-discover.desktop
+echo Hidden=true >> /usr/share/applications/avahi-discover.desktop
+sudo chmod o-w /usr/share/applications/avahi-discover.desktop
+sudo chmod o+w /usr/share/applications/electron19.desktop
+echo Hidden=true >> /usr/share/applications/electron19.desktop
+sudo chmod o-w /usr/share/applications/electron19.desktop
+sudo chmod o+w /usr/share/applications/org.kde.kuserfeedback-console.desktop
+echo Hidden=true >> /usr/share/applications/org.kde.kuserfeedback-console.desktop
+sudo chmod o-w /usr/share/applications/org.kde.kuserfeedback-console.desktop
+sudo chmod o+w /usr/share/applications/qv4l2.desktop
+echo Hidden=true >> /usr/share/applications/qv4l2.desktop
+sudo chmod o-w /usr/share/applications/qv4l2.desktop
+sudo chmod o+w /usr/share/applications/qvidcap.desktop
+echo Hidden=true >> /usr/share/applications/qvidcap.desktop
+sudo chmod o-w /usr/share/applications/qvidcap.desktop
