@@ -236,6 +236,14 @@ sudo mkinitcpio -p linux-lts
 sudo rm /boot/initramfs-linux-lts-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
+if [ $(uname -r | grep zen) ]; then
+sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-zen.preset
+sudo sed -i 's|fallback_image="/boot/initramfs-linux-zen-fallback.img"|#fallback_image="/boot/initramfs-linux-zen-fallback.img"|g' /etc/mkinitcpio.d/linux-zen.preset
+sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-zen.preset
+sudo mkinitcpio -p linux-zen
+sudo rm /boot/initramfs-linux-zen-fallback.img
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
 
 # Secure the OS.
 sudo pacman -S arch-audit apparmor sysstat puppet rkhunter --noconfirm
