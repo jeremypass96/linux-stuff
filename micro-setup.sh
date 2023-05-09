@@ -17,3 +17,4 @@ sudo mkdir -p /root/.config/micro/colorschemes
 cp -v micro/src/*.micro ~/.config/micro/colorschemes
 sudo cp -v micro/src/*.micro /etc/skel/.config/micro/colorschemes
 sudo cp -v micro/src/*.micro /root/.config/micro/colorschemes
+rm -rf micro/
