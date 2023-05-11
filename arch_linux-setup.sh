@@ -74,14 +74,8 @@ sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
 sudo pacman -S aspell aspell-en --noconfirm
 
 # Install yay AUR helper.
-# Download and extract tarball.
-cd && curl https://aur.archlinux.org/cgit/aur.git/snapshot/yay-bin.tar.gz -o yay-bin.tar.gz
-tar -xvf yay-bin.tar.gz
-# Install yay.
-cd yay-bin
-makepkg -sic --noconfirm
-# Clean up.
-cd && rm -rf yay-bin && rm -rf yay-bin.tar.gz
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sic --noconfirm
+cd .. && rm -rf yay-bin
 # Configure yay options.
 yay --editor /usr/bin/micro --answerclean A --answerupgrade Y --nodiffmenu --noeditmenu --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --sudoloop --save
 
