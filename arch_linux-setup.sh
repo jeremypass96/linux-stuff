@@ -259,6 +259,7 @@ echo "net.ipv4.conf.default.log_martians = 1" >> /etc/sysctl.d/99-sysctl.conf
 sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
 sudo touch /var/log/account/pacct
 sudo accton on
+sudo systemctl enable --now acct
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo systemctl enable --now puppet
 sudo systemctl enable --now auditd
