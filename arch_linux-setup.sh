@@ -32,13 +32,13 @@ sudo pacman -Syy
 
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
 # Download script.
-cd && wget http://downloads.sourceforge.net/project/ig-scripts/blackpac-1.0.1.sh
+cd && wget http://downloads.sourceforge.net/project/ig-scripts/blackpac.sh
 # Make script executable.
-chmod +x blackpac-1.0.1.sh
+chmod +x blackpac.sh
 # Install script.
-sudo install blackpac-1.0.1.sh /usr/local/bin/
-sudo mv /usr/local/bin/blackpac-1.0.1.sh /usr/local/bin/blackpac
-rm blackpac-1.0.1.sh
+sudo install blackpac.sh /usr/local/bin/
+sudo mv /usr/local/bin/blackpac.sh /usr/local/bin/blackpac
+rm blackpac.sh
 # Blacklist and remvove packages.
 sudo blackpac --blacklist qt5-tools
 sudo pacman -R qt5-tools --noconfirm
