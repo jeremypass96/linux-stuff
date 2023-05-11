@@ -178,13 +178,15 @@ sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' /home/$USER/.zs
 sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' /home/$USER/.zshrc
 echo alias ls='"lsd"' >> /home/$USER/.zshrc
 echo alias cat='"bat"' >> /home/$USER/.zshrc
-echo pfetch >> /home/$USER/.zshrc
 cd
+git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
+cd zsh-syntax-highlighting/themes/
+sudo cp -v catppuccin_mocha-zsh-syntax-highlighting.zsh /etc/zsh
+echo source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
+cd && rm -rf zsh-syntax-highlighting
 sudo cp -v /home/$USER/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
-
-# Remove unneeded dependencies.
-yay -c --noconfirm
+echo pfetch >> /home/$USER/.zshrc
 
 # Update environment variables.
 # Give temporary write access so we can apply the changes.
