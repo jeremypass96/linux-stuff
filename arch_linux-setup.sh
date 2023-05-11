@@ -260,7 +260,6 @@ sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
 sudo touch /var/log/account/pacct
 sudo accton on
 sudo systemctl enable --now acct
-sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo systemctl enable --now puppet
 sudo systemctl enable --now auditd
 sudo systemctl enable --now sysstat
