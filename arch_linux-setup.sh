@@ -265,7 +265,7 @@ sudo systemctl enable --now puppet
 sudo systemctl enable --now auditd
 sudo systemctl enable --now sysstat
 sudo chmod o+w /etc/conf.d/sysstat
-echo 'ENABLED="true"' >> /etc/conf.d/sysstat
+echo "" >> /etc/conf.d/sysstat && echo 'ENABLED="true"' >> /etc/conf.d/sysstat
 sudo chmod o-w /etc/conf.d/sysstat
 sudo chmod o+w /etc/bash.bashrc
 echo "# Set umask." >> /etc/bash.bashrc
