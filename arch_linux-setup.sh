@@ -86,75 +86,75 @@ sudo sed -i '/#NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
 sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 
 # Install Konsole color scheme.
-yay -S catppuccin-konsole-theme-git --noconfirm
+paru -S catppuccin-konsole-theme-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
-yay -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git plasma-splash-arch-moe kvantum --noconfirm
+paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git plasma-splash-arch-moe kvantum --noconfirm
 
 # Install and configure printing support.
-yay -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
+paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
 sudo systemctl enable --now cups cups-browsed
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
-yay -S desktop-privileges --noconfirm
+paru -S desktop-privileges --noconfirm
 
 # Install hardware dection tool for mkinitcpio.
 sudo pacman -S hwdetect --noconfirm
 
 # Install Brave web browser.
-yay -S brave-bin --noconfirm
+paru -S brave-bin --noconfirm
 
 # Install fonts.
-yay -S ttf-poppins adobe-source-sans-fonts ttf-ibm-plex ttf-ms-fonts ttf-material-design-icons-desktop-git ttf-material-design-icons ttf-material-design-icons-git noto-fonts-emoji ttf-nerd-fonts-symbols --noconfirm
+paru -S ttf-poppins adobe-source-sans-fonts ttf-ibm-plex ttf-ms-fonts ttf-material-design-icons-desktop-git ttf-material-design-icons ttf-material-design-icons-git noto-fonts-emoji ttf-nerd-fonts-symbols --noconfirm
 sudo ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d
 
 # Configure nerd fonts for "lsd".
 sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/
 
 # Install "lsd," a better replacement for ls.
-yay -S lsd --noconfirm
+paru -S lsd --noconfirm
 
 # Install topgrade.
-yay -S topgrade-bin --noconfirm
+paru -S topgrade-bin --noconfirm
 
 # Install pfetch.
-yay -S pfetch --noconfirm
+paru -S pfetch --noconfirm
 
 # Install Pamac, GUI frontend to install software.
-yay -S pamac-aur pamac-tray-icon-plasma --noconfirm
+paru -S pamac-aur pamac-tray-icon-plasma --noconfirm
 
 # Install and configure VSCodium.
-yay -S vscodium-bin vscodium-bin-marketplace --noconfirm
+paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p /home/$USER/.config/VSCodium/User && cp -v /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
 vscodium --install-extension PKief.material-icon-theme
 vscodium --install-extension BeardedBear.beardedtheme
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
 
 # Install grub theme.
-yay -S grub-theme-stylish-color-1080p-git --noconfirm
+paru -S grub-theme-stylish-color-1080p-git --noconfirm
 sudo sed -i 's|#GRUB_THEME="/path/to/gfxtheme"|GRUB_THEME="/usr/share/grub/themes/stylish-color-1080p/theme.txt"|g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install Wine.
-yay -S wine-installer wine-gecko wine-mono --noconfirm
+paru -S wine-installer wine-gecko wine-mono --noconfirm
 
 # Install some useful software.
 sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip clipgrab partitionmanager --noconfirm
 
 # Install balenaEtcher to write OS images to USB flash drives.
-yay -S balena-etcher --noconfirm
+paru -S balena-etcher --noconfirm
 
 # Install mp3tag.
-yay -S mp3tag --noconfirm
+paru -S mp3tag --noconfirm
 
 # Install dependencies for k3b.
-yay -S cdrtools dvd+rw-tools transcode sox normalize --noconfirm
+paru -S cdrtools dvd+rw-tools transcode sox normalize --noconfirm
 
 # Install some KDE games!
 sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
 
 # Install Spotify.
-yay -S spotify --noconfirm
+paru -S spotify --noconfirm
 
 # Install KDE Connect.
 sudo pacman -S kdeconnect --noconfirm
@@ -164,7 +164,7 @@ sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
 
 # Install some useful pacman post-transaction hooks.
-yay -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
+paru -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook --noconfirm
 
 # Setup config files and stuff.
 cd linux-stuff/
@@ -174,7 +174,7 @@ cd linux-stuff/
 sudo ./cleanup-systemd-boot.sh
 
 # Configure Zsh.
-yay -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
+paru -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
 cp /usr/share/oh-my-zsh/zshrc /home/$USER/.zshrc
 sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"gentoo"'/g /home/$USER/.zshrc
 sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' /home/$USER/.zshrc
@@ -210,7 +210,7 @@ echo MICRO_TRUECOLOR=1 >> /etc/environment
 sudo chmod o-w /etc/environment
 
 # Install mkinitcpio firmware, gets rid of missing firmware messages.
-yay -S mkinitcpio-firmware --noconfirm
+paru -S mkinitcpio-firmware --noconfirm
 
 # Stop mkinitcpio from generating a fallback kernel image.
 echo "Stopping mkinitcpio from generating a fallback kernel image..."
@@ -249,7 +249,7 @@ fi
 
 # Secure the OS.
 sudo pacman -S arch-audit apparmor sysstat puppet rkhunter --noconfirm
-yay -S acct chkrootkit --noconfirm
+paru -S acct chkrootkit --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/profile
