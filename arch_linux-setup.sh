@@ -72,11 +72,18 @@ sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
 # Install spell checking support.
 sudo pacman -S aspell aspell-en --noconfirm
 
-# Install yay AUR helper.
-sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sic --noconfirm
-cd .. && rm -rf yay-bin
-# Configure yay options.
-yay --editor /usr/bin/micro --answerclean A --answerupgrade Y --nodiffmenu --noeditmenu --removemake --cleanafter --devel --useask --combinedupgrade --batchinstall --sudoloop --save
+# Install paru AUR helper.
+sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -sic --noconfirm
+cd .. && rm -rf paru-bin
+# Configure paru options.
+sudo sed -i 's/#BottomUp/BottomUp'/g /etc/paru.conf
+sudo sed -i 's/#RemoveMake/RemoveMake'/g /etc/paru.conf
+sudo sed -i 's/#SudoLoop/SudoLoop'/g /etc/paru.conf
+sudo sed -i 's/#UseAsk/UseAsk'/g /etc/paru.conf
+sudo sed -i 's/#CombinedUpgrade/CombinedUpgrade'/g /etc/paru.conf
+sudo sed -i 's/#CleanAfter/CleanAfter'/g /etc/paru.conf
+sudo sed -i '/#NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
+sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 
 # Install Konsole color scheme.
 yay -S catppuccin-konsole-theme-git --noconfirm
