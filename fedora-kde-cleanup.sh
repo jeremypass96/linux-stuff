@@ -96,8 +96,8 @@ clear
 
 # Download Konsole colors.
 git clone https://github.com/catppuccin/konsole.git
-cd konsole/ && cp -v Catppuccin-Mocha.colorscheme /home/$USER/.local/share/konsole/
-chmod $USER:$USER /home/$USER/.local/share/konsole/Catppuccin-Mocha.colorscheme
+cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
+chmod $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
 cd && rm -rf konsole
 
 clear
@@ -169,6 +169,6 @@ cd && rm -rf grub2-themes
 
 # Setup Catppuccin theme for btop.
 git clone https://github.com/catppuccin/btop.git
-cd btop/themes && cp -v catppuccin_mocha.theme /home/$USER/.config/btop/themes/
-chmod $USER:$USER /home/$USER/.config/btop/themes/catppuccin_mocha.theme
+cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
+chmod $USER:$USER /home/$USER/.config/btop/themes/*.theme
 cd && rm -rf btop
