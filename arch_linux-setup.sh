@@ -333,5 +333,5 @@ sudo chmod o-w /usr/share/applications/qvidcap.desktop
 
 # Setup Catppuccin theme for btop.
 git clone https://github.com/catppuccin/btop.git
-cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
+cd btop/themes && cp -v catppuccin_mocha.theme /home/$USER/.config/btop/themes/
 cd && rm -rf btop
