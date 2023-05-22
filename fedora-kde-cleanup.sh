@@ -154,8 +154,7 @@ chmod og-rwx /etc/cron.deny
 
 # Install packages to auto-update the OS.
 dnf install -y dnf-automatic fedora-upgrade
-systemctl enable dnf-system-upgrade
-systemctl start dnf-system-upgrade
+systemctl enable --now dnf-system-upgrade
 
 # Install and run topgrade.
 curl https://github.com/topgrade-rs/topgrade/releases/download/v11.0.2/topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz -o topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
