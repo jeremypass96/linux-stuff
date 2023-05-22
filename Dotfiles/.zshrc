@@ -98,4 +98,3 @@ source $ZSH/oh-my-zsh.sh
 alias df="df -h"
 alias ls="lsd"
 alias cat="bat"
-pfetch
