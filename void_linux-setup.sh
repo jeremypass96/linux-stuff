@@ -58,16 +58,16 @@ curl https://fonts.google.com/download?family=Poppins -o /home/$USER/Poppins.zip
 unzip /home/$USER/Poppins.zip -d /usr/share/fonts/Poppins
 rm -f /home/$USER/Poppins.zip
 
-# Install micro plugins.
-micro -plugin install quoter wc
-
 # Install KDE.
 clear ; echo "Installing the KDE desktop..."
 vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers -y
 
-# Install Papirus icons.
-clear ; echo "Installing the Papirus icon theme..."
-vpm install papirus-icon-theme -y
+# Install Newaita icons.
+clear ; echo "Installing the Newaita icon theme..."
+git clone https://github.com/cbrnix/Newaita.git
+cd Newaita/
+cp -r Newaita-dark /usr/share/icons
+cd && rm -rf Newaita
 
 # Install grub theme.
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
@@ -117,3 +117,25 @@ sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/sshd_con
 # Configure plymouth boot splash.
 vpm install plymouth -y
 plymouth-set-default-theme -R solar
+
+# Download Konsole colors.
+git clone https://github.com/catppuccin/konsole.git
+cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
+chmod $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
+cd && rm -rf konsole
+
+# Setup Catppuccin theme for btop.
+git clone https://github.com/catppuccin/btop.git
+cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
+chmod $USER:$USER /home/$USER/.config/btop/themes/*.theme
+cd && rm -rf btop
+
+# Update environment variables.
+# Configure pfetch.
+echo PF_INFO='"ascii os kernel uptime pkgs shell editor de"' >> /etc/environment
+# Set BROWSER variable.
+echo BROWSER=brave >> /etc/environment
+# Set EDITOR variable.
+echo EDITOR=micro >> /etc/environment
+# Set MICRO_TRUECOLOR variable.
+echo MICRO_TRUECOLOR=1 >> /etc/environment
