@@ -36,8 +36,12 @@ dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-
 
 clear
 
-# Install Papirus icons.
-dnf install -y papirus-icon-theme
+# Install Newaita icons.
+echo "Installing the Newaita icon theme..."
+git clone https://github.com/cbrnix/Newaita.git
+cd Newaita/
+cp -r Newaita-dark /usr/share/icons
+cd && rm -rf Newaita
 
 clear
 
@@ -70,8 +74,8 @@ dnf install -y micro xclip ; dnf remove -y nano
 
 clear
 
-# Install the IBM Plex Mono fonts.
-dnf install -y ibm-plex-mono-fonts
+# Install the JetBrain Mono fonts.
+dnf install -y jetbrains-mono-fonts
 
 clear
 
@@ -91,7 +95,10 @@ dnf install -y zsh
 clear
 
 # Download Konsole colors.
-curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/konsole/Andromeda.colorscheme -o /home/$USER/.local/share/konsole/Andromeda.colorscheme
+git clone https://github.com/catppuccin/konsole.git
+cd konsole/ && cp -v Catppuccin-Mocha.colorscheme /home/$USER/.local/share/konsole/
+chmod $USER:$USER /home/$USER/.local/share/konsole/Catppuccin-Mocha.colorscheme
+cd && rm -rf konsole
 
 clear
 
@@ -151,11 +158,18 @@ systemctl enable dnf-system-upgrade
 systemctl start dnf-system-upgrade
 
 # Install and run topgrade.
-curl https://github.com/r-darwish/topgrade/releases/download/v9.0.1/topgrade-v9.0.1-x86_64-unknown-linux-gnu.tar.gz -o topgrade-v9.0.1-x86_64-unknown-linux-gnu.tar.gz
-tar -x topgrade-v9.0.1-x86_64-unknown-linux-gnu.tar.gz
+curl https://github.com/topgrade-rs/topgrade/releases/download/v11.0.2/topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz -o topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
+tar -x topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
 install topgrade /usr/local/bin/
 topgrade
 
 # Install grub theme.
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && ./install.sh -t stylish
+cd && rm -rf grub2-themes
+
+# Setup Catppuccin theme for btop.
+git clone https://github.com/catppuccin/btop.git
+cd btop/themes && cp -v catppuccin_mocha.theme /home/$USER/.config/btop/themes/
+chmod $USER:$USER /home/$USER/.config/btop/themes/catppuccin_mocha.theme
+cd && rm -rf btop
