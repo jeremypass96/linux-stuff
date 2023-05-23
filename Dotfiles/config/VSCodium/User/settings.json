@@ -11,7 +11,7 @@
     "files.hotExit": "off",
     "files.trimTrailingWhitespace": true,
     "audioCues.taskFailed": "on",
-    "editor.fontFamily": "Source Code Pro Regular",
+    "editor.fontFamily": "JetBrainsMono Nerd Font Regular",
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "update.showReleaseNotes": false,
