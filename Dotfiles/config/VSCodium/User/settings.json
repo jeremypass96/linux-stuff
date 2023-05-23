@@ -9,6 +9,7 @@
     "security.workspace.trust.enabled": false,
     "editor.wordWrap": "on",
     "editor.renderLineHighlight": "all",
+    "editor.cursorStyle": "block",
     "files.hotExit": "off",
     "files.trimTrailingWhitespace": true,
     "audioCues.taskFailed": "on",
