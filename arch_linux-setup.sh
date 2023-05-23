@@ -126,8 +126,8 @@ paru -S pamac-aur pamac-tray-icon-plasma --noconfirm
 # Install and configure VSCodium.
 paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p /home/$USER/.config/VSCodium/User && cp -v /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
-vscodium --install-extension PKief.material-icon-theme
-vscodium --install-extension BeardedBear.beardedtheme
+vscodium --install-extension Catppuccin.catppuccin-vsc
+vscodium --install-extension Catppuccin.catppuccin-vsc-icons
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
 
 # Install grub theme.
