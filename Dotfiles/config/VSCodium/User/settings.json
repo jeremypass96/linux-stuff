@@ -1,18 +1,25 @@
 {
-    "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "newUntitledFile",
+    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.editor.untitled.hint": "hidden",
+    "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.banner": "never",
     "security.workspace.trust.startupPrompt": "never",
-    "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.enabled": false,
-    "workbench.colorTheme": "Bearded Theme feat. Gold D Raynh",
-    "workbench.editor.untitled.hint": "hidden",
     "editor.wordWrap": "on",
     "files.hotExit": "off",
     "files.trimTrailingWhitespace": true,
     "audioCues.taskFailed": "on",
     "editor.fontFamily": "Source Code Pro Regular",
-    "editor.fontSize": 14,
     "git.confirmSync": false,
-    "git.enableSmartCommit": true
+    "git.enableSmartCommit": true,
+    "update.showReleaseNotes": false,
+    "catppuccin.extraBordersEnabled": true,
+    "catppuccin.customUIColors": {
+        "mocha": {
+            "statusBar.foreground": "accent"
+        }
+    },
+    "catppuccin.accentColor": "flamingo",
 }
