@@ -8,6 +8,7 @@
     "security.workspace.trust.startupPrompt": "never",
     "security.workspace.trust.enabled": false,
     "editor.wordWrap": "on",
+    "editor.renderLineHighlight": "all",
     "files.hotExit": "off",
     "files.trimTrailingWhitespace": true,
     "audioCues.taskFailed": "on",
