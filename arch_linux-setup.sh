@@ -213,6 +213,9 @@ sudo cp -v /home/$USER/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 echo pfetch >> /home/$USER/.zshrc
 
+# Change user's shell to zsh.
+chsh -s /usr/bin/zsh $USER
+
 # Update environment variables.
 # Give temporary write access so we can apply the changes.
 sudo chmod o+w /etc/environment
@@ -350,6 +353,7 @@ echo Hidden=true >> /usr/share/applications/qvidcap.desktop
 sudo chmod o-w /usr/share/applications/qvidcap.desktop
 
 # Setup Catppuccin theme for btop.
+mkdir -p /home/$USER/.config/btop/themes
 git clone https://github.com/catppuccin/btop.git
 cd btop/themes && cp -v catppuccin_mocha.theme /home/$USER/.config/btop/themes/
 cd && rm -rf btop
