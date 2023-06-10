@@ -133,4 +133,10 @@ echo EDITOR=micro >> /etc/environment
 # Set MICRO_TRUECOLOR variable.
 echo MICRO_TRUECOLOR=1 >> /etc/environment
 
+# Setup user environment.
+./bat-setup.sh
+./lsd-setup.sh
+./micro-setup.sh
+./zsh-setup.sh
+
 echo "If everything was successful, go ahead and reboot!"
