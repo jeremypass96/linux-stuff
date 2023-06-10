@@ -108,9 +108,9 @@ unzip /home/$USER/Poppins.zip -d /usr/share/fonts/Poppins
 rm -f /home/$USER/Poppins.zip
 
 # Install the Source Sans Pro font.
-curl https://fonts.google.com/download?family=Source%20Sans%20Pro -o /home/$USER/Source_Sans_Pro.zip
-unzip /home/$USER/Source_Sans_Pro.zip -d /usr/share/fonts/SourceSansPro
-rm -f /home/$USER/Source_Sans_Pro.zip
+wget https://github.com/adobe-fonts/source-sans/releases/download/3.052R/TTF-source-sans-3.052R.zip
+unzip /home/$USER/TTF-source-sans-3.052R.zip -x __MACOSX/._TTF TTF/.DS_Store __MACOSX/TTF/._.DS_Store -d /usr/share/fonts/SourceSansPro
+rm -f /home/$USER/TTF-source-sans-3.052R.zip
 
 # Install lynis.
 cat >> /etc/yum.repos.d/cisofy-lynis.repo << EOF

@@ -29,6 +29,17 @@ apk add linux-edge util-linux pciutils usbutils coreutils binutils findutils man
 
 # Install fonts.
 apk add terminus-font ttf-inconsolata ttf-dejavu font-bitstream-100dpi font-bitstream-75dpi font-bitstream-type1 font-noto ttf-font-awesome font-noto-extra font-croscore font-jetbrains-mono-nerd ttf-opensans ttf-linux-libertine ttf-liberation ttf-droid font-cursor-misc font-ibm-type1
+
+# Install the Poppins font.
+curl https://fonts.google.com/download?family=Poppins -o /home/$USER/Poppins.zip
+unzip /home/$USER/Poppins.zip -d /usr/share/fonts/Poppins
+rm -f /home/$USER/Poppins.zip
+
+# Install the Source Sans Pro font.
+wget https://github.com/adobe-fonts/source-sans/releases/download/3.052R/TTF-source-sans-3.052R.zip
+unzip /home/$USER/TTF-source-sans-3.052R.zip -x __MACOSX/._TTF TTF/.DS_Store __MACOSX/TTF/._.DS_Store -d /usr/share/fonts/SourceSansPro
+rm -f /home/$USER/TTF-source-sans-3.052R.zip
+
 fc-cache -f
 
 # Install Xorg.
