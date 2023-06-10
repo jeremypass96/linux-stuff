@@ -72,6 +72,9 @@ if [ "$resp" = n ]; then
 continue
 fi
 
+clear
+
+echo "Installing KDE..."
 # Install KDE.
 apk add plasma kde-applications-base kcalc kcharselect kdf kwalletmanager kdeconnect juk print-manager sweeper papirus-icon-theme elogind polkit-elogind polkit-openrc
 
@@ -106,9 +109,9 @@ echo "LOGO=distributor-logo-alpine" >> /etc/os-release
 apk add neofetch pfetch btop micro lsd fd fd-zsh-completion bat bat-zsh-completion
 
 # Download Konsole colors.
-git clone https://github.com/catppuccin/konsole.git
+cd && git clone https://github.com/catppuccin/konsole.git
 cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
-chmod $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
+chown $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
 cd && rm -rf konsole
 
 # Setup Catppuccin theme for btop.
