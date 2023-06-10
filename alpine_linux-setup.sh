@@ -15,9 +15,9 @@ setup-apkcache /var/cache/apk
 
 # Update repos to "edge" and upgrade the Alpine package manager.
 sed -i 's|http://dl-cdn.alpinelinux.org/alpine/v3\.18/main|#https://dl-cdn.alpinelinux.org/alpine/v3\.18/main|g' /etc/apk/repositories
-sed -i 's|#http://dl-cdn.alpinelinux.org/alpine/edge/main|https://dl-cdn.alpinelinux.org/alpine/edge/main|g' /etc/apk/repositories
-sed -i 's|#http://dl-cdn.alpinelinux.org/alpine/edge/community|https://dl-cdn.alpinelinux.org/alpine/edge/community|g' /etc/apk/repositories
-sed -i 's|#http://dl-cdn.alpinelinux.org/alpine/edge/testing|https://dl-cdn.alpinelinux.org/alpine/edge/testing|g' /etc/apk/repositories
+echo https://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
+echo https://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
+echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
 apk update
 apk add --upgrade apk-tools
 apk upgrade --available
