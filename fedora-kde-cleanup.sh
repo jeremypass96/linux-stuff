@@ -168,6 +168,7 @@ cd grub2-themes && ./install.sh -t stylish
 cd && rm -rf grub2-themes
 
 # Setup Catppuccin theme for btop.
+mkdir -p /home/$USER/.config/btop/themes
 git clone https://github.com/catppuccin/btop.git
 cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
 chown $USER:$USER /home/$USER/.config/btop/themes/*.theme
