@@ -43,7 +43,7 @@ read -p "What video card do you have installed on your computer?
 4.) Intel
 5.) VirtualBox
 6.) VMware
-–> " resp
+-> " resp
 if [ "$resp" = 1 ]; then
 apk add xf86-video-amdgpu linux-firmware-amdgpu
 fi
