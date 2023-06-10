@@ -96,8 +96,9 @@ clear
 
 # Download Konsole colors.
 git clone https://github.com/catppuccin/konsole.git
+mkdir -p /home/$USER/.local/share/konsole/
 cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
-chown $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
+chown -R $USER:$USER /home/$USER/.local/share/konsole/
 cd && rm -rf konsole
 
 clear
@@ -171,5 +172,5 @@ cd && rm -rf grub2-themes
 mkdir -p /home/$USER/.config/btop/themes
 git clone https://github.com/catppuccin/btop.git
 cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
-chown $USER:$USER /home/$USER/.config/btop/themes/*.theme
+chown -R $USER:$USER /home/$USER/.config/btop/themes/
 cd && rm -rf btop
