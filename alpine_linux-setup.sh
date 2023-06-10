@@ -111,14 +111,16 @@ apk add neofetch pfetch btop micro lsd fd fd-zsh-completion bat bat-zsh-completi
 
 # Download Konsole colors.
 cd && git clone https://github.com/catppuccin/konsole.git
+mkdir -p /home/$USER/.local/share/konsole/
 cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
 chown $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
 cd && rm -rf konsole
 
 # Setup Catppuccin theme for btop.
 git clone https://github.com/catppuccin/btop.git
+mkdir -p /home/$USER/.config/btop/themes/
 cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
-chmod $USER:$USER /home/$USER/.config/btop/themes/*.theme
+chown $USER:$USER /home/$USER/.config/btop/themes/*.theme
 cd && rm -rf btop
 
 # Update environment variables.
