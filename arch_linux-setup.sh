@@ -174,8 +174,9 @@ cd linux-stuff/
 sudo ./cleanup-systemd-boot.sh
 
 # Configure Zsh.
+echo "Configuring Zsh..."
 paru -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
-cp /usr/share/oh-my-zsh/zshrc /home/$USER/.zshrc
+cp -v /usr/share/oh-my-zsh/zshrc /home/$USER/.zshrc
 sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"gentoo"'/g /home/$USER/.zshrc
 sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' /home/$USER/.zshrc
 sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g /home/$USER/.zshrc
@@ -190,7 +191,7 @@ cd
 git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
 cd zsh-syntax-highlighting/themes/
 sudo cp -v *.zsh /etc/zsh
-read -p "Which Catppuccin colors do you want for syntax highlighting?
+read -p "Which Catppuccin colors do you want for Zsh syntax highlighting?
 1.) Latte
 2.) Frappé
 3.) Macchiato
