@@ -362,3 +362,7 @@ cd && rm -rf btop
 # Disable submenus in GRUB.
 sudo sed -i 's/#GRUB_DISABLE_SUBMENU=y/GRUB_DISABLE_SUBMENU=y'/g /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# Speed up systemd journal flush.
+sudo sed -i 's/#Storage=auto/Storage=volatile'/g /etc/systemd/journald.conf
+sudo sed -i 's/#SystemMaxFileSize/SystemMaxFileSize=20MB'/g /etc/systemd/journald.conf
