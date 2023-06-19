@@ -38,7 +38,7 @@ clear
 
 # Install Newaita icons.
 echo "Installing the Newaita icon theme..."
-git clone https://github.com/cbrnix/Newaita.git
+cd && git clone https://github.com/cbrnix/Newaita.git
 cd Newaita/
 cp -r Newaita-dark /usr/share/icons
 cd && rm -rf Newaita
@@ -95,7 +95,7 @@ dnf install -y zsh
 clear
 
 # Download Konsole colors.
-git clone https://github.com/catppuccin/konsole.git
+cd && git clone https://github.com/catppuccin/konsole.git
 mkdir -p /home/$USER/.local/share/konsole/
 cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
 chown -R $USER:$USER /home/$USER/.local/share/konsole/
@@ -113,6 +113,8 @@ wget https://github.com/adobe-fonts/source-sans/releases/download/3.052R/TTF-sou
 unzip /home/$USER/TTF-source-sans-3.052R.zip -x __MACOSX/._TTF TTF/.DS_Store __MACOSX/TTF/._.DS_Store -d /usr/share/fonts/SourceSansPro
 rm -f /home/$USER/TTF-source-sans-3.052R.zip
 
+clear
+
 # Install lynis.
 cat >> /etc/yum.repos.d/cisofy-lynis.repo << EOF
 [lynis]
@@ -124,6 +126,8 @@ gpgcheck=1
 priority=2
 EOF
 dnf install -y lynis
+
+clear
 
 # Secure the OS.
 sed -i 117s/'022'/'077'/g /etc/login.defs
@@ -153,9 +157,13 @@ chmod og-rwx /etc/crontab
 chmod og-rwx /etc/cron.d
 chmod og-rwx /etc/cron.deny
 
+clear
+
 # Install packages to auto-update the OS.
 dnf install -y dnf-automatic fedora-upgrade
 systemctl enable --now dnf-system-upgrade
+
+clear
 
 # Install and run topgrade.
 curl https://github.com/topgrade-rs/topgrade/releases/download/v11.0.2/topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz -o topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
@@ -163,10 +171,14 @@ tar -x topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
 install topgrade /usr/local/bin/
 topgrade
 
+clear
+
 # Install grub theme.
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && ./install.sh -t stylish
 cd && rm -rf grub2-themes
+
+clear
 
 # Setup Catppuccin theme for btop.
 mkdir -p /home/$USER/.config/btop/themes
