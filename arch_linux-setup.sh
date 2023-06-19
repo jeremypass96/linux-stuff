@@ -354,10 +354,7 @@ echo Hidden=true >> /usr/share/applications/qvidcap.desktop
 sudo chmod o-w /usr/share/applications/qvidcap.desktop
 
 # Setup Catppuccin theme for btop.
-mkdir -p /home/$USER/.config/btop/themes
-cd && git clone https://github.com/catppuccin/btop.git
-cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
-cd && rm -rf btop
+./btop-setup.sh
 
 # Disable submenus in GRUB.
 sudo sed -i 's/#GRUB_DISABLE_SUBMENU=y/GRUB_DISABLE_SUBMENU=y'/g /etc/default/grub
