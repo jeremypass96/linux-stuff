@@ -166,9 +166,10 @@ systemctl enable --now dnf-system-upgrade
 clear
 
 # Install and run topgrade.
-curl https://github.com/topgrade-rs/topgrade/releases/download/v11.0.2/topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz -o topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
-tar -x topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
+cd && wget https://github.com/topgrade-rs/topgrade/releases/download/v11.0.2/topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
+tar -xf topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
 install topgrade /usr/local/bin/
+rm -rf topgrade topgrade-v11.0.2-x86_64-unknown-linux-gnu.tar.gz
 topgrade
 
 clear
@@ -182,7 +183,7 @@ clear
 
 # Setup Catppuccin theme for btop.
 mkdir -p /home/$USER/.config/btop/themes
-git clone https://github.com/catppuccin/btop.git
+cd && git clone https://github.com/catppuccin/btop.git
 cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
 chown -R $USER:$USER /home/$USER/.config/btop/themes/
 cd && rm -rf btop
