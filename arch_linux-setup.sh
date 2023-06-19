@@ -186,9 +186,9 @@ sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' /home/$USER/.zs
 sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' /home/$USER/.zshrc
 echo alias ls='"lsd"' >> /home/$USER/.zshrc
 echo alias cat='"bat"' >> /home/$USER/.zshrc
-cd
+
 # Setup Catppuccin colors.
-git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
+cd && git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
 cd zsh-syntax-highlighting/themes/
 sudo cp -v *.zsh /etc/zsh
 read -p "Which Catppuccin colors do you want for Zsh syntax highlighting?
