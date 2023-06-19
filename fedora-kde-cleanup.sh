@@ -182,5 +182,5 @@ cd && rm -rf grub2-themes
 clear
 
 # Speed up systemd journal flush.
-sudo sed -i 's/#Storage=auto/Storage=volatile'/g /etc/systemd/journald.conf
-sudo sed -i 's/#SystemMaxFileSize=/SystemMaxFileSize=20MB'/g /etc/systemd/journald.conf
+sed -i 's/#Storage=auto/Storage=volatile'/g /etc/systemd/journald.conf
+sed -i 's/#SystemMaxFileSize=/SystemMaxFileSize=20MB'/g /etc/systemd/journald.conf
