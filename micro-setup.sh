@@ -9,8 +9,7 @@ sudo mkdir -p /root/.config/micro
 sudo cp -v /etc/skel/.config/micro/settings.json /root/.config/micro
 
 # Setup Catppuccin colors.
-cd
-git clone https://github.com/catppuccin/micro.git
+cd && git clone https://github.com/catppuccin/micro.git
 mkdir -p ~/.config/micro/colorschemes
 sudo mkdir -p /etc/skel/.config/micro/colorschemes
 sudo mkdir -p /root/.config/micro/colorschemes
