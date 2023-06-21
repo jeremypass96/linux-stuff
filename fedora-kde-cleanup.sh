@@ -105,13 +105,13 @@ clear
 
 # Install the Poppins font.
 curl https://fonts.google.com/download?family=Poppins -o /home/$USER/Poppins.zip
-unzip /home/$USER/Poppins.zip -d /usr/share/fonts/Poppins
+unzip /home/$USER/Poppins.zip -x OFL.txt -d /usr/share/fonts/Poppins
 rm -f /home/$USER/Poppins.zip
 
-# Install the Source Sans Pro font.
-wget https://github.com/adobe-fonts/source-sans/releases/download/3.052R/TTF-source-sans-3.052R.zip
-unzip /home/$USER/TTF-source-sans-3.052R.zip -x __MACOSX/._TTF TTF/.DS_Store __MACOSX/TTF/._.DS_Store -d /usr/share/fonts/SourceSansPro
-rm -f /home/$USER/TTF-source-sans-3.052R.zip
+# Install the Source Sans 3 font.
+curl https://fonts.google.com/download\?family\=Source+Sans+3 -o /home/$USER/Source_Sans_3.zip
+unzip /home/$USER/Source_Sans_3.zip -x README.txt OFL.txt SourceSans3-VariableFont_wght.ttf SourceSans3-Italic-VariableFont_wght.ttf -d /usr/share/fonts/SourceSansPro
+rm -f /home/$USER/Source_Sans_3.zip
 
 clear
 
