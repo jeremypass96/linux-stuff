@@ -9,7 +9,7 @@ cd && rm -rf btop
 
 # Copy over custom btop config file.
 mkdir -p /home/$USER/.config/btop && cp -v /home/$USER/linux-stuff/Dotfiles/config/btop/btop.conf /home/$USER/.config/btop/btop.conf
-mkdir -p /etc/skel/.config/btop
-cp -v /home/$USER/linux-stuff/Dotfiles/config/btop/btop.conf /etc/skel/.config/btop/btop.conf
-mkdir -p /root/.config/btop
-cp -v /home/$USER/linux-stuff/Dotfiles/config/btop/btop.conf /root/.config/btop/btop.conf
+sudo mkdir -p /etc/skel/.config/btop
+sudo cp -v /home/$USER/linux-stuff/Dotfiles/config/btop/btop.conf /etc/skel/.config/btop/btop.conf
+sudo mkdir -p /root/.config/btop
+sudo cp -v /home/$USER/linux-stuff/Dotfiles/config/btop/btop.conf /root/.config/btop/btop.conf
