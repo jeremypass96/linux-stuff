@@ -365,6 +365,6 @@ sudo sed -i 's/#Storage=auto/Storage=volatile'/g /etc/systemd/journald.conf
 sudo sed -i 's/#SystemMaxFileSize=/SystemMaxFileSize=20MB'/g /etc/systemd/journald.conf
 
 # Install pacman wrapper for easier command syntax (and set up).
-sudo paru -S pac-wrapper --noconfirm
+paru -S pac-wrapper --noconfirm
 sudo chmod o+w /etc/environment && echo "export PAC_PACMAN='paru'" >> /etc/environment && sudo chmod o-w /etc/environment
 source /etc/environment
