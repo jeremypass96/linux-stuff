@@ -148,7 +148,7 @@ paru -S etcher-cli-bin --noconfirm
 paru -S mp3tag --noconfirm
 
 # Install dependencies for k3b.
-paru -S cdrtools dvd+rw-tools transcode sox normalize --noconfirm
+paru -S cdrtools dvd+rw-tools transcode sox normalize cdrdao --noconfirm
 
 # Install some KDE games!
 sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
