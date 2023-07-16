@@ -24,4 +24,7 @@
         }
     },
     "catppuccin.accentColor": "flamingo",
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "always",
+    "editor.cursorBlinking": "smooth",
 }
