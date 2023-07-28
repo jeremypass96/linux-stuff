@@ -352,6 +352,9 @@ sudo chmod o-w /usr/share/applications/qv4l2.desktop
 sudo chmod o+w /usr/share/applications/qvidcap.desktop
 echo Hidden=true >> /usr/share/applications/qvidcap.desktop
 sudo chmod o-w /usr/share/applications/qvidcap.desktop
+sudo chmod o+w /usr/share/applications/gcdmaster.desktop
+echo Hidden=true >> /usr/share/applications/gcdmaster.desktop
+sudo chmod o-w /usr/share/applications/gcdmaster.desktop
 
 # Setup Catppuccin theme for btop.
 ./btop-setup.sh
