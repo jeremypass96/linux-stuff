@@ -82,7 +82,15 @@ sed -i 77s/'022'/'077'/g /etc/login.defs
 sed -i 26s/'022'/'077'/g /etc/profile
 sed -i s/'UMASK=0022'/'UMASK=0077'/g /etc/default/sysstat
 vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog audit acct -y
-vsv enable puppet ; vsv enable rsyslogd ; vsv enable auditd ; vsv enable ufw ; vsv disable sshd
+ln -s /etc/sv/puppet /var/service/
+vsv enable puppet
+ln -s /etc/sv/rsyslogd /var/service/
+vsv enable rsyslogd
+ln -s /etc/sv/auditd /var/service/
+vsv enable auditd
+ln -s /etc/sv/ufw /var/service/
+vsv enable ufw
+vsv disable sshd; vsv stop sshd
 mkdir /var/log/account; touch /var/log/account/pacct ; accton on
 chmod og-rwx /boot/grub/grub.cfg
 chmod og-rwx /etc/ssh/sshd_config
