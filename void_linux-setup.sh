@@ -49,14 +49,20 @@ vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-
 vpm install cups hplip -y
 vsv enable cupsd
 vsv enable cups-browsed
+
 # Install fonts.
 clear ; echo "Installing fonts..."
 vpm install nerd-fonts google-fonts-ttf -y
 
 # Install the Poppins font.
 curl https://fonts.google.com/download?family=Poppins -o /home/$USER/Poppins.zip
-unzip /home/$USER/Poppins.zip -d /usr/share/fonts/Poppins
+unzip /home/$USER/Poppins.zip -x OFL.txt -d /usr/share/fonts/Poppins
 rm -f /home/$USER/Poppins.zip
+
+# Install the Source Sans 3 font.
+curl https://fonts.google.com/download\?family\=Source+Sans+3 -o /home/$USER/Source_Sans_3.zip
+unzip /home/$USER/Source_Sans_3.zip -x README.txt OFL.txt SourceSans3-VariableFont_wght.ttf SourceSans3-Italic-VariableFont_wght.ttf -d /usr/share/fonts/SourceSansPro
+rm -f /home/$USER/Source_Sans_3.zip
 
 # Install KDE.
 clear ; echo "Installing the KDE desktop..."
@@ -66,7 +72,7 @@ vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-des
 clear ; echo "Installing the Newaita icon theme..."
 git clone https://github.com/cbrnix/Newaita.git
 cd Newaita/
-cp -r Newaita-dark /usr/share/icons
+cp -r Newaita /usr/share/icons
 cd && rm -rf Newaita
 
 # Install grub theme.
