@@ -9,6 +9,7 @@ sudo mkdir -p /root/.config/bat && sudo cp -v /etc/skel/.config/bat/config /root
 
 # Setup the Catppuccin "mocha" theme for bat.
 cd && git clone https://github.com/catppuccin/bat.git
+cd bat
 mkdir -p "$(bat --config-dir)/themes"
 cp *.tmTheme "$(bat --config-dir)/themes"
 bat cache --build
