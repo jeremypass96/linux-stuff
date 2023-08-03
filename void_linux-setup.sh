@@ -73,6 +73,7 @@ cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && ./install.sh -t stylish
 echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
 update-grub
+cd && rm -rf grub2-themes
 
 # Configure lynis.
 echo "machine-role=personal" > /etc/lynis/custom.prf
@@ -127,7 +128,7 @@ plymouth-set-default-theme -R solar
 
 # Download Konsole colors.
 mkdir -p /home/$USER/.local/share/konsole/
-git clone https://github.com/catppuccin/konsole.git
+cd && git clone https://github.com/catppuccin/konsole.git
 cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
 chown $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
 cd && rm -rf konsole
