@@ -10,13 +10,6 @@ fi
 # Audio buzz/hum fix.
 echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
 
-# Change to US mirrors and sync repos.
-echo "Changing to US mirrors and syncing repos..."
-mkdir -p /etc/xbps.d
-cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
-sed -i 's|https://repo-default.voidlinux.org|https://repo-us.voidlinux.org|g' /etc/xbps.d/*-repository-*.conf
-xbps-install -S
-
 # Configure XBPS to use the latest package versions.
 sed -i s/'#bestmatching=true'/'bestmatching=true'/g /usr/share/xbps.d/xbps.conf
 
