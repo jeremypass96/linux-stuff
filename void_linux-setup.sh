@@ -118,15 +118,17 @@ vpm install plymouth -y
 plymouth-set-default-theme -R solar
 
 # Download Konsole colors.
+mkdir -p /home/$USER/.local/share/konsole/
 git clone https://github.com/catppuccin/konsole.git
 cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
-chmod $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
+chown $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
 cd && rm -rf konsole
 
 # Setup Catppuccin theme for btop.
+mkdir -p /home/$USER/.config/btop/themes/
 git clone https://github.com/catppuccin/btop.git
 cd btop/themes && cp -v *.theme /home/$USER/.config/btop/themes/
-chmod $USER:$USER /home/$USER/.config/btop/themes/*.theme
+chown $USER:$USER /home/$USER/.config/btop/themes/*.theme
 cd && rm -rf btop
 
 # Update environment variables.
