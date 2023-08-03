@@ -63,7 +63,7 @@ vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-des
 
 # Install Newaita icons.
 clear ; echo "Installing the Newaita icon theme..."
-git clone https://github.com/cbrnix/Newaita.git
+cd && git clone https://github.com/cbrnix/Newaita.git
 cd Newaita/
 cp -r Newaita /usr/share/icons
 cd && rm -rf Newaita
