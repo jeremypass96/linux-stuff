@@ -10,6 +10,7 @@ git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
 cd zsh-syntax-highlighting/themes/
 sudo mkdir -p /usr/local/etc/zsh
 sudo cp -v *.zsh /usr/local/etc/zsh
+sudo chown $USER:$USER /usr/local/etc/zsh/*.zsh
 read -p "Which Catppuccin colors do you want for syntax highlighting?
 1.) Latte
 2.) Frappé
@@ -18,19 +19,15 @@ read -p "Which Catppuccin colors do you want for syntax highlighting?
 -> " resp
 if [ "$resp" = 1 ]; then
 echo source /usr/local/etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
-sudo chown $USER:$USER /usr/local/etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh
 fi
 if [ "$resp" = 2 ]; then
 echo source /usr/local/etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
-sudo chown $USER:$USER /usr/local/etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh
 fi
 if [ "$resp" = 3 ]; then
 echo source /usr/local/etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
-sudo chown $USER:$USER /usr/local/etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 fi
 if [ "$resp" = 4 ]; then
 echo source /usr/local/etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
-sudo chown $USER:$USER /usr/local/etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 fi
 cd && rm -rf zsh-syntax-highlighting
 sudo cp -v /home/$USER/.zshrc /etc/skel/.zshrc
