@@ -1,9 +1,19 @@
 #!/bin/bash
-mkdir -p /home/$USER/.config/lsd
-cp -v /home/$USER/linux-stuff/Dotfiles/config/lsd/config.yaml /home/$USER/.config/lsd/config.yaml
-chown $USER:$USER /home/$USER/.config/lsd
-chown $USER:$USER /home/$USER/.config/lsd/*
+
+USER_HOME="/home/$SUDO_USER"
+CONFIG_DIR="$USER_HOME/.config/lsd"
+
+# Create directory structure
+mkdir -p "$CONFIG_DIR"
 sudo mkdir -p /etc/skel/.config/lsd
-sudo cp -v /home/$USER/.config/lsd/config.yaml /etc/skel/.config/lsd/
 sudo mkdir -p /root/.config/lsd
-sudo cp -v /etc/skel/.config/lsd/config.yaml /root/.config/lsd/
+
+# Copy config file
+cp -v "/home/$SUDO_USER/linux-stuff/Dotfiles/config/lsd/config.yaml" "$CONFIG_DIR"
+sudo cp -v "$CONFIG_DIR/config.yaml" /etc/skel/.config/lsd/
+sudo cp -v "$CONFIG_DIR/config.yaml" /root/.config/lsd/
+
+# Set correct ownership
+chown -R "$SUDO_USER:$SUDO_USER" "$CONFIG_DIR"
+
+echo "lsd configuration has been set up."
