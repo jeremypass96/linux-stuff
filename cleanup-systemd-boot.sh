@@ -17,3 +17,5 @@ systemctl disable bluetooth.service
 systemctl disable brltty.service
 systemctl disable debug-shell.service
 systemctl disable ModemManager.service
+
+echo "Services have been disabled and stopped to help improve bootup speed."
