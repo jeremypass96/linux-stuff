@@ -23,7 +23,7 @@ case $theme_choice in
         ;;
     *)
         echo "Invalid choice. Defaulting to 'Latte' theme."
-        selected_theme="Latte"
+        selected_theme="Catppuccin-latte"
         ;;
 esac
 
