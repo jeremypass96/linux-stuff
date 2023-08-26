@@ -125,7 +125,7 @@ dnf install -y lynis
 clear
 
 # Secure the OS.
-declare -a files_to_secure=("/etc/login.defs" "/etc/init.d/functions" "/etc/bashrc" "/etc/csh.cshrc")
+declare -a files_to_secure=("/etc/init.d/functions" "/etc/bashrc" "/etc/csh.cshrc")
 for file in "${files_to_secure[@]}"; do
     sed -i 's/umask 022/umask 077/' "$file"
 done
