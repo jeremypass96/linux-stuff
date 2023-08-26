@@ -10,16 +10,16 @@ read -p "Enter the number of your choice: " theme_choice
 
 case $theme_choice in
     1)
-        selected_theme="Latte"
+        selected_theme="Catppuccin-latte"
         ;;
     2)
-        selected_theme="Frappé"
+        selected_theme="Catppuccin-frappe"
         ;;
     3)
-        selected_theme="Macchiato"
+        selected_theme="Catppuccin-macchiato"
         ;;
     4)
-        selected_theme="Mocha"
+        selected_theme="Catppuccin-mocha"
         ;;
     *)
         echo "Invalid choice. Defaulting to 'Latte' theme."
