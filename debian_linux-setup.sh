@@ -40,8 +40,8 @@ clear
 
 # Install Catppuccin themes for Xfce terminal.
 cd && git clone https://github.com/catppuccin/xfce4-terminal.git
-mkdir -pv /home/$USER/.local/share/xfce4/terminal/colorschemes
-cp -v xfce4-terminal/src/*.theme /home/$USER/.local/share/xfce4/terminal/colorschemes
+mkdir -pv $HOME/.local/share/xfce4/terminal/colorschemes
+cp -v xfce4-terminal/src/*.theme $HOME/.local/share/xfce4/terminal/colorschemes
 rm -rf xfce4-terminal
 
 clear
