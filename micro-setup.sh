@@ -21,14 +21,20 @@ copy_settings_and_colors() {
     chown -R "$USER:$USER" "$CONFIG_DIR"
 
     # Setup Catppuccin colors
-    cd "$USER_HOME" || exit
-    git clone https://github.com/catppuccin/micro.git
+    # Change to the user's home directory and clone Catppuccino colorscheme repository
+    cd "$USER_HOME" && git clone https://github.com/catppuccin/micro.git
+
+    # Set up colorschemes directories
     mkdir -p "$CONFIG_DIR/colorschemes"
     sudo mkdir -p /etc/skel/.config/micro/colorschemes
     sudo mkdir -p /root/.config/micro/colorschemes
+
+    # Copy colorscheme files
     cp -v micro/src/*.micro "$CONFIG_DIR/colorschemes"
     sudo cp -v micro/src/*.micro /etc/skel/.config/micro/colorschemes
     sudo cp -v micro/src/*.micro /root/.config/micro/colorschemes
+
+    # Clean up
     rm -rf micro/
 
     # Install micro plugins
