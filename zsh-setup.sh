@@ -14,9 +14,8 @@ cp -v /home/$USER/linux-stuff/Dotfiles/.zshrc /home/$USER/.zshrc
 # Setup Catppuccin syntax highlighting colors
 cd "$HOME" || exit
 git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
-cd zsh-syntax-highlighting/themes/
 sudo mkdir -p /usr/local/etc/zsh
-sudo cp -v *.zsh /usr/local/etc/zsh
+sudo cp -v zsh-syntax-highlighting/themes/*.zsh /usr/local/etc/zsh
 sudo chown $USER:$USER /usr/local/etc/zsh/*.zsh
 
 # Choose Catppuccin color scheme for syntax highlighting
