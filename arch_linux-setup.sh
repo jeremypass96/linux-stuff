@@ -31,7 +31,7 @@ sudo pacman -Syy
 
 # Setup "blackpac" script. Shell script utility that enables you to backlist packages.
 # Download script.
-cd && wget http://downloads.sourceforge.net/project/ig-scripts/blackpac.sh
+cd $HOME && wget http://downloads.sourceforge.net/project/ig-scripts/blackpac.sh
 # Make script executable.
 chmod +x blackpac.sh
 # Install script.
