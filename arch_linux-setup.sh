@@ -125,7 +125,7 @@ paru -S pamac-aur pamac-tray-icon-plasma --noconfirm
 
 # Install and configure VSCodium.
 paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
-mkdir -p /home/$USER/.config/VSCodium/User && cp -v /home/$USER/linux-stuff/Dotfiles/config/VSCodium/User/settings.json /home/$USER/.config/VSCodium/User/settings.json
+mkdir -p $HOME/.config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.config/VSCodium/User/settings.json
 vscodium --install-extension Catppuccin.catppuccin-vsc
 vscodium --install-extension Catppuccin.catppuccin-vsc-icons
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
@@ -176,16 +176,17 @@ sudo ./cleanup-systemd-boot.sh
 # Configure Zsh.
 echo "Configuring Zsh..."
 paru -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
-cp -v /usr/share/oh-my-zsh/zshrc /home/$USER/.zshrc
-sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"gentoo"'/g /home/$USER/.zshrc
-sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' /home/$USER/.zshrc
-sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g /home/$USER/.zshrc
-sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/g' /home/$USER/.zshrc
-sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' /home/$USER/.zshrc
-sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' /home/$USER/.zshrc
-sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' /home/$USER/.zshrc
-echo alias ls='"lsd"' >> /home/$USER/.zshrc
-echo alias cat='"bat"' >> /home/$USER/.zshrc
+cp -v /usr/share/oh-my-zsh/zshrc $HOME/.zshrc
+sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"gentoo"'/g $HOME/.zshrc
+sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' $HOME/.zshrc
+sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g $HOME/.zshrc
+sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/g' $HOME/.zshrc
+sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' $HOME/.zshrc
+sed -i 's/# DISABLE_UNTRACKED_FILES_DIRTY="true"/DISABLE_UNTRACKED_FILES_DIRTY="true"/g' $HOME/.zshrc
+sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' $HOME/.zshrc
+sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' $HOME/.zshrc
+echo alias ls='"lsd"' >> $HOME/.zshrc
+echo alias cat='"bat"' >> $HOME/.zshrc
 
 # Setup Catppuccin colors.
 cd && git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
@@ -198,21 +199,21 @@ read -p "Which Catppuccin colors do you want for Zsh syntax highlighting?
 4.) Mocha
 -> " resp
 if [ "$resp" = 1 ]; then
-echo source /etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
+echo source /etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh >> $HOME/.zshrc
 fi
 if [ "$resp" = 2 ]; then
-echo source /etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
+echo source /etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh >> $HOME/.zshrc
 fi
 if [ "$resp" = 3 ]; then
-echo source /etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
+echo source /etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh >> $HOME/.zshrc
 fi
 if [ "$resp" = 4 ]; then
-echo source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh >> /home/$USER/.zshrc
+echo source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh >> $HOME/.zshrc
 fi
 cd && rm -rf zsh-syntax-highlighting
-sudo cp -v /home/$USER/.zshrc /etc/skel/.zshrc
+sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
-echo pfetch >> /home/$USER/.zshrc
+echo pfetch >> $HOME/.zshrc
 
 # Change user's shell to zsh.
 chsh -s /usr/bin/zsh $USER
