@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USER_HOME="/home/$SUDO_USER"
+USER_HOME="$HOME"
 CONFIG_DIR="$USER_HOME/.config/micro"
 COLOR_SCHEMES=("Catppuccin Latte" "Catppuccin Frappé" "Catppuccin Macchiato" "Catppuccin Mocha")
 SCHEME_NAMES=("catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha")
@@ -13,12 +13,12 @@ copy_settings_and_colors() {
     sudo mkdir -p /root/.config/micro
 
     # Copy settings file
-    cp -v "/home/$SUDO_USER/linux-stuff/Dotfiles/config/micro/settings.json" "$CONFIG_DIR/settings.json"
+    cp -v "$HOME/linux-stuff/Dotfiles/config/micro/settings.json" "$CONFIG_DIR/settings.json"
     sudo cp -v "$CONFIG_DIR/settings.json" /etc/skel/.config/micro/
     sudo cp -v "$CONFIG_DIR/settings.json" /root/.config/micro/
 
     # Set correct ownership
-    chown -R "$SUDO_USER:$SUDO_USER" "$CONFIG_DIR"
+    chown -R "$USER:$USER" "$CONFIG_DIR"
 
     # Setup Catppuccin colors
     cd "$USER_HOME" || exit
