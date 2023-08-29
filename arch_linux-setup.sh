@@ -29,19 +29,6 @@ sudo systemctl enable reflector.service --now && sudo systemctl enable reflector
 sudo sed -i 's/#NoExtract   =/NoExtract    = mirrorlist.pacnew'/g /etc/pacman.conf
 sudo pacman -Syy
 
-# Setup "blackpac" script. Shell script utility that enables you to backlist packages.
-# Download script.
-cd $HOME && wget http://downloads.sourceforge.net/project/ig-scripts/blackpac.sh
-# Make script executable.
-chmod +x blackpac.sh
-# Install script.
-sudo install blackpac.sh /usr/local/bin/
-sudo mv /usr/local/bin/blackpac.sh /usr/local/bin/blackpac
-rm blackpac.sh
-# Blacklist and remvove packages.
-sudo blackpac --blacklist qt5-tools
-sudo pacman -R qt5-tools --noconfirm
-
 # Install and use better NTP daemon.
 sudo pacman -S chrony --noconfirm
 sudo sed -i 's/! server 0.arch.pool.ntp.org iburst/server 0.arch.pool.ntp.org iburst'/g /etc/chrony.conf
