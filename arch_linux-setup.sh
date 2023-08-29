@@ -355,6 +355,18 @@ sudo chmod o-w /usr/share/applications/qvidcap.desktop
 sudo chmod o+w /usr/share/applications/gcdmaster.desktop
 echo Hidden=true >> /usr/share/applications/gcdmaster.desktop
 sudo chmod o-w /usr/share/applications/gcdmaster.desktop
+sudo chmod o+w /usr/share/applications/assistant.desktop
+echo Hidden=true >> /usr/share/applications/assistant.desktop
+sudo chmod o-w /usr/share/applications/assistant.desktop
+sudo chmod o+w /usr/share/applications/designer.desktop
+echo Hidden=true >> /usr/share/applications/designer.desktop
+sudo chmod o-w /usr/share/applications/designer.desktop
+sudo chmod o+w /usr/share/applications/linguist.desktop
+echo Hidden=true >> /usr/share/applications/linguist.desktop
+sudo chmod o-w /usr/share/applications/linguist.desktop
+sudo chmod o+w /usr/share/applications/qdbusviewer.desktop
+echo Hidden=true >> /usr/share/applications/qdbusviewer.desktop
+sudo chmod o-w /usr/share/applications/qdbusviewer.desktop
 
 # Setup Catppuccin theme for btop.
 ./btop-setup.sh
