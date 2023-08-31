@@ -72,7 +72,6 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)
 
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
