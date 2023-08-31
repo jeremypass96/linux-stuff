@@ -157,6 +157,22 @@ cd && rm -rf konsole
 echo "Setting up Catppuccin theme for btop..."
 ./btop-setup.sh
 
+# Enable flatpak support.
+echo "Enabling flatpak support..."
+vpm install flatpak -y
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# Ask the user if they want to install Pinta.
+read -p "Do you want to install the Pinta image editor? (Y/n) " resp
+resp=${resp:-Y}
+if [ "$resp" = Y ] || [ "$resp" = y ]; then
+echo "Installing Pinta image editor..."
+flatpak install flathub com.github.PintaProject.Pinta
+fi
+if [ "$resp" = n ]; then
+exit
+fi
+
 # Update environment variables.
 # Configure pfetch.
 echo "PF_INFO='\"ascii os kernel uptime pkgs shell editor de\"'" >> /etc/environment
