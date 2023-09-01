@@ -107,8 +107,8 @@ paru -S topgrade-bin --noconfirm
 # Install pfetch.
 paru -S pfetch --noconfirm
 
-# Install Pamac, GUI frontend to install software.
-paru -S pamac-aur pamac-tray-icon-plasma --noconfirm
+# Install KDE system tray update plasmoid (with AUR support).
+paru -S plasma5-applets-kde-arch-update-notifier --noconfirm
 
 # Install and configure VSCodium.
 paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
