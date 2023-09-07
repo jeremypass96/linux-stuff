@@ -107,9 +107,6 @@ paru -S topgrade-bin --noconfirm
 # Install pfetch.
 paru -S pfetch --noconfirm
 
-# Install KDE system tray update plasmoid (with AUR support).
-paru -S plasma5-applets-kde-arch-update-notifier checkupdates-aur --noconfirm
-
 # Install and configure VSCodium.
 paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p $HOME/.config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.config/VSCodium/User/settings.json
