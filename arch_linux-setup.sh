@@ -129,7 +129,7 @@ sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7z
 paru -S etcher-cli-bin --noconfirm
 
 # Install VirtualBox.
-paru -S virtualbox virtualbox-unattended-templates virtualbox-guest-iso
+paru -S virtualbox virtualbox-unattended-templates virtualbox-guest-iso --noconfirm
 
 # Install mp3tag.
 paru -S mp3tag --noconfirm
