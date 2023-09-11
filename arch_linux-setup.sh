@@ -60,7 +60,7 @@ sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
 sudo pacman -S aspell aspell-en --noconfirm
 
 # Install paru AUR helper.
-sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -sic --noconfirm
+sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git $HOME/paru-bin && cd paru-bin && makepkg -sic --noconfirm
 cd .. && rm -rf paru-bin
 # Configure paru options.
 sudo sed -i 's/#BottomUp/BottomUp'/g /etc/paru.conf
@@ -128,13 +128,16 @@ sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7z
 # Install balenaEtcher (command-line version) to write OS images to USB flash drives.
 paru -S etcher-cli-bin --noconfirm
 
+# Install VirtualBox.
+paru -S virtualbox virtualbox-unattended-templates virtualbox-guest-iso
+
 # Install mp3tag.
 paru -S mp3tag --noconfirm
 
 # Install dependencies for k3b.
 paru -S cdrtools dvd+rw-tools transcode sox normalize cdrdao --noconfirm
 
-# Install some KDE games!
+# Install some KDE games.
 sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
 
 # Install Spotify.
