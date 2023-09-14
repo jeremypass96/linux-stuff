@@ -216,6 +216,8 @@ echo BROWSER=brave >> /etc/environment
 echo EDITOR=micro >> /etc/environment
 # Set MICRO_TRUECOLOR variable.
 echo MICRO_TRUECOLOR=1 >> /etc/environment
+# Enable VSCodium to use QT file dialogs by default instead of GTK.
+echo GTK_USE_PORTAL=1 >> /etc/environment
 # Remove permission for other users to write to this file.
 sudo chmod o-w /etc/environment
 
