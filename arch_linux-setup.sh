@@ -173,6 +173,20 @@ sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' $HO
 sed -i 's/# DISABLE_UNTRACKED_FILES_DIRTY="true"/DISABLE_UNTRACKED_FILES_DIRTY="true"/g' $HOME/.zshrc
 sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' $HOME/.zshrc
 sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' $HOME/.zshrc
+echo "" >> $HOME/.zshrc
+echo "# Set the default umask." >> $HOME/.zshrc
+echo "umask 077" >> $HOME/.zshrc
+echo "" >> $HOME/.zshrc
+echo "# Disable highlighting of pasted text." >> $HOME/.zshrc
+echo "zle_highlight=('paste:none')" >> $HOME/.zshrc
+echo "" >> $HOME/.zshrc
+echo "# Apply sensible history settings." >> $HOME/.zshrc
+echo "setopt HIST_EXPIRE_DUPS_FIRST" >> $HOME/.zshrc
+echo "setopt HIST_FIND_NO_DUPS" >> $HOME/.zshrc
+echo "setopt HIST_IGNORE_ALL_DUPS" >> $HOME/.zshrc
+echo "setopt HIST_IGNORE_DUPS" >> $HOME/.zshrc
+echo "setopt HIST_IGNORE_SPACE" >> $HOME/.zshrc
+echo "setopt HIST_SAVE_NO_DUPS" >> $HOME/.zshrc
 echo alias ls='"lsd"' >> $HOME/.zshrc
 echo alias cat='"bat"' >> $HOME/.zshrc
 
