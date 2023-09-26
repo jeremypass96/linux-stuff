@@ -311,10 +311,6 @@ echo ::1 localhost ip6-localhost ip6-loopback >> /etc/hosts
 echo ff02::1 ip6-allnodes >> /etc/hosts
 echo ff02::2 ip6-allrouters >> /etc/hosts
 echo 127.0.1.1 `hostname` >> /etc/hosts
-echo 127.0.0.1 localhost >> /etc/hosts
-echo ::1 localhost ip6-localhost ip6-loopback >> /etc/hosts
-echo ff02::1 ip6-allnodes >> /etc/hosts
-echo ff02::2 ip6-allrouters >> /etc/hosts
 sudo chmod o-w /etc/hosts
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding no'/g /etc/ssh/sshd_config
