@@ -88,6 +88,9 @@ paru -S desktop-privileges --noconfirm
 # Install hardware dection tool for mkinitcpio.
 sudo pacman -S hwdetect --noconfirm
 
+# Install NTFS filesystem driver.
+sudo pacman -S ntfs-3g --noconfirm
+
 # Install Brave web browser.
 paru -S brave-bin --noconfirm
 
