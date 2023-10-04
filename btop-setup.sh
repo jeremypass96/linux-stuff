@@ -13,6 +13,12 @@ cd && rm -rf btop
 
 # Copy over custom btop config file.
 mkdir -p "$config_dir" && cp -v "$btop_config" "$config_dir"/btop.conf
+
+# Edit btop config file with host user's username.
+sed -i "s/\$USER/$(whoami)/g" "$config_dir"/btop.conf
+
+# Copy the edited config file to other locations.
+
 sudo mkdir -p /etc/skel/.config/btop
 sudo cp -v "$btop_config" /etc/skel/.config/btop/btop.conf
 sudo mkdir -p /root/.config/btop
