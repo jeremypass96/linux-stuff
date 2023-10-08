@@ -2,20 +2,17 @@
 # This script sets up btop with Catppuccin color scheme and custom config file. Run as a normal user!
 
 # Setup Catppuccin theme for btop.
-themes_dir="$HOME/.config/btop/themes"
+themes_dir="/etc/btop/themes"
 config_dir="$HOME/.config/btop"
 btop_config="$HOME/linux-stuff/Dotfiles/config/btop/btop.conf"
 
-mkdir -p "$themes_dir"
+sudo mkdir -p "$themes_dir"
 cd && git clone https://github.com/catppuccin/btop.git
-cd btop/themes && cp -v *.theme "$themes_dir"/
+cd btop/themes && sudo cp -v *.theme "$themes_dir"/
 cd && rm -rf btop
 
 # Copy over custom btop config file.
 mkdir -p "$config_dir" && cp -v "$btop_config" "$config_dir"/btop.conf
-
-# Edit btop config file with host user's username.
-sed -i "s/\$USER/$(whoami)/g" "$config_dir"/btop.conf
 
 # Copy the edited config file to other locations.
 
