@@ -386,3 +386,7 @@ sudo sed -i 's/#SystemMaxFileSize=/SystemMaxFileSize=20MB'/g /etc/systemd/journa
 paru -S pac-wrapper --noconfirm
 sudo chmod o+w /etc/environment && echo PAC_PACMAN=paru >> /etc/environment && sudo chmod o-w /etc/environment
 source /etc/environment
+
+# Install autoupdate to automatically update the OS during boot.
+paru -S autoupdate --noconfirm
+sudo sed -i 's/pacman/paru'/g /usr/lib/systemd/system/autoupdate.service
