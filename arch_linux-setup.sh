@@ -69,7 +69,8 @@ sudo sed -i 's/#SudoLoop/SudoLoop'/g /etc/paru.conf
 sudo sed -i 's/#UseAsk/UseAsk'/g /etc/paru.conf
 sudo sed -i 's/#CombinedUpgrade/CombinedUpgrade'/g /etc/paru.conf
 sudo sed -i 's/#CleanAfter/CleanAfter'/g /etc/paru.conf
-sudo sed -i '/#NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
+sudo sed -i 's/#NewsOnUpgrade/NewsOnUpgrade'/g /etc/paru.conf
+sudo sed -i '/NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
 sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 
 # Install Konsole color scheme.
