@@ -94,7 +94,7 @@ for service in "${services[@]}"; do
     vsv enable "$service"
 done
 
-# Disable and stop sshd
+# Disable and stop sshd. Not needed on a personal desktop PC/laptop.
 vsv disable sshd
 vsv stop sshd
 
@@ -112,7 +112,7 @@ chmod og-rwx /etc/cron.daily
 chmod og-rwx /etc/cron.hourly
 
 # Configure sysctl.conf
-cat <<EOF >> /etc/sysctl.conf
+cat << EOF >> /etc/sysctl.conf
 dev.tty.ldisc_autoload = 0
 fs.protected_fifos = 2
 fs.protected_regular = 2
