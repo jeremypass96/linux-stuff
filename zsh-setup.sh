@@ -12,7 +12,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-
 cp -v $HOME/linux-stuff/Dotfiles/.zshrc $HOME/.zshrc
 
 # Setup Catppuccin syntax highlighting colors
-cd "$HOME" || exit
+cd
 git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
 sudo mkdir -p /usr/local/etc/zsh
 sudo cp -v zsh-syntax-highlighting/themes/*.zsh /usr/local/etc/zsh
@@ -45,7 +45,7 @@ select scheme in "Latte" "Frappé" "Macchiato" "Mocha"; do
 done
 
 # Clean up and copy configurations for future users and root
-cd && rm -rf zsh-syntax-highlighting
+rm -rf zsh-syntax-highlighting
 sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 
