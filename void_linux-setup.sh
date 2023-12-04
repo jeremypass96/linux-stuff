@@ -46,19 +46,13 @@ vsv enable cups-browsed
 
 # Install fonts.
 echo "Installing fonts..."
-vpm install nerd-fonts google-fonts-ttf -y
+vpm install nerd-fonts font-util source-sans-pro font-manjari noto-fonts-ttf noto-fonts-emoji font-material-design-icons-ttf ttf-ubuntu-font-family fonts-roboto-ttf -y
 
 # Install the Poppins font.
 echo "Installing the Poppins font..."
 curl https://fonts.google.com/download?family=Poppins -o /home/$USER/Poppins.zip
 unzip /home/$USER/Poppins.zip -x OFL.txt -d /usr/share/fonts/Poppins
 rm -f /home/$USER/Poppins.zip
-
-# Install the Source Sans 3 font.
-echo "Installing the Source Sans 3 font..."
-curl https://fonts.google.com/download\?family\=Source+Sans+3 -o /home/$USER/Source_Sans_3.zip
-unzip /home/$USER/Source_Sans_3.zip -x README.txt OFL.txt SourceSans3-VariableFont_wght.ttf SourceSans3-Italic-VariableFont_wght.ttf -d /usr/share/fonts/SourceSansPro
-rm -f /home/$USER/Source_Sans_3.zip
 
 # Install KDE.
 echo "Installing the KDE desktop..."
