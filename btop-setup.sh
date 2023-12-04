@@ -1,24 +1,32 @@
 #!/bin/bash
-# This script sets up btop with Catppuccin color scheme and custom config file. Run as a normal user!
+# This script sets up btop with Catppuccin color scheme and custom config file.
+
+# Checking to see if we're running as root.
+if [ $(id -u) -ne 0 ]; then
+	echo "Please run this setup script as root via 'su'! Thanks."
+    exit
+fi
 
 # Setup Catppuccin theme for btop.
 themes_dir="/etc/btop/themes"
 config_dir="$HOME/.config/btop"
 btop_config="$HOME/linux-stuff/Dotfiles/config/btop/btop.conf"
 
-sudo mkdir -p "$themes_dir"
-cd && git clone https://github.com/catppuccin/btop.git
+mkdir -p "$themes_dir"
+cd $HOME && git clone https://github.com/catppuccin/btop.git
 cd btop/themes && sudo cp -v *.theme "$themes_dir"/
-cd && rm -rf btop
+cd $HOME && rm -rf btop
 
 # Copy over custom btop config file.
 mkdir -p "$config_dir" && cp -v "$btop_config" "$config_dir"/btop.conf
 
-# Copy the edited config file to other locations.
+# Set correct user ownership permissions.
+chown -R $USER:$USER "$config_dir"
 
-sudo mkdir -p /etc/skel/.config/btop
-sudo cp -v "$btop_config" /etc/skel/.config/btop/btop.conf
-sudo mkdir -p /root/.config/btop
-sudo cp -v "$btop_config" /root/.config/btop/btop.conf
+# Copy the edited config file to other locations.
+mkdir -p /etc/skel/.config/btop
+cp -v "$btop_config" /etc/skel/.config/btop/btop.conf
+mkdir -p /root/.config/btop
+cp -v "$btop_config" /root/.config/btop/btop.conf
 
 echo "btop has been configured with Catppuccin theme and custom config."
