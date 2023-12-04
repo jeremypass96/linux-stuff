@@ -160,7 +160,7 @@ paru -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kerne
 
 # Setup config files and stuff.
 cd linux-stuff/
-./bat-setup.sh
+sudo ./bat-setup.sh
 ./lsd-setup.sh
 ./micro-setup.sh
 sudo ./cleanup-systemd-boot.sh
