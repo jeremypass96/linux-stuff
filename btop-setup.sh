@@ -14,8 +14,8 @@ btop_config="$HOME/linux-stuff/Dotfiles/config/btop/btop.conf"
 
 mkdir -p "$themes_dir"
 cd $HOME && git clone https://github.com/catppuccin/btop.git
-cd btop/themes && sudo cp -v *.theme "$themes_dir"/
-cd $HOME && rm -rf btop
+cp -v $HOME/btop/themes/*.theme "$themes_dir"/
+rm -rf btop
 
 # Copy over custom btop config file.
 mkdir -p "$config_dir" && cp -v "$btop_config" "$config_dir"/btop.conf
