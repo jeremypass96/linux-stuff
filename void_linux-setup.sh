@@ -58,6 +58,19 @@ rm -f /home/$USER/Poppins.zip
 echo "Installing the KDE desktop..."
 vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers -y
 
+# Enable desktop services.
+declare -a services=("dbus" "cupsd" "NetworkManager" "elogind")
+for service in "${services[@]}"; do
+    ln -s "/etc/sv/$service" "/var/service/"
+    vsv enable "$service"
+done
+
+# Install and configure PipeWire.
+vpm install pipewire -y
+mkdir -p /etc/pipewire/pipewire.conf.d
+ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
+ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
+
 # Install Newaita icons.
 echo "Installing the Newaita icon theme..."
 cd && git clone https://github.com/cbrnix/Newaita.git
@@ -81,7 +94,7 @@ echo "Securing the OS..."
 sed -i 's/UMASK=0022/UMASK=0077/g' /etc/default/sysstat
 vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog audit acct -y
 
-# Enable services
+# Enable services.
 declare -a services=("puppet" "rsyslogd" "auditd" "ufw")
 for service in "${services[@]}"; do
     ln -s "/etc/sv/$service" "/var/service/"
