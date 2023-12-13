@@ -66,7 +66,7 @@ for service in "${services[@]}"; do
 done
 
 # Install and configure PipeWire.
-vpm install pipewire -y
+vpm install pipewire alsa-pipewire -y
 mkdir -p /etc/pipewire/pipewire.conf.d
 ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
 ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
