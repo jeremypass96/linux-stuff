@@ -344,9 +344,6 @@ sudo chmod o-w /usr/share/applications/bvnc.desktop
 sudo chmod o+w /usr/share/applications/avahi-discover.desktop
 echo Hidden=true >> /usr/share/applications/avahi-discover.desktop
 sudo chmod o-w /usr/share/applications/avahi-discover.desktop
-sudo chmod o+w /usr/share/applications/electron19.desktop
-echo Hidden=true >> /usr/share/applications/electron19.desktop
-sudo chmod o-w /usr/share/applications/electron19.desktop
 sudo chmod o+w /usr/share/applications/org.kde.kuserfeedback-console.desktop
 echo Hidden=true >> /usr/share/applications/org.kde.kuserfeedback-console.desktop
 sudo chmod o-w /usr/share/applications/org.kde.kuserfeedback-console.desktop
