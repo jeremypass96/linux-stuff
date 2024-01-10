@@ -10,7 +10,7 @@ fi
 # Setup Catppuccin theme for btop.
 themes_dir="/etc/btop/themes"
 config_dir="$HOME/.config/btop"
-btop_config="$HOME/linux-stuff/Dotfiles/config/btop/btop.conf"
+btop_config="/home/$USER/linux-stuff/Dotfiles/config/btop/btop.conf"
 
 mkdir -p "$themes_dir"
 cd $HOME && git clone https://github.com/catppuccin/btop.git

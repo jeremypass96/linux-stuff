@@ -96,10 +96,10 @@ echo "machine-role=personal" > /etc/lynis/custom.prf
 # Secure the OS.
 echo "Securing the OS..."
 sed -i 's/UMASK=0022/UMASK=0077/g' /etc/default/sysstat
-vpm install sysstat puppet rkhunter chkrootkit apparmor rsyslog audit acct -y
+vpm install sysstat rkhunter chkrootkit apparmor rsyslog audit acct -y
 
 # Enable services.
-declare -a services=("puppet" "rsyslogd" "auditd" "ufw")
+declare -a services=("rsyslogd" "auditd" "ufw")
 for service in "${services[@]}"; do
     ln -s "/etc/sv/$service" "/var/service/"
     vsv enable "$service"
@@ -166,6 +166,7 @@ cd && rm -rf konsole
 
 # Setup Catppuccin theme for btop.
 echo "Setting up Catppuccin theme for btop..."
+cd /home/$USER/linux-stuff/
 ./btop-setup.sh
 
 # Ask the user if they want to enable Flatpak support.
