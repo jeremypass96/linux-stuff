@@ -45,7 +45,7 @@ resp=${resp:-Y}
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
     echo "Enabling printer support..."
     echo "Installing CUPS..."
-    vpm install cups cups-pdf system-config-printer system-config-printer-udev -y
+    vpm install cups cups-filters cups-pdf system-config-printer system-config-printer-udev -y
     declare -a services=("cupsd" "cups-browsed")
     for service in "${services[@]}"; do
         ln -s "/etc/sv/$service" "/var/service/"
