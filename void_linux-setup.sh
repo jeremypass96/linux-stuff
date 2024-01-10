@@ -44,9 +44,15 @@ vpm install cups hplip -y
 vsv enable cupsd
 vsv enable cups-browsed
 
-# Install fonts.
+# Install and configure fonts.
 echo "Installing fonts..."
-vpm install nerd-fonts font-util source-sans-pro font-manjari noto-fonts-ttf noto-fonts-emoji font-material-design-icons-ttf ttf-ubuntu-font-family fonts-roboto-ttf -y
+vpm install nerd-fonts font-util source-sans-pro font-manjari noto-fonts-ttf noto-fonts-emoji font-material-design-icons-ttf ttf-ubuntu-font-family fonts-roboto-ttf ttfautohint -y
+# Enable auto-hinting.
+sudo ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
+# Enable RGB sub-pixel rendering.
+sudo ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+# Configure nerd fonts for "lsd".
+sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/
 
 # Install the Poppins font.
 echo "Installing the Poppins font..."
