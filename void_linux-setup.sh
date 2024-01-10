@@ -38,11 +38,30 @@ ln -s /etc/sv/elogind /var/service/
 echo "Installing misc. utilities..."
 vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g vsv void-updates void-release-keys fortune-mod-void -y
 
-# Enable printing support.
-echo "Enabling printing support..."
-vpm install cups hplip -y
-vsv enable cupsd
-vsv enable cups-browsed
+# Enable printer support.
+read -p "Do you want to enable printer support? (Y/n) " resp
+resp=${resp:-Y}
+
+if [ "$resp" = Y ] || [ "$resp" = y ]; then
+    echo "Enabling printer support..."
+    echo "Installing CUPS..."
+    vpm install cups cups-pdf system-config-printer system-config-printer-udev -y
+    declare -a services=("cupsd" "cups-browsed")
+    for service in "${services[@]}"; do
+        ln -s "/etc/sv/$service" "/var/service/"
+        vsv enable "$service"
+done
+
+read -p "Do you want to install HPLIP for HP printer support? (Y/n) " resp
+resp=${resp:-Y}
+if [ "$resp" = Y ] || [ "$resp" = y ]; then
+    vpm install hplip -y
+else
+    echo "Skipping HPLIP installation."
+fi
+else
+    echo "Skipping printer support."
+fi
 
 # Install and configure fonts.
 echo "Installing fonts..."
@@ -197,6 +216,17 @@ else
 fi
 else
     echo "Skipping Flatpak setup."
+fi
+
+# Ask the user if they want to install the Brave web browser.
+read -p "Do you want to isntall the Brave web browser? (Y/n) " resp
+resp=${resp:-Y}
+
+if [ "$resp" = Y ] || [ "$resp" = y ]; then
+    echo "Installing Brave..."
+    flatpak install -y com.brave.Browser
+else
+    echo "Skipping Brave browser installation."
 fi
 
 # Update environment variables.
