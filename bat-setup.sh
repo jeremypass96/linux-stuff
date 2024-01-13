@@ -52,16 +52,6 @@ sh -c 'mkdir -p "$(bat --config-dir)/themes"; cp *.tmTheme "$(bat --config-dir)/
 # Copy themes to /etc/skel.
 sudo sh -c 'mkdir -p /etc/skel/.config/bat/themes; cp *.tmTheme /etc/skel/.config/bat/themes'
 
-# Modify the configuration settings for root.
-sudo sed -i "s/#--theme=\"TwoDark\"/--theme=\"$selected_theme\"/g" "/root/.config/bat/config"
-sudo sed -i 's/#--italic-text=always/--italic-text=always/g' "/root/.config/bat/config"
-# Give temporary write access so we can apply the changes.
-sudo chmod o+w /root/.config/bat/config
-echo '--map-syntax "*.conf:INI"' >> "/root/.config/bat/config"
-echo '--map-syntax "config:INI"' >> "/root/.config/bat/config"
-# Remove permission for other users to write to this file.
-sudo chmod o-w /root/.config/bat/config
-
 # Copy themes to root's home directory.
 sudo sh -c 'mkdir -p /root/.config/bat/themes; cp *.tmTheme /root/.config/bat/themes; bat cache --build'
 
