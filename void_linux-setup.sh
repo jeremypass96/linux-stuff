@@ -199,10 +199,25 @@ read -p "Do you want to enable Flatpak support? (Y/n) " resp
 resp=${flatpak_resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo "Enabling flatpak support..."
+    echo "Enabling Flatpak support..."
     vpm install flatpak -y
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
+
+# Ask the user if they want to install the Brave web browser.
+read -p "Do you want to isntall the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
+resp=${resp:-Y}
+
+if [ "$resp" = Y ] || [ "$resp" = y ]; then
+    echo "Enabling Flatpak support..."
+    vpm install flatpak -y
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
+    echo "Installing Brave..."
+    flatpak install -y com.brave.Browser
+else
+    echo "Skipping Brave browser installation."
+fi
 
 # Ask the user if they want to install Pinta.
 read -p "Do you want to install the Pinta image editor? (Y/n) " resp
@@ -216,17 +231,6 @@ else
 fi
 else
     echo "Skipping Flatpak setup."
-fi
-
-# Ask the user if they want to install the Brave web browser.
-read -p "Do you want to isntall the Brave web browser? (Y/n) " resp
-resp=${resp:-Y}
-
-if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo "Installing Brave..."
-    flatpak install -y com.brave.Browser
-else
-    echo "Skipping Brave browser installation."
 fi
 
 # Update environment variables.
