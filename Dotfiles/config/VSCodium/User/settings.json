@@ -2,7 +2,6 @@
     "workbench.startupEditor": "newUntitledFile",
     "workbench.iconTheme": "catppuccin-mocha",
     "workbench.colorTheme": "Catppuccin Mocha",
-    "workbench.editor.untitled.hint": "hidden",
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.banner": "never",
     "security.workspace.trust.startupPrompt": "never",
@@ -13,7 +12,7 @@
     "files.hotExit": "off",
     "files.trimTrailingWhitespace": true,
     "audioCues.taskFailed": "on",
-    "editor.fontFamily": "JetBrainsMono Nerd Font Regular",
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "update.showReleaseNotes": false,
@@ -26,4 +25,6 @@
     "catppuccin.accentColor": "flamingo",
     "git.autofetch": true,
     "editor.cursorBlinking": "smooth",
+    "workbench.editor.empty.hint": "hidden",
+    "editor.smoothScrolling": true,
 }
