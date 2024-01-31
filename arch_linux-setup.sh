@@ -167,7 +167,7 @@ sudo ./cleanup-systemd-boot.sh
 
 # Configure Zsh.
 echo "Configuring Zsh..."
-paru -S oh-my-zsh-git oh-my-zsh-plugin-syntax-highlighting oh-my-zsh-plugin-autosuggestions --noconfirm
+paru -S oh-my-zsh-git --noconfirm
 cp -v /usr/share/oh-my-zsh/zshrc $HOME/.zshrc
 sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"gentoo"'/g $HOME/.zshrc
 sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' $HOME/.zshrc
@@ -177,6 +177,9 @@ sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' $HO
 sed -i 's/# DISABLE_UNTRACKED_FILES_DIRTY="true"/DISABLE_UNTRACKED_FILES_DIRTY="true"/g' $HOME/.zshrc
 sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' $HOME/.zshrc
 sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' $HOME/.zshrc
+export ZSH_CUSTOM=/usr/share/oh-my-zsh/custom
+sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
 echo "" >> $HOME/.zshrc
 echo "# Set the default umask." >> $HOME/.zshrc
 echo "umask 077" >> $HOME/.zshrc
