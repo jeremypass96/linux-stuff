@@ -177,9 +177,10 @@ sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' $HO
 sed -i 's/# DISABLE_UNTRACKED_FILES_DIRTY="true"/DISABLE_UNTRACKED_FILES_DIRTY="true"/g' $HOME/.zshrc
 sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' $HOME/.zshrc
 sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' $HOME/.zshrc
-export ZSH_CUSTOM=/usr/share/oh-my-zsh/custom
+ZSH_CUSTOM=/usr/share/oh-my-zsh/custom
 sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+unset ZSH_CUSTOM
 echo "" >> $HOME/.zshrc
 echo "# Set the default umask." >> $HOME/.zshrc
 echo "umask 077" >> $HOME/.zshrc
@@ -247,7 +248,7 @@ paru -S mkinitcpio-firmware --noconfirm
 
 # Stop mkinitcpio from generating a fallback kernel image.
 echo "Stopping mkinitcpio from generating a fallback kernel image..."
-if [ $(uname -r | grep arch) ]; then
+if [ $(uname -r | grep arch | awk -F "-" '{print $(NF)}') ]; then
 sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
 sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
@@ -255,7 +256,7 @@ sudo mkinitcpio -p linux
 sudo rm /boot/initramfs-linux-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-if [ $(uname -r | grep hardened) ]; then
+if [ $(uname -r | grep hardened | awk -F "-" '{print $(NF)}') ]; then
 sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-hardened.preset
 sudo sed -i 's|fallback_image="/boot/initramfs-linux-hardened-fallback.img"|#fallback_image="/boot/initramfs-linux-hardened-fallback.img"|g' /etc/mkinitcpio.d/linux-hardened.preset
 sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-hardened.preset
@@ -263,7 +264,7 @@ sudo mkinitcpio -p linux-hardened
 sudo rm /boot/initramfs-linux-hardened-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-if [ $(uname -r | grep lts) ]; then
+if [ $(uname -r | grep lts | awk -F "-" '{print $(NF)}') ]; then
 sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-lts.preset
 sudo sed -i 's|fallback_image="/boot/initramfs-linux-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-lts.preset
 sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-lts.preset
@@ -271,12 +272,28 @@ sudo mkinitcpio -p linux-lts
 sudo rm /boot/initramfs-linux-lts-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-if [ $(uname -r | grep zen) ]; then
+if [ $(uname -r | grep zen | awk -F "-" '{print $(NF)}') ]; then
 sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-zen.preset
 sudo sed -i 's|fallback_image="/boot/initramfs-linux-zen-fallback.img"|#fallback_image="/boot/initramfs-linux-zen-fallback.img"|g' /etc/mkinitcpio.d/linux-zen.preset
 sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-zen.preset
 sudo mkinitcpio -p linux-zen
 sudo rm /boot/initramfs-linux-zen-fallback.img
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ $(uname -r | grep realtime | awk -F "-" '{print $(NF)}') ]; then
+sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-rt.preset
+sudo sed -i 's|fallback_image="/boot/initramfs-linux-rt-fallback.img"|#fallback_image="/boot/initramfs-linux-rt-fallback.img"|g' /etc/mkinitcpio.d/linux-rt.preset
+sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-rt.preset
+sudo mkinitcpio -p linux-rt
+sudo rm /boot/initramfs-linux-rt-fallback.img
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ $(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}') ]; then
+sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-rt-lts.preset
+sudo sed -i 's|fallback_image="/boot/initramfs-linux-rt-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-rt-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-rt-lts.preset
+sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-rt-lts.preset
+sudo mkinitcpio -p linux-rt-lts
+sudo rm /boot/initramfs-linux-rt-lts-fallback.img
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
@@ -338,39 +355,28 @@ sudo systemctl enable --now apparmor
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
 
 # Hide menu entries.
-sudo chmod o+w /usr/share/applications/bssh.desktop
-echo Hidden=true >> /usr/share/applications/bssh.desktop
-sudo chmod o-w /usr/share/applications/bssh.desktop
-sudo chmod o+w /usr/share/applications/bvnc.desktop
-echo Hidden=true >> /usr/share/applications/bvnc.desktop
-sudo chmod o-w /usr/share/applications/bvnc.desktop
-sudo chmod o+w /usr/share/applications/avahi-discover.desktop
-echo Hidden=true >> /usr/share/applications/avahi-discover.desktop
-sudo chmod o-w /usr/share/applications/avahi-discover.desktop
-sudo chmod o+w /usr/share/applications/org.kde.kuserfeedback-console.desktop
-echo Hidden=true >> /usr/share/applications/org.kde.kuserfeedback-console.desktop
-sudo chmod o-w /usr/share/applications/org.kde.kuserfeedback-console.desktop
-sudo chmod o+w /usr/share/applications/qv4l2.desktop
-echo Hidden=true >> /usr/share/applications/qv4l2.desktop
-sudo chmod o-w /usr/share/applications/qv4l2.desktop
-sudo chmod o+w /usr/share/applications/qvidcap.desktop
-echo Hidden=true >> /usr/share/applications/qvidcap.desktop
-sudo chmod o-w /usr/share/applications/qvidcap.desktop
-sudo chmod o+w /usr/share/applications/gcdmaster.desktop
-echo Hidden=true >> /usr/share/applications/gcdmaster.desktop
-sudo chmod o-w /usr/share/applications/gcdmaster.desktop
-sudo chmod o+w /usr/share/applications/assistant.desktop
-echo Hidden=true >> /usr/share/applications/assistant.desktop
-sudo chmod o-w /usr/share/applications/assistant.desktop
-sudo chmod o+w /usr/share/applications/designer.desktop
-echo Hidden=true >> /usr/share/applications/designer.desktop
-sudo chmod o-w /usr/share/applications/designer.desktop
-sudo chmod o+w /usr/share/applications/linguist.desktop
-echo Hidden=true >> /usr/share/applications/linguist.desktop
-sudo chmod o-w /usr/share/applications/linguist.desktop
-sudo chmod o+w /usr/share/applications/qdbusviewer.desktop
-echo Hidden=true >> /usr/share/applications/qdbusviewer.desktop
-sudo chmod o-w /usr/share/applications/qdbusviewer.desktop
+cp /usr/share/applications/bssh.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/bssh.desktop
+cp /usr/share/applications/bvnc.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/bvnc.desktop
+cp /usr/share/applications/avahi-discover.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/avahi-discover.desktop
+cp /usr/share/applications/org.kde.kuserfeedback-console.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/org.kde.kuserfeedback-console.desktop
+cp /usr/share/applications/qv4l2.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/qv4l2.desktop
+cp /usr/share/applications/qvidcap.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/qvidcap.desktop
+cp /usr/share/applications/gcdmaster.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/gcdmaster.desktop
+cp /usr/share/applications/assistant.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/assistant.desktop
+cp /usr/share/applications/designer.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/designer.desktop
+cp /usr/share/applications/linguist.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/linguist.desktop
+cp /usr/share/applications/qdbusviewer.desktop ~/.local/share/applications
+echo Hidden=true >> ~/.local/share/applications/qdbusviewer.desktop
 
 # Setup Catppuccin theme for btop.
 ./btop-setup.sh

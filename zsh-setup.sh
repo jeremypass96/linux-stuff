@@ -5,8 +5,10 @@ sudo ZSH=/usr/share/oh-my-zsh sh -c "$(curl -fsSL https://raw.githubusercontent.
 chsh -s /usr/bin/zsh $USER
 
 # Clone and set up zsh-autosuggestions and zsh-syntax-highlighting plugins
-sudo git clone https://github.com/zsh-users/zsh-autosuggestions.git /usr/share/oh-my-zsh/custom/plugins/zsh-autosuggestions
-sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+ZSH_CUSTOM=/usr/share/oh-my-zsh/custom
+sudo git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+unset ZSH_CUSTOM
 
 # Copy .zshrc configuration
 cp -v $HOME/linux-stuff/Dotfiles/.zshrc $HOME/.zshrc
@@ -16,7 +18,6 @@ cd
 git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
 sudo mkdir -p /usr/local/etc/zsh
 sudo cp -v zsh-syntax-highlighting/themes/*.zsh /usr/local/etc/zsh
-sudo chown $USER:$USER /usr/local/etc/zsh/*.zsh
 
 # Choose Catppuccin color scheme for syntax highlighting
 echo "Choose Catppuccin colors for syntax highlighting:"
