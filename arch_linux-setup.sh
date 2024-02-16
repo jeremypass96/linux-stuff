@@ -355,27 +355,27 @@ sudo systemctl enable --now apparmor
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
 
 # Hide menu entries.
-cp /usr/share/applications/bssh.desktop ~/.local/share/applications
+mv /usr/share/applications/bssh.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/bssh.desktop
-cp /usr/share/applications/bvnc.desktop ~/.local/share/applications
+mv /usr/share/applications/bvnc.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/bvnc.desktop
-cp /usr/share/applications/avahi-discover.desktop ~/.local/share/applications
+mv /usr/share/applications/avahi-discover.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/avahi-discover.desktop
-cp /usr/share/applications/org.kde.kuserfeedback-console.desktop ~/.local/share/applications
+mv /usr/share/applications/org.kde.kuserfeedback-console.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/org.kde.kuserfeedback-console.desktop
-cp /usr/share/applications/qv4l2.desktop ~/.local/share/applications
+mv /usr/share/applications/qv4l2.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/qv4l2.desktop
-cp /usr/share/applications/qvidcap.desktop ~/.local/share/applications
+mv /usr/share/applications/qvidcap.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/qvidcap.desktop
-cp /usr/share/applications/gcdmaster.desktop ~/.local/share/applications
+mv /usr/share/applications/gcdmaster.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/gcdmaster.desktop
-cp /usr/share/applications/assistant.desktop ~/.local/share/applications
+mv /usr/share/applications/assistant.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/assistant.desktop
-cp /usr/share/applications/designer.desktop ~/.local/share/applications
+mv /usr/share/applications/designer.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/designer.desktop
-cp /usr/share/applications/linguist.desktop ~/.local/share/applications
+mv /usr/share/applications/linguist.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/linguist.desktop
-cp /usr/share/applications/qdbusviewer.desktop ~/.local/share/applications
+mv /usr/share/applications/qdbusviewer.desktop ~/.local/share/applications
 echo Hidden=true >> ~/.local/share/applications/qdbusviewer.desktop
 
 # Setup Catppuccin theme for btop.
