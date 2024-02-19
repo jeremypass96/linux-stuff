@@ -86,7 +86,7 @@ sudo systemctl enable --now cups cups-browsed
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
 paru -S desktop-privileges --noconfirm
 
-# Install hardware dection tool for mkinitcpio.
+# Install hardware detection tool for mkinitcpio.
 sudo pacman -S hwdetect --noconfirm
 
 # Install NTFS filesystem driver.
