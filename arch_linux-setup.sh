@@ -355,28 +355,36 @@ sudo systemctl enable --now apparmor
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
 
 # Hide menu entries.
-mv /usr/share/applications/bssh.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/bssh.desktop
-mv /usr/share/applications/bvnc.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/bvnc.desktop
-mv /usr/share/applications/avahi-discover.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/avahi-discover.desktop
-mv /usr/share/applications/org.kde.kuserfeedback-console.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/org.kde.kuserfeedback-console.desktop
-mv /usr/share/applications/qv4l2.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/qv4l2.desktop
-mv /usr/share/applications/qvidcap.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/qvidcap.desktop
-mv /usr/share/applications/gcdmaster.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/gcdmaster.desktop
-mv /usr/share/applications/assistant.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/assistant.desktop
-mv /usr/share/applications/designer.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/designer.desktop
-mv /usr/share/applications/linguist.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/linguist.desktop
-mv /usr/share/applications/qdbusviewer.desktop ~/.local/share/applications
-echo Hidden=true >> ~/.local/share/applications/qdbusviewer.desktop
+sudo chmod o+w /usr/share/applications/bssh.desktop
+echo Hidden=true >> /usr/share/applications/bssh.desktop
+sudo chmod o-w /usr/share/applications/bssh.desktop
+sudo chmod o+w /usr/share/applications/bvnc.desktop
+echo Hidden=true >> /usr/share/applications/bvnc.desktop
+sudo chmod o-w /usr/share/applications/bvnc.desktop
+sudo chmod o+w /usr/share/applications/avahi-discover.desktop
+echo Hidden=true >> /usr/share/applications/avahi-discover.desktop
+sudo chmod o-w /usr/share/applications/avahi-discover.desktop
+sudo chmod o+w /usr/share/applications/org.kde.kuserfeedback-console.desktop
+echo Hidden=true >> /usr/share/applications/org.kde.kuserfeedback-console.desktop
+sudo chmod o-w /usr/share/applications/org.kde.kuserfeedback-console.desktop
+sudo chmod o+w /usr/share/applications/qv4l2.desktop
+echo Hidden=true >> /usr/share/applications/qv4l2.desktop
+sudo chmod o-w /usr/share/applications/qv4l2.desktop
+sudo chmod o+w /usr/share/applications/qvidcap.desktop
+echo Hidden=true >> /usr/share/applications/qvidcap.desktop
+sudo chmod o-w /usr/share/applications/qvidcap.desktop
+sudo chmod o+w /usr/share/applications/gcdmaster.desktop
+echo Hidden=true >> /usr/share/applications/gcdmaster.desktop
+sudo chmod o-w /usr/share/applications/gcdmaster.desktop
+sudo chmod o+w /usr/share/applications/designer.desktop
+echo Hidden=true >> /usr/share/applications/designer.desktop
+sudo chmod o-w /usr/share/applications/designer.desktop
+sudo chmod o+w /usr/share/applications/linguist.desktop
+echo Hidden=true >> /usr/share/applications/linguist.desktop
+sudo chmod o-w /usr/share/applications/linguist.desktop
+sudo chmod o+w /usr/share/applications/qdbusviewer.desktop
+echo Hidden=true >> /usr/share/applications/qdbusviewer.desktop
+sudo chmod o-w /usr/share/applications/qdbusviewer.desktop
 
 # Setup Catppuccin theme for btop.
 ./btop-setup.sh
