@@ -22,7 +22,7 @@
             "statusBar.foreground": "accent"
         }
     },
-    "catppuccin.accentColor": "flamingo",
+    "catppuccin.accentColor": "lavender",
     "git.autofetch": true,
     "editor.cursorBlinking": "smooth",
     "workbench.editor.empty.hint": "hidden",
