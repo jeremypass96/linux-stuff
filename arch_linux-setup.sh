@@ -355,36 +355,33 @@ sudo systemctl enable --now apparmor
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
 
 # Hide menu entries.
-sudo chmod o+w /usr/share/applications/bssh.desktop
-echo Hidden=true >> /usr/share/applications/bssh.desktop
-sudo chmod o-w /usr/share/applications/bssh.desktop
-sudo chmod o+w /usr/share/applications/bvnc.desktop
-echo Hidden=true >> /usr/share/applications/bvnc.desktop
-sudo chmod o-w /usr/share/applications/bvnc.desktop
-sudo chmod o+w /usr/share/applications/avahi-discover.desktop
-echo Hidden=true >> /usr/share/applications/avahi-discover.desktop
-sudo chmod o-w /usr/share/applications/avahi-discover.desktop
-sudo chmod o+w /usr/share/applications/org.kde.kuserfeedback-console.desktop
-echo Hidden=true >> /usr/share/applications/org.kde.kuserfeedback-console.desktop
-sudo chmod o-w /usr/share/applications/org.kde.kuserfeedback-console.desktop
-sudo chmod o+w /usr/share/applications/qv4l2.desktop
-echo Hidden=true >> /usr/share/applications/qv4l2.desktop
-sudo chmod o-w /usr/share/applications/qv4l2.desktop
-sudo chmod o+w /usr/share/applications/qvidcap.desktop
-echo Hidden=true >> /usr/share/applications/qvidcap.desktop
-sudo chmod o-w /usr/share/applications/qvidcap.desktop
-sudo chmod o+w /usr/share/applications/gcdmaster.desktop
-echo Hidden=true >> /usr/share/applications/gcdmaster.desktop
-sudo chmod o-w /usr/share/applications/gcdmaster.desktop
-sudo chmod o+w /usr/share/applications/designer.desktop
-echo Hidden=true >> /usr/share/applications/designer.desktop
-sudo chmod o-w /usr/share/applications/designer.desktop
-sudo chmod o+w /usr/share/applications/linguist.desktop
-echo Hidden=true >> /usr/share/applications/linguist.desktop
-sudo chmod o-w /usr/share/applications/linguist.desktop
-sudo chmod o+w /usr/share/applications/qdbusviewer.desktop
-echo Hidden=true >> /usr/share/applications/qdbusviewer.desktop
-sudo chmod o-w /usr/share/applications/qdbusviewer.desktop
+####################
+# Define the source directory
+source_dir=/usr/share/applications/
+
+# List of files to modify
+files=(
+  "bssh.desktop"
+  "bvnc.desktop"
+  "avahi-discover.desktop"
+  "org.kde.kuserfeedback-console.desktop"
+  "qv4l2.desktop"
+  "qvidcap.desktop"
+  "gcdmaster.desktop"
+  "designer.desktop"
+  "linguist.desktop"
+  "qdbusviewer.desktop"
+)
+
+# Add "Hidden=true" to the end of each file
+for file in "${files[@]}"
+do
+  echo "Hidden=true" | sudo tee -a "$source_dir$file" > /dev/null
+  echo "Added 'Hidden=true' to $file"
+done
+
+echo "All files updated."
+####################
 
 # Setup Catppuccin theme for btop.
 ./btop-setup.sh
