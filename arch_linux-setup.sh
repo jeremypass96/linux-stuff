@@ -181,6 +181,15 @@ ZSH_CUSTOM=/usr/share/oh-my-zsh/custom
 sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
 unset ZSH_CUSTOM
+sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-autosuggestions
+sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-autosuggestions/*.zsh
+sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+sudo chmod -R 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/docs
+sudo chmod -R 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/highlighters
+sudo chmod -R 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/images
+sudo chmod -R 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/tests
+sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/*.zsh
+sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.*
 echo "" >> $HOME/.zshrc
 echo "# Set the default umask." >> $HOME/.zshrc
 echo "umask 077" >> $HOME/.zshrc
