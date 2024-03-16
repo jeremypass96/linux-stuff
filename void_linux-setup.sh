@@ -109,7 +109,6 @@ echo "Installing the GRUB theme..."
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && ./install.sh -t stylish
 echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
-update-grub
 cd && rm -rf grub2-themes
 
 # Configure lynis.
@@ -203,7 +202,7 @@ if [ "$resp" = Y ] || [ "$resp" = y ]; then
     flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
 
 # Ask the user if they want to install the Brave web browser.
-read -p "Do you want to isntall the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
+read -p "Do you want to install the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
