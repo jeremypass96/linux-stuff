@@ -28,11 +28,10 @@ xbps-install -S vpm -y
 # Install Xorg server.
 echo "Installing Xorg server..."
 vpm install xorg-minimal xorg-input-drivers xorg-video-drivers xorg-fonts dbus-elogind dbus-elogind-x11 -y
-ln -s /etc/sv/elogind /var/service/
 
 # Install misc. utilities.
 echo "Installing misc. utilities..."
-vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g vsv void-updates void-release-keys fortune-mod-void unzip wl-clipboard -y
+vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g void-updates void-release-keys fortune-mod-void unzip wl-clipboard -y
 
 clear
 
@@ -47,7 +46,6 @@ if [ "$resp" = Y ] || [ "$resp" = y ]; then
     declare -a services=("cupsd" "cups-browsed")
     for service in "${services[@]}"; do
         ln -s "/etc/sv/$service" "/var/service/"
-        vsv enable "$service"
 done
 
 read -p "Do you want to install HPLIP for HP printer support? (Y/n) " resp
@@ -65,16 +63,16 @@ fi
 echo "Installing fonts..."
 vpm install nerd-fonts font-util source-sans-pro font-manjari noto-fonts-ttf noto-fonts-emoji font-material-design-icons-ttf ttf-ubuntu-font-family fonts-roboto-ttf ttfautohint -y
 # Enable auto-hinting.
-sudo ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
+ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
 # Enable RGB sub-pixel rendering.
-sudo ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 # Configure nerd fonts for "lsd".
-sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/
+ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/
 
 # Install the Poppins font.
 echo "Installing the Poppins font..."
 curl https://fonts.google.com/download?family=Poppins -o /home/$USER/Poppins.zip
-sudo unzip /home/$USER/Poppins.zip -x OFL.txt -d /usr/share/fonts/Poppins
+unzip /home/$USER/Poppins.zip -x OFL.txt -d /usr/share/fonts/Poppins
 rm -f /home/$USER/Poppins.zip
 
 # Install KDE.
@@ -85,7 +83,6 @@ vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-des
 declare -a services=("dbus" "NetworkManager" "elogind")
 for service in "${services[@]}"; do
     ln -s "/etc/sv/$service" "/var/service/"
-    vsv enable "$service"
 done
 
 # Install and configure PipeWire.
@@ -124,7 +121,6 @@ vpm install sysstat rkhunter chkrootkit apparmor rsyslog audit acct -y
 declare -a services=("rsyslogd" "auditd" "ufw")
 for service in "${services[@]}"; do
     ln -s "/etc/sv/$service" "/var/service/"
-    vsv enable "$service"
 done
 
 # Disable and stop sshd. Not needed on a personal desktop PC/laptop.
