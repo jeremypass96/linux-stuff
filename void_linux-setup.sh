@@ -17,10 +17,6 @@ sed -i 's/#bestmatching=true/bestmatching=true/g' /usr/share/xbps.d/xbps.conf
 echo "Adding nonfree repo to system..."
 xbps-install -S void-repo-nonfree -y
 
-# Add multilib repos.
-echo "Adding multilib repos to system..."
-xbps-install -S void-repo-multilib void-repo-multilib-nonfree -y
-
 # Update OS.
 echo "Updating OS packages..."
 xbps-install -Suvy
@@ -37,6 +33,8 @@ ln -s /etc/sv/elogind /var/service/
 # Install misc. utilities.
 echo "Installing misc. utilities..."
 vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g vsv void-updates void-release-keys fortune-mod-void -y
+
+clear
 
 # Enable printer support.
 read -p "Do you want to enable printer support? (Y/n) " resp
@@ -84,7 +82,7 @@ echo "Installing the KDE desktop..."
 vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers -y
 
 # Enable desktop services.
-declare -a services=("dbus" "cupsd" "NetworkManager" "elogind")
+declare -a services=("dbus" "NetworkManager" "elogind")
 for service in "${services[@]}"; do
     ln -s "/etc/sv/$service" "/var/service/"
     vsv enable "$service"
