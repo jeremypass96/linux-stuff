@@ -76,6 +76,6 @@ sudo cp -v /etc/skel/.zshrc /root/.zshrc
 echo pfetch >> $HOME/.zshrc
 
 # Change root's shell.
-chsh -s /usr/bin/zsh root
+sudo chsh -s /usr/bin/zsh root
 
 echo "Zsh and related configurations have been set up with the chosen Catppuccin syntax highlighting."
