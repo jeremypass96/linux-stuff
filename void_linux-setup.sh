@@ -32,7 +32,7 @@ ln -s /etc/sv/elogind /var/service/
 
 # Install misc. utilities.
 echo "Installing misc. utilities..."
-vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g vsv void-updates void-release-keys fortune-mod-void unzip -y
+vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g vsv void-updates void-release-keys fortune-mod-void unzip wl-clipboard -y
 
 clear
 
