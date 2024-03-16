@@ -74,7 +74,7 @@ sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts
 # Install the Poppins font.
 echo "Installing the Poppins font..."
 curl https://fonts.google.com/download?family=Poppins -o /home/$USER/Poppins.zip
-unzip /home/$USER/Poppins.zip -x OFL.txt -d /usr/share/fonts/Poppins
+sudo unzip /home/$USER/Poppins.zip -x OFL.txt -d /usr/share/fonts/Poppins
 rm -f /home/$USER/Poppins.zip
 
 # Install KDE.
