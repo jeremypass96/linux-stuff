@@ -183,7 +183,7 @@ echo "Downloading Konsole colors..."
 mkdir -p /home/$USER/.local/share/konsole/
 cd && git clone https://github.com/catppuccin/konsole.git
 cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
-chown $USER:$USER /home/$USER/.local/share/konsole/*.colorscheme
+chown -R $USER:$USER /home/$USER/.local
 cd && rm -rf konsole
 
 # Setup Catppuccin theme for btop.
