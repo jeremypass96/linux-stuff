@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_DIR=$USER_HOME/.config/micro
+CONFIG_DIR=$HOME/.config/micro
 COLOR_SCHEMES=("Catppuccin Latte" "Catppuccin Frappé" "Catppuccin Macchiato" "Catppuccin Mocha")
 SCHEME_NAMES=("catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha")
 
