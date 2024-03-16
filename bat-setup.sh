@@ -10,20 +10,20 @@ read -p "Enter the number of your choice: " theme_choice
 
 case $theme_choice in
     1)
-        selected_theme="Catppuccin-latte"
+        selected_theme="Catppuccin Latte"
         ;;
     2)
-        selected_theme="Catppuccin-frappe"
+        selected_theme="Catppuccin Frappe"
         ;;
     3)
-        selected_theme="Catppuccin-macchiato"
+        selected_theme="Catppuccin Macchiato"
         ;;
     4)
-        selected_theme="Catppuccin-mocha"
+        selected_theme="Catppuccin Mocha"
         ;;
     *)
         echo "Invalid choice. Defaulting to 'Mocha' theme."
-        selected_theme="Catppuccin-mocha"
+        selected_theme="Catppuccin Mocha"
         ;;
 esac
 
@@ -46,7 +46,7 @@ sudo cp -v $HOME/.config/bat/config /root/.config/bat/
 
 # Setup the Catppuccin theme for bat.
 cd $HOME
-git clone https://github.com/catppuccin/bat.git && cd bat
+git clone https://github.com/catppuccin/bat.git && cd bat/themes
 sh -c 'mkdir -p $(bat --config-dir)/themes; cp *.tmTheme $(bat --config-dir)/themes; bat cache --build'
 
 # Copy themes to /etc/skel.
@@ -56,5 +56,6 @@ sudo sh -c 'mkdir -p /etc/skel/.config/bat/themes; cp *.tmTheme /etc/skel/.confi
 sudo sh -c 'mkdir -p /root/.config/bat/themes; cp *.tmTheme /root/.config/bat/themes; bat cache --build'
 
 echo "Bat syntax highlighter has been configured with the selected theme ($selected_theme) for both your user and root."
+cd $HOME
 rm -rf $HOME/bat
 sudo rm -rf /root/bat
