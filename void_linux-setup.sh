@@ -124,8 +124,9 @@ for service in "${services[@]}"; do
 done
 
 # Disable and stop sshd. Not needed on a personal desktop PC/laptop.
-vsv disable sshd
-vsv stop sshd
+sv down sshd
+rm /var/service/sshd
+touch /etc/sv/sshd/down
 
 # Enable process accounting.
 echo "Enabling process accounting..."

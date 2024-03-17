@@ -56,11 +56,21 @@ sudo ./cleanup-systemd-boot.sh
 
 # Setup other stuff.
 sudo ln -s /usr/bin/batcat /usr/bin/bat && ./bat-setup.sh
-./btop-setup.sh
+sudo ./btop-setup.sh
+sudo ./wallpapers.sh
 ./lsd-setup.sh
 ./micro-setup.sh
+./bat-setup.sh
+./zsh-setup.sh
 
 # Install Brave web browser.
 sudo nala install curl && sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 sudo nala update && sudo nala install brave-browser -y
+
+# Install grub theme.
+echo "Installing the GRUB theme..."
+cd && git clone https://github.com/vinceliuice/grub2-themes.git
+cd grub2-themes && sudo ./install.sh -t stylish
+sudo echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
+cd && rm -rf grub2-themes
