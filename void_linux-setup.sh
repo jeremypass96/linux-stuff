@@ -236,4 +236,7 @@ echo "EDITOR=micro" >> /etc/environment
 # Set MICRO_TRUECOLOR variable.
 echo "MICRO_TRUECOLOR=1" >> /etc/environment
 
+# Download wallpapers.
+./wallpapers.sh
+
 echo "Void Linux post-install setup complete."

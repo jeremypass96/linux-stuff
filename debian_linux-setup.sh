@@ -34,7 +34,7 @@ sudo nala upgrade
 clear
 
 # Install some useful software.
-sudo nala install audacity vlc git fd-find bat lsd micro btop -y
+sudo nala install audacity vlc fd-find bat lsd micro btop -y
 
 clear
 
