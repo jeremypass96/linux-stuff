@@ -37,7 +37,7 @@ copy_settings_and_colors() {
     rm -rf micro/
 
     # Install micro plugins
-    micro -plugin install quoter wc
+    micro -plugin install quoter wc detectindent aspell
 
     # Update color scheme in settings
     sed -i "s/\"colorscheme\": \"[^\"]*\"/\"colorscheme\": \"$selected_scheme\"/" $CONFIG_DIR/settings.json
