@@ -72,5 +72,12 @@ sudo nala update && sudo nala install brave-browser -y
 echo "Installing the GRUB theme..."
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && sudo ./install.sh -t stylish
-sudo echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
+sudo chmod o+w /etc/default/grub
+echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
+sudo chmod o-w /etc/default/grub
 cd && rm -rf grub2-themes
+
+# Enable GRUB_DISABLE_RECOVERY in /etc/default/grub.
+sudo chmod o+w /etc/default/grub
+sudo sed -i s/#GRUB_DISABLE_RECOVERY/GRUB_DISABLE_RECOVERY/g /etc/default/grub
+sudo chmod o-w /etc/default/grub
