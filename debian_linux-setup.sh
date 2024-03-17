@@ -49,6 +49,12 @@ clear
 # Install and setup Zsh.
 nala install zsh -y && ./zsh-setup.sh
 
+# Install pfetch.
+sudo nala install git gcc make automake autoconf libtool -y
+git clone https://github.com/dylanaraps/pfetch.git && cd pfetch
+sudo make install
+cd && rm -rf pfetch
+
 clear
 
 # Cleanup systemd boot.
@@ -81,3 +87,17 @@ cd && rm -rf grub2-themes
 sudo chmod o+w /etc/default/grub
 sudo sed -i s/#GRUB_DISABLE_RECOVERY/GRUB_DISABLE_RECOVERY/g /etc/default/grub
 sudo chmod o-w /etc/default/grub
+
+# Update environment variables.
+# Enable write permissions.
+sudo chmod o+w /etc/environment
+# Configure pfetch.
+echo "PF_INFO=\"ascii os kernel uptime pkgs shell editor de\"" >> /etc/environment
+# Set BROWSER variable.
+echo "BROWSER=brave" >> /etc/environment
+# Set EDITOR variable.
+echo "EDITOR=micro" >> /etc/environment
+# Set MICRO_TRUECOLOR variable.
+echo "MICRO_TRUECOLOR=1" >> /etc/environment
+# Remove write permissions.
+sudo chmod o-w /etc/environment
