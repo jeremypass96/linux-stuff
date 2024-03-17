@@ -229,7 +229,7 @@ fi
 
 # Update environment variables.
 # Configure pfetch.
-echo "PF_INFO='\"ascii os kernel uptime pkgs shell editor de\"'" >> /etc/environment
+echo "PF_INFO=\"ascii os kernel uptime pkgs shell editor de\"" >> /etc/environment
 # Set BROWSER variable.
 echo "BROWSER=brave" >> /etc/environment
 # Set EDITOR variable.
