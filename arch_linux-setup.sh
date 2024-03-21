@@ -414,7 +414,7 @@ sudo sed -i 's/pacman/paru'/g /usr/lib/systemd/system/autoupdate.service
 
 # Install and enable orphan-manager, a Systemd timer to automatically remove orphaned packages.
 paru -S orphan-manager
-sudo systemctl enable orphan-manager.timer --now
+sudo systemctl enable --now orphan-manager.timer
 
 # Add script to system to automatically purge .pacnew files.
 sudo ./purge_pacnew.sh
