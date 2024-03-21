@@ -411,3 +411,10 @@ source /etc/environment
 # Install autoupdate to automatically update the OS during boot.
 paru -S autoupdate --noconfirm
 sudo sed -i 's/pacman/paru'/g /usr/lib/systemd/system/autoupdate.service
+
+# Install and enable orphan-manager, a Systemd timer to automatically remove orphaned packages.
+paru -S orphan-manager
+sudo systemctl enable orphan-manager.timer --now
+
+# Add script to system to automatically purge .pacnew files.
+sudo ./purge_pacnew.sh
