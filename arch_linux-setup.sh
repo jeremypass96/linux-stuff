@@ -77,7 +77,7 @@ sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 paru -S catppuccin-konsole-theme-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
-paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git plasma-splash-arch-moe kvantum kvantum-qt5 qt5ct  --noconfirm
+paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git kvantum kvantum-qt5 qt5ct  --noconfirm
 
 # Install and configure printing support.
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
