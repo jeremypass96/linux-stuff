@@ -77,7 +77,7 @@ sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 paru -S catppuccin-konsole-theme-git --noconfirm
 
 # Install icon, cursor, and KDE theme.
-paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git plasma-splash-arch-moe kvantum --noconfirm
+paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git plasma-splash-arch-moe kvantum kvantum-qt5 qt5ct  --noconfirm
 
 # Install and configure printing support.
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
@@ -245,10 +245,12 @@ echo PF_INFO='"ascii os kernel uptime pkgs shell editor de"' >> /etc/environment
 echo BROWSER=brave >> /etc/environment
 # Set EDITOR variable.
 echo EDITOR=micro >> /etc/environment
-# Set MICRO_TRUECOLOR variable.
+# Set MICRO_TRUECOLOR variable to 1 to enable truecolor support for the micro text editor.
 echo MICRO_TRUECOLOR=1 >> /etc/environment
 # Enable VSCodium to use QT file dialogs by default instead of GTK.
 echo GTK_USE_PORTAL=1 >> /etc/environment
+# Enable QT5 apps to use Kvantum theming engine.
+echo QT_QPA_PLATFORMTHEME=qt5ct >> /etc/environment
 # Remove permission for other users to write to this file.
 sudo chmod o-w /etc/environment
 
