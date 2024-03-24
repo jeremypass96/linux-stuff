@@ -17,9 +17,7 @@ echo '#!/bin/bash
 PACNEW_DIR="/etc"
 
 # Remove all .pacnew files
-find "$PACNEW_DIR" -name "*.pacnew" -type f -exec rm -f {} \;
-
-echo "All .pacnew files have been purged."' | tee "$DEST_DIR/purge_pacnew.sh" > /dev/null
+find "$PACNEW_DIR" -name "*.pacnew" -type f -exec rm -f {} \;' | tee "$DEST_DIR/purge_pacnew.sh" > /dev/null
 
 # Content of purge_pacnew.hook
 echo '[Trigger]
