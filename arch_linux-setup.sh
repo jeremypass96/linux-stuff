@@ -415,8 +415,28 @@ paru -S autoupdate --noconfirm
 sudo sed -i 's/pacman/paru'/g /usr/lib/systemd/system/autoupdate.service
 
 # Install and enable orphan-manager, a Systemd timer to automatically remove orphaned packages.
-paru -S orphan-manager
+paru -S orphan-manager --noconfirm
 sudo systemctl enable --now orphan-manager.timer
 
 # Add script to system to automatically purge .pacnew files.
 sudo ./purge_pacnew.sh
+
+# Colorize make.
+paru -S colormake --noconfirm
+
+# Install and configure cope-git.
+paru -S perl-app-cope --noconfirm
+
+# Make /etc/profile.d shell scripts for correct path.
+sudo touch /etc/profile.d/cope.csh
+sudo chmod o+w /etc/profile.d/cope.csh
+echo 'setenv PATH "${PATH}:/usr/share/perl5/vendor_perl/auto/share/dist/App-Cope"' >> /etc/profile.d/cope.csh
+sudo chmod o-w /etc/profile.d/cope.csh
+sudo chmod 644 /etc/profile.d/cope.csh
+
+sudo touch /etc/profile.d/cope.sh
+sudo chmod o+w /etc/profile.d/cope.sh
+echo "append_path '/usr/share/perl5/vendor_perl/auto/share/dist/App-Cope'
+export PATH" >> /etc/profile.d/cope.sh
+sudo chmod o-w /etc/profile.d/cope.sh
+sudo chmod 644 /etc/profile.d/cope.sh
