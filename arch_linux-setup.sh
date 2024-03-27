@@ -1,4 +1,4 @@
-#!/bin/bash
+F#!/bin/bash
 # This script cleans up and configures an Arch Linux KDE install that was installed with "archinstall." Run as a normal user!
 
 # Audio buzz/hum fix.
@@ -84,7 +84,7 @@ paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper guten
 sudo systemctl enable --now cups cups-browsed
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
-paru -S desktop-privileges --noconfirm
+paru -S desktop-privileges-nogroups --noconfirm
 
 # Install hardware detection tool for mkinitcpio.
 sudo pacman -S hwdetect --noconfirm
