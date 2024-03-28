@@ -39,7 +39,7 @@ sudo systemctl enable --now chronyd && sudo systemctl enable --now chrony-wait
 sudo chronyc online
 
 # Remove unneeded packages.
-sudo pacman -Rsu nano vim htop kate --noconfirm
+sudo pacman -Rsu nano htop kate --noconfirm
 
 # Install ffmpegthumbs, for video file thumbnail support in Dolphin.
 sudo pacman -S ffmpegthumbs --noconfirm
