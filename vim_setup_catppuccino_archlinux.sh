@@ -14,6 +14,8 @@ cat << EOF >> $vimrc_path
 set number
 set cursorline
 set linebreak
+set incsearch
+set hlsearch
 set spell
 set smoothscroll
 set termguicolors
