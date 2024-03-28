@@ -9,7 +9,7 @@ paru -S vim-lightline-git vim-plug --noconfirm
 
 # Configure the vimrc file.
 vimrc_path=/etc/vimrc
-sudo chmod +x $vimrc_path
+sudo chmod o+x $vimrc_path
 cat << EOF >> $vimrc_path
 set number
 set cursorline
