@@ -129,8 +129,8 @@ paru -S wine-installer wine-gecko wine-mono --noconfirm
 # Install some useful software.
 sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip clipgrab partitionmanager --noconfirm
 
-# Install balenaEtcher (command-line version) to write OS images to USB flash drives.
-paru -S etcher-cli-bin --noconfirm
+# Install balenaEtcher to write OS images to USB flash drives.
+paru -S etcher-bin --noconfirm
 
 # Install VirtualBox.
 sudo pacman -S virtualbox virtualbox-guest-iso --noconfirm
