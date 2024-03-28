@@ -1,4 +1,4 @@
-F#!/bin/bash
+#!/bin/bash
 # This script cleans up and configures an Arch Linux KDE install that was installed with "archinstall." Run as a normal user!
 
 # Audio buzz/hum fix.
