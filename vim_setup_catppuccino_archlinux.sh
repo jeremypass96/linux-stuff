@@ -4,8 +4,8 @@
 # Install Vim.
 sudo pacman -S vim --noconfirm
 
-# Install lightline plugin manager and vim-plug.
-paru -S vim-lightline-git vim-plug --noconfirm
+# Install the Lightline plugin manager, vim-plug, and colorschemes.
+paru -S vim-lightline-git vim-plug vim-colors-night-git --noconfirm
 
 # Configure the vimrc file.
 vimrc_path=/etc/vimrc
@@ -21,10 +21,11 @@ set smoothscroll
 set termguicolors
 
 let g:lightline = {'colorscheme': 'catppuccin_mocha'}
+colorscheme catppuccin_mocha
 set laststatus=2
 set noshowmode
 EOF
 chmod o-x $vimrc_path
 
-# Install Catppuccin colors plugin.
+# Install the Lightline plugin.
 sudo vim -es -u $vimrc_path -i NONE -c "PlugInstall" -c "qa"
