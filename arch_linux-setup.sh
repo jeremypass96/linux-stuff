@@ -74,7 +74,18 @@ sudo sed -i '/NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
 sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 
 # Install Konsole color scheme.
-paru -S catppuccin-konsole-theme-git --noconfirm
+read -p "Which Konsole colorscheme do you want?
+1. Catppuccin
+2. OneHalf-Dark
+-> " $resp
+if [ "$resp" = 1 ]; then
+	paru -S catppuccin-konsole-theme-git --noconfirm
+fi
+if [ "$resp" = 2 ]; then
+	wget https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
+	sudo mv onehalf-dark.colorscheme /usr/share/konsole
+	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
+fi
 
 # Install icon, cursor, and KDE theme.
 paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git kvantum kvantum-qt5 qt5ct  --noconfirm
@@ -162,7 +173,6 @@ paru -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kerne
 cd linux-stuff/
 sudo ./bat-setup.sh
 ./lsd-setup.sh
-./micro-setup.sh
 sudo ./cleanup-systemd-boot.sh
 
 # Configure Zsh.
@@ -215,18 +225,22 @@ read -p "Which Catppuccin colors do you want for Zsh syntax highlighting?
 2.) Frappé
 3.) Macchiato
 4.) Mocha
+
+0.) None.
 -> " resp
 if [ "$resp" = 1 ]; then
-echo "source /etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+	echo "source /etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
 fi
 if [ "$resp" = 2 ]; then
-echo "source /etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+	echo "source /etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
 fi
 if [ "$resp" = 3 ]; then
-echo "source /etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+	echo "source /etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
 fi
 if [ "$resp" = 4 ]; then
-echo "source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+	echo "source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+if [ "$rest" = 0 ]; then
+	continue
 fi
 rm -rf zsh-syntax-highlighting
 sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
@@ -440,3 +454,19 @@ echo "append_path '/usr/share/perl5/vendor_perl/auto/share/dist/App-Cope'
 export PATH" >> /etc/profile.d/cope.sh
 sudo chmod o-w /etc/profile.d/cope.sh
 sudo chmod 644 /etc/profile.d/cope.sh
+
+# Configure console text editor.
+read -p "Which console text editor do you want?
+1.) Micro
+2.) Vim
+3.) Vim with Catppuccino colorscheme.
+-> " $resp
+if [ "$resp" = 1 ]; then
+	./micro-setup.sh
+fi
+if [ "$resp" = 2 ]; then
+	./vim_setup_archlinux.sh
+fi
+if [ "$resp" = 3 ]; then
+	./vim_setup_catppuccino_archlinux.sh
+fi

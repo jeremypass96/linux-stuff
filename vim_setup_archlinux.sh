@@ -1,9 +1,6 @@
 #!/bin/bash
 # This script sets up Vim with the "onehalfdark" colorscheme and the Lightline plugin for Arch Linux.
 
-# Install Vim.
-sudo pacman -S vim --noconfirm
-
 # Install the Lightline plugin manager, vim-plug, and colorschemes.
 paru -S vim-lightline-git vim-plug vim-colors-night-git --noconfirm
 
