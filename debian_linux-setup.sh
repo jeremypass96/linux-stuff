@@ -62,7 +62,6 @@ sudo ./cleanup-systemd-boot.sh
 
 # Setup other stuff.
 sudo ln -s /usr/bin/batcat /usr/bin/bat && ./bat-setup.sh
-sudo ./btop-setup.sh
 sudo ./wallpapers.sh
 ./lsd-setup.sh
 ./micro-setup.sh

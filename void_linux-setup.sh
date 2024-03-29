@@ -183,11 +183,6 @@ cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
 chown -R $USER:$USER /home/$USER/.local
 cd && rm -rf konsole
 
-# Setup Catppuccin theme for btop.
-echo "Setting up Catppuccin theme for btop..."
-cd /home/$USER/linux-stuff/
-./btop-setup.sh
-
 # Ask the user if they want to enable Flatpak support.
 read -p "Do you want to enable Flatpak support? (Y/n) " resp
 resp=${flatpak_resp:-Y}
