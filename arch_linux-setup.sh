@@ -240,6 +240,7 @@ fi
 if [ "$resp" = 4 ]; then
 	echo "source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
 if [ "$rest" = 0 ]; then
+	sudo rm -rf /etc/zsh/*.zsh
 	continue
 fi
 rm -rf zsh-syntax-highlighting
@@ -407,9 +408,6 @@ done
 
 echo "All files updated."
 ####################
-
-# Setup Catppuccin theme for btop.
-./btop-setup.sh
 
 # Disable submenus in GRUB.
 sudo sed -i 's/#GRUB_DISABLE_SUBMENU=y/GRUB_DISABLE_SUBMENU=y'/g /etc/default/grub
