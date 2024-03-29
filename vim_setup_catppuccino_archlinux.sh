@@ -25,7 +25,6 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 call plug#end()
 
 let g:lightline = {'colorscheme': 'catppuccin_mocha'}
-colorscheme catppuccin_mocha
 set laststatus=2
 set noshowmode
 EOF
