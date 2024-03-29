@@ -4,7 +4,7 @@
 # Install Vim.
 sudo pacman -S vim --noconfirm
 
-# Install lightline plugin manager and vim-plug.
+# Install the Lightline plugin manager and vim-plug.
 paru -S vim-lightline-git vim-plug --noconfirm
 
 # Configure the vimrc file.
