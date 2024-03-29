@@ -20,10 +20,6 @@ set spell
 set smoothscroll
 set termguicolors
 
-call plug#begin('/usr/share/vim/vimfiles/plugin')
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-call plug#end()
-
 let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 set laststatus=2
 set noshowmode
@@ -32,11 +28,3 @@ chmod o-x $vimrc_path
 
 # Install Catppuccin colors plugin.
 sudo vim -es -u $vimrc_path -i NONE -c "PlugInstall" -c "qa"
-
-# Set correct permissions.
-sudo chmod 755 /usr/share/vim/vimfiles/plugin/catppuccin
-sudo chmod 755 /usr/share/vim/vimfiles/plugin/catppuccin/assets
-sudo chmod 755 /usr/share/vim/vimfiles/plugin/catppuccin/autoload
-sudo chmod -R 755 /usr/share/vim/vimfiles/plugin/catppuccin/colors
-sudo chmod 755 /usr/share/vim/vimfiles/plugin/catppuccin/autoload/lightline
-sudo chmod -R 755 /usr/share/vim/vimfiles/plugin/catppuccin/autoload/lightline/colorscheme
