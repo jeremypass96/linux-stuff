@@ -90,11 +90,22 @@ dnf install -y zsh
 clear
 
 # Download Konsole colors.
-cd && git clone https://github.com/catppuccin/konsole.git
-mkdir -p /home/$USER/.local/share/konsole/
-cp -v konsole/*.colorscheme /home/$USER/.local/share/konsole/
-chown -R $USER:$USER /home/$USER/.local/share/konsole/
-rm -rf konsole
+read -p "Which Konsole colorscheme do you want?
+1. Catppuccin
+2. OneHalf-Dark
+-> " $resp
+if [ "$resp" = 1 ]; then
+	cd && git clone https://github.com/catppuccin/konsole.git
+	mkdir -p /home/$USER/.local/share/konsole/
+	cp -v konsole/*.colorscheme /home/$USER/.local/share/konsole/
+	chown -R $USER:$USER /home/$USER/.local/share/konsole/
+	rm -rf konsole
+fi
+if [ "$resp" = 2 ]; then
+	wget https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
+	sudo mv onehalf-dark.colorscheme /usr/share/konsole
+	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
+fi
 
 clear
 
