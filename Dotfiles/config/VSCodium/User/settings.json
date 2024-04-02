@@ -1,7 +1,7 @@
 {
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.iconTheme": "catppuccin-mocha",
-    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "One Dark Pro Mix",
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.banner": "never",
     "security.workspace.trust.startupPrompt": "never",
@@ -11,21 +11,16 @@
     "editor.cursorStyle": "block",
     "files.hotExit": "off",
     "files.trimTrailingWhitespace": true,
-    "audioCues.taskFailed": "on",
     "editor.fontFamily": "JetBrainsMono Nerd Font",
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "update.showReleaseNotes": false,
-    "catppuccin.extraBordersEnabled": true,
-    "catppuccin.customUIColors": {
-        "mocha": {
-            "statusBar.foreground": "accent"
-        }
-    },
-    "catppuccin.accentColor": "lavender",
     "git.autofetch": true,
     "editor.cursorBlinking": "smooth",
     "workbench.editor.empty.hint": "hidden",
     "editor.smoothScrolling": true,
     "workbench.productIconTheme": "fluent-icons",
+    "accessibility.signals.taskFailed": {
+        "sound": "on",
+    }
 }

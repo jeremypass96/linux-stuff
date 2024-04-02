@@ -125,9 +125,10 @@ paru -S pfetch --noconfirm
 # Install and configure VSCodium.
 paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p $HOME/.config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.config/VSCodium/User/settings.json
-vscodium --install-extension Catppuccin.catppuccin-vsc
-vscodium --install-extension Catppuccin.catppuccin-vsc-icons
+vscodium --install-extension zhuangtongfa.material-theme
+vscodium --install-extension PKief.material-icon-theme
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
+vscodium --install-extension miguelsolorio.fluent-icons
 
 # Install grub theme.
 paru -S grub-theme-stylish-color-1080p-git --noconfirm
