@@ -128,7 +128,7 @@ mkdir -p $HOME/.config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/
 vscodium --install-extension zhuangtongfa.material-theme
 vscodium --install-extension PKief.material-icon-theme
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
-vscodium --install-extension miguelsolorio.fluent-icons
+vscodium --install-extension file-icons.file-icons
 
 # Install grub theme.
 paru -S grub-theme-stylish-color-1080p-git --noconfirm
