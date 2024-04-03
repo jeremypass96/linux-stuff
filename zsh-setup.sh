@@ -35,16 +35,20 @@ sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.*
 cp -v $HOME/linux-stuff/Dotfiles/.zshrc $HOME/.zshrc
 
 # Setup Catppuccin syntax highlighting colors
-cd
-git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
-sudo mkdir -p /usr/local/etc/zsh
-sudo cp -v zsh-syntax-highlighting/themes/*.zsh /usr/local/etc/zsh
-sudo chmod -R 755 /usr/local/etc
+read -p "Do you want to setup syntax highlighting colors with the Catppuccin colorscheme? (y/N) " resp
+resp=${resp:-N}
 
-# Choose Catppuccin color scheme for syntax highlighting
-echo "Choose Catppuccin colors for syntax highlighting:"
-select scheme in "Latte" "Frappé" "Macchiato" "Mocha"; do
-    case $scheme in
+if [ "$resp" = y ]; then
+    cd
+    git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
+    sudo mkdir -p /usr/local/etc/zsh
+    sudo cp -v zsh-syntax-highlighting/themes/*.zsh /usr/local/etc/zsh
+    sudo chmod -R 755 /usr/local/etc
+
+    # Choose Catppuccin color scheme for syntax highlighting
+    echo "Choose Catppuccin colors for syntax highlighting:"
+    select scheme in "Latte" "Frappé" "Macchiato" "Mocha"; do
+        case $scheme in
         Latte)
             echo "source /usr/local/etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
             break
@@ -64,8 +68,11 @@ select scheme in "Latte" "Frappé" "Macchiato" "Mocha"; do
         *)
             echo "Invalid selection. Please choose a valid option."
             ;;
-    esac
-done
+        esac
+    done
+else
+    continue
+fi
 
 # Clean up and copy configurations for future users and root
 rm -rf zsh-syntax-highlighting
