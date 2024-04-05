@@ -234,4 +234,4 @@ echo "MICRO_TRUECOLOR=1" >> /etc/environment
 # Download wallpapers.
 ./wallpapers.sh
 
-echo "Void Linux post-install setup complete."
+echo "Void Linux post-install setup complete. Don't forget to enable SDDM by changing back into this directory and typing: "./enable-sddm-void.sh" after you reboot."
