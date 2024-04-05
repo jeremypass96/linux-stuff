@@ -178,10 +178,9 @@ plymouth-set-default-theme -R solar
 # Download Konsole colors.
 echo "Downloading Konsole colors..."
 mkdir -p /home/$USER/.local/share/konsole/
-cd && git clone https://github.com/catppuccin/konsole.git
-cd konsole/ && cp -v *.colorscheme /home/$USER/.local/share/konsole/
+cd && curl https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme -o onehalf-dark.colorscheme
+cp -v onehalf-dark.colorscheme /home/$USER/.local/share/konsole/
 chown -R $USER:$USER /home/$USER/.local
-cd && rm -rf konsole
 
 # Ask the user if they want to enable Flatpak support.
 read -p "Do you want to enable Flatpak support? (Y/n) " resp

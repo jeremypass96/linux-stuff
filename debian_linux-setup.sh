@@ -38,11 +38,12 @@ sudo nala install audacity vlc fd-find bat lsd micro btop -y
 
 clear
 
-# Install Catppuccin themes for Xfce terminal.
-cd && git clone https://github.com/catppuccin/xfce4-terminal.git
-mkdir -pv $HOME/.local/share/xfce4/terminal/colorschemes
-cp -v xfce4-terminal/src/*.theme $HOME/.local/share/xfce4/terminal/colorschemes
-rm -rf xfce4-terminal
+# Install OneHalf-Dark theme for Xfce terminal.
+sudo mkdir -p /etc/skel/.local/share/xfce4/terminal/colorschemes
+cd && curl https://raw.githubusercontent.com/sonph/onehalf/master/xfce4-terminal/OneHalfDark.theme -o OneHalfDark.theme
+mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
+cp -v OneHalfDark.theme /etc/skel/.local/share/xfce4/terminal/colorschemes
+cp -v OneHalfDark.theme $HOME/.local/share/xfce4/terminal/colorschemes
 
 clear
 
