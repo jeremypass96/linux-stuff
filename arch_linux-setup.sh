@@ -29,7 +29,7 @@ sudo systemctl enable reflector.service --now && sudo systemctl enable reflector
 sudo sed -i 's/#NoExtract   =/NoExtract    = mirrorlist.pacnew'/g /etc/pacman.conf
 sudo pacman -Syy
 
-# Install and use better NTP daemon.
+# Install and use a better NTP daemon, Chrony.
 sudo pacman -S chrony --noconfirm
 sudo sed -i 's/! server 0.arch.pool.ntp.org iburst/server 0.arch.pool.ntp.org iburst'/g /etc/chrony.conf
 sudo sed -i 's/! server 1.arch.pool.ntp.org iburst/server 1.arch.pool.ntp.org iburst'/g /etc/chrony.conf
@@ -276,52 +276,52 @@ paru -S mkinitcpio-firmware --noconfirm
 # Stop mkinitcpio from generating a fallback kernel image.
 echo "Stopping mkinitcpio from generating a fallback kernel image..."
 if [ $(uname -r | grep arch | awk -F "-" '{print $(NF)}') ]; then
-sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
-sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
-sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
-sudo mkinitcpio -p linux
-sudo rm /boot/initramfs-linux-fallback.img
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
+	sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
+	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
+	sudo mkinitcpio -p linux
+	sudo rm /boot/initramfs-linux-fallback.img
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [ $(uname -r | grep hardened | awk -F "-" '{print $(NF)}') ]; then
-sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-hardened.preset
-sudo sed -i 's|fallback_image="/boot/initramfs-linux-hardened-fallback.img"|#fallback_image="/boot/initramfs-linux-hardened-fallback.img"|g' /etc/mkinitcpio.d/linux-hardened.preset
-sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-hardened.preset
-sudo mkinitcpio -p linux-hardened
-sudo rm /boot/initramfs-linux-hardened-fallback.img
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-hardened.preset
+	sudo sed -i 's|fallback_image="/boot/initramfs-linux-hardened-fallback.img"|#fallback_image="/boot/initramfs-linux-hardened-fallback.img"|g' /etc/mkinitcpio.d/linux-hardened.preset
+	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-hardened.preset
+	sudo mkinitcpio -p linux-hardened
+	sudo rm /boot/initramfs-linux-hardened-fallback.img
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [ $(uname -r | grep lts | awk -F "-" '{print $(NF)}') ]; then
-sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-lts.preset
-sudo sed -i 's|fallback_image="/boot/initramfs-linux-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-lts.preset
-sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-lts.preset
-sudo mkinitcpio -p linux-lts
-sudo rm /boot/initramfs-linux-lts-fallback.img
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-lts.preset
+	sudo sed -i 's|fallback_image="/boot/initramfs-linux-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-lts.preset
+	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-lts.preset
+	sudo mkinitcpio -p linux-lts
+	sudo rm /boot/initramfs-linux-lts-fallback.img
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [ $(uname -r | grep zen | awk -F "-" '{print $(NF)}') ]; then
-sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-zen.preset
-sudo sed -i 's|fallback_image="/boot/initramfs-linux-zen-fallback.img"|#fallback_image="/boot/initramfs-linux-zen-fallback.img"|g' /etc/mkinitcpio.d/linux-zen.preset
-sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-zen.preset
-sudo mkinitcpio -p linux-zen
-sudo rm /boot/initramfs-linux-zen-fallback.img
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-zen.preset
+	sudo sed -i 's|fallback_image="/boot/initramfs-linux-zen-fallback.img"|#fallback_image="/boot/initramfs-linux-zen-fallback.img"|g' /etc/mkinitcpio.d/linux-zen.preset
+	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-zen.preset
+	sudo mkinitcpio -p linux-zen
+	sudo rm /boot/initramfs-linux-zen-fallback.img
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [ $(uname -r | grep realtime | awk -F "-" '{print $(NF)}') ]; then
-sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-rt.preset
-sudo sed -i 's|fallback_image="/boot/initramfs-linux-rt-fallback.img"|#fallback_image="/boot/initramfs-linux-rt-fallback.img"|g' /etc/mkinitcpio.d/linux-rt.preset
-sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-rt.preset
-sudo mkinitcpio -p linux-rt
-sudo rm /boot/initramfs-linux-rt-fallback.img
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-rt.preset
+	sudo sed -i 's|fallback_image="/boot/initramfs-linux-rt-fallback.img"|#fallback_image="/boot/initramfs-linux-rt-fallback.img"|g' /etc/mkinitcpio.d/linux-rt.preset
+	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-rt.preset
+	sudo mkinitcpio -p linux-rt
+	sudo rm /boot/initramfs-linux-rt-fallback.img
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [ $(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}') ]; then
-sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-rt-lts.preset
-sudo sed -i 's|fallback_image="/boot/initramfs-linux-rt-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-rt-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-rt-lts.preset
-sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-rt-lts.preset
-sudo mkinitcpio -p linux-rt-lts
-sudo rm /boot/initramfs-linux-rt-lts-fallback.img
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-rt-lts.preset
+	sudo sed -i 's|fallback_image="/boot/initramfs-linux-rt-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-rt-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-rt-lts.preset
+	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-rt-lts.preset
+	sudo mkinitcpio -p linux-rt-lts
+	sudo rm /boot/initramfs-linux-rt-lts-fallback.img
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
 # Secure the OS.
@@ -434,25 +434,9 @@ sudo systemctl enable --now orphan-manager.timer
 # Add script to system to automatically purge .pacnew files.
 sudo ./purge_pacnew.sh
 
-# Colorize make.
+# Colorize make and symlink it.
 paru -S colormake --noconfirm
-
-# Install and configure cope-git.
-paru -S perl-app-cope --noconfirm
-
-# Make /etc/profile.d shell scripts for correct path.
-sudo touch /etc/profile.d/cope.csh
-sudo chmod o+w /etc/profile.d/cope.csh
-echo 'setenv PATH "${PATH}:/usr/share/perl5/vendor_perl/auto/share/dist/App-Cope"' >> /etc/profile.d/cope.csh
-sudo chmod o-w /etc/profile.d/cope.csh
-sudo chmod 644 /etc/profile.d/cope.csh
-
-sudo touch /etc/profile.d/cope.sh
-sudo chmod o+w /etc/profile.d/cope.sh
-echo "append_path '/usr/share/perl5/vendor_perl/auto/share/dist/App-Cope'
-export PATH" >> /etc/profile.d/cope.sh
-sudo chmod o-w /etc/profile.d/cope.sh
-sudo chmod 644 /etc/profile.d/cope.sh
+sudo ln -fs /usr/bin/colormake /usr/bin/make
 
 # Configure console text editor.
 read -p "Which console text editor do you want?
