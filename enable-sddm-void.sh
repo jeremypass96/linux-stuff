@@ -1,5 +1,5 @@
 #!/bin/bash
-# Simple one-linder script to enable and start SDDM after a Void Linux install.
+# Simple one-liner script to enable and start SDDM after a Void Linux install.
 
 # Checking to see if we're running as root.
 if [ $(id -u) -ne 0 ]; then
