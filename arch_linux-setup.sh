@@ -394,6 +394,7 @@ sudo sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 100000'g /etc/log
 
 # Change password encryption method from "YESCRYPT" to "SHA256."
 sudo sed -i 's/ENCRYPT_METHOD YESCRYPT/ENCRYPT_METHOD SHA256'/g /etc/login.defs
+sudo chmod o+w /etc/pam.d/passwd
 cat << EOF >> /etc/pam.d/passwd
 #
 # These lines require the user to select a password with a minimum
@@ -404,6 +405,7 @@ password required pam_pwquality.so \
               dcredit=-1 ucredit=-1 lcredit=0 minlen=8
 password required pam_unix.so use_authtok nullok sha256
 EOF
+sudo chmod o-w /etc/pam.d/passwd
 
 # Setup AppArmor.
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
