@@ -331,17 +331,28 @@ sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/login.defs
 sudo sed -i 's/UMASK=0022/UMASK=0077'/g /etc/conf.d/sysstat
+sudo chmod o+w /etc/profile
+cat << EOF >> /etc/profile
+# Set default umask.
+umask 077
+EOF
 sudo touch /etc/sysctl.d/99-sysctl.conf
 sudo chmod o+w /etc/sysctl.d/99-sysctl.conf
-echo "dev.tty.ldisc_autoload = 0" >> /etc/sysctl.d/99-sysctl.conf
-echo "fs.protected_fifos = 2" >> /etc/sysctl.d/99-sysctl.conf
-echo "fs.protected_regular = 2" >> /etc/sysctl.d/99-sysctl.conf
-echo "fs.suid_dumpable = 0" >> /etc/sysctl.d/99-sysctl.conf
-echo "kernel.sysrq = 0" >> /etc/sysctl.d/99-sysctl.conf
-echo "kernel.unprivileged_bpf_disabled = 1" >> /etc/sysctl.d/99-sysctl.conf
-echo "net.ipv4.conf.all.log_martians = 1" >> /etc/sysctl.d/99-sysctl.conf
-echo "net.ipv4.conf.all.send_redirects = 0" >> /etc/sysctl.d/99-sysctl.conf
-echo "net.ipv4.conf.default.log_martians = 1" >> /etc/sysctl.d/99-sysctl.conf
+cat << EOF >> /etc/sysctl.d/99-sysctl.conf
+sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
+dev.tty.ldisc_autoload = 0
+fs.protected_fifos = 2 
+fs.protected_regular = 2
+fs.suid_dumpable = 0
+kernel.sysrq = 0
+kernel.unprivileged_bpf_disabled = 1
+kernel.kptr_restrict = 2
+kernel.perf_event_paranoid = 3
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.log_martians = 1
+net.core.bpf_jit_harden = 2
+EOF
 sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
 sudo touch /var/log/account/pacct
 sudo accton on
@@ -353,15 +364,19 @@ sudo chmod o+w /etc/conf.d/sysstat
 echo "" >> /etc/conf.d/sysstat && echo 'ENABLED="true"' >> /etc/conf.d/sysstat
 sudo chmod o-w /etc/conf.d/sysstat
 sudo chmod o+w /etc/bash.bashrc
-echo "# Set umask." >> /etc/bash.bashrc
-echo "umask 077" >> /etc/bash.bashrc
+cat << EOF >> /etc/bash.bashrc
+# Set default umask.
+umask 077
+EOF
 sudo chmod o-w /etc/bash.bashrc
 sudo chmod o+w /etc/hosts
-echo 127.0.0.1 localhost >> /etc/hosts
-echo ::1 localhost ip6-localhost ip6-loopback >> /etc/hosts
-echo ff02::1 ip6-allnodes >> /etc/hosts
-echo ff02::2 ip6-allrouters >> /etc/hosts
-echo 127.0.1.1 `hostname` >> /etc/hosts
+cat << EOF >> /etc/hosts
+127.0.0.1 localhost
+::1 localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+127.0.1.1 `hostname`
+EOF
 sudo chmod o-w /etc/hosts
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding no'/g /etc/ssh/sshd_config
