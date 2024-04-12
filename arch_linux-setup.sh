@@ -325,8 +325,8 @@ if [ $(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}') ]; then
 fi
 
 # Secure the OS.
-sudo pacman -S arch-audit apparmor sysstat puppet rkhunter --noconfirm
-paru -S acct chkrootkit passwdqc --noconfirm
+sudo pacman -S arch-audit apparmor sysstat puppet rkhunter libpwquality --noconfirm
+paru -S acct chkrootkit --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/login.defs
