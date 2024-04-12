@@ -392,6 +392,19 @@ sudo sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/ssh
 sudo sed -i 's/#SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 100000'/g /etc/login.defs
 sudo sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 100000'g /etc/login.defs
 
+# Change password encryption method from "YESCRYPT" to "SHA256."
+sudo sed -i 's/ENCRYPT_METHOD YESCRYPT/ENCRYPT_METHOD SHA256'/g /etc/login.defs
+cat << EOF >> /etc/pam.d/passwd
+#
+# These lines require the user to select a password with a minimum
+# length of 8 and with at least 1 digit number, and 1 upper case
+# letter.
+#
+password required pam_pwquality.so \
+              dcredit=-1 ucredit=-1 lcredit=0 minlen=8
+password required pam_unix.so use_authtok nullok sha256
+EOF
+
 # Setup AppArmor.
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 loglevel=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/g' /etc/default/grub && sudo grub-mkconfig -o /boot/grub/grub.cfg
