@@ -327,8 +327,8 @@ fi
 # Secure the OS.
 sudo pacman -S arch-audit apparmor sysstat puppet rkhunter libpwquality rng-tools --noconfirm
 paru -S acct chkrootkit --noconfirm
-sudo chmod og-rwx /boot/grub/grub.cfg
-sudo chmod og-rwx /etc/ssh/sshd_config
+sudo chmod 600 /boot/grub/grub.cfg
+sudo chmod 600 /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/login.defs
 sudo sed -i 's/UMASK=0022/UMASK=0077'/g /etc/conf.d/sysstat
 sudo chmod o+w /etc/profile
