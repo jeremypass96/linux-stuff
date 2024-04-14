@@ -325,7 +325,7 @@ if [ $(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}') ]; then
 fi
 
 # Secure the OS.
-sudo pacman -S arch-audit apparmor sysstat puppet rkhunter libpwquality --noconfirm
+sudo pacman -S arch-audit apparmor sysstat puppet rkhunter libpwquality rng-tools --noconfirm
 paru -S acct chkrootkit --noconfirm
 sudo chmod og-rwx /boot/grub/grub.cfg
 sudo chmod og-rwx /etc/ssh/sshd_config
@@ -359,10 +359,11 @@ sudo accton on
 sudo systemctl enable --now acct
 sudo systemctl enable --now puppet
 sudo systemctl enable --now auditd
-sudo systemctl enable --now sysstat
+sudo systemctl enable --now rngd
 sudo chmod o+w /etc/conf.d/sysstat
 echo "" >> /etc/conf.d/sysstat && echo 'ENABLED="true"' >> /etc/conf.d/sysstat
 sudo chmod o-w /etc/conf.d/sysstat
+sudo systemctl enable --now sysstat
 sudo chmod o+w /etc/bash.bashrc
 cat << EOF >> /etc/bash.bashrc
 # Set default umask.
