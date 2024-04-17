@@ -96,28 +96,44 @@ read -p "Which Konsole colorscheme do you want?
 -> " $resp
 if [ "$resp" = 1 ]; then
 	cd && git clone https://github.com/catppuccin/konsole.git
-	mkdir -p /home/$USER/.local/share/konsole/
-	cp -v konsole/*.colorscheme /home/$USER/.local/share/konsole/
-	chown -R $USER:$USER /home/$USER/.local/share/konsole/
+	cp -v konsole/*.colorscheme /usr/share/konsole
+	chown -R $USER:$USER /usr/share/konsole/Catppuccin-*.colorscheme
 	rm -rf konsole
 fi
 if [ "$resp" = 2 ]; then
 	wget https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
-	sudo mv onehalf-dark.colorscheme /usr/share/konsole
-	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
+	mv onehalf-dark.colorscheme /usr/share/konsole
+	chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
+	chown root:root /usr/share/konsole/onehalf-dark.colorscheme
 fi
 
 clear
 
 # Install the Poppins font.
-curl https://fonts.google.com/download?family=Poppins -o /home/$USER/Poppins.zip
-unzip /home/$USER/Poppins.zip -x OFL.txt -d /usr/share/fonts/Poppins
-rm -f /home/$USER/Poppins.zip
+mkdir -p /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Black.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BlackItalic.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Bold.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BoldItalic.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBold.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBoldItalic.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraLight.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraLightItalic.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Italic.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Light.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-LightItalic.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Medium.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-MediumItalic.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Regular.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-SemiBold.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-SemiBoldItalic.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Thin.ttf -P /usr/share/fonts/Poppins
+wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ThinItalic.ttf -P /usr/share/fonts/Poppins
 
 # Install the Source Sans 3 font.
-curl https://fonts.google.com/download\?family\=Source+Sans+3 -o /home/$USER/Source_Sans_3.zip
-unzip /home/$USER/Source_Sans_3.zip -x README.txt OFL.txt SourceSans3-VariableFont_wght.ttf SourceSans3-Italic-VariableFont_wght.ttf -d /usr/share/fonts/SourceSansPro
-rm -f /home/$USER/Source_Sans_3.zip
+mkdir -p /usr/share/fonts/SourceSans3
+wget https://github.com/google/fonts/raw/main/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf -P /usr/share/fonts/SourceSans3
+wget https://github.com/google/fonts/raw/main/ofl/sourcesans3/SourceSans3-Italic%5Bwght%5D.ttf -P /usr/share/fonts/SourceSans3
 
 clear
 
