@@ -111,6 +111,16 @@ cd && rm -rf grub2-themes
 # Configure lynis.
 echo "Configuring lynis..."
 echo "machine-role=personal" > /etc/lynis/custom.prf
+echo "test-scan-mode=normal" >> /etc/lynis/custom.prf
+echo "" >> /etc/lynis/custom.prf
+cat << EOF >> /etc/lynis/custom.prf
+# Plugins to disable
+disable-plugin=docker
+disable-plugin=forensics
+disable-plugin=intrusion-detection
+disable-plugin=intrusion-prevention
+disable-plugin=nginx
+EOF
 
 # Secure the OS.
 echo "Securing the OS..."
@@ -228,8 +238,10 @@ echo "PF_INFO=\"ascii os kernel uptime pkgs shell editor de\"" >> /etc/environme
 echo "BROWSER=brave" >> /etc/environment
 # Set EDITOR variable.
 echo "EDITOR=micro" >> /etc/environment
-# Set MICRO_TRUECOLOR variable.
+# Set MICRO_TRUECOLOR variable to 1 to enable truecolor support for the micro text editor.
 echo "MICRO_TRUECOLOR=1" >> /etc/environment
+# Enable QT5 apps to use Kvantum theming engine.
+echo QT_QPA_PLATFORMTHEME=qt5ct >> /etc/environment
 
 # Download wallpapers.
 ./wallpapers.sh

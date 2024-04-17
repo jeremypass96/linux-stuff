@@ -324,6 +324,22 @@ if [ $(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}') ]; then
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
+# Configure lynis.
+echo "Configuring lynis..."
+sudo chmod o+w /etc/lynis/custom.prf
+echo "machine-role=personal" > /etc/lynis/custom.prf
+echo "test-scan-mode=normal" >> /etc/lynis/custom.prf
+echo "" >> /etc/lynis/custom.prf
+cat << EOF >> /etc/lynis/custom.prf
+# Plugins to disable
+disable-plugin=docker
+disable-plugin=forensics
+disable-plugin=intrusion-detection
+disable-plugin=intrusion-prevention
+disable-plugin=nginx
+EOF
+sudo chmod o-w /etc/lynis/custom.prf
+
 # Secure the OS.
 sudo pacman -S arch-audit apparmor sysstat puppet rkhunter libpwquality rng-tools --noconfirm
 paru -S acct chkrootkit --noconfirm
@@ -336,6 +352,7 @@ cat << EOF >> /etc/profile
 # Set default umask.
 umask 077
 EOF
+sudo chmod o-w /etc/profile
 sudo touch /etc/sysctl.d/99-sysctl.conf
 sudo chmod o+w /etc/sysctl.d/99-sysctl.conf
 cat << EOF >> /etc/sysctl.d/99-sysctl.conf
