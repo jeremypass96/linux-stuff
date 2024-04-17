@@ -341,7 +341,7 @@ sudo chmod o+w /etc/sysctl.d/99-sysctl.conf
 cat << EOF >> /etc/sysctl.d/99-sysctl.conf
 sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
 dev.tty.ldisc_autoload = 0
-fs.protected_fifos = 2 
+fs.protected_fifos = 2
 fs.protected_regular = 2
 fs.suid_dumpable = 0
 kernel.sysrq = 0
@@ -468,10 +468,6 @@ sudo systemctl enable --now orphan-manager.timer
 
 # Add script to system to automatically purge .pacnew files.
 sudo ./purge_pacnew.sh
-
-# Colorize make and symlink it.
-paru -S colormake --noconfirm
-sudo ln -fs /usr/bin/colormake /usr/bin/make
 
 # Configure console text editor.
 read -p "Which console text editor do you want?
