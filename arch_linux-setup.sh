@@ -462,7 +462,7 @@ done
 # Insert NoExtract directive with sed
 for file in "${files[@]}"
 do
-  sudo sed -i '/#NoExtract/a NoExtract = /usr/share/applications/'"$file" /etc/pacman.conf
+  sudo sed -i '/#NoExtract/a NoExtract = "$file" /etc/pacman.conf
 done
 
 # Delete the existing '#NoExtract' line
