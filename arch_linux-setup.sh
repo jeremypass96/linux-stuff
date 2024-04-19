@@ -138,7 +138,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 paru -S wine-installer wine-gecko wine-mono --noconfirm
 
 # Install some useful software.
-sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip clipgrab partitionmanager --noconfirm
+sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip clipgrab partitionmanager dolphin-plugins --noconfirm
 
 # Install balenaEtcher to write OS images to USB flash drives.
 paru -S etcher-bin --noconfirm
