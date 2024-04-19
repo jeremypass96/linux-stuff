@@ -452,11 +452,17 @@ files=(
   "qdbusviewer.desktop"
 )
 
-# Add "Hidden=true" to the end of each file
+# Add each file to NoExtract directive in /etc/pacman.conf
 for file in "${files[@]}"
 do
-  echo "Hidden=true" | sudo tee -a "$source_dir$file" > /dev/null
-  echo "Added 'Hidden=true' to $file"
+  # Check if the file is already listed in NoExtract
+  if grep -qxF "NoExtract = $file" /etc/pacman.conf; then
+    echo "$file is already added to NoExtract directive."
+  else
+    # Add the file to NoExtract directive
+    echo "NoExtract = $source_dir$file" | sudo tee -a /etc/pacman.conf > /dev/null
+    echo "Added $file to NoExtract directive."
+  fi
 done
 
 echo "All files updated."
