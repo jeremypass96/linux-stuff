@@ -452,24 +452,20 @@ files=(
   "codium-wayland.desktop"
 )
 
-# Add each file to NoExtract directive in /etc/pacman.conf and remove it
+# Remove the files
 for file in "${files[@]}"
 do
-  # Check if the file is already listed in NoExtract
-  if grep -qxF "NoExtract = $file" /etc/pacman.conf; then
-    echo "$file is already added to NoExtract directive."
-  else
-    # Add the file to NoExtract directive
-    echo "NoExtract = $source_dir$file" | sudo tee -a /etc/pacman.conf > /dev/null
-    echo "Added $file to NoExtract directive."
-  fi
-
-  # Remove the file
   sudo rm -rf "$source_dir$file"
   echo "Removed $file"
 done
 
-echo "All files updated and removed."
+# Insert NoExtract directive with sed
+for file in "${files[@]}"
+do
+  sudo sed -i '/#NoExtract/a NoExtract = /usr/share/applications/'"$file" /etc/pacman.conf
+done
+
+echo "All files removed and NoExtract directive updated."
 ####################
 
 # Disable submenus in GRUB.
