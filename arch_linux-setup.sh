@@ -26,7 +26,6 @@ echo "# Sort the mirrors by highest rate (--sort)." >> /etc/xdg/reflector/reflec
 echo "--sort rate" >> /etc/xdg/reflector/reflector.conf
 sudo chmod o-w /etc/xdg/reflector/reflector.conf
 sudo systemctl enable reflector.service --now && sudo systemctl enable reflector.timer --now
-sudo sed -i 's/#NoExtract   =/NoExtract    = mirrorlist.pacnew'/g /etc/pacman.conf
 sudo pacman -Syy
 
 # Install and use a better NTP daemon, Chrony.
