@@ -432,7 +432,7 @@ sudo systemctl enable --now apparmor
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
 
-# Hide menu entries.
+# Hide menu entries and remove files.
 ####################
 # Define the source directory
 source_dir=/usr/share/applications/
@@ -452,7 +452,7 @@ files=(
   "codium-wayland.desktop"
 )
 
-# Add each file to NoExtract directive in /etc/pacman.conf
+# Add each file to NoExtract directive in /etc/pacman.conf and remove it
 for file in "${files[@]}"
 do
   # Check if the file is already listed in NoExtract
@@ -463,9 +463,13 @@ do
     echo "NoExtract = $source_dir$file" | sudo tee -a /etc/pacman.conf > /dev/null
     echo "Added $file to NoExtract directive."
   fi
+
+  # Remove the file
+  sudo rm -rf "$source_dir$file"
+  echo "Removed $file"
 done
 
-echo "All files updated."
+echo "All files updated and removed."
 ####################
 
 # Disable submenus in GRUB.
