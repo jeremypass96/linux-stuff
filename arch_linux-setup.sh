@@ -465,6 +465,9 @@ do
   sudo sed -i '/#NoExtract/a NoExtract = /usr/share/applications/'"$file" /etc/pacman.conf
 done
 
+# Delete the existing '#NoExtract' line
+sudo sed -i '/^#NoExtract =$/d' /etc/pacman.conf
+
 echo "All files removed and NoExtract directive updated."
 ####################
 
