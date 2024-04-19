@@ -449,6 +449,7 @@ files=(
   "designer.desktop"
   "linguist.desktop"
   "qdbusviewer.desktop"
+  "codium-wayland.desktop"
 )
 
 # Add each file to NoExtract directive in /etc/pacman.conf
