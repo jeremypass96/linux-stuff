@@ -87,7 +87,7 @@ if [ "$resp" = 2 ]; then
 fi
 
 # Install icon, cursor, and KDE theme.
-paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git kvantum kvantum-qt5 qt5ct  --noconfirm
+paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git kvantum kvantum-qt5 qt5ct --noconfirm
 
 # Install and configure printing support.
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
