@@ -58,6 +58,10 @@ sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
 # Install spell checking support.
 sudo pacman -S aspell aspell-en --noconfirm
 
+# Install and configure plocate.
+sudo pacman -S plocate --noconfirm
+sudo systemctl enable --now plocate-updatedb.timer
+
 # Install paru AUR helper.
 sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git $HOME/paru-bin && cd paru-bin && makepkg -sic --noconfirm
 cd .. && rm -rf paru-bin
