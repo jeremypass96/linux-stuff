@@ -90,6 +90,12 @@ cd /etc/init.d
 ln -s net.lo net.eth0
 rc-update add net.eth0 default
 
+# Fix /etc/hosts
+sed -i 's/"127.0.0.1     localhost"/"127.0.0.1     GentooBox"/' /etc/hosts
+
+# Set root password.
+passwd
+
 # Set clock configuration
 sed -i 's/clock=UTC/clock=local/' /etc/conf.d/hwclock
 
@@ -98,8 +104,8 @@ emerge --ask app-admin/sysklogd
 rc-update add sysklogd default
 
 # Install cron daemon
-emerge --ask sys-process/dcron
-crontab /etc/crontab
+emerge --ask sys-process/cronie
+rc-update add cronie default
 
 # Add file indexing
 emerge --ask sys-apps/plocate
