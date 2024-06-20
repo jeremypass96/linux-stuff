@@ -455,6 +455,7 @@ files=(
   "assistant.desktop"
   "qdbusviewer.desktop"
   "codium-wayland.desktop"
+  "vscodium-bin-wayland.desktop"
 )
 
 # Remove the files
