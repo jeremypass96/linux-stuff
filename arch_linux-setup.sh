@@ -452,6 +452,7 @@ files=(
   "gcdmaster.desktop"
   "designer.desktop"
   "linguist.desktop"
+  "assistant.desktop"
   "qdbusviewer.desktop"
   "codium-wayland.desktop"
 )
