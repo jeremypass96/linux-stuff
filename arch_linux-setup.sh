@@ -456,6 +456,7 @@ files=(
   "qdbusviewer.desktop"
   "codium-wayland.desktop"
   "vscodium-bin-wayland.desktop"
+  "org.kde.krdp.desktop"
 )
 
 # Remove the files
@@ -493,7 +494,7 @@ source /etc/environment
 
 # Install autoupdate to automatically update the OS during boot.
 paru -S autoupdate --noconfirm
-sudo sed -i 's/pacman/paru'/g /usr/lib/systemd/system/autoupdate.service
+sudo systemctl enable --now autoupdate.service
 
 # Install and enable orphan-manager, a Systemd timer to automatically remove orphaned packages.
 paru -S orphan-manager --noconfirm
