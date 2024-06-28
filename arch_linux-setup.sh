@@ -38,7 +38,7 @@ sudo systemctl enable --now chronyd && sudo systemctl enable --now chrony-wait
 sudo chronyc online
 
 # Remove unneeded packages.
-sudo pacman -Rsu nano htop kate --noconfirm
+sudo pacman -Rns nano htop kate --noconfirm
 
 # Install ffmpegthumbs, for video file thumbnail support in Dolphin.
 sudo pacman -S ffmpegthumbs --noconfirm
@@ -53,7 +53,7 @@ sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcente
 sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp --noconfirm
 
 # Install some command-line utilities.
-sudo pacman -S micro xclip duf bat fd lynis btop --noconfirm
+sudo pacman -S micro xclip vim duf bat fd lynis btop --noconfirm
 
 # Install spell checking support.
 sudo pacman -S aspell aspell-en --noconfirm
@@ -90,8 +90,8 @@ if [ "$resp" = 2 ]; then
 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
 fi
 
-# Install icon, cursor, and KDE theme.
-paru -S newaita-icons-git bibata-cursor-theme-bin vimix-theme-kde-git vimix-gtk-themes-git kvantum kvantum-qt5 qt5ct --noconfirm
+# Install icon and KDE theme.
+paru -S papirus-icon-theme vimix-theme-kde-git vimix-gtk-themes-git kvantum kvantum-qt5 qt5ct --noconfirm
 
 # Install and configure printing support.
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
@@ -175,7 +175,7 @@ paru -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kerne
 
 # Setup config files and stuff.
 cd linux-stuff/
-sudo ./bat-setup.sh
+./bat-setup.sh
 ./lsd-setup.sh
 sudo ./cleanup-systemd-boot.sh
 
@@ -263,7 +263,7 @@ echo PF_INFO='"ascii os kernel uptime pkgs shell editor de"' >> /etc/environment
 # Set BROWSER variable.
 echo BROWSER=brave >> /etc/environment
 # Set EDITOR variable.
-echo EDITOR=micro >> /etc/environment
+echo EDITOR=vim >> /etc/environment
 # Set MICRO_TRUECOLOR variable to 1 to enable truecolor support for the micro text editor.
 echo MICRO_TRUECOLOR=1 >> /etc/environment
 # Enable VSCodium to use QT file dialogs by default instead of GTK.
@@ -514,10 +514,13 @@ read -p "Which console text editor do you want?
 -> " $resp
 if [ "$resp" = 1 ]; then
 	./micro-setup.sh
+	sudo sed -i 's/vim/micro'/g /etc/environment
 fi
 if [ "$resp" = 2 ]; then
 	./vim_setup_archlinux.sh
+	sudo pacman -Rns micro xclip --noconfirm
 fi
 if [ "$resp" = 3 ]; then
 	./vim_setup_catppuccino_archlinux.sh
+	sudo pacman -Rns micro xclip --noconfirm
 fi
