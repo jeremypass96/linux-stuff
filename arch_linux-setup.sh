@@ -496,6 +496,9 @@ source /etc/environment
 paru -S autoupdate --noconfirm
 sudo systemctl enable --now autoupdate.service
 
+# Configure autoupdate.
+sed -i 's/-Syuwq/-Syuq'/g /usr/lib/systemd/system/autoupdate.service
+
 # Install and enable orphan-manager, a Systemd timer to automatically remove orphaned packages.
 paru -S orphan-manager --noconfirm
 sudo systemctl enable --now orphan-manager.timer
