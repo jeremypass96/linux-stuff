@@ -463,7 +463,7 @@ files=(
 for file in "${files[@]}"
 do
   sudo rm -rf "$source_dir$file"
-  echo "Removed $file"
+  echo "Removed $file..."
 done
 
 # Insert NoExtract directive with sed
@@ -515,6 +515,7 @@ read -p "Which console text editor do you want?
 if [ "$resp" = 1 ]; then
 	./micro-setup.sh
 	sudo sed -i 's/vim/micro'/g /etc/environment
+	sudo pacman -Rns vim
 fi
 if [ "$resp" = 2 ]; then
 	./vim_setup_archlinux.sh
