@@ -434,7 +434,7 @@ sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_
 sudo systemctl enable --now apparmor
 
 # Prettify Arch logo.
-sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-arch-linux'/g /etc/os-release
+sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-archlinux'/g /etc/os-release
 
 # Hide menu entries and remove files.
 ####################
