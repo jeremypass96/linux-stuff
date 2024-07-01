@@ -264,8 +264,6 @@ echo PF_INFO='"ascii os kernel uptime pkgs shell editor de"' >> /etc/environment
 echo BROWSER=brave >> /etc/environment
 # Set EDITOR variable.
 echo EDITOR=vim >> /etc/environment
-# Set MICRO_TRUECOLOR variable to 1 to enable truecolor support for the micro text editor.
-echo MICRO_TRUECOLOR=1 >> /etc/environment
 # Enable VSCodium to use QT file dialogs by default instead of GTK.
 echo GTK_USE_PORTAL=1 >> /etc/environment
 # Enable QT5 apps to use Kvantum theming engine.
@@ -515,6 +513,10 @@ read -p "Which console text editor do you want?
 if [ "$resp" = 1 ]; then
 	./micro-setup.sh
 	sudo sed -i 's/vim/micro'/g /etc/environment
+	sudo chmod o+w /etc/environment
+	# Enables truecolor support.
+	sudo echo MICRO_TRUECOLOR=1 >> /etc/environment
+	sudo chmod o-w /etc/environment
 	sudo pacman -Rns vim
 fi
 if [ "$resp" = 2 ]; then
