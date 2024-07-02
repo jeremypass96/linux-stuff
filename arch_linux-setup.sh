@@ -49,6 +49,9 @@ sudo pacman -S kdegraphics-thumbnailers --noconfirm
 # Install some KDE utilities.
 sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive kio-admin ksystemlog kcron --noconfirm
 
+# Install PackageKit so that Discover will work properly.
+sudo pacman -S packagekit-qt6 --noconfirm
+
 # Install some core utilities that didn't get installed, for some reason.
 sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp cronie --noconfirm
 
