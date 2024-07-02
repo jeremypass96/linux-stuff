@@ -493,6 +493,9 @@ paru -S pac-wrapper --noconfirm
 sudo chmod o+w /etc/environment && echo PAC_PACMAN=paru >> /etc/environment && sudo chmod o-w /etc/environment
 source /etc/environment
 
+# Enable paccache SystemD timer (cleans up pacman package cache).
+sudo systemctl enable --now paccache.timer
+
 # Install autoupdate to automatically update the OS during boot.
 paru -S autoupdate --noconfirm
 sudo systemctl enable --now autoupdate.service
