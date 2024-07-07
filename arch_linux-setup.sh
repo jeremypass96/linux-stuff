@@ -106,6 +106,9 @@ paru -S desktop-privileges-nogroups --noconfirm
 # Install hardware detection tool for mkinitcpio.
 sudo pacman -S hwdetect --noconfirm
 
+# Install power-profiles-daemon package. Makes power management profiles available to KDE.
+sudo pacman -S power-profiles-daemon --noconfirm
+
 # Install NTFS filesystem driver.
 sudo pacman -S ntfs-3g --noconfirm
 
