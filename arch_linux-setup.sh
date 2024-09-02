@@ -152,8 +152,8 @@ sudo chmod 755 /usr/share/aurorae/themes/Vimix*
 sudo chmod 644 /usr/share/aurorae/themes/Vimix*/*
 sudo chmod 755 /usr/share/Kvantum/Vimix*
 sudo chmod 644 /usr/share/Kvantum/Vimix*/*
-cd $HOME
 # Cleanup
+cd $HOME
 rm -rf $HOME/Vimix-kde
 
 # Install and configure printing support.
