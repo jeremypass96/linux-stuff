@@ -99,6 +99,7 @@ paru -S papirus-icon-theme vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfir
 # Install KDE theme.
 git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
 cd $HOME/Vimix-kde
+sudo cp -rv aurorae /usr/share/aurorae/themes
 sudo cp -rv color-schemes /usr/share/color-schemes
 sudo cp -rv Kvantum /usr/share
 sudo cp -rv plasma/desktoptheme /usr/share/plasma
