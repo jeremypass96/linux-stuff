@@ -94,7 +94,12 @@ if [ "$resp" = 2 ]; then
 fi
 
 # Install icon and KDE theme.
-paru -S papirus-icon-theme vimix-theme-kde-git vimix-gtk-themes-git kvantum kvantum-qt5 qt5ct --noconfirm
+paru -S papirus-icon-theme vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
+# Install KDE theme.
+git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
+cd $HOME/Vimix-kde && sudo ./install.sh
+# Cleanup
+rm -rf $HOME/Vimix-kde
 
 # Install and configure printing support.
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
