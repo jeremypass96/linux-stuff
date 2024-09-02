@@ -99,11 +99,10 @@ paru -S papirus-icon-theme vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfir
 # Install KDE theme.
 git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
 cd $HOME/Vimix-kde
-sudo cp -rv aurorae /usr/share/aurorae/themes
-sudo cp -rv color-schemes /usr/share/color-schemes
+sudo cp -rv aurorae/* /usr/share/aurorae/themes
+sudo cp -rv color-schemes /usr/share
 sudo cp -rv Kvantum /usr/share
-sudo cp -rv plasma/desktoptheme /usr/share/plasma
-sudo cp -rv plasma/look-and-feel /usr/share/plasma
+sudo cp -rv plasma /usr/share
 sudo cp -rv wallpaper/Vimix* /usr/share/plasma/wallpapers
 cd sddm && sudo ./install.sh
 # Fix Vimix SDDM folder permissions.
@@ -120,6 +119,39 @@ sudo chmod 644 /usr/share/sddm/themes/vimix/*.png
 sudo chmod 644 /usr/share/sddm/themes/vimix/*.conf
 sudo chmod 644 /usr/share/sddm/themes/vimix/*.conf.user
 sudo chmod 744 /usr/share/sddm/themes/vimix/background.jpg
+# Fix Vimix Plasma theme folder permissions.
+sudo chmod -R 644 /usr/share/plasma/desktoptheme/Vimix*
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix*
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/dialogs
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/icons
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/solid
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/translucent
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/widgets
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/solid/dialogs
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/solid/widgets
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/translucent/dialogs
+sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/translucent/widgets
+sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*
+sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents
+sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/previews
+sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/splash
+sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/metadata.desktop
+sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/defaults
+sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/previews/*.jpg
+sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/previews/*.png
+sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/splash/images
+sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/splash/Splash.qml
+sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/splash/images/*.svg
+sudo chmod 755 /usr/share/plasma/wallpapers/Vimix*
+sudo chmod 755 /usr/share/plasma/wallpapers/Vimix*/contents
+sudo chmod 755 /usr/share/plasma/wallpapers/Vimix*/contents/images
+sudo chmod 644 /usr/share/plasma/wallpapers/Vimix*/contents/images/3840x3840.png
+sudo chmod 644 /usr/share/plasma/wallpapers/Vimix*/metadata.desktop
+sudo chmod 644 /usr/share/color-schemes/Vimix*.colors
+sudo chmod 755 /usr/share/aurorae/themes/Vimix*
+sudo chmod 644 /usr/share/aurorae/themes/Vimix*/*
+sudo chmod 755 /usr/share/Kvantum/Vimix*
+sudo chmod 644 /usr/share/Kvantum/Vimix*/*
 cd $HOME
 # Cleanup
 rm -rf $HOME/Vimix-kde
