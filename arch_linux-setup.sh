@@ -95,9 +95,18 @@ fi
 
 # Install icon and KDE theme.
 paru -S papirus-icon-theme vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
+
 # Install KDE theme.
 git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
-cd $HOME/Vimix-kde && sudo ./install.sh
+cd $HOME/Vimix-kde
+sudo cp -rv color-schemes /usr/share/color-schemes
+sudo cp -rv Kvantum /usr/share
+sudo cp -rv plasma/desktoptheme /usr/share/plasma
+sudo cp -rv plasma/look-and-feel /usr/share/plasma
+sudo cp -rv wallpaper/Vimix* /usr/share/plasma/wallpapers
+cd sddm && sudo ./install.sh
+cd $HOME
+
 # Cleanup
 rm -rf $HOME/Vimix-kde
 
