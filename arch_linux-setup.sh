@@ -120,9 +120,7 @@ sudo chmod 644 /usr/share/sddm/themes/vimix/*.png
 sudo chmod 644 /usr/share/sddm/themes/vimix/*.conf
 sudo chmod 644 /usr/share/sddm/themes/vimix/*.conf.user
 sudo chmod 744 /usr/share/sddm/themes/vimix/background.jpg
-
 cd $HOME
-
 # Cleanup
 rm -rf $HOME/Vimix-kde
 
