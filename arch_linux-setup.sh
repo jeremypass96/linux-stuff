@@ -534,7 +534,7 @@ done
 for file in "${files[@]}"
 do
   filename=$(basename "$file")
-  sudo sed -i '/#NoExtract/a NoExtract = '"$filename" /etc/pacman.conf
+  sudo sed -i '/#NoExtract/a NoExtract = '"usr/share/applications/$filename" /etc/pacman.conf
 done
 
 # Delete the existing '#NoExtract' line
