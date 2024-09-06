@@ -96,10 +96,9 @@ echo "Installing the KDE desktop..."
 vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers -y
 
 # Enable desktop services.
-declare -a services=("dbus" "NetworkManager" "elogind")
-for service in "${services[@]}"; do
-    ln -s "/etc/sv/$service" "/var/service/"
-done
+ln -s /etc/sv/dbus /var/service/
+ln -s /etc/sv/NetworkManager /var/service/
+ln -s /etc/sv/elogind /var/service/
 
 # Install and configure PipeWire.
 vpm install pipewire alsa-pipewire -y
@@ -144,10 +143,9 @@ sed -i 's/UMASK=0022/UMASK=0077/g' /etc/default/sysstat
 vpm install sysstat rkhunter chkrootkit apparmor rsyslog audit acct -y
 
 # Enable services.
-declare -a services=("rsyslogd" "auditd" "ufw")
-for service in "${services[@]}"; do
-    ln -s "/etc/sv/$service" "/var/service/"
-done
+ln -s /etc/sv/rsyslogd /var/service/
+ln -s /etc/sv/auditd /var/service/
+ln -s /etc/sv/ufw /var/service/
 
 # Disable and stop sshd. Not needed on a personal desktop PC/laptop.
 sv down sshd
