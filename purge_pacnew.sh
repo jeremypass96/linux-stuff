@@ -28,6 +28,6 @@ When = PostTransaction
 Exec = /usr/local/bin/purge_pacnew.sh' | tee "$HOOK_DIR/purge_pacnew.hook" > /dev/null
 
 # Make the script executable
-chmod +x "$DEST_DIR/purge_pacnew.sh"
+chmod 744 "$DEST_DIR/purge_pacnew.sh"
 
-echo "Installation complete. You can now use the purge_pacnew.sh script and the purge_pacnew.hook pacman post-install hook."
+echo "Installation complete. You can now use the $DEST_DIR/purge_pacnew script and the $HOOK_DIR/purge_pacnew pacman post-install hook."

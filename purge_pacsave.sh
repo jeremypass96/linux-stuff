@@ -27,7 +27,7 @@ Description = Purging .pacsave files...
 When = PostTransaction
 Exec = /usr/local/bin/purge_pacsave.sh' | tee "$HOOK_DIR/purge_pacsave.hook" > /dev/null
 
-# Make the script executable
-chmod +x "$DEST_DIR/purge_pacsave.sh"
+# Make the script executable and fix permissions.
+chmod 744 "$DEST_DIR/purge_pacsave.sh"
 
-echo "Installation complete. You can now use the $DEST_DIR/purge_pacsave script and the $HOOK_DIR/purge_pacsave.hook pacman post-install hook."
+echo "Installation complete. You can now use the $DEST_DIR/purge_pacsave script and the $HOOK_DIR/purge_pacsave pacman post-install hook."
