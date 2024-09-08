@@ -570,8 +570,9 @@ sed -i 's/-Syuwq/-Syuq'/g /usr/lib/systemd/system/autoupdate.service
 paru -S orphan-manager --noconfirm
 sudo systemctl enable --now orphan-manager.timer
 
-# Add script to system to automatically purge .pacnew files.
+# Add script to system to automatically purge .pacnew and .pacsave files.
 sudo ./purge_pacnew.sh
+sudo ./purge_pacsave.sh
 
 # Configure console text editor.
 read -p "Which console text editor do you want?

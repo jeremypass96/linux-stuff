@@ -13,8 +13,8 @@ HOOK_DIR="/etc/pacman.d/hooks"
 # Content of purge_pacnew.sh
 echo '#!/bin/bash
 
-# Remove all .pacnew files
-fd -e pacnew . /etc -X rm -rf' | tee "$DEST_DIR/purge_pacnew.sh" > /dev/null
+# Remove all .pacsave files
+fd -e pacsave . /etc -X rm -rf' | tee "$DEST_DIR/purge_pacsave.sh" > /dev/null
 
 # Content of purge_pacnew.hook
 echo '[Trigger]
@@ -23,11 +23,11 @@ Type = Package
 Target = *
 
 [Action]
-Description = Purging .pacnew files...
+Description = Purging .pacsave files...
 When = PostTransaction
-Exec = /usr/local/bin/purge_pacnew.sh' | tee "$HOOK_DIR/purge_pacnew.hook" > /dev/null
+Exec = /usr/local/bin/purge_pacsave.sh' | tee "$HOOK_DIR/purge_pacsave.hook" > /dev/null
 
 # Make the script executable
-chmod +x "$DEST_DIR/purge_pacnew.sh"
+chmod +x "$DEST_DIR/purge_pacsave.sh"
 
-echo "Installation complete. You can now use the purge_pacnew.sh script and the purge_pacnew.hook pacman post-install hook."
+echo "Installation complete. You can now use the $DEST_DIR/purge_pacsave script and the $HOOK_DIR/purge_pacsave.hook pacman post-install hook."
