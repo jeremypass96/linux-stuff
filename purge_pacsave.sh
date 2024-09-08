@@ -26,6 +26,7 @@ Target = *
 Description = Purging .pacsave files...
 When = PostTransaction
 Exec = /usr/local/bin/purge_pacsave.sh' | tee "$HOOK_DIR/purge_pacsave.hook" > /dev/null
+chmod 644 "$HOOK_DIR/purge_pacsave.hook"
 
 # Make the script executable and fix permissions.
 chmod 744 "$DEST_DIR/purge_pacsave.sh"

@@ -26,6 +26,7 @@ Target = *
 Description = Purging .pacnew files...
 When = PostTransaction
 Exec = /usr/local/bin/purge_pacnew.sh' | tee "$HOOK_DIR/purge_pacnew.hook" > /dev/null
+chmod 644 "$HOOK_DIR/purge_pacnew.hook"
 
 # Make the script executable
 chmod 744 "$DEST_DIR/purge_pacnew.sh"
