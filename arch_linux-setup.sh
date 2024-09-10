@@ -94,7 +94,7 @@ if [ "$resp" = 2 ]; then
 fi
 
 # Install icon and KDE theme.
-paru -S papirus-icon-theme vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
+paru -S papirus-icon-theme papirus-folders vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
 
 # Install KDE theme.
 git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
