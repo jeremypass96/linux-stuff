@@ -47,7 +47,7 @@ sudo pacman -S ffmpegthumbs --noconfirm
 sudo pacman -S kdegraphics-thumbnailers --noconfirm
 
 # Install some KDE utilities.
-sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive kio-admin ksystemlog kcron --noconfirm
+sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive kio-admin audiocd-kio ksystemlog kcron --noconfirm
 
 # Install PackageKit so that Discover will work properly.
 sudo pacman -S packagekit-qt6 --noconfirm
