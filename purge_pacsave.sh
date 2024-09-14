@@ -19,18 +19,23 @@ fd -e pacsave . /etc -X rm -rf' | tee "$DEST_DIR/purge_pacsave" > /dev/null
 # Content of check_pacsave script.
 echo '#!/bin/bash
 
+# Define color escape codes for output
+bold_green="\e[1;32m"
+bold_yellow="\e[1;33m"
+reset="\e[0m"
+
 # Search the pacman log for recent warnings about .pacsave files
 log_pacsave=$(grep -P 'warning: .*\.pacsave' /var/log/pacman.log | tail -n 10)
 
 # Verify if .pacsave files exist on the system
-system_pacsave=$(fd -e pacsave . /etc -X rm -rf)
+system_pacsave=$(fd -e pacsave . /etc > /dev/null)
 
 # If there are matching .pacsave files in the system, run the purge script
 if [[ -n "$log_pacsave" && -n "$system_pacsave" ]]; then
-    echo "New .pacsave files detected. Running purge..."
+    echo -e "${bold_green}New .pacsave files detected. Running purge...${reset}"
     /usr/local/bin/purge_pacsave
 else
-    echo "No new .pacsave files detected."
+    echo -e "${bold_yellow}No new .pacsave files detected.${reset}"
 fi' | tee "$DEST_DIR/check_pacsave" > /dev/null
 
 # Content of purge_pacsave.hook

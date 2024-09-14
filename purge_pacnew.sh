@@ -19,18 +19,23 @@ fd -e pacnew . /etc -X rm -rf' | tee "$DEST_DIR/purge_pacnew" > /dev/null
 # Content of check_pacnew script.
 echo '#!/bin/bash
 
+# Define color escape codes for output
+bold_green="\e[1;32m"
+bold_yellow="\e[1;33m"
+reset="\e[0m"
+
 # Search the pacman log for recent warnings about .pacnew files
 log_pacnew=$(grep -P 'warning: .*\.pacnew' /var/log/pacman.log | tail -n 10)
 
 # Verify if .pacnew files exist on the system
-system_pacnew=$(fd -e pacnew . /etc -X rm -rf)
+system_pacnew=$(fd -e pacnew . /etc > /dev/null)
 
 # If there are matching .pacnew files in the system, run the purge script
 if [[ -n "$log_pacnew" && -n "$system_pacnew" ]]; then
-    echo "New .pacnew files detected. Running purge..."
+    echo -e "${bold_green}New .pacnew files detected. Running purge...${reset}"
     /usr/local/bin/purge_pacnew
 else
-    echo "No new .pacnew files detected."
+    echo -e "${bold_yellow}No new .pacnew files detected.${reset}"
 fi' | tee "$DEST_DIR/check_pacnew" > /dev/null
 
 # Content of check_pacnew.hook
