@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Checking to see if we're running as root.
+if [ $(id -u) -ne 0 ]; then
+    echo "Please run this script as root via 'su' or 'sudo'! Thanks."
+    exit
+fi
+
+# Define the directory where the script and hook will be copied.
+DEST_DIR="/usr/local/bin"
+HOOK_DIR="/etc/pacman.d/hooks"
+
+# Content of restore_pacsave script.
+echo '#!/bin/bash
+
+# Define bold color escape codes for output
+bold_green="\e[1;32m"
+bold_yellow="\e[1;33m"
+reset="\e[0m"
+
+# Find all .pacsave files and restore them
+pacsave_files=$(fd -e pacsave . /etc)
+
+if [[ -n "$pacsave_files" ]]; then
+    echo -e "${bold_green}Restoring .pacsave files...${reset}"
+    for pacsave in $pacsave_files; do
+        # Construct the original file path by removing .pacsave suffix
+        original_file="${pacsave%.pacsave}"
+
+        # Check if the original file exists
+        if [[ -e "$original_file" ]]; then
+            echo "Backing up existing file: $original_file"
+            mv "$original_file" "$original_file.bak"
+        fi
+
+        # Restore the .pacsave file to its original location
+        mv "$pacsave" "$original_file"
+        echo "Restored $pacsave to $original_file"
+    done
+else
+    echo -e "${bold_yellow}No .pacsave files found.${reset}"
+fi' | tee "$DEST_DIR/restore_pacsave" > /dev/null
+
+# Content of restore_pacsave.hook
+echo '[Trigger]
+Operation = Install
+Type = Package
+Target = *
+
+[Action]
+Description = Checking for and restoring .pacsave files...
+When = PostTransaction
+Exec = /usr/local/bin/restore_pacsave' | tee "$HOOK_DIR/restore_pacsave.hook" > /dev/null
+chmod 644 "$HOOK_DIR/restore_pacsave.hook"
+
+# Make the script executable and fix permissions.
+chmod 744 "$DEST_DIR/restore_pacsave"
+
+echo "Installation complete. You can now use the $DEST_DIR/restore_pacsave script and the $HOOK_DIR/restore_pacsave pacman post-install hook."
