@@ -287,9 +287,6 @@ echo "setopt HIST_SAVE_NO_DUPS" >> $HOME/.zshrc
 echo alias ls='"lsd"' >> $HOME/.zshrc
 echo alias cat='"bat"' >> $HOME/.zshrc
 
-# Copy over custom Oh My Zsh theme.
-sudo cp -v jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
-
 # Setup Catppuccin colors.
 cd $HOME && git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
 sudo cp -v zsh-syntax-highlighting/themes/*.zsh /etc/zsh
@@ -320,6 +317,9 @@ rm -rf zsh-syntax-highlighting
 sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 echo pfetch >> $HOME/.zshrc
+
+# Copy over custom Oh My Zsh theme.
+sudo cp -v $HOME/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
 
 # Change user's shell to zsh.
 chsh -s /usr/bin/zsh $USER
