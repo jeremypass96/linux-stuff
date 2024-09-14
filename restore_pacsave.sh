@@ -16,6 +16,7 @@ echo '#!/bin/bash
 # Define bold color escape codes for output
 bold_green="\e[1;32m"
 bold_yellow="\e[1;33m"
+bold_red="\e[1;31m"
 reset="\e[0m"
 
 # Find all .pacsave files and restore them
@@ -29,13 +30,13 @@ if [[ -n "$pacsave_files" ]]; then
 
         # Check if the original file exists
         if [[ -e "$original_file" ]]; then
-            echo "Backing up existing file: $original_file"
+            echo -e "${bold_red}Backing up existing file: $original_file${reset}"
             mv "$original_file" "$original_file.bak"
         fi
 
         # Restore the .pacsave file to its original location
         mv "$pacsave" "$original_file"
-        echo "Restored $pacsave to $original_file"
+        echo -e "${bold_green}Restored $pacsave to $original_file${reset}"
     done
 else
     echo -e "${bold_yellow}No .pacsave files found.${reset}"
