@@ -22,7 +22,7 @@ echo '#!/bin/bash
 # Search the pacman log for recent warnings about .pacsave files
 log_pacsave=$(grep -P 'warning: .*\.pacsave' /var/log/pacman.log | tail -n 10)
 
-# Verify if .pacnew files exist on the system
+# Verify if .pacsave files exist on the system
 system_pacsave=$(fd -e pacsave . /etc -X rm -rf)
 
 # If there are matching .pacsave files in the system, run the purge script
