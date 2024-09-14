@@ -318,6 +318,9 @@ sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 echo pfetch >> $HOME/.zshrc
 
+# Copy over custom Oh My Zsh theme.
+sudo cp -v $HOME/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
+
 # Change user's shell to zsh.
 chsh -s /usr/bin/zsh $USER
 
@@ -570,7 +573,7 @@ sed -i 's/-Syuwq/-Syuq'/g /usr/lib/systemd/system/autoupdate.service
 paru -S orphan-manager --noconfirm
 sudo systemctl enable --now orphan-manager.timer
 
-# Add script to system to automatically purge .pacnew and .pacsave files.
+# Add scripts to system to automatically purge .pacnew and .pacsave files.
 sudo ./purge_pacnew.sh
 sudo ./purge_pacsave.sh
 
