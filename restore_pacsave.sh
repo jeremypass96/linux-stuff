@@ -14,6 +14,7 @@ HOOK_DIR="/etc/pacman.d/hooks"
 echo '#!/bin/bash
 
 # Define bold color escape codes for output
+bold_blue="\e[1;34m"
 bold_green="\e[1;32m"
 bold_yellow="\e[1;33m"
 bold_red="\e[1;31m"
@@ -23,7 +24,7 @@ reset="\e[0m"
 pacsave_files=$(fd -e pacsave . /etc)
 
 if [[ -n "$pacsave_files" ]]; then
-    echo -e "${bold_green}Restoring .pacsave files...${reset}"
+    echo -e "${bold_blue}Restoring .pacsave files...${reset}"
     for pacsave in $pacsave_files; do
         # Construct the original file path by removing .pacsave suffix
         original_file="${pacsave%.pacsave}"
