@@ -40,9 +40,9 @@ Type = Package
 Target = *
 
 [Action]
-Description = Purging .pacsave files...
+Description = Checking for and purging .pacsave files...
 When = PostTransaction
-Exec = /usr/local/bin/purge_pacsave' | tee "$HOOK_DIR/check_pacsave.hook" > /dev/null
+Exec = /usr/local/bin/check_pacsave' | tee "$HOOK_DIR/check_pacsave.hook" > /dev/null
 chmod 644 "$HOOK_DIR/check_pacsave.hook"
 
 # Make the script executable and fix permissions.
