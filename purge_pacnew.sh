@@ -28,7 +28,7 @@ reset="\e[0m"
 log_pacnew=$(grep -P 'warning: .*\.pacnew' /var/log/pacman.log | tail -n 10)
 
 # Verify if .pacnew files exist on the system
-system_pacnew=$(fd -e pacnew . /etc > /dev/null)
+system_pacnew=$(fd -e pacnew . /etc)
 
 # If there are matching .pacnew files in the system, run the purge script
 if [[ -n "$log_pacnew" && -n "$system_pacnew" ]]; then
