@@ -545,11 +545,7 @@ paru -S pac-wrapper --noconfirm
 sudo chmod o+w /etc/environment && echo PAC_PACMAN=paru >> /etc/environment && sudo chmod o-w /etc/environment
 source /etc/environment
 
-# Enable paccache SystemD timer (cleans up pacman package cache).
-sudo systemctl enable --now paccache.timer
-sudo sed -i 's/paccache -r/paccache -rk0/g' /usr/lib/systemd/system/paccache.service
-
-# Install and enable orphan-manager, a Systemd timer to automatically remove orphaned packages.
+# Install and enable orphan-manager, a systemd timer to automatically remove orphaned packages.
 paru -S orphan-manager --noconfirm
 sudo systemctl enable --now orphan-manager.timer
 
