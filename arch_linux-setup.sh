@@ -585,3 +585,11 @@ if [ "$resp" = 3 ]; then
 	./vim_setup_catppuccino_archlinux.sh
 	sudo pacman -Rns micro xclip --noconfirm
 fi
+
+# Install and fix Plymouth and apply theme!
+sudo pacman -S plymouth --noconfirm
+sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 loglevel=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 quiet loglevel=3 udev.log-priority=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf udev.log_level=3 splash net.ifnames=0"/g' /etc/default/grub
+echo ShowDelay=0 >> /etc/plymouth/plymouthd.conf
+paru -S plymouth-theme-arch-charge-big --noconfirm
+sudo plymouth-set-default-theme -R arch-charge-big
+sudo grub-mkconfig -o /boot/grub/grub.cfg
