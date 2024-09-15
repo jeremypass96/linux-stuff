@@ -101,22 +101,6 @@ sudo cp -rv color-schemes /usr/share
 sudo cp -rv Kvantum /usr/share
 sudo cp -rv plasma /usr/share
 sudo cp -rv wallpaper/Vimix* /usr/share/plasma/wallpapers
-cd sddm && sudo ./install.sh
-# Fix Vimix SDDM folder permissions.
-sudo chmod 755 /usr/share/sddm/themes/vimix
-sudo chmod 755 /usr/share/sddm/themes/vimix/assets
-sudo chmod 644 /usr/share/sddm/themes/vimix/assets/*
-sudo chmod 755 /usr/share/sddm/themes/vimix/components
-sudo chmod 644 /usr/share/sddm/themes/vimix/components/*
-sudo chmod 755 /usr/share/sddm/themes/vimix/faces
-sudo chmod 644 /usr/share/sddm/themes/vimix/faces/.face.icon
-sudo chmod 644 /usr/share/sddm/themes/vimix/*.qml
-sudo chmod 755 /usr/share/sddm/themes/vimix/Main.qml
-sudo chmod 644 /usr/share/sddm/themes/vimix/*.desktop
-sudo chmod 644 /usr/share/sddm/themes/vimix/*.png
-sudo chmod 644 /usr/share/sddm/themes/vimix/*.conf
-sudo chmod 644 /usr/share/sddm/themes/vimix/*.conf.user
-sudo chmod 744 /usr/share/sddm/themes/vimix/background.jpg
 # Fix Vimix Plasma theme folder permissions.
 sudo chmod -R 644 /usr/share/plasma/desktoptheme/Vimix*
 sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix*
