@@ -546,13 +546,7 @@ source /etc/environment
 
 # Enable paccache SystemD timer (cleans up pacman package cache).
 sudo systemctl enable --now paccache.timer
-
-# Install autoupdate to automatically update the OS during boot.
-paru -S autoupdate --noconfirm
-sudo systemctl enable --now autoupdate.service
-
-# Configure autoupdate.
-sed -i 's/-Syuwq/-Syuq'/g /usr/lib/systemd/system/autoupdate.service
+sudo sed -i 's/paccache -r/paccache -rk0/g' /usr/lib/systemd/system/paccache.service
 
 # Install and enable orphan-manager, a Systemd timer to automatically remove orphaned packages.
 paru -S orphan-manager --noconfirm
