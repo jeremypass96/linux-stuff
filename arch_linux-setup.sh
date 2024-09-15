@@ -222,7 +222,8 @@ sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
 
 # Install some useful pacman post-transaction hooks.
-paru -S pacman-cleanup-hook grub-hook sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook pamac-appstream-hook --noconfirm
+paru -S paccache-hook grub-hook sync-pacman-hook-git remove-orphaned-kernels pacman-log-orphans-hook pamac-appstream-hook --noconfirm
+sudo sed -i 's/installed_keep=2/installed_keep=0/g' /etc/paccache-hook.conf
 
 # Setup config files and stuff.
 cd linux-stuff/
