@@ -111,6 +111,7 @@ sudo chmod 644 /usr/share/sddm/themes/vimix/components/*
 sudo chmod 755 /usr/share/sddm/themes/vimix/faces
 sudo chmod 644 /usr/share/sddm/themes/vimix/faces/.face.icon
 sudo chmod 644 /usr/share/sddm/themes/vimix/*.qml
+sudo chmod 755 /usr/share/sddm/themes/vimix/Main.qml
 sudo chmod 644 /usr/share/sddm/themes/vimix/*.desktop
 sudo chmod 644 /usr/share/sddm/themes/vimix/*.png
 sudo chmod 644 /usr/share/sddm/themes/vimix/*.conf
