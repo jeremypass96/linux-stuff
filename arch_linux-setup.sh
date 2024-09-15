@@ -49,9 +49,6 @@ sudo pacman -S kdegraphics-thumbnailers --noconfirm
 # Install some KDE utilities.
 sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive kio-admin audiocd-kio ksystemlog kcron --noconfirm
 
-# Install PackageKit so that Discover will work properly.
-sudo pacman -S packagekit-qt6 --noconfirm
-
 # Install some core utilities that didn't get installed, for some reason.
 sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp cronie --noconfirm
 
@@ -155,6 +152,9 @@ sudo chmod 644 /usr/share/Kvantum/Vimix*/*
 # Cleanup
 cd $HOME
 rm -rf $HOME/Vimix-kde
+
+# Install Octopi, a Qt-based pacman frontend with AUR support.
+paru -S octopi --noconfirm
 
 # Install and configure printing support.
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
