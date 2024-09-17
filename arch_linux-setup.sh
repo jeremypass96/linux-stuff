@@ -76,6 +76,10 @@ sudo sed -i 's/#NewsOnUpgrade/NewsOnUpgrade'/g /etc/paru.conf
 sudo sed -i '/NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
 sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 
+# Change to wget from curl for http/https downloads with Paru.
+sudo sed -i 's|http::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u|http::/usr/bin/wget --no-cookies --tries=3 --waitretry=3 --continue -O %o %u|' /etc/makepkg.conf
+sudo sed -i 's|https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u|https::/usr/bin/wget --no-cookies --tries=3 --waitretry=3 --continue -O %o %u|' /etc/makepkg.conf
+
 # Install Konsole color scheme.
 read -p "Which Konsole colorscheme do you want?
 1. Catppuccin
