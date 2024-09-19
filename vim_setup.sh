@@ -11,7 +11,7 @@ sudo cp -v ~/.vim/autoload/plug.vim /etc/skel/.vim/autoload/plug.vim
 sudo touch /etc/vimrc
 vimrc_path=/etc/vimrc
 sudo chmod o+x $vimrc_path
-cat << EOF >> $vimrc_path
+sudo cat << EOF >> $vimrc_path
 set number
 set cursorline
 set linebreak
