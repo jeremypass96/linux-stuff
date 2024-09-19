@@ -11,19 +11,19 @@ NC='\033[0m' # No color
 
 # Function to display messages with different colors
 function echo_info {
-    echo -e "${BLUE}$1${NC}"   # Blue for info
+    echo -e "${BLUE}$1${NC}"
 }
 
 function echo_success {
-    echo -e "${GREEN}$1${NC}"  # Green for success
+    echo -e "${GREEN}$1${NC}"
 }
 
 function echo_warning {
-    echo -e "${YELLOW}$1${NC}" # Yellow for warnings
+    echo -e "${YELLOW}$1${NC}"
 }
 
 function echo_error {
-    echo -e "${RED}$1${NC}"    # Red for errors
+    echo -e "${RED}$1${NC}"
 }
 
 # Get the total installed RAM in kilobytes
