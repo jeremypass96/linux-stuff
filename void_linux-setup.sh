@@ -44,7 +44,7 @@ echo -e "${GREEN}Installing Xorg server...${NC}"
 vpm install xorg-minimal xorg-input-drivers xorg-video-drivers xorg-fonts dbus-elogind dbus-elogind-x11 -y
 
 # Install misc. utilities.
-echo "${GREEN}Installing misc. utilities...${NC}"
+echo -e "${GREEN}Installing misc. utilities...${NC}"
 vpm install wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g void-updates void-release-keys fortune-mod-void unzip wl-clipboard qt5ct kvantum -y
 
 clear
