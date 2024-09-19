@@ -33,4 +33,4 @@ set noshowmode
 EOF
 sudo chmod o-w $vimrc_path
 vim -es -u $vimrc_path -i NONE -c "PlugInstall" -c "qa"
-sudo cp -rv ~/.vim/plugged /etc/skel/.vim/plugged
+sudo cp -r ~/.vim/plugged /etc/skel/.vim/plugged
