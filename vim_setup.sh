@@ -8,6 +8,7 @@ sudo mkdir -p /etc/skel/.vim/autoload
 sudo cp -v ~/.vim/autoload/plug.vim /etc/skel/.vim/autoload/plug.vim
 
 # Configure the vimrc file.
+sudo touch /etc/vimrc
 vimrc_path=/etc/vimrc
 sudo chmod o+x $vimrc_path
 cat << EOF >> $vimrc_path
