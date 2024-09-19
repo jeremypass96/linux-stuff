@@ -20,6 +20,9 @@ fi
 echo -e "${YELLOW}Applying audio buzz/hum fix...${NC}"
 echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
 
+echo -e "${YELLOW}Creating swapfile...${NC}"
+./create_swapfile_void.sh
+
 # Configure XBPS to use the latest package versions.
 echo -e "${GREEN}Configuring XBPS to use the latest package versions from the Void repositories...${NC}"
 sed -i 's/#bestmatching=true/bestmatching=true/g' /usr/share/xbps.d/xbps.conf
