@@ -23,6 +23,7 @@ set termguicolors
 
 call plug#begin()
 Plug 'itchyny/lightline.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 call plug#end()
 
 let g:lightline = {'colorscheme': 'one'}
