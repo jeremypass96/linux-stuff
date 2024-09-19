@@ -35,7 +35,7 @@ sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.*
 cp -v $HOME/linux-stuff/Dotfiles/.zshrc $HOME/.zshrc
 
 # Copy custom Oh My Zsh theme.
-cp -v $HOME/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
+sudo cp -v $HOME/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
 
 # Setup Catppuccin syntax highlighting colors
 read -p "Do you want to setup syntax highlighting colors with the Catppuccin colorscheme? (y/N) " resp
