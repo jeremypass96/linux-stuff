@@ -75,7 +75,7 @@ fi
 
 # Install and configure fonts.
 echo -e "${GREEN}Installing fonts...${NC}"
-vpm install nerd-fonts font-util source-sans-pro font-manjari noto-fonts-ttf noto-fonts-emoji font-material-design-icons-ttf ttf-ubuntu-font-family fonts-roboto-ttf ttfautohint -y
+vpm install nerd-fonts source-sans-pro font-manjari noto-fonts-ttf noto-fonts-emoji font-material-design-icons-ttf ttf-ubuntu-font-family fonts-roboto-ttf ttfautohint -y
 # Enable auto-hinting.
 ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
 # Enable RGB sub-pixel rendering.
