@@ -45,7 +45,7 @@ vpm install xorg-minimal xorg-input-drivers xorg-video-drivers xorg-fonts dbus-e
 
 # Install misc. utilities.
 echo -e "${GREEN}Installing misc. utilities...${NC}"
-vpm install dialog wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g void-updates void-release-keys fortune-mod-void unzip wl-clipboard qt5ct kvantum -y
+vpm install dialog bc wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g void-updates void-release-keys fortune-mod-void unzip wl-clipboard qt5ct kvantum -y
 
 clear
 
