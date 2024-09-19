@@ -10,8 +10,8 @@ sudo cp -v ~/.vim/autoload/plug.vim /etc/skel/.vim/autoload/plug.vim
 # Configure the vimrc file.
 sudo touch /etc/vimrc
 vimrc_path=/etc/vimrc
-sudo chmod o+x $vimrc_path
-sudo cat << EOF >> $vimrc_path
+sudo chmod o+w $vimrc_path
+cat << EOF >> $vimrc_path
 set number
 set cursorline
 set linebreak
@@ -30,4 +30,4 @@ colorscheme onehalfdark
 set laststatus=2
 set noshowmode
 EOF
-chmod o-x $vimrc_path
+chmod o-w $vimrc_path
