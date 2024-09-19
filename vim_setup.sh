@@ -21,7 +21,7 @@ set spell
 set smoothscroll
 set termguicolors
 
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 call plug#end()
@@ -33,3 +33,4 @@ set noshowmode
 EOF
 sudo chmod o-w $vimrc_path
 vim -es -u $vimrc_path -i NONE -c "PlugInstall" -c "qa"
+sudo cp -rv ~/.vim/plugged /etc/skel/.vim/plugged
