@@ -225,9 +225,10 @@ echo -e "${YELLOW}Downloading Konsole colors...${NC}"
 mkdir -p /home/$USER/.local/share/konsole/
 mkdir -p /etc/skel/.local/share/konsole/
 curl https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme -o /home/$USER/onehalf-dark.colorscheme
-cp -v onehalf-dark.colorscheme /home/$USER/.local/share/konsole/
-cp -v onehalf-dark.colorscheme /etc/skel/.local/share/konsole/
+cp -v /home/$USER/onehalf-dark.colorscheme /home/$USER/.local/share/konsole/
+cp -v /home/$USER/onehalf-dark.colorscheme /etc/skel/.local/share/konsole/
 chown -R $USER:$USER /home/$USER/.local
+rm -r /home/$USER/onehalf-dark.colorscheme
 
 # Ask the user if they want to enable Flatpak support.
 read -p "Do you want to enable Flatpak support? (Y/n) " resp
