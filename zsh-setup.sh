@@ -74,7 +74,7 @@ if [ "$resp" = y ]; then
         esac
     done
 else
-    continue
+    echo "Continuing..."
 fi
 
 # Clean up and copy configurations for future users and root
