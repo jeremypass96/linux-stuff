@@ -8,9 +8,8 @@ sudo mkdir -p /etc/skel/.vim/autoload
 sudo cp -v ~/.vim/autoload/plug.vim /etc/skel/.vim/autoload/plug.vim
 
 # Configure the vimrc file.
-sudo touch /etc/vimrc
-vimrc_path=/etc/vimrc
-sudo chmod o+w $vimrc_path
+sudo touch ~/.vim/vimrc
+vimrc_path=~/.vim/vimrc
 cat << EOF >> $vimrc_path
 set number
 set cursorline
@@ -31,6 +30,7 @@ colorscheme onehalfdark
 set laststatus=2
 set noshowmode
 EOF
-sudo chmod o-w $vimrc_path
+
+# Configure vim.
 vim -es -u $vimrc_path -i NONE -c "PlugInstall" -c "qa"
 sudo cp -r ~/.vim/plugged /etc/skel/.vim/plugged
