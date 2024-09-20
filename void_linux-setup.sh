@@ -107,7 +107,7 @@ wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ThinItalic.ttf
 
 # Install KDE.
 echo -e "${GREEN}Installing the KDE desktop...${NC}"
-vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds print-manager plasma-firewall plasma-disks breeze krunner sddm -y
+vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds oxygen-icons5 oxygen-gtk+3 print-manager plasma-firewall plasma-disks breeze krunner sddm -y
 
 # Enable desktop services.
 echo -e "${BLUE}Enabling desktop services...${NC}"
