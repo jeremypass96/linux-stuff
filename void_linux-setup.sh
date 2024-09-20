@@ -20,9 +20,6 @@ fi
 echo -e "${YELLOW}Applying audio buzz/hum fix...${NC}"
 echo "options snd-hda-intel power_save=0 power_save_controller=N" >> /etc/modprobe.d/alsa-base.conf
 
-echo -e "${YELLOW}Creating swapfile...${NC}"
-./create_swapfile_void.sh
-
 # Configure XBPS to use the latest package versions.
 echo -e "${GREEN}Configuring XBPS to use the latest package versions from the Void repositories...${NC}"
 sed -i 's/#bestmatching=true/bestmatching=true/g' /usr/share/xbps.d/xbps.conf
@@ -46,6 +43,9 @@ vpm install xorg-minimal xorg-input-drivers xorg-video-drivers xorg-fonts dbus-e
 # Install misc. utilities.
 echo -e "${GREEN}Installing misc. utilities...${NC}"
 vpm install dialog bc wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd pfetch topgrade octoxbps micro make autoconf automake pkg-config gcc lynis neofetch flac vlc duf btop gufw ffmpegthumbs ntfs-3g void-updates void-release-keys fortune-mod-void unzip wl-clipboard qt5ct kvantum -y
+
+echo -e "${YELLOW}Creating swapfile...${NC}"
+./create_swapfile_void.sh
 
 clear
 
