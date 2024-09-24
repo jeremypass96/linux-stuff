@@ -38,9 +38,9 @@ TOTAL_RAM_KB=$(grep MemTotal /proc/meminfo | awk '{print $2}')
 # Convert RAM to gigabytes (GB)
 TOTAL_RAM_GB=$(echo "$TOTAL_RAM_KB / 1024 / 1024" | bc)
 
-# Calculate swap size based on the condition
+# Calculate swap size. If RAM is larger than 8GB, create a 4GB swap file.
 if [[ "$TOTAL_RAM_GB" -ge 8 ]]; then
-    SWAP_SIZE_GB=8
+    SWAP_SIZE_GB=4
 else
     SWAP_SIZE_GB=$(echo "$TOTAL_RAM_GB * 2" | bc)
 fi
