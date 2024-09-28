@@ -97,6 +97,9 @@ fi
 # Install icon and KDE theme.
 paru -S papirus-icon-theme papirus-folders vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
 
+# Install SDDM theme.
+paru -S sddm-theme-sugar-candy-git --noconfirm
+
 # Install KDE theme.
 git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
 cd $HOME/Vimix-kde
@@ -173,9 +176,6 @@ sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts
 
 # Install "lsd," a better replacement for ls.
 paru -S lsd --noconfirm
-
-# Install topgrade.
-paru -S topgrade-bin --noconfirm
 
 # Install pfetch.
 paru -S pfetch --noconfirm
