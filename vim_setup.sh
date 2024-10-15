@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script sets up Vim with the "onehalfdark" colorscheme and the Lightline plugin for Linux.
+# This script sets up Vim with the "one" colorscheme and the Lightline plugin for Linux.
 
 # Install vim-plug.
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -22,11 +22,12 @@ set termguicolors
 
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'rakr/vim-one', { 'rtp': 'vim' }
 call plug#end()
 
 let g:lightline = {'colorscheme': 'one'}
-colorscheme onehalfdark
+let g:one_allow_italics = 1
+colorscheme one
 set laststatus=2
 set noshowmode
 EOF

@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script sets up Vim with the "onehalfdark" colorscheme and the Lightline plugin for Arch Linux.
+# This script sets up Vim with the "one" colorscheme and the Lightline plugin for Arch Linux.
 
 # Install the Lightline plugin manager, vim-plug, and colorschemes.
 paru -S vim-lightline-git vim-plug vim-colors-night-git --noconfirm
@@ -18,7 +18,8 @@ set smoothscroll
 set termguicolors
 
 let g:lightline = {'colorscheme': 'one'}
-colorscheme onehalfdark
+let g:one_allow_italics = 1
+colorscheme one
 set laststatus=2
 set noshowmode
 EOF
