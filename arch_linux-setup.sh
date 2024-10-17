@@ -239,7 +239,7 @@ sudo ./cleanup-systemd-boot.sh
 echo "Configuring Zsh..."
 paru -S oh-my-zsh-git --noconfirm
 cp -v /usr/share/oh-my-zsh/zshrc $HOME/.zshrc
-sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"gentoo"'/g $HOME/.zshrc
+sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"jpassarelli"'/g $HOME/.zshrc
 sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' $HOME/.zshrc
 sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g $HOME/.zshrc
 sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/g' $HOME/.zshrc
