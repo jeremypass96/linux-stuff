@@ -22,7 +22,7 @@ set termguicolors
 
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
-Plug 'rakr/vim-one', { 'rtp': 'vim' }
+Plug 'rakr/vim-one'
 call plug#end()
 
 let g:lightline = {'colorscheme': 'one'}
