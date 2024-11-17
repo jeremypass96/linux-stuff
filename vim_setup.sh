@@ -23,6 +23,7 @@ set termguicolors
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 let g:lightline = {'colorscheme': 'ayu_mirage'}
