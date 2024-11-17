@@ -1,8 +1,8 @@
 #!/bin/bash
 # This script sets up Vim with the "one" colorscheme and the Lightline plugin for Arch Linux.
-
-# Install the Lightline plugin manager, vim-plug, and colorschemes.
-paru -S vim-lightline-git vim-plug vim-colors-night-git --noconfirm
+tt
+# install the lightline plugin manager, vim-plug, and colorschemes.
+paru -s vim-lightline-git vim-plug vim-ayu-git --noconfirm
 
 # Configure the vimrc file.
 vimrc_path=/etc/vimrc
@@ -17,9 +17,10 @@ set spell
 set smoothscroll
 set termguicolors
 
-let g:lightline = {'colorscheme': 'one'}
+let g:lightline = {'colorscheme': 'ayu_mirage'}
 let g:one_allow_italics = 1
-colorscheme one
+let ayucolor="mirage"
+colorscheme ayu
 set laststatus=2
 set noshowmode
 EOF

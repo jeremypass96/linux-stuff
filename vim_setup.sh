@@ -22,12 +22,13 @@ set termguicolors
 
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
-Plug 'rakr/vim-one'
+Plug 'ayu-theme/ayu-vim'
 call plug#end()
 
-let g:lightline = {'colorscheme': 'one'}
+let g:lightline = {'colorscheme': 'ayu_mirage'}
 let g:one_allow_italics = 1
-colorscheme one
+let ayucolor="mirage"
+colorscheme ayu
 set laststatus=2
 set noshowmode
 EOF
