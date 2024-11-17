@@ -2,7 +2,7 @@
 # This script sets up Vim with the Catppuccino Mocha colorscheme and the Lightline plugin for Arch Linux.
 
 # Install the Lightline plugin manager, vim-plug, and colorschemes.
-paru -S vim-lightline-git vim-plug vim-colors-night-git --noconfirm
+paru -S vim-lightline-git vim-plug vim-colors-night-git vim-auto-pairs-git --noconfirm
 
 # Configure the vimrc file.
 vimrc_path=/etc/vimrc
