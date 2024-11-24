@@ -1,7 +1,7 @@
 {
     "workbench.startupEditor": "newUntitledFile",
     "workbench.iconTheme": "file-icons",
-    "workbench.colorTheme": "Mayukai Mono",
+    "workbench.colorTheme": "ayu MiDas",
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.banner": "never",
     "security.workspace.trust.startupPrompt": "never",
