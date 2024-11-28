@@ -1,18 +1,32 @@
 #!/bin/bash
 # This script cleans up and configures an Arch Linux KDE install that was installed with "archinstall." Run as a normal user!
 
+# Define color codes
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[1;34m'
+MAGENTA='\033[1;35m'
+CYAN='\033[1;36m'
+NC='\033[0m' # No Color
+
+echo -e "${CYAN}Welcome to the Arch Linux post-install script!${NC}"
+
 # Audio buzz/hum fix.
+echo -e "${BLUE}Fixing audio buzz/him issue...${NC}"
 sudo touch /etc/modprobe.d/alsa-base.conf && sudo chmod o+w /etc/modprobe.d/alsa-base.conf
 echo "options snd-hda-intel power_save=0 power_save_controller=N" > /etc/modprobe.d/alsa-base.conf
 sudo chmod o-w /etc/modprobe.d/alsa-base.conf
 
 # Tweak pacman for sane defaults.
+echo -e "${BLUE}Tweaking pacman for sane defaults...${NC}"
 sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
 sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
 sudo sed -i 's/'"#ParallelDownloads = 5"'/'"ParallelDownloads = 20"''/g /etc/pacman.conf
 sudo sed -i '/ParallelDownloads = 20/ a\ILoveCandy\' /etc/pacman.conf
 
 # Rank mirrors.
+echo -e "${BLUE}Ranking Arch Linux mirrors...${NC}"
 sudo pacman -S reflector --noconfirm
 sudo reflector --latest 150 --protocol https --sort rate --sort age --score 10 --save /etc/pacman.d/mirrorlist
 # Congfigure reflector config file for systemd auto-update.
@@ -29,6 +43,7 @@ sudo systemctl enable reflector.service --now && sudo systemctl enable reflector
 sudo pacman -Syy
 
 # Install and use a better NTP daemon, Chrony.
+echo -e "${BLUE}Installing and using a better NTP daemon, Chrony...${NC}"
 sudo pacman -S chrony --noconfirm
 sudo sed -i 's/! server 0.arch.pool.ntp.org iburst/server 0.arch.pool.ntp.org iburst'/g /etc/chrony.conf
 sudo sed -i 's/! server 1.arch.pool.ntp.org iburst/server 1.arch.pool.ntp.org iburst'/g /etc/chrony.conf
@@ -38,7 +53,25 @@ sudo systemctl enable --now chronyd && sudo systemctl enable --now chrony-wait
 sudo chronyc online
 
 # Remove unneeded packages.
-sudo pacman -Rns nano htop kate --noconfirm
+echo -e "${BLUE}Removing unneeded packages...${NC}"
+sudo pacman -Rns nano htop kate openssh --noconfirm
+
+# Remove wireless tooks (if not needed!).
+read -p "$(echo -e "${YELLOW}Do you wish to remove the wireless tools that the Arch installer installed via the 'Desktop' profile? (Y/n) ${NC}")" resp
+resp=${resp:-Y}
+if [[ "$resp" =~ ^[Yy]$ ]]; then
+	echo -e "${GREEN}Removing wireless tools...${NC}"
+	sudo pacman -Rns wireless_tools wpa_supplicant iwd
+	if [[ $? -eq 0 ]]; then
+        echo -e "${GREEN}Wireless tools removed successfully!${NC}"
+    else
+        echo -e "${RED}An error occurred while removing wireless tools.${NC}"
+	fi
+fi
+elif [[ "$resp" =~ ^[Nn]$ ]]; then
+	echo -e "${BLUE}Skipping removal of wireless tools.${NC}"
+	continue
+fi
 
 # Install ffmpegthumbs, for video file thumbnail support in Dolphin.
 sudo pacman -S ffmpegthumbs --noconfirm
@@ -47,22 +80,25 @@ sudo pacman -S ffmpegthumbs --noconfirm
 sudo pacman -S kdegraphics-thumbnailers --noconfirm
 
 # Install some KDE utilities.
+echo -e "${BLUE}Installing some KDE utilities...${NC}"
 sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive kio-admin audiocd-kio ksystemlog kcron --noconfirm
 
-# Install some core utilities that didn't get installed, for some reason.
+# Install some core utilities that didn't get installed, for some odd reason.
 sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp cronie --noconfirm
 
 # Install some command-line utilities.
-sudo pacman -S micro xclip vim duf bat fd lynis btop --noconfirm
+sudo pacman -S duf bat fd lynis btop --noconfirm
 
 # Install spell checking support.
 sudo pacman -S aspell aspell-en --noconfirm
 
 # Install and configure plocate.
+echo -e "${BLUE}Installing and configuring 'plocate'...${NC}"
 sudo pacman -S plocate --noconfirm
 sudo systemctl enable --now plocate-updatedb.timer
 
 # Install paru AUR helper.
+echo -e "${BLUE}Installing the 'paru' AUR helper...${NC}"
 sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git $HOME/paru-bin && cd paru-bin && makepkg -sic --noconfirm
 cd .. && rm -rf paru-bin
 # Configure paru options.
@@ -77,11 +113,12 @@ sudo sed -i '/NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
 sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 
 # Change to wget from curl for http/https downloads with Paru.
+echo -e "${BLUE}Changing download manager to wget from curl for Paru...${NC}"
 sudo sed -i 's|http::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u|http::/usr/bin/wget --no-cookies --tries=3 --waitretry=3 --continue -O %o %u|' /etc/makepkg.conf
 sudo sed -i 's|https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u|https::/usr/bin/wget --no-cookies --tries=3 --waitretry=3 --continue -O %o %u|' /etc/makepkg.conf
 
 # Install Konsole color scheme.
-read -p "Which Konsole colorscheme do you want?
+read -p "$(echo -e "${YELLOW}Which Konsole colorscheme do you want?${NC}")
 1. Catppuccin
 2. OneHalf-Dark
 -> " $resp
@@ -146,9 +183,11 @@ cd $HOME
 rm -rf $HOME/Vimix-kde
 
 # Install Octopi, a Qt-based pacman frontend with AUR support.
+echo -e "${BLUE}Installing Octopi...${NC}"
 paru -S octopi --noconfirm
 
 # Install and configure printing support.
+echo -e "${BLUE}Installing and configuring printing support...${NC}"
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
 sudo systemctl enable --now cups cups-browsed
 
@@ -165,6 +204,7 @@ sudo pacman -S power-profiles-daemon --noconfirm
 sudo pacman -S ntfs-3g --noconfirm
 
 # Install Brave web browser.
+echo -e "${BLUE}Installing the Brave web browser...${NC}"
 paru -S brave-bin --noconfirm
 
 # Install fonts.
@@ -181,6 +221,7 @@ paru -S lsd --noconfirm
 paru -S pfetch --noconfirm
 
 # Install and configure VSCodium.
+echo -e "${BLUE}Installing and configuring VSCodium...${NC}"
 paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p $HOME/.config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.config/VSCodium/User/settings.json
 vscodium --install-extension qyurila.ayu-midas
@@ -188,40 +229,49 @@ vscodium --install-extension jeff-hykin.better-shellscript-syntax
 vscodium --install-extension file-icons.file-icons
 vscodium --install-extension miguelsolorio.fluent-icons
 
-# Install grub theme.
+# Install GRUB theme.
+echo -e "${BLUE}Installing and configuring GRUB theme...${NC}"
 paru -S grub-theme-stylish-color-1080p-git --noconfirm
 sudo sed -i 's|#GRUB_THEME="/path/to/gfxtheme"|GRUB_THEME="/usr/share/grub/themes/stylish-color-1080p/theme.txt"|g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install Wine.
+echo -e "${BLUE}Installing Wine...${NC}"
 paru -S wine-installer wine-gecko wine-mono --noconfirm
 
 # Install some useful software.
 sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip clipgrab partitionmanager dolphin-plugins --noconfirm
 
 # Install balenaEtcher to write OS images to USB flash drives.
+echo -e "${BLUE}Installing balenaEtcher...${NC}"
 paru -S etcher-bin --noconfirm
 
 # Install VirtualBox.
+echo -e "${BLUE}Installing VirtualBox...${NC}"
 sudo pacman -S virtualbox virtualbox-guest-iso --noconfirm
 paru -S virtualbox-unattended-templates --noconfirm
 
 # Install mp3tag.
+echo -e "${BLUE}Installing mp3tag...${NC}"
 paru -S mp3tag --noconfirm
 
 # Install dependencies for k3b.
 paru -S cdrtools dvd+rw-tools transcode sox normalize cdrdao --noconfirm
 
 # Install some KDE games.
+echo -e "${BLUE}Installing some KDE games...${NC}"
 sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
 
 # Install Spotify.
+echo -e "${BLUE}Installing Spotify...${NC}"
 paru -S spotify --noconfirm
 
 # Install KDE Connect.
+echo -e "${BLUE}Installing KDE Connect...${NC}"
 sudo pacman -S kdeconnect --noconfirm
 
 # Install gufw firewall and enable the systemd service.
+echo -e "${BLUE}Installing and enabling the 'gufw' firewall...${NC}"
 sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
 
@@ -236,7 +286,7 @@ cd linux-stuff/
 sudo ./cleanup-systemd-boot.sh
 
 # Configure Zsh.
-echo "Configuring Zsh..."
+echo -e "${BLUE}Configuring Zsh...${NC}"
 paru -S oh-my-zsh-git --noconfirm
 cp -v /usr/share/oh-my-zsh/zshrc $HOME/.zshrc
 sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"jpassarelli"'/g $HOME/.zshrc
@@ -280,7 +330,8 @@ echo alias cat='"bat"' >> $HOME/.zshrc
 # Setup Catppuccin colors.
 cd $HOME && git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
 sudo cp -v zsh-syntax-highlighting/themes/*.zsh /etc/zsh
-read -p "Which Catppuccin colors do you want for Zsh syntax highlighting?
+
+read -p "$(echo -e "${YELLOW}Which Catppuccin colors do you want for Zsh syntax highlighting?${NC}")
 1.) Latte
 2.) Frappé
 3.) Macchiato
@@ -334,7 +385,7 @@ sudo chmod o-w /etc/environment
 paru -S mkinitcpio-firmware --noconfirm
 
 # Stop mkinitcpio from generating a fallback kernel image.
-echo "Stopping mkinitcpio from generating a fallback kernel image..."
+echo -e "${BLUE}Stopping mkinitcpio from generating a fallback kernel image...${NC}"
 if [ $(uname -r | grep arch | awk -F "-" '{print $(NF)}') ]; then
 	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
 	sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
@@ -385,7 +436,7 @@ if [ $(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}') ]; then
 fi
 
 # Configure lynis.
-echo "Configuring lynis..."
+echo -e "${BLUE}Configuring lynis...${NC}"
 sudo chmod o+w /etc/lynis/custom.prf
 echo "machine-role=personal" > /etc/lynis/custom.prf
 echo "test-scan-mode=normal" >> /etc/lynis/custom.prf
@@ -401,6 +452,7 @@ EOF
 sudo chmod o-w /etc/lynis/custom.prf
 
 # Secure the OS.
+echo -e "${BLUE}Hardening the OS...${NC}"
 sudo pacman -S arch-audit apparmor sysstat puppet rkhunter libpwquality rng-tools --noconfirm
 paru -S acct chkrootkit --noconfirm
 sudo chmod 600 /boot/grub/grub.cfg
@@ -558,12 +610,13 @@ sudo ./purge_pacnew.sh
 sudo ./purge_pacsave.sh
 
 # Configure console text editor.
-read -p "Which console text editor do you want?
+read -p "$(echo -e "${YELLOW}Which console text editor do you want?${NC}")
 1.) Micro
 2.) Vim
 3.) Vim with Catppuccino colorscheme.
 -> " $resp
 if [ "$resp" = 1 ]; then
+	sudo pacman -S micro xclip --noconfirm
 	./micro-setup.sh
 	sudo sed -i 's/vim/micro'/g /etc/environment
 	sudo chmod o+w /etc/environment
@@ -574,11 +627,9 @@ if [ "$resp" = 1 ]; then
 fi
 if [ "$resp" = 2 ]; then
 	./vim_setup_archlinux.sh
-	sudo pacman -Rns micro xclip --noconfirm
 fi
 if [ "$resp" = 3 ]; then
 	./vim_setup_catppuccino_archlinux.sh
-	sudo pacman -Rns micro xclip --noconfirm
 fi
 
 # Install and fix Plymouth and apply theme!
