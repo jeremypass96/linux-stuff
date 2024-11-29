@@ -639,3 +639,14 @@ echo ShowDelay=0 >> /etc/plymouth/plymouthd.conf
 paru -S plymouth-theme-arch-charge-big --noconfirm
 sudo plymouth-set-default-theme -R arch-charge-big
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# Check if we're running on VMware.
+if dmesg | grep -iq 'VMware\|Virtual Machine'; then
+    # Install open-vm-tools.
+    echo -e "${GREEN}Running on VMware, installing open-vm-tools...${NC}"
+    sudo pacman -S open-vm-tools --noconfirm
+    sudo systemctl enable --now vmtoolsd
+    sudo systemctl enable --now vmware-vmblock-fuse
+else
+    echo -e "${RED}Not running on VMware. Skipping open-vm-tools installation.${NC}"
+fi
