@@ -112,7 +112,9 @@ if [ "$resp" = 1 ]; then
 fi
 if [ "$resp" = 2 ]; then
 	wget https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
-	sudo mv onehalf-dark.colorscheme /usr/share/konsole
+	sudo mkdir -p /usr/share/konsole
+    sudo chmod 755 /usr/share/konsole
+    sudo mv onehalf-dark.colorscheme /usr/share/konsole
 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
 fi
 
