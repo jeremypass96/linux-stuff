@@ -640,6 +640,9 @@ paru -S plymouth-theme-arch-charge-big --noconfirm
 sudo plymouth-set-default-theme -R arch-charge-big
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
+# Use xz compression when compressing the initramfs image.
+sed -i 's/#COMPRESSION="xz"/COMPRESSION="xz"/g' /etc/mkinitcpio.conf
+
 # Check if we're running on VMware.
 if dmesg | grep -iq 'VMware\|Virtual Machine'; then
     # Install open-vm-tools.
