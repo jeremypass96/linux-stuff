@@ -160,6 +160,8 @@ sudo chmod 755 /usr/share/plasma/wallpapers/Vimix*/contents/images
 sudo chmod 644 /usr/share/plasma/wallpapers/Vimix*/contents/images/3840x3840.png
 sudo chmod 644 /usr/share/plasma/wallpapers/Vimix*/metadata.desktop
 sudo chmod 644 /usr/share/color-schemes/Vimix*.colors
+sudo chmod 755 /usr/share/aurorae
+sudo chmod 755 /usr/share/aurorae/themes
 sudo chmod 755 /usr/share/aurorae/themes/Vimix*
 sudo chmod 644 /usr/share/aurorae/themes/Vimix*/*
 sudo chmod 755 /usr/share/Kvantum/Vimix*
