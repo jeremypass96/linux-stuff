@@ -53,7 +53,7 @@ sudo chronyc online
 
 # Remove unneeded packages.
 echo -e "${BLUE}Removing unneeded packages...${NC}"
-sudo pacman -Rns nano htop kate openssh --noconfirm
+sudo pacman -Rns nano htop kate --noconfirm
 
 # Install file thumbnail support.
 echo -e "${BLUE}Installing file thumbnail support...${NC}"
