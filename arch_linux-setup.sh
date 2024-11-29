@@ -638,7 +638,7 @@ esac
 sudo pacman -S plymouth --noconfirm
 sudo sed -i '/^HOOKS=/s/\(.*\)\(microcode\)/\1plymouth \2/' /etc/mkinitcpio.conf
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 loglevel=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 quiet loglevel=3 udev.log-priority=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf udev.log_level=3 splash net.ifnames=0"/g' /etc/default/grub
-echo ShowDelay=0 | sudo tee -a /etc/plymouth/plymouthd.conf
+echo ShowDelay=0 | sudo tee -a /etc/plymouth/plymouthd.conf > /dev/null
 paru -S plymouth-theme-arch-charge-big --noconfirm
 sudo plymouth-set-default-theme -R arch-charge-big
 sudo grub-mkconfig -o /boot/grub/grub.cfg
