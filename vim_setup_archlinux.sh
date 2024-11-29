@@ -5,7 +5,7 @@ paru -s vim-lightline-git vim-plug vim-ayu-git vim-auto-pairs-git  --noconfirm
 
 # Configure the vimrc file.
 vimrc_path=/etc/vimrc
-sudo chmod o+x $vimrc_path
+sudo chmod o+w $vimrc_path
 cat << EOF >> $vimrc_path
 set number
 set cursorline
@@ -23,4 +23,4 @@ colorscheme ayu
 set laststatus=2
 set noshowmode
 EOF
-chmod o-x $vimrc_path
+chmod o-w $vimrc_path
