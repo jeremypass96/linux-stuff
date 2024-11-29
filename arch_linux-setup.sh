@@ -374,7 +374,7 @@ echo -e "${BLUE}Installing mkinitcpio firmware to get rid of missing firmware me
 paru -S mkinitcpio-firmware --noconfirm
 
 # Use xz compression when compressing the initramfs image.
-sed -i 's/#COMPRESSION="xz"/COMPRESSION="xz"/g' /etc/mkinitcpio.conf
+sudo sed -i 's/#COMPRESSION="xz"/COMPRESSION="xz"/g' /etc/mkinitcpio.conf
 
 # Stop mkinitcpio from generating a fallback kernel image.
 echo -e "${BLUE}Stopping mkinitcpio from generating a fallback kernel image...${NC}"
