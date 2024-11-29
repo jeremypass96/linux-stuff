@@ -55,21 +55,6 @@ sudo chronyc online
 echo -e "${BLUE}Removing unneeded packages...${NC}"
 sudo pacman -Rns nano htop kate openssh --noconfirm
 
-# Remove wireless tooks (if not needed!).
-read -p "$(echo -e "${YELLOW}Do you wish to remove the wireless tools that the Arch installer installed via the 'Desktop' profile? (Y/n) ${NC}")" resp
-resp=${resp:-Y}
-if [[ "$resp" =~ ^[Yy]$ ]]; then
-	echo -e "${GREEN}Removing wireless tools...${NC}"
-	sudo pacman -Rns wireless_tools wpa_supplicant iwd
-	if [[ $? -eq 0 ]]; then
-        echo -e "${GREEN}Wireless tools removed successfully!${NC}"
-    else
-        echo -e "${RED}An error occurred while removing wireless tools.${NC}"
-	fi
-elif [[ "$resp" =~ ^[Nn]$ ]]; then
-	echo -e "${BLUE}Skipping removal of wireless tools.${NC}"
-fi
-
 # Install file thumbnail support.
 echo -e "${BLUE}Installing file thumbnail support...${NC}"
 sudo pacman -S kdegraphics-thumbnailers ffmpegthumbs --noconfirm
@@ -97,7 +82,7 @@ sudo systemctl enable --now plocate-updatedb.timer
 
 # Install paru AUR helper.
 echo -e "${BLUE}Installing the 'paru' AUR helper...${NC}"
-sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git $HOME/paru-bin && cd paru-bin && makepkg -sic --noconfirm
+sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git $HOME/paru-bin && cd $HOME/paru-bin && makepkg -sic --noconfirm
 cd .. && rm -rf paru-bin
 # Configure paru options.
 echo -e "${BLUE}Configuring paru options...${NC}"
