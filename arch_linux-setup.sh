@@ -603,7 +603,7 @@ sudo systemctl enable --now orphan-manager.timer
 # Add scripts to automatically purge .pacnew and .pacsave files.
 echo -e "${BLUE}Adding scripts to the system to automatically purge .pacnew and .pacsave files...${NC}"
 sudo ./purge_pacnew.sh
-sudo ./purge_pacsave.sh
+sudo ./restore_pacsave.sh
 
 # Configure console text editor.
 echo -e "${YELLOW}Which console text editor do you want?${NC}"
