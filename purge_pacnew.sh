@@ -16,6 +16,10 @@ echo '#!/bin/bash
 # Remove all .pacnew files
 fd -e pacnew . /etc -X rm -rf' | tee -a "$DEST_DIR/purge_pacnew" > /dev/null
 
+# Make pacman.d hooks directory and fix permissions.
+sudo mkdir -p /etc/pacman.d/hooks
+sudo chmod 755 /etc/pacman.d/hooks
+
 # Content of check_pacnew script.
 echo '#!/bin/bash
 

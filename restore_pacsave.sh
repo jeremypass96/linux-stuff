@@ -10,6 +10,10 @@ fi
 DEST_DIR="/usr/local/bin"
 HOOK_DIR="/etc/pacman.d/hooks"
 
+# Make pacman.d hooks directory and fix permissions.
+sudo mkdir -p /etc/pacman.d/hooks
+sudo chmod 755 /etc/pacman.d/hooks
+
 # Content of restore_pacsave script.
 echo '#!/bin/bash
 
