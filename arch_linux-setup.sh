@@ -178,6 +178,17 @@ sudo systemctl enable --now cups cups-browsed
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
 paru -S desktop-privileges-nogroups --noconfirm
 
+# Install hardware detection tool for mkinitcpio.
+echo -e "${BLUE}Installing hardware detection tool for mkinitcpio...${NC}"
+sudo pacman -S hwdetect --noconfirm
+
+# Install power-profiles-daemon package. Makes power management profiles available to KDE.
+sudo pacman -S power-profiles-daemon --noconfirm
+
+# Install NTFS filesystem driver.
+echo -e "${BLUE}Installing NTFS filesystem driver...${NC}"
+sudo pacman -S ntfs-3g --noconfirm
+
 # Install Brave web browser.
 echo -e "${BLUE}Installing the Brave web browser...${NC}"
 paru -S brave-bin --noconfirm
@@ -230,7 +241,6 @@ paru -S etcher-bin --noconfirm
 # Install VirtualBox.
 echo -e "${BLUE}Installing VirtualBox...${NC}"
 sudo pacman -S virtualbox virtualbox-guest-iso --noconfirm
-paru -S virtualbox-unattended-templates --noconfirm
 
 # Install mp3tag.
 echo -e "${BLUE}Installing mp3tag...${NC}"
