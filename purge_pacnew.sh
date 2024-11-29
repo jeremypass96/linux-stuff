@@ -14,7 +14,7 @@ HOOK_DIR="/etc/pacman.d/hooks"
 echo '#!/bin/bash
 
 # Remove all .pacnew files
-fd -e pacnew . /etc -X rm -rf' | tee "$DEST_DIR/purge_pacnew" > /dev/null
+fd -e pacnew . /etc -X rm -rf' | tee -a "$DEST_DIR/purge_pacnew" > /dev/null
 
 # Content of check_pacnew script.
 echo '#!/bin/bash
@@ -36,7 +36,7 @@ if [[ -n "$log_pacnew" && -n "$system_pacnew" ]]; then
     /usr/local/bin/purge_pacnew
 else
     echo -e "${bold_yellow}No new .pacnew files detected.${reset}"
-fi' | tee "$DEST_DIR/check_pacnew" > /dev/null
+fi' | tee -a "$DEST_DIR/check_pacnew" > /dev/null
 
 # Content of check_pacnew.hook
 echo '[Trigger]
@@ -47,7 +47,7 @@ Target = *
 [Action]
 Description = Checking for and purging .pacnew files...
 When = PostTransaction
-Exec = /usr/local/bin/check_pacnew' | tee "$HOOK_DIR/check_pacnew.hook" > /dev/null
+Exec = /usr/local/bin/check_pacnew' | tee -a "$HOOK_DIR/check_pacnew.hook" > /dev/null
 chmod 644 "$HOOK_DIR/check_pacnew.hook"
 
 # Make the scripts executable

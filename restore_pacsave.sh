@@ -41,7 +41,7 @@ if [[ -n "$pacsave_files" ]]; then
     done
 else
     echo -e "${bold_yellow}No .pacsave files found.${reset}"
-fi' | tee "$DEST_DIR/restore_pacsave" > /dev/null
+fi' | tee -a "$DEST_DIR/restore_pacsave" > /dev/null
 
 # Content of restore_pacsave.hook
 echo '[Trigger]
@@ -52,7 +52,7 @@ Target = *
 [Action]
 Description = Checking for and restoring .pacsave files...
 When = PostTransaction
-Exec = /usr/local/bin/restore_pacsave' | tee "$HOOK_DIR/restore_pacsave.hook" > /dev/null
+Exec = /usr/local/bin/restore_pacsave' | tee -a "$HOOK_DIR/restore_pacsave.hook" > /dev/null
 chmod 644 "$HOOK_DIR/restore_pacsave.hook"
 
 # Make the script executable and fix permissions.
