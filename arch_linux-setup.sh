@@ -11,11 +11,14 @@ CYAN='\033[1;36m'
 NC='\033[0m' # No Color
 
 echo -e "${CYAN}Welcome to the Arch Linux post-install script!${NC}"
+sleep 10 ; clear
 
 # Audio buzz/hum fix.
 echo -e "${BLUE}Fixing audio buzz/him issue...${NC}"
 sudo touch /etc/modprobe.d/alsa-base.conf
 echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee -a /etc/modprobe.d/alsa-base.conf > /dev/null
+echo -e "${GREEN}Audio buzz/him issue fixed!${NC}"
+sleep 10 ; clear
 
 # Tweak pacman for sane defaults.
 echo -e "${BLUE}Tweaking pacman for sane defaults...${NC}"
@@ -23,6 +26,7 @@ sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
 sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
 sudo sed -i 's/'"#ParallelDownloads = 5"'/'"ParallelDownloads = 20"''/g /etc/pacman.conf
 sudo sed -i '/ParallelDownloads = 20/ a\ILoveCandy\' /etc/pacman.conf
+sleep 10 ; clear
 
 # Rank mirrors.
 echo -e "${BLUE}Ranking Arch Linux mirrors...${NC}"
@@ -40,6 +44,7 @@ echo "--sort rate" >> /etc/xdg/reflector/reflector.conf
 sudo chmod o-w /etc/xdg/reflector/reflector.conf
 sudo systemctl enable reflector.service --now && sudo systemctl enable reflector.timer --now
 sudo pacman -Syy
+sleep 10 ; clear
 
 # Install and use a better NTP daemon, Chrony.
 echo -e "${BLUE}Installing and using a better NTP daemon, Chrony...${NC}"
@@ -50,35 +55,43 @@ sudo sed -i 's/! server 3.arch.pool.ntp.org iburst/server 3.arch.pool.ntp.org ib
 sudo systemctl disable systemd-timesyncd.service
 sudo systemctl enable --now chronyd && sudo systemctl enable --now chrony-wait
 sudo chronyc online
+sleep 10 ; clear
 
 # Remove unneeded packages.
 echo -e "${BLUE}Removing unneeded packages...${NC}"
 sudo pacman -Rns nano htop kate --noconfirm
+sleep 10 ; clear
 
 # Install file thumbnail support.
 echo -e "${BLUE}Installing file thumbnail support...${NC}"
 sudo pacman -S kdegraphics-thumbnailers ffmpegthumbs --noconfirm
+sleep 10 ; clear
 
 # Install some KDE utilities.
 echo -e "${BLUE}Installing some KDE utilities...${NC}"
 sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive kio-admin audiocd-kio ksystemlog kcron --noconfirm
+sleep 10 ; clear
 
 # Install some core utilities that didn't get installed, for some odd reason.
 echo -e "${BLUE}Installing some core system utilities that forgot to be installed...${NC}"
 sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp cronie --noconfirm
+sleep 10 ; clear
 
 # Install a few command-line utilities.
 echo -e "${BLUE}Installing a few command-line utilities...${NC}"
 sudo pacman -S duf bat fd lynis btop --noconfirm
+sleep 10 ; clear
 
 # Install spell checking support.
 echo -e "${BLUE}Installing spell checking support...${NC}"
 sudo pacman -S aspell aspell-en --noconfirm
+sleep 10 ; clear
 
 # Install and configure plocate.
 echo -e "${BLUE}Installing and configuring 'plocate'...${NC}"
 sudo pacman -S plocate --noconfirm
 sudo systemctl enable --now plocate-updatedb.timer
+sleep 10 ; clear
 
 # Install paru AUR helper.
 echo -e "${BLUE}Installing the 'paru' AUR helper...${NC}"
@@ -96,11 +109,13 @@ sudo sed -i 's/#NewsOnUpgrade/NewsOnUpgrade'/g /etc/paru.conf
 sudo sed -i '/NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
 sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
 echo -e "${GREEN}Paru options configured.${NC}"
+sleep 10 ; clear
 
 # Change to wget from curl for http/https downloads with Paru.
 echo -e "${BLUE}Changing download manager to wget from curl for Paru...${NC}"
 sudo sed -i 's|http::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u|http::/usr/bin/wget --no-cookies --tries=3 --waitretry=3 --continue -O %o %u|' /etc/makepkg.conf
 sudo sed -i 's|https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u|https::/usr/bin/wget --no-cookies --tries=3 --waitretry=3 --continue -O %o %u|' /etc/makepkg.conf
+sleep 10 ; clear
 
 # Install Konsole color scheme.
 read -p "$(echo -e "${YELLOW}Which Konsole colorscheme do you want?${NC}")
@@ -117,9 +132,11 @@ if [ "$resp" = 2 ]; then
     sudo mv onehalf-dark.colorscheme /usr/share/konsole
 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
 fi
+sleep 10 ; clear
 
 # Install SDDM theme.
 paru -S sddm-theme-sugar-candy-git --noconfirm
+sleep 10 ; clear
 
 # Install icon and KDE theme.
 echo -e "${BLUE}Installing Papirus icon theme and Vimix KDE/GTK/Kvantum theme...${NC}"
@@ -169,51 +186,64 @@ sudo chmod 644 /usr/share/Kvantum/Vimix*/*
 # Cleanup
 cd $HOME
 rm -rf $HOME/Vimix-kde
+sleep 10 ; clear
 
 # Install Octopi, a Qt-based pacman frontend with AUR support.
 echo -e "${BLUE}Installing Octopi...${NC}"
 paru -S octopi --noconfirm
+sleep 10 ; clear
 
 # Install and configure printing support.
 echo -e "${BLUE}Installing and configuring printing support...${NC}"
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
 sudo systemctl enable --now cups cups-browsed
+sleep 10 ; clear
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
 paru -S desktop-privileges-nogroups --noconfirm
+sleep 10 ; clear
 
 # Install hardware detection tool for mkinitcpio.
 echo -e "${BLUE}Installing hardware detection tool for mkinitcpio...${NC}"
 sudo pacman -S hwdetect --noconfirm
+sleep 10 ; clear
 
 # Install power-profiles-daemon package. Makes power management profiles available to KDE.
+echo -e "${BLUE}Installing power-profiles-daemon package. Makes power management profiles available to KDE...${NC}"
 sudo pacman -S power-profiles-daemon --noconfirm
+sleep 10 ; clear
 
 # Install NTFS filesystem driver.
 echo -e "${BLUE}Installing NTFS filesystem driver...${NC}"
 sudo pacman -S ntfs-3g --noconfirm
+sleep 10 ; clear
 
 # Install Brave web browser.
 echo -e "${BLUE}Installing the Brave web browser...${NC}"
 paru -S brave-bin --noconfirm
+sleep 10 ; clear
 
 # Install fonts.
 echo -e "${BLUE}Installing fonts...${NC}"
 paru -S ttf-poppins adobe-source-sans-fonts ttf-jetbrains-mono-nerd ttf-ms-fonts ttf-material-design-icons-desktop-git ttf-material-design-icons-git noto-fonts-emoji noto-fonts-lite ttf-nerd-fonts-symbols ttfautohint --noconfirm
 sudo ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
+sleep 10 ; clear
 
 # Install "lsd," a better replacement for ls.
 echo -e "${BLUE}Installing 'lsd,' a better replacement for ls...${NC}"
 paru -S lsd --noconfirm
+sleep 10 ; clear
 
 # Configure nerd fonts for "lsd".
 echo -e "${BLUE}Configuring nerd fonts for 'lsd'...${NC}"
 sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/
 echo -e "${GREEN}Fonts configured.${NC}"
+sleep 10 ; clear
 
 # Install pfetch.
 echo -e "${BLUE}Installing 'pfetch'...${NC}"
 paru -S pfetch --noconfirm
+sleep 10 ; clear
 
 # Install and configure VSCodium.
 echo -e "${BLUE}Installing and configuring VSCodium...${NC}"
@@ -223,53 +253,65 @@ vscodium --install-extension qyurila.ayu-midas
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
 vscodium --install-extension file-icons.file-icons
 vscodium --install-extension miguelsolorio.fluent-icons
+sleep 10 ; clear
 
 # Install GRUB theme.
 echo -e "${BLUE}Installing and configuring GRUB theme...${NC}"
 paru -S grub-theme-stylish-color-1080p-git --noconfirm
 sudo sed -i 's|#GRUB_THEME="/path/to/gfxtheme"|GRUB_THEME="/usr/share/grub/themes/stylish-color-1080p/theme.txt"|g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+sleep 10 ; clear
 
 # Install Wine.
 echo -e "${BLUE}Installing Wine...${NC}"
 paru -S wine-installer wine-gecko wine-mono --noconfirm
+sleep 10 ; clear
 
 # Install some useful software.
 echo -e "${BLUE}Installing some useful software for daily tasks and multimedia needs...${NC}"
 sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip clipgrab partitionmanager dolphin-plugins --noconfirm
+sleep 10 ; clear
 
 # Install balenaEtcher to write OS images to USB flash drives.
 echo -e "${BLUE}Installing balenaEtcher...${NC}"
 paru -S etcher-bin --noconfirm
+sleep 10 ; clear
 
 # Install VirtualBox.
 echo -e "${BLUE}Installing VirtualBox...${NC}"
 sudo pacman -S virtualbox virtualbox-guest-iso --noconfirm
+sleep 10 ; clear
 
 # Install mp3tag.
 echo -e "${BLUE}Installing mp3tag...${NC}"
 paru -S mp3tag --noconfirm
+sleep 10 ; clear
 
 # Install dependencies for k3b.
 echo -e "${BLUE}Installing dependencies for k3b to ensure all features work correctly...${NC}"
 paru -S cdrtools dvd+rw-tools transcode sox normalize cdrdao --noconfirm
+sleep 10 ; clear
 
 # Install some KDE games.
 echo -e "${BLUE}Installing some KDE games...${NC}"
 sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
+sleep 10 ; clear
 
 # Install Spotify.
 echo -e "${BLUE}Installing Spotify...${NC}"
 paru -S spotify --noconfirm
+sleep 10 ; clear
 
 # Install KDE Connect.
 echo -e "${BLUE}Installing KDE Connect...${NC}"
 sudo pacman -S kdeconnect --noconfirm
+sleep 10 ; clear
 
 # Install gufw firewall and enable the systemd service.
 echo -e "${BLUE}Installing and enabling the 'gufw' firewall...${NC}"
 sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
+sleep 10 ; clear
 
 # Install some useful pacman post-transaction hooks.
 echo -e "${BLUE}Installing useful Pacman post-transaction hooks to automate system maintenance tasks...${NC}"
@@ -281,12 +323,14 @@ if [[ $? -eq 0 ]]; then
 else
     echo -e "${RED}Failed to update the paccache-hook configuration. Please check the configuration file manually.${NC}"
 fi
+sleep 10 ; clear
 
 # Setup config files and stuff.
 cd linux-stuff/
 ./bat-setup.sh
 ./lsd-setup.sh
 sudo ./cleanup-systemd-boot.sh
+sleep 10 ; clear
 
 # Configure Zsh.
 echo -e "${BLUE}Configuring Zsh...${NC}"
@@ -329,6 +373,7 @@ echo "setopt HIST_IGNORE_SPACE" >> $HOME/.zshrc
 echo "setopt HIST_SAVE_NO_DUPS" >> $HOME/.zshrc
 echo alias ls='"lsd"' >> $HOME/.zshrc
 echo alias cat='"bat"' >> $HOME/.zshrc
+sleep 10 ; clear
 
 # Setup Catppuccin colors.
 cd $HOME && git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
@@ -354,6 +399,7 @@ rm -rf zsh-syntax-highlighting
 sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 echo pfetch >> $HOME/.zshrc
+sleep 10 ; clear
 
 # Copy over custom Oh My Zsh theme.
 sudo cp -v $HOME/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
@@ -376,6 +422,7 @@ echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment > /dev/null
 # Install mkinitcpio firmware, gets rid of missing firmware messages.
 echo -e "${BLUE}Installing mkinitcpio firmware to get rid of missing firmware messages...${NC}"
 paru -S mkinitcpio-firmware --noconfirm
+sleep 10 ; clear
 
 # Use xz compression when compressing the initramfs image.
 sudo sed -i 's/#COMPRESSION="xz"/COMPRESSION="xz"/g' /etc/mkinitcpio.conf
@@ -433,19 +480,17 @@ fi
 
 # Configure lynis.
 echo -e "${BLUE}Configuring lynis...${NC}"
-sudo chmod o+w /etc/lynis/custom.prf
-echo "machine-role=personal" > /etc/lynis/custom.prf
-echo "test-scan-mode=normal" >> /etc/lynis/custom.prf
-echo "" >> /etc/lynis/custom.prf
 cat << EOF >> /etc/lynis/custom.prf
+machine-role=personal
+test-scan-mode=normal
+
 # Plugins to disable
 disable-plugin=docker
 disable-plugin=forensics
 disable-plugin=intrusion-detection
 disable-plugin=intrusion-prevention
 disable-plugin=nginx
-EOF
-sudo chmod o-w /etc/lynis/custom.prf
+EOF | sudo tee -a /etc/lynis/custom.prf > /dev/null
 
 # Secure the OS.
 echo -e "${BLUE}Hardening the OS...${NC}"
@@ -538,6 +583,7 @@ echo -e "${BLUE}Setting up AppArmor...${NC}"
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 loglevel=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/g' /etc/default/grub && sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl enable --now apparmor
+sleep 10 ; clear
 
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-archlinux'/g /etc/os-release
@@ -585,6 +631,7 @@ sudo sed -i '/^#NoExtract = $/d' /etc/pacman.conf
 
 echo -e "${GREEN}All files removed and NoExtract directive updated.${NC}"
 ####################
+sleep 10 ; clear
 
 # Disable submenus in GRUB.
 echo -e "${BLUE}Disabling submenus in GRUB...${NC}"
@@ -601,11 +648,13 @@ echo -e "${BLUE}Installing pacman wrapper for easier command syntax...${NC}"
 paru -S pac-wrapper --noconfirm
 sudo chmod o+w /etc/environment && echo PAC_PACMAN=paru >> /etc/environment && sudo chmod o-w /etc/environment
 source /etc/environment
+sleep 10 ; clear
 
 # Install and enable orphan-manager, a systemd timer to automatically remove orphaned packages.
 echo -e "${BLUE}Installing and enabling 'orphan-manager,' a systemd timer to automatically remove orphaned packages...${NC}"
 paru -S orphan-manager --noconfirm
 sudo systemctl enable --now orphan-manager.timer
+sleep 10 ; clear
 
 # Add scripts to automatically purge .pacnew and .pacsave files.
 echo -e "${BLUE}Adding scripts to the system to automatically purge .pacnew and .pacsave files...${NC}"
@@ -634,6 +683,7 @@ case "$resp" in
         ./vim_setup_catppuccino_archlinux.sh
         ;;
 esac
+sleep 10 ; clear
 
 # Install and fix Plymouth and apply theme!
 sudo pacman -S plymouth --noconfirm
