@@ -633,9 +633,6 @@ case "$resp" in
     3)
         ./vim_setup_catppuccino_archlinux.sh
         ;;
-    *)
-        echo "Invalid choice, please select a valid option."
-        ;;
 esac
 
 # Install and fix Plymouth and apply theme!
