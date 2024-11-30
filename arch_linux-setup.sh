@@ -480,7 +480,7 @@ fi
 
 # Configure lynis.
 echo -e "${BLUE}Configuring lynis...${NC}"
-cat << EOF >> /etc/lynis/custom.prf
+sudo tee /etc/lynis/custom.prf > /dev/null << EOF
 machine-role=personal
 test-scan-mode=normal
 
@@ -490,7 +490,7 @@ disable-plugin=forensics
 disable-plugin=intrusion-detection
 disable-plugin=intrusion-prevention
 disable-plugin=nginx
-EOF | sudo tee -a /etc/lynis/custom.prf > /dev/null
+EOF
 
 # Secure the OS.
 echo -e "${BLUE}Hardening the OS...${NC}"
@@ -500,16 +500,13 @@ sudo chmod 600 /boot/grub/grub.cfg
 sudo chmod 600 /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/login.defs
 sudo sed -i 's/UMASK=0022/UMASK=0077'/g /etc/conf.d/sysstat
-sudo chmod o+w /etc/profile
-cat << EOF >> /etc/profile
+
+sudo tee -a /etc/profile > /dev/null << EOF
 # Set default umask.
 umask 077
 EOF
-sudo chmod o-w /etc/profile
-sudo touch /etc/sysctl.d/99-sysctl.conf
-sudo chmod o+w /etc/sysctl.d/99-sysctl.conf
-cat << EOF >> /etc/sysctl.d/99-sysctl.conf
-sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
+
+sudo tee -a /etc/sysctl.d/99-sysctl.conf > /dev/null << EOF
 dev.tty.ldisc_autoload = 0
 fs.protected_fifos = 2
 fs.protected_regular = 2
@@ -523,32 +520,33 @@ net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.log_martians = 1
 net.core.bpf_jit_harden = 2
 EOF
-sudo chmod o-w /etc/sysctl.d/99-sysctl.conf
+
+# Enable accounting.
 sudo touch /var/log/account/pacct
 sudo accton on
 sudo systemctl enable --now acct
 sudo systemctl enable --now puppet
 sudo systemctl enable --now auditd
 sudo systemctl enable --now rngd
-sudo chmod o+w /etc/conf.d/sysstat
-echo "" >> /etc/conf.d/sysstat && echo 'ENABLED="true"' >> /etc/conf.d/sysstat
-sudo chmod o-w /etc/conf.d/sysstat
+sudo tee -a /etc/conf.d/sysstat > /dev/null << EOF
+#####
+echo 'ENABLED="true"'
+EOF
 sudo systemctl enable --now sysstat
-sudo chmod o+w /etc/bash.bashrc
-cat << EOF >> /etc/bash.bashrc
+
+sudo tee -a /etc/bash.bashrc > /dev/null << EOF
 # Set default umask.
 umask 077
 EOF
-sudo chmod o-w /etc/bash.bashrc
-sudo chmod o+w /etc/hosts
-cat << EOF >> /etc/hosts
+
+sudo tee -a /etc/hosts > /dev/null << EOF
 127.0.0.1 localhost
 ::1 localhost ip6-localhost ip6-loopback
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 127.0.1.1 `hostname`
 EOF
-sudo chmod o-w /etc/hosts
+
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding no'/g /etc/ssh/sshd_config
 sudo sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 2'/g /etc/ssh/sshd_config
@@ -565,8 +563,7 @@ sudo sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 100000'g /etc/log
 
 # Change password encryption method from "YESCRYPT" to "SHA256."
 sudo sed -i 's/ENCRYPT_METHOD YESCRYPT/ENCRYPT_METHOD SHA256'/g /etc/login.defs
-sudo chmod o+w /etc/pam.d/passwd
-cat << EOF >> /etc/pam.d/passwd
+sudo tee -a /etc/pam.d/passwd > /dev/null << EOF
 #
 # These lines require the user to select a password with a minimum
 # length of 8 and with at least 1 digit number, and 1 upper case
@@ -576,7 +573,6 @@ password required pam_pwquality.so \
               dcredit=-1 ucredit=-1 lcredit=0 minlen=8
 password required pam_unix.so use_authtok nullok sha256
 EOF
-sudo chmod o-w /etc/pam.d/passwd
 
 # Setup AppArmor.
 echo -e "${BLUE}Setting up AppArmor...${NC}"
@@ -646,7 +642,9 @@ sudo sed -i 's/#SystemMaxFileSize=/SystemMaxFileSize=20MB'/g /etc/systemd/journa
 # Install pacman wrapper for easier command syntax (and set up).
 echo -e "${BLUE}Installing pacman wrapper for easier command syntax...${NC}"
 paru -S pac-wrapper --noconfirm
-sudo chmod o+w /etc/environment && echo PAC_PACMAN=paru >> /etc/environment && sudo chmod o-w /etc/environment
+sudo tee -a /etc/environment > /dev/null << EOF
+PAC_PACMAN=paru
+EOF
 source /etc/environment
 sleep 10 ; clear
 
@@ -671,16 +669,16 @@ read -p "-> " resp
 case "$resp" in
     1)
         sudo pacman -S micro xclip --noconfirm
-        ./micro-setup.sh
+        $HOME/./linux-stuff/micro-setup.sh
         sudo sed -i 's/vim/micro/g' /etc/environment
         echo MICRO_TRUECOLOR=1 | sudo tee -a /etc/environment > /dev/null
         sudo pacman -Rns vim
         ;;
     2)
-        ./vim_setup_archlinux.sh
+        $HOME/./linux-stuff/vim_setup_archlinux.sh
         ;;
     3)
-        ./vim_setup_catppuccino_archlinux.sh
+        $HOME/./linux-stuff/vim_setup_catppuccino_archlinux.sh
         ;;
 esac
 sleep 10 ; clear

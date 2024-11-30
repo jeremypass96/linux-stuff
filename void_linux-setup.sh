@@ -141,10 +141,10 @@ cd && rm -rf grub2-themes
 
 # Configure lynis.
 echo -e "${YELLOW}Configuring lynis...${NC}"
-echo "machine-role=personal" > /etc/lynis/custom.prf
-echo "test-scan-mode=normal" >> /etc/lynis/custom.prf
-echo "" >> /etc/lynis/custom.prf
-cat << EOF >> /etc/lynis/custom.prf
+sudo tee /etc/lynis/custom.prf > /dev/null << EOF
+machine-role=personal
+test-scan-mode=normal
+
 # Plugins to disable
 disable-plugin=docker
 disable-plugin=forensics
@@ -185,7 +185,7 @@ chmod og-rwx /etc/cron.hourly
 
 # Configure sysctl.conf
 echo -e "${BLUE}Configuring sysctl.conf...${NC}"
-cat << EOF >> /etc/sysctl.conf
+sudo tee -a /etc/sysctl.conf > /dev/null << EOF
 dev.tty.ldisc_autoload = 0
 fs.protected_fifos = 2
 fs.protected_regular = 2

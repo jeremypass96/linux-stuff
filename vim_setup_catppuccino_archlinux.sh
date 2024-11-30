@@ -6,8 +6,7 @@ paru -S vim-lightline-git vim-plug vim-colors-night-git vim-auto-pairs-git --noc
 
 # Configure the vimrc file.
 vimrc_path=/etc/vimrc
-sudo chmod o+w $vimrc_path
-cat << EOF >> $vimrc_path
+sudo tee -a $vimrc_path > /dev/null << EOF
 set number
 set cursorline
 set linebreak
@@ -22,7 +21,6 @@ colorscheme catppuccin_mocha
 set laststatus=2
 set noshowmode
 EOF
-chmod o-w $vimrc_path
 
 # Install the Lightline plugin.
 sudo vim -es -u $vimrc_path -i NONE -c "PlugInstall" -c "qa"

@@ -8,9 +8,8 @@ sudo mkdir -p /etc/skel/.vim/autoload
 sudo cp -v ~/.vim/autoload/plug.vim /etc/skel/.vim/autoload/plug.vim
 
 # Configure the vimrc file.
-touch ~/.vim/vimrc
 vimrc_path=~/.vim/vimrc
-cat << EOF >> $vimrc_path
+tee $vimrc_path > /dev/null << EOF
 set number
 set cursorline
 set linebreak
