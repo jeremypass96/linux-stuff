@@ -6,7 +6,7 @@ wget -qO- https://git.io/papirus-icon-theme-install | env DESTDIR="$HOME/.icons"
 
 # Install the Vimix KDE theme.
 rpm-ostree install kvantum
-git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
+gh repo clone vinceliuice/Vimix-kde $HOME/Vimix-kde
 cd $HOME/Vimix-kde
 ./install.sh -t doder
 # Cleanup
@@ -14,7 +14,8 @@ cd $HOME
 rm -rf Vimix-kde
 
 # Remove Firefox and Kate text editor.
-flatpak uninstall -y org.mozilla.firefox org.kde.kate
+flatpak uninstall -y org.mozilla.firefox
+rpm-ostree uninstall kate
 
 # Install the Brave web browser and VSCodium.
 flatpak install -y com.brave.Browser com.vscodium.codium
@@ -27,7 +28,16 @@ vscodium --install-extension file-icons.file-icons
 vscodium --install-extension miguelsolorio.fluent-icons
 
 # Install the Pinta image editor.
-flatpak install -y app/com.github.PintaProject.Pinta/x86_64/stable
+flatpak install -y com.github.PintaProject.Pinta
 
 # Install Audacity.
 flatpak install -y org.audacityteam.Audacity
+
+# Install VLC.
+flatpak install -y org.videolan.VLC
+
+# Install qBittorrent.
+flatpak install -y org.qbittorrent.qBittorrent
+
+# Install Spotify.
+flatpak install -y com.spotify.Client
