@@ -6,7 +6,7 @@ wget -qO- https://git.io/papirus-icon-theme-install | env DESTDIR="$HOME/.icons"
 
 # Install the Vimix KDE theme.
 rpm-ostree install kvantum
-gh repo clone vinceliuice/Vimix-kde $HOME/Vimix-kde
+git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
 cd $HOME/Vimix-kde
 ./install.sh -t doder
 # Cleanup
