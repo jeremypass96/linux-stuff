@@ -134,10 +134,6 @@ if [ "$resp" = 2 ]; then
 fi
 sleep 10 ; clear
 
-# Install SDDM theme.
-paru -S sddm-theme-sugar-candy-git --noconfirm
-sleep 10 ; clear
-
 # Install icon and KDE theme.
 echo -e "${BLUE}Installing Papirus icon theme and Vimix KDE/GTK/Kvantum theme...${NC}"
 paru -S papirus-icon-theme papirus-folders vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
