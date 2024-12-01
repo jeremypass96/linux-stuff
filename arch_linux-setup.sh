@@ -695,8 +695,8 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # Check if we're running on VMware.
 if dmesg | grep -iq 'VMware\|Virtual Machine'; then
     # Install open-vm-tools.
-    echo -e "${GREEN}Running on VMware, installing open-vm-tools...${NC}"
-    sudo pacman -S open-vm-tools --noconfirm
+    echo -e "${GREEN}Running on VMware, installing open-vm-tools and the Xorg mouse driver...${NC}"
+    sudo pacman -S open-vm-tools xf86-input-vmmouse --noconfirm
     sudo systemctl enable --now vmtoolsd
     sudo systemctl enable --now vmware-vmblock-fuse
 else
