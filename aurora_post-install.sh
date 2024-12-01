@@ -6,12 +6,15 @@ wget -qO- https://git.io/papirus-icon-theme-install | env DESTDIR="$HOME/.icons"
 
 # Install the Vimix KDE theme.
 rpm-ostree install kvantum
-git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/
+git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
 cd $HOME/Vimix-kde
 ./install.sh -t doder
+# Cleanup
+cd $HOME
+rm -rf $HOME/Vimix-kde
 
 # Remove Firefox and Kate text editor.
-flatpak uninstall -y firefox kate
+flatpak uninstall -y org.mozilla.firefox org.kde.kate
 
 # Install the Brave web browser and VSCodium.
 flatpak install -y com.brave.Browser com.vscodium.codium
