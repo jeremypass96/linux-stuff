@@ -11,7 +11,7 @@ cd $HOME/Vimix-kde
 ./install.sh -t doder
 # Cleanup
 cd $HOME
-rm -rf $HOME/Vimix-kde
+rm -rf Vimix-kde
 
 # Remove Firefox and Kate text editor.
 flatpak uninstall -y org.mozilla.firefox org.kde.kate
