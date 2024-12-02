@@ -13,19 +13,19 @@ cd $HOME/Vimix-kde
 cd $HOME
 rm -rf Vimix-kde
 
-# Remove Firefox and Kate text editor.
+# Remove Firefox and Kate text editor, among other junk.
 flatpak uninstall -y org.mozilla.firefox
-rpm-ostree uninstall kate
+rpm-ostree uninstall haruna
 
 # Install the Brave web browser and VSCodium.
 flatpak install -y com.brave.Browser com.vscodium.codium
 
 # Configure VSCodium.
-mkdir -p $HOME/.config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.config/VSCodium/User/settings.json
-vscodium --install-extension qyurila.ayu-midas
-vscodium --install-extension jeff-hykin.better-shellscript-syntax
-vscodium --install-extension file-icons.file-icons
-vscodium --install-extension miguelsolorio.fluent-icons
+mkdir -p $HOME/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
+flatpak run com.vscodium.codium vscodium --install-extension qyurila.ayu-midas
+flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
+flatpak run com.vscodium.codium --install-extension file-icons.file-icons
+flatpak run com.vscodium.codium --install-extension miguelsolorio.fluent-icons
 
 # Install the Pinta image editor.
 flatpak install -y com.github.PintaProject.Pinta
