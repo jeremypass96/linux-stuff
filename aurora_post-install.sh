@@ -2,7 +2,7 @@
 # This script will install the Vimix KDE theme and Papirus icons and install the Brave web browser, VSCodium, and the Pinta image editor on Aurora, and some more useful software.
 
 # Install the Papirus icon theme.
-wget -qO- https://git.io/papirus-icon-theme-install | env DESTDIR="$HOME/.local/share/icons" sh
+rpm-ostree install papirus-icon-theme
 
 # Install the Vimix KDE theme.
 rpm-ostree install kvantum
@@ -14,7 +14,7 @@ cd $HOME
 rm -rf Vimix-kde
 
 # Remove Firefox and other junk.
-flatpak uninstall -y org.mozilla.firefox org.fedoraproject.MediaWriter org.kde.haruna org.kde.kontact
+flatpak uninstall -y org.mozilla.firefox org.fedoraproject.MediaWriter org.kde.haruna org.kde.kontact org.gnome.World.PikaBackup org.gnome.DejaDup
 
 # Install the Brave web browser and VSCodium.
 flatpak install -y com.brave.Browser com.vscodium.codium
