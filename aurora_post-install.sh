@@ -2,7 +2,7 @@
 # This script will install the Vimix KDE theme and Papirus icons and install the Brave web browser, VSCodium, and the Pinta image editor on Aurora, and some more useful software.
 
 # Install the Papirus icon theme.
-wget -qO- https://git.io/papirus-icon-theme-install | env DESTDIR="$HOME/.icons" sh
+wget -qO- https://git.io/papirus-icon-theme-install | env DESTDIR="$HOME/.local/share/icons" sh
 
 # Install the Vimix KDE theme.
 rpm-ostree install kvantum
@@ -13,16 +13,15 @@ cd $HOME/Vimix-kde
 cd $HOME
 rm -rf Vimix-kde
 
-# Remove Firefox and Kate text editor, among other junk.
-flatpak uninstall -y org.mozilla.firefox
-rpm-ostree uninstall haruna
+# Remove Firefox and other junk.
+flatpak uninstall -y org.mozilla.firefox org.fedoraproject.MediaWriter org.kde.haruna org.kde.kontact
 
 # Install the Brave web browser and VSCodium.
 flatpak install -y com.brave.Browser com.vscodium.codium
 
 # Configure VSCodium.
 mkdir -p $HOME/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
-flatpak run com.vscodium.codium vscodium --install-extension qyurila.ayu-midas
+flatpak run com.vscodium.codium --install-extension qyurila.ayu-midas
 flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
 flatpak run com.vscodium.codium --install-extension file-icons.file-icons
 flatpak run com.vscodium.codium --install-extension miguelsolorio.fluent-icons
