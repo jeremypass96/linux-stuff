@@ -696,5 +696,5 @@ if dmesg | grep -iq 'VMware\|Virtual Machine'; then
     sudo systemctl enable --now vmtoolsd
     sudo systemctl enable --now vmware-vmblock-fuse
 else
-    echo -e "${RED}Not running on VMware. Skipping open-vm-tools installation.${NC}"
+    echo -e "${RED}Not running on VMware.${NC} ${GREEN}Skipping open-vm-tools installation.${NC}"
 fi

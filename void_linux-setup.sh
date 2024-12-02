@@ -126,11 +126,9 @@ ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d/
 ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d/
 ln -s /usr/share/applications/pipewire.desktop /etc/xdg/autostart/
 
-# Install Newaita icons.
-echo -e "${YELLOW}Installing the Newaita icon theme...${NC}"
-cd && git clone https://github.com/cbrnix/Newaita.git
-cp -r Newaita/Newaita /usr/share/icons
-cd && rm -rf Newaita
+# Install Papirus icons.
+echo -e "${YELLOW}Installing the Papirus icon theme...${NC}"
+sudo vpm install papirus-icon-theme -y
 
 # Install grub theme.
 echo -e "${YELLOW}Installing the GRUB theme...${NC}"
@@ -269,19 +267,57 @@ else
     echo "${CYAN}Skipping Flatpak setup.${NC}"
 fi
 
+# Ask the user if they want to install VSCodium.
+read -p "Do you want to install VSCodium? (Y/n) " resp
+resp=${resp:-Y}
+
+if [ "$resp" = Y ] || [ "$resp" = y ]; then
+    echo -e "${MANGENTA}Installing VSCodium...${NC}"
+    flatpak install -y com.vscodium.codium
+    mkdir -p $HOME/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
+    flatpak run com.vscodium.codium --install-extension qyurila.ayu-midas
+    flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
+    flatpak run com.vscodium.codium --install-extension file-icons.file-icons
+    flatpak run com.vscodium.codium --install-extension miguelsolorio.fluent-icons
+else
+    echo -e "${CYAN}Skipping VSCodium installation.${NC}"
+fi
+
+# Ask the user if they want to install Audacity.
+read -p "Do you want to install Audacity? (Y/n) " resp
+resp=${resp:-Y}
+
+if [ "$resp" = Y ] || [ "$resp" = y ]; then
+    echo -e "${MANGENTA}Installing Audacity...${NC}"
+    flatpak install -y org.audacityteam.Audacity
+else
+    echo -e "${CYAN}Skipping Audacity installation.${NC}"
+fi
+
+# Ask the user if they want to install Spotify.
+read -p "Do you want to install Spotify? (Y/n) " resp
+resp=${resp:-Y}
+
+if [ "$resp" = Y ] || [ "$resp" = y ]; then
+    echo -e "${MANGENTA}Installing Spotify...${NC}"
+    flatpak install -y com.spotify.Client
+else
+    echo -e "${CYAN}Skipping Spotify installation.${NC}"
+fi
+
 # Update environment variables.
 # Configure pfetch.
-echo "PF_INFO=\"ascii os kernel uptime pkgs shell editor de\"" >> /etc/environment
+echo 'PF_INFO="ascii os kernel uptime pkgs shell editor de"' | sudo tee -a /etc/environment > /dev/null
 # Set BROWSER variable.
-echo "BROWSER=brave" >> /etc/environment
+echo 'BROWSER=brave' | sudo tee -a /etc/environment > /dev/null
 # Set EDITOR variable.
-echo "EDITOR=micro" >> /etc/environment
-# Set MICRO_TRUECOLOR variable to 1 to enable truecolor support for the micro text editor.
-echo "MICRO_TRUECOLOR=1" >> /etc/environment
+echo 'EDITOR=vim' | sudo tee -a /etc/environment > /dev/null
+# Enable VSCodium to use QT file dialogs by default instead of GTK.
+echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment > /dev/null
 # Enable QT5 apps to use Kvantum theming engine.
-echo QT_QPA_PLATFORMTHEME=qt5ct >> /etc/environment
+echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment > /dev/null
 
 # Download wallpapers.
-./wallpapers.sh
+$HOME/./linux-stuff/wallpapers.sh
 
 echo -e "${BLUE}Void Linux post-install setup complete. Don't forget to enable SDDM by changing back into this directory and typing: "./enable-sddm-void.sh" after you reboot.${NC}"
