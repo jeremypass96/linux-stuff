@@ -121,6 +121,7 @@ sleep 10 ; clear
 read -p "$(echo -e "${YELLOW}Which Konsole colorscheme do you want?${NC}")
 1. Catppuccin
 2. OneHalf-Dark
+3. Ayu Mirage
 -> " $resp
 if [ "$resp" = 1 ]; then
 	paru -S catppuccin-konsole-theme-git --noconfirm
@@ -128,9 +129,16 @@ fi
 if [ "$resp" = 2 ]; then
 	wget https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
 	sudo mkdir -p /usr/share/konsole
-    sudo chmod 755 /usr/share/konsole
-    sudo mv onehalf-dark.colorscheme /usr/share/konsole
+	sudo chmod 755 /usr/share/konsole
+	sudo mv onehalf-dark.colorscheme /usr/share/konsole
 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
+fi
+if [ "$resp" = 3 ]; then
+	curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
+	sudo mkdir -p /usr/share/konsole
+	sudo chmod 755 /usr/share/konsole
+	sudo mv AyuMirage.colorscheme /usr/share/konsole
+	sudo chmod 644 /usr/share/konsole/AyuMirage.colorscheme
 fi
 sleep 10 ; clear
 
