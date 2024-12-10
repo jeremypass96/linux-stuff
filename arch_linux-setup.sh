@@ -257,6 +257,7 @@ vscodium --install-extension qyurila.ayu-midas
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
 vscodium --install-extension file-icons.file-icons
 vscodium --install-extension miguelsolorio.fluent-icons
+vscodium --install-extension streetsidesoftware.code-spell-checker
 sleep 10 ; clear
 
 # Install GRUB theme.

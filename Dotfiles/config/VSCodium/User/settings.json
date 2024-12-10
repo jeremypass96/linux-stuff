@@ -20,7 +20,8 @@
     "workbench.editor.empty.hint": "hidden",
     "editor.smoothScrolling": true,
     "workbench.productIconTheme": "fluent-icons",
+    "cSpell.language": "en,en-US",
     "accessibility.signals.taskFailed": {
-        "sound": "on",
-    }
+        "sound": "on"
+    },
 }
