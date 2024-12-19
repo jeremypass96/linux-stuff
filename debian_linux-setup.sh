@@ -101,3 +101,6 @@ echo "EDITOR=micro" >> /etc/environment
 echo "MICRO_TRUECOLOR=1" >> /etc/environment
 # Remove write permissions.
 sudo chmod o-w /etc/environment
+
+# Install Liquorix kernel.
+curl -s 'https://liquorix.net/install-liquorix.sh' | sudo bash
