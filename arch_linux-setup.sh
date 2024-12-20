@@ -244,9 +244,17 @@ sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts
 echo -e "${GREEN}Fonts configured.${NC}"
 sleep 10 ; clear
 
-# Install pfetch.
-echo -e "${BLUE}Installing 'pfetch'...${NC}"
-paru -S pfetch --noconfirm
+# Install and configure fastfetch.
+echo -e "${BLUE}Installing and configuring 'fastfetch'...${NC}"
+sudo pacman -S fastfetch --noconfirm
+mkdir $HOME/.config/fastfetch
+sudo mkdir /etc/skel/.config/fastfetch
+cp -v $HOME/linux-stuff/Dotfiles/config/fasfetch/config.jsonc $HOME/.config/fastfetch
+sudo cp -v $HOME/linux-stuff/Dotfiles/config/fasfetch/config.jsonc /etc/skel/.config/fastfetch
+# Fix directory permissions.
+sudo chmod 755 /etc/skel/.config/fastfetch
+# Fix config file permissions.
+sudo chmod 644 /etc/skel/.config/fastfetch/config.jsonc 
 sleep 10 ; clear
 
 # Install and configure VSCodium.
@@ -403,7 +411,7 @@ esac
 rm -rf zsh-syntax-highlighting
 sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
-echo pfetch >> $HOME/.zshrc
+echo fastfetch >> $HOME/.zshrc
 sleep 10 ; clear
 
 # Copy over custom Oh My Zsh theme.
@@ -413,8 +421,6 @@ sudo cp -v $HOME/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/t
 chsh -s /usr/bin/zsh $USER
 
 # Update environment variables.
-# Configure pfetch.
-echo 'PF_INFO="ascii os kernel uptime pkgs shell editor de"' | sudo tee -a /etc/environment > /dev/null
 # Set BROWSER variable.
 echo 'BROWSER=brave' | sudo tee -a /etc/environment > /dev/null
 # Set EDITOR variable.
