@@ -93,20 +93,24 @@ clear
 read -p "Which Konsole colorscheme do you want?
 1. Catppuccin
 2. OneHalf-Dark
+3. Ayu Mirage
 -> " $resp
 if [ "$resp" = 1 ]; then
 	cd && git clone https://github.com/catppuccin/konsole.git
 	cp -v konsole/*.colorscheme /usr/share/konsole
 	chown -R $USER:$USER /usr/share/konsole/Catppuccin-*.colorscheme
 	rm -rf konsole
-fi
-if [ "$resp" = 2 ]; then
+elif [ "$resp" = 2 ]; then
 	wget https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
 	mv onehalf-dark.colorscheme /usr/share/konsole
 	chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
 	chown root:root /usr/share/konsole/onehalf-dark.colorscheme
-fi
-
+elif [ "$resp" = 3 ]; then
+	curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
+	mkdir -p /usr/share/konsole
+	chmod 755 /usr/share/konsole
+	mv AyuMirage.colorscheme /usr/share/konsole
+	chmod 644 /usr/share/konsole/AyuMirage.colorscheme
 clear
 
 # Install the Poppins font.
