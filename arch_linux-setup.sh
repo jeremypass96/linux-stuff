@@ -118,7 +118,7 @@ sudo sed -i 's|https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o 
 sleep 10 ; clear
 
 # Install Konsole color scheme.
-dialog --title "Konsole Colorscheme" --menu "Which Konsole colorscheme do you want?" 12 40 12 \
+dialog --title "Konsole Colorscheme" --menu "Which Konsole colorscheme do you want?" 10 42 10 \
 1 "Catppuccin" \
 2 "OneHalf-Dark" \
 3 "Ayu Mirage" 2> /tmp/konsole_resp
