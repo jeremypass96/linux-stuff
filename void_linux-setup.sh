@@ -220,13 +220,30 @@ plymouth-set-default-theme -R solar
 
 # Download Konsole colors.
 echo -e "${YELLOW}Downloading Konsole colors...${NC}"
-mkdir -p /home/$USER/.local/share/konsole/
-mkdir -p /etc/skel/.local/share/konsole/
-curl https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme -o /home/$USER/onehalf-dark.colorscheme
-cp -v /home/$USER/onehalf-dark.colorscheme /home/$USER/.local/share/konsole/
-cp -v /home/$USER/onehalf-dark.colorscheme /etc/skel/.local/share/konsole/
-chown -R $USER:$USER /home/$USER/.local
-rm -r /home/$USER/onehalf-dark.colorscheme
+dialog --title "Konsole Colorscheme" --menu "Which Konsole colorscheme do you want?" 12 40 12 \
+1 "Catppuccin" \
+2 "OneHalf-Dark" \
+3 "Ayu Mirage" 2> /tmp/konsole_resp
+konsole_resp=$(cat /tmp/konsole_resp)
+if [ "$konsole_resp" = 1 ]; then
+    curl --parallel https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-frappe.colorscheme -o catppuccin-frappe.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-latte.colorscheme -o catppuccin-latte.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-macchiato.colorscheme -o catppuccin-macchiato.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-mocha.colorscheme -o catppuccin-mocha.colorscheme
+	sudo mkdir -p /usr/share/konsole
+	sudo chmod 755 /usr/share/konsole
+	sudo mv *.colorscheme /usr/share/konsole
+	sudo chmod 644 /usr/share/konsole/*.colorscheme
+elif [ "$konsole_resp" = 2 ]; then
+    curl https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme -o onehalf-dark.colorscheme
+	sudo mkdir -p /usr/share/konsole
+	sudo chmod 755 /usr/share/konsole
+	sudo mv onehalf-dark.colorscheme /usr/share/konsole
+	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
+elif [ "$konsole_resp" = 3 ]; then
+    curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
+	sudo mkdir -p /usr/share/konsole
+	sudo chmod 755 /usr/share/konsole
+	sudo mv AyuMirage.colorscheme /usr/share/konsole
+	sudo chmod 644 /usr/share/konsole/AyuMirage.colorscheme
+fi
 
 # Ask the user if they want to enable Flatpak support.
 read -p "Do you want to enable Flatpak support? (Y/n) " resp
