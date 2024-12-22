@@ -34,8 +34,7 @@ sudo nala upgrade
 clear
 
 # Install some useful software.
-sudo nala install audacity vlc fd-find bat lsd micro btop -y
-
+sudo nala install audacity vlc fd-find bat lsd vim btop -y
 clear
 
 # Install OneHalf-Dark theme for Xfce terminal.
@@ -50,11 +49,8 @@ clear
 # Install and setup Zsh.
 nala install zsh -y && ./zsh-setup.sh
 
-# Install pfetch.
-sudo nala install git gcc make automake autoconf libtool -y
-git clone https://github.com/dylanaraps/pfetch.git && cd pfetch
-sudo make install
-cd && rm -rf pfetch
+# Install fastfetch.
+sudo nala install fastfetch -y
 
 clear
 
@@ -65,9 +61,10 @@ sudo ./cleanup-systemd-boot.sh
 sudo ln -s /usr/bin/batcat /usr/bin/bat && ./bat-setup.sh
 sudo ./wallpapers.sh
 ./lsd-setup.sh
-./micro-setup.sh
 ./bat-setup.sh
 ./zsh-setup.sh
+./fastfetch-setup.sh
+./vim_setup.sh
 
 # Install Brave web browser.
 sudo nala install curl && sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -91,14 +88,10 @@ sudo chmod o-w /etc/default/grub
 # Update environment variables.
 # Enable write permissions.
 sudo chmod o+w /etc/environment
-# Configure pfetch.
-echo "PF_INFO=\"ascii os kernel uptime pkgs shell editor de\"" >> /etc/environment
 # Set BROWSER variable.
 echo "BROWSER=brave" >> /etc/environment
 # Set EDITOR variable.
-echo "EDITOR=micro" >> /etc/environment
-# Set MICRO_TRUECOLOR variable.
-echo "MICRO_TRUECOLOR=1" >> /etc/environment
+echo "EDITOR=vim" >> /etc/environment
 # Remove write permissions.
 sudo chmod o-w /etc/environment
 

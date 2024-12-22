@@ -86,6 +86,11 @@ clear
 
 # Install Zsh.
 dnf install -y zsh
+./zsh-setup.sh
+
+# Install fastfetch.
+dnf install -y fastfetch
+./fastfetch-setup.sh
 
 clear
 

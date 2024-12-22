@@ -79,7 +79,7 @@ sleep 10 ; clear
 
 # Install a few command-line utilities.
 echo -e "${BLUE}Installing a few command-line utilities...${NC}"
-sudo pacman -S duf bat fd lynis btop --noconfirm
+sudo pacman -S duf bat fd lynis btop wcurl --noconfirm
 sleep 10 ; clear
 
 # Install spell checking support.
@@ -118,23 +118,21 @@ sudo sed -i 's|https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o 
 sleep 10 ; clear
 
 # Install Konsole color scheme.
-read -p "$(echo -e "${YELLOW}Which Konsole colorscheme do you want?${NC}")
-1. Catppuccin
-2. OneHalf-Dark
-3. Ayu Mirage
--> " $resp
-if [ "$resp" = 1 ]; then
-	paru -S catppuccin-konsole-theme-git --noconfirm
-fi
-if [ "$resp" = 2 ]; then
-	wget https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
+dialog --title "Konsole Colorscheme" --menu "Which Konsole colorscheme do you want?" 12 40 12 \
+1 "Catppuccin" \
+2 "OneHalf-Dark" \
+3 "Ayu Mirage" 2> /tmp/konsole_resp
+konsole_resp=$(cat /tmp/konsole_resp)
+if [ "$konsole_resp" = 1 ]; then
+    paru -S catppuccin-konsole-theme-git --noconfirm
+elif [ "$konsole_resp" = 2 ]; then
+    wcurl --curl-options="--progress-bar" https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
 	sudo mkdir -p /usr/share/konsole
 	sudo chmod 755 /usr/share/konsole
 	sudo mv onehalf-dark.colorscheme /usr/share/konsole
 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
-fi
-if [ "$resp" = 3 ]; then
-	curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
+elif [ "$konsole_resp" = 3 ]; then
+    wcurl --curl-options="--progress-bar" https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
 	sudo mkdir -p /usr/share/konsole
 	sudo chmod 755 /usr/share/konsole
 	sudo mv AyuMirage.colorscheme /usr/share/konsole
@@ -254,7 +252,7 @@ sudo cp -v $HOME/linux-stuff/Dotfiles/config/fasfetch/config.jsonc /etc/skel/.co
 # Fix directory permissions.
 sudo chmod 755 /etc/skel/.config/fastfetch
 # Fix config file permissions.
-sudo chmod 644 /etc/skel/.config/fastfetch/config.jsonc 
+sudo chmod 644 /etc/skel/.config/fastfetch/config.jsonc
 sleep 10 ; clear
 
 # Install and configure VSCodium.
