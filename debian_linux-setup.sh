@@ -2,9 +2,9 @@
 # This script will clean up and optimize a Debian Xfce (rolling - Sid) installation.
 
 # Audio buzz/hum fix.
-sudo touch /etc/modprobe.d/alsa-base.conf && sudo chmod o+w /etc/modprobe.d/alsa-base.conf
-echo "options snd-hda-intel power_save=0 power_save_controller=N" > /etc/modprobe.d/alsa-base.conf
-sudo chmod o-w /etc/modprobe.d/alsa-base.conf
+sudo tee /etc/modprobe.d/alsa-base.conf > /dev/null << EOF
+options snd-hda-intel power_save=0 power_save_controller=N
+EOF
 
 clear
 
