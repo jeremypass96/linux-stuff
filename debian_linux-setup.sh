@@ -1,5 +1,5 @@
 #!/bin/sh
-# This script will clean up and optimize a Debian Xfce (rolling - Sid) installtion.
+# This script will clean up and optimize a Debian Xfce (rolling - Sid) installation.
 
 # Audio buzz/hum fix.
 sudo touch /etc/modprobe.d/alsa-base.conf && sudo chmod o+w /etc/modprobe.d/alsa-base.conf
