@@ -25,12 +25,13 @@ sudo nala purge xterm xsane exfalso quodlibet libreoffice-common firefox-esr -y
 
 clear
 
-# Install a few GNOME games.
-sudo nala install aisleriot four-in-a-row gnome-mines gnome-nibbles swell-foop quadrapassel -y
-
 # Update package list and upgrade Debian.
 sudo nala upgrade
 
+clear
+
+# Install a few GNOME games.
+sudo nala install aisleriot four-in-a-row gnome-mines gnome-nibbles swell-foop quadrapassel -y
 clear
 
 # Install some useful software.
@@ -39,7 +40,7 @@ clear
 
 # Install OneHalf-Dark theme for Xfce terminal.
 sudo mkdir -p /etc/skel/.local/share/xfce4/terminal/colorschemes
-cd && curl https://raw.githubusercontent.com/sonph/onehalf/master/xfce4-terminal/OneHalfDark.theme -o OneHalfDark.theme
+cd $HOME && curl https://raw.githubusercontent.com/sonph/onehalf/master/xfce4-terminal/OneHalfDark.theme -o OneHalfDark.theme
 mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
 cp -v OneHalfDark.theme /etc/skel/.local/share/xfce4/terminal/colorschemes
 cp -v OneHalfDark.theme $HOME/.local/share/xfce4/terminal/colorschemes
@@ -75,9 +76,9 @@ sudo nala update && sudo nala install brave-browser -y
 echo "Installing the GRUB theme..."
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && sudo ./install.sh -t stylish
-sudo chmod o+w /etc/default/grub
-echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
-sudo chmod o-w /etc/default/grub
+sudo tee -a /etc/default/grub > /dev/null << EOF
+GRUB_DISABLE_SUBMENU=y
+EOF
 cd && rm -rf grub2-themes
 
 # Enable GRUB_DISABLE_RECOVERY in /etc/default/grub.
@@ -86,14 +87,10 @@ sudo sed -i s/#GRUB_DISABLE_RECOVERY/GRUB_DISABLE_RECOVERY/g /etc/default/grub
 sudo chmod o-w /etc/default/grub
 
 # Update environment variables.
-# Enable write permissions.
-sudo chmod o+w /etc/environment
-# Set BROWSER variable.
-echo "BROWSER=brave" >> /etc/environment
-# Set EDITOR variable.
-echo "EDITOR=vim" >> /etc/environment
-# Remove write permissions.
-sudo chmod o-w /etc/environment
+sudo tee -a /etc/environment > /dev/null << EOF
+BROWSER=brave
+EDITOR=vim
+EOF
 
 # Install Liquorix kernel.
 curl -s 'https://liquorix.net/install-liquorix.sh' | sudo bash
