@@ -2,9 +2,7 @@
 # This script will clean up and optimize a Debian Xfce (rolling - Sid) installation.
 
 # Audio buzz/hum fix.
-sudo tee /etc/modprobe.d/alsa-base.conf > /dev/null << EOF
-options snd-hda-intel power_save=0 power_save_controller=N
-EOF
+echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /etc/modprobe.d/alsa-base.conf
 
 clear
 
@@ -76,9 +74,7 @@ sudo nala update && sudo nala install brave-browser -y
 echo "Installing the GRUB theme..."
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && sudo ./install.sh -t stylish
-sudo tee -a /etc/default/grub > /dev/null << EOF
-GRUB_DISABLE_SUBMENU=y
-EOF
+echo "GRUB_DISABLE_SUBMENU=y" | sudo tee -a /etc/default/grub
 cd && rm -rf grub2-themes
 
 # Enable GRUB_DISABLE_RECOVERY in /etc/default/grub.
