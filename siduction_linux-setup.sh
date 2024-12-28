@@ -20,6 +20,33 @@ clear
 sudo nala purge xsane libreoffice-common firefox kmail kget konqueror konversation krdc krfb flameshot gimp imagemagick kcolorchooser kolourpaint kruler akregator kasts kdepim dragonpalyer elisa mpv smplayer mc kate kleopatra krusader kteatime imagemagick* kaffine ktorrent sshactivate kaddressbook korganizer zim whowatch yakuake byobu -y
 sudo nala autoremove -y
 
+# Install and configure fonts.
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh)"
+sudo nala install fonts-adobe-sourcesans3 fonts-material-design-icons-iconfont fonts-materialdesignicons-webfont fonts-roboto-hinted fonts-ubuntu ttfautohint -y
+sudo mkdir -p /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Black.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BlackItalic.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Bold.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BoldItalic.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBold.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBoldItalic.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraLight.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraLightItalic.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Italic.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Light.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-LightItalic.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Medium.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-MediumItalic.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Regular.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-SemiBold.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-SemiBoldItalic.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Thin.ttf -P /usr/share/fonts/Poppins
+sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ThinItalic.ttf -P /usr/share/fonts/Poppins
+# Enable auto-hinting.
+ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
+# Enable RGB sub-pixel rendering.
+ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+
 clear
 
 # Update package list and upgrade Debian.
@@ -97,6 +124,9 @@ cd && rm -rf grub2-themes
 sudo chmod o+w /etc/default/grub
 sudo sed -i s/#GRUB_DISABLE_RECOVERY/GRUB_DISABLE_RECOVERY/g /etc/default/grub
 sudo chmod o-w /etc/default/grub
+
+# Install icon theme.
+sudo nala install papirus-icon-theme -y
 
 # Update environment variables.
 sudo tee /etc/environment > /dev/null << EOF
