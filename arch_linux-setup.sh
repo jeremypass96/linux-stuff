@@ -15,7 +15,7 @@ sleep 10 ; clear
 
 # Audio buzz/hum fix.
 echo -e "${BLUE}Fixing audio buzz/him issue...${NC}"
-echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /etc/modprobe.d/alsa-base.conf
+echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /etc/modprobe.d/alsa-base.conf > /dev/null
 echo -e "${GREEN}Audio buzz/him issue fixed!${NC}"
 sleep 10 ; clear
 

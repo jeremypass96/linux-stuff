@@ -2,7 +2,7 @@
 # This script will clean up and optimize a Siduction KDE (Debian-based rolling release distribution) installation.
 
 # Audio buzz/hum fix.
-echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /etc/modprobe.d/alsa-base.conf
+echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /etc/modprobe.d/alsa-base.conf > /dev/null
 
 clear
 
