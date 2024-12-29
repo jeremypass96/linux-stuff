@@ -7,9 +7,7 @@ echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /et
 clear
 
 # Install Nala, a better apt front-end.
-echo "deb [arch=amd64,arm64,armhf] http://deb.volian.org/volian/ scar main" | sudo tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
-wget -qO - https://deb.volian.org/volian/scar.key | sudo tee /etc/apt/trusted.gpg.d/volian-archive-scar-unstable.gpg > /dev/null
-sudo apt update && sudo apt install nala
+curl https://gitlab.com/volian/volian-archive/-/raw/main/install-nala.sh | bash
 
 clear
 
@@ -49,7 +47,7 @@ clear
 nala install zsh -y && ./zsh-setup.sh
 
 # Install fastfetch.
-sudo nala install fastfetch -y
+sudo nala install fastfetch -y && ./fastfetch-setup.sh
 
 clear
 
@@ -60,9 +58,6 @@ sudo ./cleanup-systemd-boot.sh
 sudo ln -s /usr/bin/batcat /usr/bin/bat && ./bat-setup.sh
 sudo ./wallpapers.sh
 ./lsd-setup.sh
-./bat-setup.sh
-./zsh-setup.sh
-./fastfetch-setup.sh
 ./vim_setup.sh
 
 # Install Brave web browser.
