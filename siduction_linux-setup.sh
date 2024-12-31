@@ -127,9 +127,9 @@ elif [ "$konsole_resp" = 3 ]; then
     sudo mv AyuMirage.colorscheme /usr/share/konsole
 fi
 if [ $? -eq 0 ]; then
-  echo -e "${GREEN}Konsole theme(s) installed successfully.${NC}"
+  echo -e "${GREEN}Konsole theme installed successfully.${NC}"
 else
-  echo -e "${RED}Failed to install Konsole theme(s).${NC}"
+  echo -e "${RED}Failed to install Konsole theme.${NC}"
 fi
 
 # Install and setup Zsh.
