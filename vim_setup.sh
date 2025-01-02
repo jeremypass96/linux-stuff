@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script sets up Vim with the "one" colorscheme and the Lightline plugin for Linux.
+# This script sets up Vim with the "Ayu Mirage" colorscheme and the Lightline plugin for Linux.
 
 # Install vim-plug.
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
