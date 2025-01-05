@@ -94,7 +94,7 @@ sleep 10 ; clear
 
 # Install paru AUR helper.
 echo -e "${BLUE}Installing the 'paru' AUR helper...${NC}"
-sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git $HOME/paru-bin && cd $HOME/paru-bin && makepkg -sic --noconfirm
+sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru-bin.git "$HOME"/paru-bin && cd "$HOME"/paru-bin && makepkg -sic --noconfirm
 cd .. && rm -rf paru-bin
 # Configure paru options.
 echo -e "${BLUE}Configuring paru options...${NC}"
@@ -142,8 +142,8 @@ sleep 10 ; clear
 # Install icon and KDE theme.
 echo -e "${BLUE}Installing Papirus icon theme and Vimix KDE/GTK/Kvantum theme...${NC}"
 paru -S papirus-icon-theme papirus-folders vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
-git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
-cd $HOME/Vimix-kde
+git clone https://github.com/vinceliuice/Vimix-kde.git "$HOME"/Vimix-kde
+cd "$HOME"/Vimix-kde || exit
 sudo cp -rv aurorae/* /usr/share/aurorae/themes
 sudo cp -rv color-schemes /usr/share
 sudo cp -rv Kvantum /usr/share
@@ -185,8 +185,8 @@ sudo chmod 644 /usr/share/aurorae/themes/Vimix*/*
 sudo chmod 755 /usr/share/Kvantum/Vimix*
 sudo chmod 644 /usr/share/Kvantum/Vimix*/*
 # Cleanup
-cd $HOME
-rm -rf $HOME/Vimix-kde
+cd "$HOME" || exit
+rm -rf "$HOME"/Vimix-kde
 sleep 10 ; clear
 
 # Install Octopi, a Qt-based pacman frontend with AUR support.
@@ -244,10 +244,10 @@ sleep 10 ; clear
 # Install and configure fastfetch.
 echo -e "${BLUE}Installing and configuring 'fastfetch'...${NC}"
 sudo pacman -S fastfetch --noconfirm
-mkdir $HOME/.config/fastfetch
+mkdir "$HOME"/.config/fastfetch
 sudo mkdir /etc/skel/.config/fastfetch
-cp -v $HOME/linux-stuff/Dotfiles/config/fasfetch/config.jsonc $HOME/.config/fastfetch
-sudo cp -v $HOME/linux-stuff/Dotfiles/config/fasfetch/config.jsonc /etc/skel/.config/fastfetch
+cp -v "$HOME"/linux-stuff/Dotfiles/config/fasfetch/config.jsonc "$HOME"/.config/fastfetch
+sudo cp -v "$HOME"/linux-stuff/Dotfiles/config/fasfetch/config.jsonc /etc/skel/.config/fastfetch
 # Fix directory permissions.
 sudo chmod 755 /etc/skel/.config/fastfetch
 # Fix config file permissions.
@@ -257,7 +257,7 @@ sleep 10 ; clear
 # Install and configure VSCodium.
 echo -e "${BLUE}Installing and configuring VSCodium...${NC}"
 paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
-mkdir -p $HOME/.config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.config/VSCodium/User/settings.json
+mkdir -p "$HOME"/.config/VSCodium/User && cp -v "$HOME"/linux-stuff/Dotfiles/config/VSCodium/User/settings.json "$HOME"/.config/VSCodium/User/settings.json
 vscodium --install-extension qyurila.ayu-midas
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
 vscodium --install-extension file-icons.file-icons
@@ -336,7 +336,7 @@ fi
 sleep 10 ; clear
 
 # Setup config files and stuff.
-cd linux-stuff/
+cd linux-stuff/ || exit
 ./bat-setup.sh
 ./lsd-setup.sh
 sudo ./cleanup-systemd-boot.sh
@@ -345,15 +345,15 @@ sleep 10 ; clear
 # Configure Zsh.
 echo -e "${BLUE}Configuring Zsh...${NC}"
 paru -S oh-my-zsh-git --noconfirm
-cp -v /usr/share/oh-my-zsh/zshrc $HOME/.zshrc
-sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"jpassarelli"'/g $HOME/.zshrc
-sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' $HOME/.zshrc
-sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g $HOME/.zshrc
-sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/g' $HOME/.zshrc
-sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' $HOME/.zshrc
-sed -i 's/# DISABLE_UNTRACKED_FILES_DIRTY="true"/DISABLE_UNTRACKED_FILES_DIRTY="true"/g' $HOME/.zshrc
-sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' $HOME/.zshrc
-sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' $HOME/.zshrc
+cp -v /usr/share/oh-my-zsh/zshrc "$HOME"/.zshrc
+sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"jpassarelli"'/g "$HOME"/.zshrc
+sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' "$HOME"/.zshrc
+sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g "$HOME"/.zshrc
+sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/g' "$HOME"/.zshrc
+sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' "$HOME"/.zshrc
+sed -i 's/# DISABLE_UNTRACKED_FILES_DIRTY="true"/DISABLE_UNTRACKED_FILES_DIRTY="true"/g' "$HOME"/.zshrc
+sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' "$HOME"/.zshrc
+sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' "$HOME"/.zshrc
 ZSH_CUSTOM=/usr/share/oh-my-zsh/custom
 sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
@@ -367,29 +367,29 @@ sudo chmod -R 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/im
 sudo chmod -R 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/tests
 sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/*.zsh
 sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.*
-echo "" >> $HOME/.zshrc
-echo "# Set the default umask." >> $HOME/.zshrc
-echo "umask 077" >> $HOME/.zshrc
-echo "" >> $HOME/.zshrc
-echo "# Disable highlighting of pasted text." >> $HOME/.zshrc
-echo "zle_highlight=('paste:none')" >> $HOME/.zshrc
-echo "" >> $HOME/.zshrc
-echo "# Apply sensible history settings." >> $HOME/.zshrc
-echo "setopt HIST_EXPIRE_DUPS_FIRST" >> $HOME/.zshrc
-echo "setopt HIST_FIND_NO_DUPS" >> $HOME/.zshrc
-echo "setopt HIST_IGNORE_ALL_DUPS" >> $HOME/.zshrc
-echo "setopt HIST_IGNORE_DUPS" >> $HOME/.zshrc
-echo "setopt HIST_IGNORE_SPACE" >> $HOME/.zshrc
-echo "setopt HIST_SAVE_NO_DUPS" >> $HOME/.zshrc
-echo alias ls='"lsd"' >> $HOME/.zshrc
-echo alias cat='"bat"' >> $HOME/.zshrc
+echo "" >> "$HOME"/.zshrc
+echo "# Set the default umask." >> "$HOME"/.zshrc
+echo "umask 077" >> "$HOME"/.zshrc
+echo "" >> "$HOME"/.zshrc
+echo "# Disable highlighting of pasted text." >> "$HOME"/.zshrc
+echo "zle_highlight=('paste:none')" >> "$HOME"/.zshrc
+echo "" >> "$HOME"/.zshrc
+echo "# Apply sensible history settings." >> "$HOME"/.zshrc
+echo "setopt HIST_EXPIRE_DUPS_FIRST" >> "$HOME"/.zshrc
+echo "setopt HIST_FIND_NO_DUPS" >> "$HOME"/.zshrc
+echo "setopt HIST_IGNORE_ALL_DUPS" >> "$HOME"/.zshrc
+echo "setopt HIST_IGNORE_DUPS" >> "$HOME"/.zshrc
+echo "setopt HIST_IGNORE_SPACE" >> "$HOME"/.zshrc
+echo "setopt HIST_SAVE_NO_DUPS" >> "$HOME"/.zshrc
+echo alias ls='"lsd"' >> "$HOME"/.zshrc
+echo alias cat='"bat"' >> "$HOME"/.zshrc
 sleep 10 ; clear
 
 # Setup Catppuccin colors.
-cd $HOME && git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
+cd "$HOME" && git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
 sudo cp -v zsh-syntax-highlighting/themes/*.zsh /etc/zsh
 
-read -p "$(echo -e "${YELLOW}Which Catppuccin colors do you want for Zsh syntax highlighting?${NC}")
+read -rp "$(echo -e "${YELLOW}Which Catppuccin colors do you want for Zsh syntax highlighting?${NC}")
 1.) Latte
 2.) Frappé
 3.) Macchiato
@@ -398,24 +398,24 @@ read -p "$(echo -e "${YELLOW}Which Catppuccin colors do you want for Zsh syntax 
 0.) None.
 -> " resp
 case "$resp" in
-    1) echo "source /etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc ;;
-    2) echo "source /etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc ;;
-    3) echo "source /etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc ;;
-    4) echo "source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc ;;
+    1) echo "source /etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc ;;
+    2) echo "source /etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc ;;
+    3) echo "source /etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc ;;
+    4) echo "source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc ;;
     0) sudo rm -rf /etc/zsh/*.zsh ;;
     *) echo -e "${RED}Invalid option. Please choose a valid number.${NC}" ;;
 esac
 rm -rf zsh-syntax-highlighting
-sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
+sudo cp -v "$HOME"/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
-echo fastfetch >> $HOME/.zshrc
+echo fastfetch >> "$HOME"/.zshrc
 sleep 10 ; clear
 
 # Copy over custom Oh My Zsh theme.
-sudo cp -v $HOME/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
+sudo cp -v "$HOME"/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
 
 # Change user's shell to zsh.
-chsh -s /usr/bin/zsh $USER
+chsh -s /usr/bin/zsh "$USER"
 
 # Update environment variables.
 # Set BROWSER variable.
@@ -437,7 +437,7 @@ sudo sed -i 's/#COMPRESSION="xz"/COMPRESSION="xz"/g' /etc/mkinitcpio.conf
 
 # Stop mkinitcpio from generating a fallback kernel image.
 echo -e "${BLUE}Stopping mkinitcpio from generating a fallback kernel image...${NC}"
-if [ $(uname -r | grep arch | awk -F "-" '{print $(NF)}') ]; then
+if [ "$(uname -r | grep arch | awk -F "-" '{print $(NF)}')" ]; then
 	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux.preset
 	sudo sed -i 's|fallback_image="/boot/initramfs-linux-fallback.img"|#fallback_image="/boot/initramfs-linux-fallback.img"|g' /etc/mkinitcpio.d/linux.preset
 	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux.preset
@@ -445,7 +445,7 @@ if [ $(uname -r | grep arch | awk -F "-" '{print $(NF)}') ]; then
 	sudo rm /boot/initramfs-linux-fallback.img
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-if [ $(uname -r | grep hardened | awk -F "-" '{print $(NF)}') ]; then
+if [ "$(uname -r | grep hardened | awk -F "-" '{print $(NF)}')" ]; then
 	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-hardened.preset
 	sudo sed -i 's|fallback_image="/boot/initramfs-linux-hardened-fallback.img"|#fallback_image="/boot/initramfs-linux-hardened-fallback.img"|g' /etc/mkinitcpio.d/linux-hardened.preset
 	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-hardened.preset
@@ -453,7 +453,7 @@ if [ $(uname -r | grep hardened | awk -F "-" '{print $(NF)}') ]; then
 	sudo rm /boot/initramfs-linux-hardened-fallback.img
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-if [ $(uname -r | grep lts | awk -F "-" '{print $(NF)}') ]; then
+if [ "$(uname -r | grep lts | awk -F "-" '{print $(NF)}')" ]; then
 	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-lts.preset
 	sudo sed -i 's|fallback_image="/boot/initramfs-linux-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-lts.preset
 	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-lts.preset
@@ -461,7 +461,7 @@ if [ $(uname -r | grep lts | awk -F "-" '{print $(NF)}') ]; then
 	sudo rm /boot/initramfs-linux-lts-fallback.img
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-if [ $(uname -r | grep zen | awk -F "-" '{print $(NF)}') ]; then
+if [ "$(uname -r | grep zen | awk -F "-" '{print $(NF)}')" ]; then
 	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-zen.preset
 	sudo sed -i 's|fallback_image="/boot/initramfs-linux-zen-fallback.img"|#fallback_image="/boot/initramfs-linux-zen-fallback.img"|g' /etc/mkinitcpio.d/linux-zen.preset
 	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-zen.preset
@@ -469,7 +469,7 @@ if [ $(uname -r | grep zen | awk -F "-" '{print $(NF)}') ]; then
 	sudo rm /boot/initramfs-linux-zen-fallback.img
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-if [ $(uname -r | grep realtime | awk -F "-" '{print $(NF)}') ]; then
+if [ "$(uname -r | grep realtime | awk -F "-" '{print $(NF)}')" ]; then
 	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-rt.preset
 	sudo sed -i 's|fallback_image="/boot/initramfs-linux-rt-fallback.img"|#fallback_image="/boot/initramfs-linux-rt-fallback.img"|g' /etc/mkinitcpio.d/linux-rt.preset
 	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-rt.preset
@@ -477,7 +477,7 @@ if [ $(uname -r | grep realtime | awk -F "-" '{print $(NF)}') ]; then
 	sudo rm /boot/initramfs-linux-rt-fallback.img
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-if [ $(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}') ]; then
+if [ "$(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}')" ]; then
 	sudo sed -i 's/'"PRESETS=('default' 'fallback')"'/'"PRESETS=('default')"''/g /etc/mkinitcpio.d/linux-rt-lts.preset
 	sudo sed -i 's|fallback_image="/boot/initramfs-linux-rt-lts-fallback.img"|#fallback_image="/boot/initramfs-linux-rt-lts-fallback.img"|g' /etc/mkinitcpio.d/linux-rt-lts.preset
 	sudo sed -i 's/fallback_options="-S autodetect"/#fallback_options="-S autodetect"'/g /etc/mkinitcpio.d/linux-rt-lts.preset
@@ -552,7 +552,7 @@ sudo tee -a /etc/hosts > /dev/null << EOF
 ::1 localhost ip6-localhost ip6-loopback
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
-127.0.1.1 `hostname`
+127.0.1.1 $(hostname)
 EOF
 
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no'/g /etc/ssh/sshd_config
@@ -567,7 +567,7 @@ sudo sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no'/g /etc/ssh/ssh
 
 # Increase password hashing rounds.
 sudo sed -i 's/#SHA_CRYPT_MIN_ROUNDS 5000/SHA_CRYPT_MIN_ROUNDS 100000'/g /etc/login.defs
-sudo sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 100000'g /etc/login.defs
+sudo sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 100000'/g /etc/login.defs
 
 # Change password encryption method from "YESCRYPT" to "SHA256."
 sudo sed -i 's/ENCRYPT_METHOD YESCRYPT/ENCRYPT_METHOD SHA256'/g /etc/login.defs
@@ -672,21 +672,21 @@ echo -e "${YELLOW}Which console text editor do you want?${NC}"
 echo "1.) Micro"
 echo "2.) Vim"
 echo "3.) Vim with Catppuccino colorscheme"
-read -p "-> " resp
+read -rp "-> " resp
 
 case "$resp" in
     1)
         sudo pacman -S micro xclip --noconfirm
-        $HOME/./linux-stuff/micro-setup.sh
+        "$HOME"/./linux-stuff/micro-setup.sh
         sudo sed -i 's/vim/micro/g' /etc/environment
         echo MICRO_TRUECOLOR=1 | sudo tee -a /etc/environment > /dev/null
         sudo pacman -Rns vim
         ;;
     2)
-        $HOME/./linux-stuff/vim_setup_archlinux.sh
+        "$HOME"/./linux-stuff/vim_setup_archlinux.sh
         ;;
     3)
-        $HOME/./linux-stuff/vim_setup_catppuccino_archlinux.sh
+        "$HOME"/./linux-stuff/vim_setup_catppuccino_archlinux.sh
         ;;
 esac
 sleep 10 ; clear
