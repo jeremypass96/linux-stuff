@@ -15,7 +15,8 @@ sudo mkdir -p /etc/pacman.d/hooks
 sudo chmod 755 /etc/pacman.d/hooks
 
 # Content of restore_pacsave script.
-echo '#!/bin/bash
+tee "$DEST_DIR/restore_pacsave" > /dev/null << EOF
+#!/bin/bash
 
 # Define bold color escape codes for output
 bold_blue="\e[1;34m"
@@ -45,10 +46,12 @@ if [[ -n "$pacsave_files" ]]; then
     done
 else
     echo -e "${bold_yellow}No .pacsave files found.${reset}"
-fi' | tee -a "$DEST_DIR/restore_pacsave" > /dev/null
+fi
+EOF
 
 # Content of restore_pacsave.hook
-echo '[Trigger]
+tee "$HOOK_DIR/restore_pacsave.hook" > /dev/null << EOF
+[Trigger]
 Operation = Install
 Type = Package
 Target = *
@@ -56,7 +59,10 @@ Target = *
 [Action]
 Description = Checking for and restoring .pacsave files...
 When = PostTransaction
-Exec = /usr/local/bin/restore_pacsave' | tee -a "$HOOK_DIR/restore_pacsave.hook" > /dev/null
+Exec = /usr/local/bin/restore_pacsave
+EOF
+
+# Fix permissions for pacman hook.
 chmod 644 "$HOOK_DIR/restore_pacsave.hook"
 
 # Make the script executable and fix permissions.

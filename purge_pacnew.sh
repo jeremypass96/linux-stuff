@@ -11,17 +11,20 @@ DEST_DIR="/usr/local/bin"
 HOOK_DIR="/etc/pacman.d/hooks"
 
 # Content of purge_pacnew script.
-echo '#!/bin/bash
+tee "$DEST_DIR/purge_pacnew" > /dev/null << EOF
+#!/bin/bash
 
 # Remove all .pacnew files
-fd -e pacnew . /etc -X rm -rf' | tee -a "$DEST_DIR/purge_pacnew" > /dev/null
+fd -e pacnew . /etc -X rm -rf'
+EOF
 
 # Make pacman.d hooks directory and fix permissions.
 sudo mkdir -p /etc/pacman.d/hooks
 sudo chmod 755 /etc/pacman.d/hooks
 
 # Content of check_pacnew script.
-echo '#!/bin/bash
+tee "$DEST_DIR/check_pacnew" > /dev/null << EOF
+#!/bin/bash
 
 # Define color escape codes for output
 bold_green="\e[1;32m"
@@ -40,10 +43,12 @@ if [[ -n "$log_pacnew" && -n "$system_pacnew" ]]; then
     /usr/local/bin/purge_pacnew
 else
     echo -e "${bold_yellow}No new .pacnew files detected.${reset}"
-fi' | tee -a "$DEST_DIR/check_pacnew" > /dev/null
+fi
+EOF
 
 # Content of check_pacnew.hook
-echo '[Trigger]
+tee "$HOOK_DIR/check_pacnew.hook" > /dev/null << EOF
+[Trigger]
 Operation = Install
 Type = Package
 Target = *
@@ -51,7 +56,10 @@ Target = *
 [Action]
 Description = Checking for and purging .pacnew files...
 When = PostTransaction
-Exec = /usr/local/bin/check_pacnew' | tee -a "$HOOK_DIR/check_pacnew.hook" > /dev/null
+Exec = /usr/local/bin/check_pacnew
+EOF
+
+# Fix permissions for pacman hook.
 chmod 644 "$HOOK_DIR/check_pacnew.hook"
 
 # Make the scripts executable
