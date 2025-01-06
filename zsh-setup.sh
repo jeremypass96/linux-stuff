@@ -88,4 +88,4 @@ echo pfetch >> "$HOME"/.zshrc
 # Change root's shell.
 sudo chsh -s /usr/bin/zsh root
 
-echo "Zsh and related configurations have been set up with the chosen Catppuccin syntax highlighting."
+echo "Zsh has been sucessfully set up."
