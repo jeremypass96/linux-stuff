@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Checking to see if we're running as root.
-if [ $(id -u) -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     echo "Please run this script as root via 'su' or 'sudo'! Thanks."
     exit
 fi
@@ -29,7 +29,7 @@ bold_yellow="\e[1;33m"
 reset="\e[0m"
 
 # Search the pacman log for recent warnings about .pacnew files
-log_pacnew=$(grep -P 'warning: .*\.pacnew' /var/log/pacman.log | tail -n 10)
+log_pacnew=$(grep -P "warning: .*\.pacnew" /var/log/pacman.log | tail -n 10)
 
 # Verify if .pacnew files exist on the system
 system_pacnew=$(fd -e pacnew . /etc)

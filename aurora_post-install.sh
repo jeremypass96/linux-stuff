@@ -6,11 +6,11 @@ rpm-ostree install papirus-icon-theme
 
 # Install the Vimix KDE theme.
 rpm-ostree install kvantum
-git clone https://github.com/vinceliuice/Vimix-kde.git $HOME/Vimix-kde
-cd $HOME/Vimix-kde
+git clone https://github.com/vinceliuice/Vimix-kde.git "$HOME"/Vimix-kde
+cd "$HOME"/Vimix-kde || exit
 ./install.sh -t doder
 # Cleanup
-cd $HOME
+cd "$HOME" || exit
 rm -rf Vimix-kde
 
 # Remove Firefox and other junk.
@@ -20,7 +20,7 @@ flatpak uninstall -y org.mozilla.firefox org.fedoraproject.MediaWriter org.kde.h
 flatpak install -y com.brave.Browser com.vscodium.codium
 
 # Configure VSCodium.
-mkdir -p $HOME/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
+mkdir -p "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v "$HOME"/linux-stuff/Dotfiles/config/VSCodium/User/settings.json "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
 flatpak run com.vscodium.codium --install-extension qyurila.ayu-midas
 flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
 flatpak run com.vscodium.codium --install-extension file-icons.file-icons

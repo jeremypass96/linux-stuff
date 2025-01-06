@@ -10,7 +10,7 @@ CYAN='\033[1;36m'
 NC='\033[0m' # No color
 
 # Checking to see if we're running as root.
-if [ $(id -u) -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     echo -e "${RED}Please run this script as root via 'su'! Thanks.${NC}"
     exit
 fi

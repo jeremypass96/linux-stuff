@@ -2,7 +2,7 @@
 # This shell script cleans up a Fedora KDE spin and removes unnecessary bloatware included with the operating system.
 
 # Checking to see if we're running as root.
-if [ $(id -u) -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     echo "Please run this script as root! Thanks."
     exit
 fi
@@ -28,7 +28,7 @@ dnf update -y
 clear
 
 # Add RPMFusion repositories.
-dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
 
 clear
 
@@ -95,15 +95,15 @@ dnf install -y fastfetch
 clear
 
 # Download Konsole colors.
-read -p "Which Konsole colorscheme do you want?
+read -rp "Which Konsole colorscheme do you want?
 1. Catppuccin
 2. OneHalf-Dark
 3. Ayu Mirage
--> " $resp
+-> " resp
 if [ "$resp" = 1 ]; then
 	cd && git clone https://github.com/catppuccin/konsole.git
 	cp -v konsole/*.colorscheme /usr/share/konsole
-	chown -R $USER:$USER /usr/share/konsole/Catppuccin-*.colorscheme
+	chown -R "$USER:$USER" /usr/share/konsole/Catppuccin-*.colorscheme
 	rm -rf konsole
 elif [ "$resp" = 2 ]; then
 	wget https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
@@ -116,6 +116,7 @@ elif [ "$resp" = 3 ]; then
 	chmod 755 /usr/share/konsole
 	mv AyuMirage.colorscheme /usr/share/konsole
 	chmod 644 /usr/share/konsole/AyuMirage.colorscheme
+fi
 clear
 
 # Install the Poppins font.

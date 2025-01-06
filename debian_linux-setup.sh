@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script will clean up and optimize a Debian Xfce (rolling - Sid) installation.
 
 # Audio buzz/hum fix.
@@ -36,10 +36,10 @@ clear
 
 # Install OneHalf-Dark theme for Xfce terminal.
 sudo mkdir -p /etc/skel/.local/share/xfce4/terminal/colorschemes
-cd $HOME && curl https://raw.githubusercontent.com/sonph/onehalf/master/xfce4-terminal/OneHalfDark.theme -o OneHalfDark.theme
-mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
+cd "$HOME" && curl https://raw.githubusercontent.com/sonph/onehalf/master/xfce4-terminal/OneHalfDark.theme -o OneHalfDark.theme
+mkdir -p "$HOME"/.local/share/xfce4/terminal/colorschemes
 cp -v OneHalfDark.theme /etc/skel/.local/share/xfce4/terminal/colorschemes
-cp -v OneHalfDark.theme $HOME/.local/share/xfce4/terminal/colorschemes
+cp -v OneHalfDark.theme "$HOME"/.local/share/xfce4/terminal/colorschemes
 
 clear
 

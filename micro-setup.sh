@@ -7,29 +7,29 @@ SCHEME_NAMES=("catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "cat
 # Function to copy settings and color scheme
 copy_settings_and_colors() {
     # Create directory structure
-    mkdir -p $CONFIG_DIR
+    mkdir -p "$CONFIG_DIR"
     sudo mkdir -p /etc/skel/.config/micro
     sudo mkdir -p /root/.config/micro
 
     # Copy settings file
-    cp -v $HOME/linux-stuff/Dotfiles/config/micro/settings.json $CONFIG_DIR/settings.json
-    sudo cp -v $CONFIG_DIR/settings.json /etc/skel/.config/micro/
-    sudo cp -v $CONFIG_DIR/settings.json /root/.config/micro/
+    cp -v "$HOME"/linux-stuff/Dotfiles/config/micro/settings.json "$CONFIG_DIR"/settings.json
+    sudo cp -v "$CONFIG_DIR"/settings.json /etc/skel/.config/micro/
+    sudo cp -v "$CONFIG_DIR"/settings.json /root/.config/micro/
 
     # Set correct ownership
-    chown -R $USER:$USER $CONFIG_DIR
+    chown -R "$USER":"$USER" "$CONFIG_DIR"
 
     # Setup Catppuccin colors
     # Change to the user's home directory and clone Catppuccino colorscheme repository
-    cd $HOME && git clone https://github.com/catppuccin/micro.git
+    cd "$HOME" && git clone https://github.com/catppuccin/micro.git
 
     # Set up colorschemes directories
-    mkdir -p $CONFIG_DIR/colorschemes
+    mkdir -p "$CONFIG_DIR"/colorschemes
     sudo mkdir -p /etc/skel/.config/micro/colorschemes
     sudo mkdir -p /root/.config/micro/colorschemes
 
     # Copy colorscheme files
-    cp -v micro/src/*.micro $CONFIG_DIR/colorschemes
+    cp -v micro/src/*.micro "$CONFIG_DIR"/colorschemes
     sudo cp -v micro/src/*.micro /etc/skel/.config/micro/colorschemes
     sudo cp -v micro/src/*.micro /root/.config/micro/colorschemes
 
@@ -40,7 +40,7 @@ copy_settings_and_colors() {
     micro -plugin install quoter wc detectindent aspell
 
     # Update color scheme in settings
-    sed -i "s/\"colorscheme\": \"[^\"]*\"/\"colorscheme\": \"$selected_scheme\"/" $CONFIG_DIR/settings.json
+    sed -i "s/\"colorscheme\": \"[^\"]*\"/\"colorscheme\": \"$selected_scheme\"/" "$CONFIG_DIR"/settings.json
 
     echo "Micro text editor configuration has been set up with the \"$selected_scheme\" color scheme."
 }
@@ -52,7 +52,7 @@ for ((i=0; i<${#COLOR_SCHEMES[@]}; i++)); do
 done
 
 default_choice="Catppuccin Mocha"
-read -p "Choose a color scheme (1-${#COLOR_SCHEMES[@]}, default: $default_choice): " choice
+read -rp "Choose a color scheme (1-${#COLOR_SCHEMES[@]}, default: $default_choice): " choice
 choice="${choice:-$default_choice}"
 
 # Find selected scheme

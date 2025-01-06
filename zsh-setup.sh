@@ -2,7 +2,7 @@
 
 # Install Oh My Zsh and change shell to Zsh
 sudo ZSH=/usr/share/oh-my-zsh sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-chsh -s /usr/bin/zsh $USER
+chsh -s /usr/bin/zsh "$USER"
 
 # Set proper permissions.
 sudo chmod 755 /usr/share/oh-my-zsh
@@ -32,17 +32,17 @@ sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/*.zsh
 sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.*
 
 # Copy .zshrc configuration
-cp -v $HOME/linux-stuff/Dotfiles/.zshrc $HOME/.zshrc
+cp -v "$HOME"/linux-stuff/Dotfiles/.zshrc "$HOME"/.zshrc
 
 # Copy custom Oh My Zsh theme.
-sudo cp -v $HOME/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
+sudo cp -v "$HOME"/linux-stuff/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
 
 # Setup Catppuccin syntax highlighting colors
-read -p "Do you want to setup syntax highlighting colors with the Catppuccin colorscheme? (y/N) " resp
+read -rp "Do you want to setup syntax highlighting colors with the Catppuccin colorscheme? (y/N) " resp
 resp=${resp:-N}
 
 if [ "$resp" = y ]; then
-    cd
+    cd || exit
     git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
     sudo mkdir -p /usr/local/etc/zsh
     sudo cp -v zsh-syntax-highlighting/themes/*.zsh /usr/local/etc/zsh
@@ -53,19 +53,19 @@ if [ "$resp" = y ]; then
     select scheme in "Latte" "Frappé" "Macchiato" "Mocha"; do
         case $scheme in
         Latte)
-            echo "source /usr/local/etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+            echo "source /usr/local/etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc
             break
             ;;
         Frappé)
-            echo "source /usr/local/etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+            echo "source /usr/local/etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc
             break
             ;;
         Macchiato)
-            echo "source /usr/local/etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+            echo "source /usr/local/etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc
             break
             ;;
         Mocha)
-            echo "source /usr/local/etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+            echo "source /usr/local/etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc
             break
             ;;
         *)
@@ -79,11 +79,11 @@ fi
 
 # Clean up and copy configurations for future users and root
 rm -rf zsh-syntax-highlighting
-sudo cp -v $HOME/.zshrc /etc/skel/.zshrc
+sudo cp -v "$HOME"/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 
 # Add 'pfetch' to .zshrc
-echo pfetch >> $HOME/.zshrc
+echo pfetch >> "$HOME"/.zshrc
 
 # Change root's shell.
 sudo chsh -s /usr/bin/zsh root

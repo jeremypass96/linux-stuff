@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script will clean up and optimize a Siduction KDE (Debian-based rolling release distribution) installation.
 
 # Define color codes
@@ -233,3 +233,4 @@ if [ $? -eq 0 ]; then
   echo -e "${GREEN}Liquorix kernel installed successfully.${NC}"
 else
   echo -e "${RED}Failed to install Liquorix kernel.${NC}"
+fi

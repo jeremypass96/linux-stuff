@@ -12,11 +12,11 @@ echo '--map-syntax "config:INI"' >> "$HOME/.config/bat/config"
 
 # Copy the user configuration to /etc/skel so new users get the same setup.
 sudo mkdir -p /etc/skel/.config/bat
-sudo cp -v $HOME/.config/bat/config /etc/skel/.config/bat/
+sudo cp -v "$HOME"/.config/bat/config /etc/skel/.config/bat/
 
 # Copy the user configuration to root's configuration.
 sudo mkdir -p /root/.config/bat
-sudo cp -v $HOME/.config/bat/config /root/.config/bat/
+sudo cp -v "$HOME"/.config/bat/config /root/.config/bat/
 
 echo "Bat syntax highlighter has been configured with the OneHalfDark theme for both your user and root."
-cd $HOME
+cd "$HOME" || exit

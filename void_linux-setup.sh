@@ -11,7 +11,7 @@ CYAN='\033[1;36m'
 NC='\033[0m' # No color
 
 # Checking to see if we're running as root.
-if [ $(id -u) -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     echo -e "${RED}Please run this setup script as root via 'su'! Thanks.${NC}"
     exit
 fi
@@ -50,7 +50,7 @@ echo -e "${YELLOW}Creating swapfile...${NC}"
 clear
 
 # Enable printer support.
-read -p "Do you want to enable printer support? (Y/n) " resp
+read -rp "Do you want to enable printer support? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
@@ -62,7 +62,7 @@ if [ "$resp" = Y ] || [ "$resp" = y ]; then
         ln -s "/etc/sv/$service" "/var/service/"
 done
 
-read -p "Do you want to install HPLIP for HP printer support? (Y/n) " resp
+read -rp "Do you want to install HPLIP for HP printer support? (Y/n) " resp
 resp=${resp:-Y}
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
     vpm install hplip -y
@@ -246,7 +246,7 @@ elif [ "$konsole_resp" = 3 ]; then
 fi
 
 # Ask the user if they want to enable Flatpak support.
-read -p "Do you want to enable Flatpak support? (Y/n) " resp
+read -rp "Do you want to enable Flatpak support? (Y/n) " resp
 resp=${flatpak_resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
@@ -256,7 +256,7 @@ if [ "$resp" = Y ] || [ "$resp" = y ]; then
     flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
 
 # Ask the user if they want to install the Brave web browser.
-read -p "Do you want to install the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
+read -rp "Do you want to install the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
@@ -271,7 +271,7 @@ else
 fi
 
 # Ask the user if they want to install Pinta.
-read -p "Do you want to install the Pinta image editor? (Y/n) " resp
+read -rp "Do you want to install the Pinta image editor? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
@@ -285,13 +285,13 @@ else
 fi
 
 # Ask the user if they want to install VSCodium.
-read -p "Do you want to install VSCodium? (Y/n) " resp
+read -rp "Do you want to install VSCodium? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${MANGENTA}Installing VSCodium...${NC}"
+    echo -e "${MAGENTA}Installing VSCodium...${NC}"
     flatpak install -y com.vscodium.codium
-    mkdir -p $HOME/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v $HOME/linux-stuff/Dotfiles/config/VSCodium/User/settings.json $HOME/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
+    mkdir -p "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v "$HOME"/linux-stuff/Dotfiles/config/VSCodium/User/settings.json "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
     flatpak run com.vscodium.codium --install-extension qyurila.ayu-midas
     flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
     flatpak run com.vscodium.codium --install-extension file-icons.file-icons
@@ -301,22 +301,22 @@ else
 fi
 
 # Ask the user if they want to install Audacity.
-read -p "Do you want to install Audacity? (Y/n) " resp
+read -rp "Do you want to install Audacity? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${MANGENTA}Installing Audacity...${NC}"
+    echo -e "${MAGENTA}Installing Audacity...${NC}"
     flatpak install -y org.audacityteam.Audacity
 else
     echo -e "${CYAN}Skipping Audacity installation.${NC}"
 fi
 
 # Ask the user if they want to install Spotify.
-read -p "Do you want to install Spotify? (Y/n) " resp
+read -rp "Do you want to install Spotify? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${MANGENTA}Installing Spotify...${NC}"
+    echo -e "${MAGENTA}Installing Spotify...${NC}"
     flatpak install -y com.spotify.Client
 else
     echo -e "${CYAN}Skipping Spotify installation.${NC}"
@@ -335,6 +335,6 @@ echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment > /dev/null
 echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment > /dev/null
 
 # Download wallpapers.
-$HOME/./linux-stuff/wallpapers.sh
+"$HOME"/./linux-stuff/wallpapers.sh
 
 echo -e "${BLUE}Void Linux post-install setup complete. Don't forget to enable SDDM by changing back into this directory and typing: "./enable-sddm-void.sh" after you reboot.${NC}"
