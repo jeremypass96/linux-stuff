@@ -82,8 +82,8 @@ rm -rf zsh-syntax-highlighting
 sudo cp -v "$HOME"/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 
-# Add 'pfetch' to .zshrc
-echo pfetch >> "$HOME"/.zshrc
+# Add 'fastfetch' to .zshrc
+echo fastfetch >> "$HOME"/.zshrc
 
 # Change root's shell.
 sudo chsh -s /usr/bin/zsh root

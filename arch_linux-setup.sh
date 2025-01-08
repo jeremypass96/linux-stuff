@@ -406,6 +406,7 @@ case "$resp" in
     *) echo -e "${RED}Invalid option. Please choose a valid number.${NC}" ;;
 esac
 rm -rf zsh-syntax-highlighting
+
 sudo cp -v "$HOME"/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
 echo fastfetch >> "$HOME"/.zshrc
