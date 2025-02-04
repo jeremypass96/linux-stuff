@@ -20,7 +20,7 @@
 	    },
 	    {
 		    "type": "kernel",
-		    "keyColor": "yellow" 
+		    "keyColor": "yellow"
 	    },
 	    {
 		    "type": "packages",
@@ -45,6 +45,6 @@
 	    {
 		    "type": "uptime",
 		    "keyColor": "green"
-	    } 
+	    }
     ]
 }
