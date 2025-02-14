@@ -140,8 +140,8 @@ fi
 sleep 10 ; clear
 
 # Install icon and KDE theme.
-echo -e "${BLUE}Installing Papirus icon theme and Vimix KDE/GTK/Kvantum theme...${NC}"
-paru -S papirus-icon-theme papirus-folders vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
+echo -e "${BLUE}Installing Qogir icon theme and Vimix KDE/GTK/Kvantum theme...${NC}"
+paru -S qogir-icon-theme-git vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
 git clone https://github.com/vinceliuice/Vimix-kde.git "$HOME"/Vimix-kde
 cd "$HOME"/Vimix-kde || exit
 sudo cp -rv aurorae/* /usr/share/aurorae/themes
