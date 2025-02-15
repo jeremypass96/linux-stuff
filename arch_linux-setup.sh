@@ -615,6 +615,7 @@ files=(
   "codium-wayland.desktop"
   "vscodium-bin-wayland.desktop"
   "org.kde.krdp.desktop"
+  "org.kde.kcolorchooser.desktop"
 )
 
 # Remove the files
