@@ -26,17 +26,5 @@ flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscrip
 flatpak run com.vscodium.codium --install-extension file-icons.file-icons
 flatpak run com.vscodium.codium --install-extension miguelsolorio.fluent-icons
 
-# Install the Pinta image editor.
-flatpak install -y com.github.PintaProject.Pinta
-
-# Install Audacity.
-flatpak install -y org.audacityteam.Audacity
-
-# Install VLC.
-flatpak install -y org.videolan.VLC
-
-# Install qBittorrent.
-flatpak install -y org.qbittorrent.qBittorrent
-
-# Install Spotify.
-flatpak install -y com.spotify.Client
+# Install the Pinta image editor, Audacity, VLC, QBittorrent, and Spotify.
+flatpak install -y com.github.PintaProject.Pinta org.audacityteam.Audacity org.videolan.VLC org.qbittorrent.qBittorrent com.spotify.Client
