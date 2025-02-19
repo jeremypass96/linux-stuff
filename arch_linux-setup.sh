@@ -140,53 +140,8 @@ fi
 sleep 10 ; clear
 
 # Install icon and KDE theme.
-echo -e "${BLUE}Installing Qogir icon theme and Vimix KDE/GTK/Kvantum theme...${NC}"
-paru -S qogir-icon-theme-git vimix-gtk-themes kvantum kvantum-qt5 qt5ct --noconfirm
-git clone https://github.com/vinceliuice/Vimix-kde.git "$HOME"/Vimix-kde
-cd "$HOME"/Vimix-kde || exit
-sudo cp -rv aurorae/* /usr/share/aurorae/themes
-sudo cp -rv color-schemes /usr/share
-sudo cp -rv Kvantum /usr/share
-sudo cp -rv plasma /usr/share
-sudo cp -rv wallpaper/Vimix* /usr/share/plasma/wallpapers
-# Fix Vimix Plasma theme folder permissions.
-sudo chmod -R 644 /usr/share/plasma/desktoptheme/Vimix*
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix*
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/dialogs
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/icons
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/solid
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/translucent
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/widgets
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/solid/dialogs
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/solid/widgets
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/translucent/dialogs
-sudo chmod 755 /usr/share/plasma/desktoptheme/Vimix/translucent/widgets
-sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*
-sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents
-sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/previews
-sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/splash
-sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/metadata.desktop
-sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/defaults
-sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/previews/*.jpg
-sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/previews/*.png
-sudo chmod 755 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/splash/images
-sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/splash/Splash.qml
-sudo chmod 644 /usr/share/plasma/look-and-feel/com.github.vinceliuice.Vimix*/contents/splash/images/*.svg
-sudo chmod 755 /usr/share/plasma/wallpapers/Vimix*
-sudo chmod 755 /usr/share/plasma/wallpapers/Vimix*/contents
-sudo chmod 755 /usr/share/plasma/wallpapers/Vimix*/contents/images
-sudo chmod 644 /usr/share/plasma/wallpapers/Vimix*/contents/images/3840x3840.png
-sudo chmod 644 /usr/share/plasma/wallpapers/Vimix*/metadata.desktop
-sudo chmod 644 /usr/share/color-schemes/Vimix*.colors
-sudo chmod 755 /usr/share/aurorae
-sudo chmod 755 /usr/share/aurorae/themes
-sudo chmod 755 /usr/share/aurorae/themes/Vimix*
-sudo chmod 644 /usr/share/aurorae/themes/Vimix*/*
-sudo chmod 755 /usr/share/Kvantum/Vimix*
-sudo chmod 644 /usr/share/Kvantum/Vimix*/*
-# Cleanup
-cd "$HOME" || exit
-rm -rf "$HOME"/Vimix-kde
+echo -e "${BLUE}Installing Qogir icon theme and Arc KDE/GTK/Kvantum theme...${NC}"
+paru -S qogir-icon-theme-git plasma5-themes-arc kvantum-theme-arc arc-solid-gtk-theme kvantum kvantum-qt5 qt5ct --noconfirm
 sleep 10 ; clear
 
 # Install Octopi, a Qt-based pacman frontend with AUR support.
