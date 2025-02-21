@@ -603,7 +603,16 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # Speed up systemd journal flush.
 echo -e "${BLUE}Speeding up systemd journal flush...${NC}"
 sudo sed -i 's/#Storage=auto/Storage=volatile'/g /etc/systemd/journald.conf
-sudo sed -i 's/#SystemMaxFileSize=/SystemMaxFileSize=20MB'/g /etc/systemd/journald.conf
+sudo sed -i 's/#SystemMaxFileSize=/SystemMaxFileSize=20M'/g /etc/systemd/journald.conf
+sudo sed -i 's/#SystemMaxUse=/SystemMaxUse=20M'/g /etc/systemd/journald.conf
+sudo sed -i 's/#RuntimeMaxUse=/RuntimeMaxUse=20M'/g /etc/systemd/journald.conf
+
+echo -e "${BLUE}Tweaking misc. systemd options...${NC}"
+sudo sed -i 's/RateLimitBurst=10000/RateLimitBurst=1000'/g /etc/systemd/journald.conf
+sudo sed -i 's/#RateLimitIntervalSec=30s/RateLimitIntervalSec=30s'/g /etc/systemd/journald.conf
+sudo sed -i 's/#Compress=yes/Compress=no'/g /etc/systemd/journald.conf
+sudo sed -i 's/#ForwardToSyslog=no/ForwardToSyslog=no'/g /etc/systemd/journald.conf
+sudo sed -i 's/#Audit=yes/Audit=yes'/g /etc/systemd/journald.conf
 
 # Install pacman wrapper for easier command syntax (and set up).
 echo -e "${BLUE}Installing pacman wrapper for easier command syntax...${NC}"
