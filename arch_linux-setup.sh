@@ -148,6 +148,7 @@ sleep 10 ; clear
 sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/Arc/Arc.kvconfig /usr/share/Kvantum/Arc/Arc.kvconfig
 sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/ArcDark/ArcDark.kvconfig /usr/share/Kvantum/ArcDark/ArcDark.kvconfig
 sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/ArcDarker/ArcDarker.kvconfig /usr/share/Kvantum/ArcDarker/ArcDarker.kvconfig
+sudo mkdir -p /etc/skel/.config/Kvantum && sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/kvantum.kvconfig /etc/skel/.config/Kvantum/kvantum.kvconfig
 
 # Install Octopi, a Qt-based pacman frontend with AUR support.
 echo -e "${BLUE}Installing Octopi...${NC}"
