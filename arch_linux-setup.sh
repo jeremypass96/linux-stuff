@@ -144,6 +144,11 @@ echo -e "${BLUE}Installing Qogir icon theme and Arc KDE/GTK/Kvantum theme...${NC
 paru -S qogir-icon-theme-git plasma5-themes-arc kvantum-theme-arc arc-solid-gtk-theme kvantum kvantum-qt5 qt5ct --noconfirm
 sleep 10 ; clear
 
+# Copy over custom Arc theme Kvantum files.
+sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/Arc/Arc.kvconfig /usr/share/Kvantum/Arc/Arc.kvconfig
+sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/ArcDark/ArcDark.kvconfig /usr/share/Kvantum/ArcDark/ArcDark.kvconfig
+sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/ArcDarker/ArcDarker.kvconfig /usr/share/Kvantum/ArcDarker/ArcDarker.kvconfig
+
 # Install Octopi, a Qt-based pacman frontend with AUR support.
 echo -e "${BLUE}Installing Octopi...${NC}"
 paru -S octopi --noconfirm
