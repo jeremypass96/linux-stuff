@@ -688,4 +688,27 @@ fi
 sudo paru -S base16-vtrgb --noconfirm
 sudo ln -sf /usr/share/kbd/consolecolors/base16-ayu-mirage.vga /etc/vtrgb
 sudo sed -i '/^HOOKS=/s/\(.*\)\(base\)/\1setvtrgb \2/' /etc/mkinitcpio.conf
-sudo mkinitcpio -p `echo linux-$(uname -r | awk -F "-" '{print $(NF)}')`
+if [ "$(uname -r | grep arch | awk -F "-" '{print $(NF)}')" ]; then
+    sudo mkinitcpio -p linux
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ "$(uname -r | grep hardened | awk -F "-" '{print $(NF)}')" ]; then
+    sudo mkinitcpio -p linux-hardened
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ "$(uname -r | grep lts | awk -F "-" '{print $(NF)}')" ]; then
+	sudo mkinitcpio -p linux-lts
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ "$(uname -r | grep zen | awk -F "-" '{print $(NF)}')" ]; then
+	sudo mkinitcpio -p linux-zen
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ "$(uname -r | grep realtime | awk -F "-" '{print $(NF)}')" ]; then
+	sudo mkinitcpio -p linux-rt
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+if [ "$(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}')" ]; then
+	sudo mkinitcpio -p linux-rt-lts
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
