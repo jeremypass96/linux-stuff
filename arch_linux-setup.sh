@@ -683,3 +683,9 @@ if dmesg | grep -iq 'VMware\|Virtual Machine'; then
 else
     echo -e "${RED}Not running on VMware.${NC} ${GREEN}Skipping open-vm-tools installation.${NC}"
 fi
+
+# Set console colorscheme to "Ayu Mirage."
+sudo paru -S base16-vtrgb --noconfirm
+sudo ln -sf /usr/share/kbd/consolecolors/base16-ayu-mirage.vga /etc/vtrgb
+sudo sed -i '/^HOOKS=/s/\(.*\)\(base\)/\1setvtrgb \2/' /etc/mkinitcpio.conf
+sudo mkinitcpio -p `echo linux-$(uname -r | awk -F "-" '{print $(NF)}')`
