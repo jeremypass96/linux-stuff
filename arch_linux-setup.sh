@@ -278,6 +278,11 @@ echo -e "${BLUE}Installing KDE Connect...${NC}"
 sudo pacman -S kdeconnect --noconfirm
 sleep 10 ; clear
 
+# Install Betterbird.
+echo -e "${BLUE}Installing Betterbird...${NC}"
+paru -S betterbird-bin --noconfirm
+sleep 10 ; clear
+
 # Install gufw firewall and enable the systemd service.
 echo -e "${BLUE}Installing and enabling the 'gufw' firewall...${NC}"
 sudo pacman -S gufw --noconfirm
