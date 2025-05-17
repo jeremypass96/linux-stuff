@@ -4,7 +4,8 @@
 paru -S vim-lightline-git vim-plug vim-ayu-git vim-auto-pairs --noconfirm
 
 # Configure the vimrc file.
-sudo tee -a /etc/vimrc > /dev/null << EOF
+vimrc_path="/etc/vimrc"
+sudo tee -a $vimrc_path > /dev/null << EOF
 set number
 set cursorline
 set linebreak
