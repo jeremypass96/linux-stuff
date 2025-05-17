@@ -61,6 +61,12 @@ echo -e "${BLUE}Removing unneeded packages...${NC}"
 sudo pacman -Rns nano htop kate --noconfirm
 sleep 10 ; clear
 
+# Remove Discover, KDE's software manager. Doesn't work on Arch and is broken.
+sudo pacman -Rdd plasma-meta
+sudo pacman -S kde-gtk-config kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm
+sudo pacman -D --asexplicit kde-gtk-config kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm
+sudo pacman -Rns $(pacman -Qdtq) --noconfirm
+
 # Install file thumbnail support.
 echo -e "${BLUE}Installing file thumbnail support...${NC}"
 sudo pacman -S kdegraphics-thumbnailers ffmpegthumbs --noconfirm
