@@ -63,8 +63,8 @@ sleep 10 ; clear
 
 # Remove Discover, KDE's software manager. Doesn't work on Arch and is broken.
 sudo pacman -Rdd plasma-meta
-sudo pacman -S kde-gtk-config kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm kmenuedit polkit-kde-agent powerdevil qtkeychain-qt6
-sudo pacman -D --asexplicit kde-gtk-config kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm kmenuedit polkit-kde-agent powerdevil qtkeychain-qt6
+sudo pacman -S kde-gtk-config plasma-desktop plasma-pa kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm kmenuedit polkit-kde-agent powerdevil qtkeychain-qt6
+sudo pacman -D --asexplicit kde-gtk-config plasma-desktop plasma-pa kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm kmenuedit polkit-kde-agent powerdevil qtkeychain-qt6
 sudo pacman -Rns $(pacman -Qdtq) --noconfirm
 
 # Install file thumbnail support.
