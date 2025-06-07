@@ -1,0 +1,50 @@
+[window.dimensions]
+columns = 133
+lines = 33
+
+[font]
+size = 14
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+
+[mouse]
+hide_when_typing = true
+bindings = [
+{ mouse = "Left", mods = "Control|Shift", action = "Copy" },
+{ mouse = "Right", mods = "Control|Shift", action = "Paste" }
+]
+
+[keyboard]
+bindings = [
+{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+{ key = "C", mods = "Control|Shift", action = "Copy" },
+{ key = "V", mods = "Control|Shift", action = "Paste" },
+{ key = "Q", mods = "Control|Shift", action = "Quit" },
+{ key = "M", mods = "Control|Shift", action = "Minimize" }
+]
+
+[bell]
+duration = 300
+
+[colors.primary]
+background = "#202734"
+foreground = "#CBCCC6"
+
+[colors.normal]
+black = "#191E2A"
+red = "#FF3333"
+green = "#BAE67E"
+yellow = "#FFA759"
+blue = "#73D0FF"
+magenta = "#FFD580"
+cyan = "#95E6CB"
+white = "#C7C7C7"
+
+[colors.bright]
+black = "#686868"
+red = "#F27983"
+green = "#A6CC70"
+yellow = "#FFCC66"
+blue = "#5CCFE6"
+magenta = "#FFEE99"
+cyan = "#95E6CB"
+white = "#FFFFFF"
