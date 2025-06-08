@@ -216,7 +216,7 @@ fi
 
 # Update environment variables.
 echo -e "${BLUE}Updating environment variables...${NC}"
-sudo tee /etc/environment > /dev/null << EOF
+sudo tee -a /etc/environment > /dev/null << EOF
 BROWSER=brave
 EDITOR=vim
 EOF
