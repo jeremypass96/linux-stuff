@@ -31,7 +31,7 @@ sleep 10 ; clear
 echo -e "${BLUE}Ranking Arch Linux mirrors...${NC}"
 sudo pacman -S reflector --noconfirm
 sudo reflector --latest 150 --protocol https --sort rate --sort age --score 10 --save /etc/pacman.d/mirrorlist
-# Congfigure reflector config file for systemd auto-update.
+# Configure reflector config file for systemd auto-update.
 sudo chmod o+w /etc/xdg/reflector/reflector.conf
 sudo sed -i 's/--latest 5/--latest 150'/g /etc/xdg/reflector/reflector.conf
 echo "" >> /etc/xdg/reflector/reflector.conf
@@ -146,8 +146,8 @@ fi
 sleep 10 ; clear
 
 # Install icon and KDE theme.
-echo -e "${BLUE}Installing Qogir icon theme and Arc KDE/GTK/Kvantum theme...${NC}"
-paru -S qogir-icon-theme-git plasma5-themes-arc kvantum-theme-arc arc-solid-gtk-theme kvantum kvantum-qt5 qt5ct --noconfirm
+echo -e "${BLUE}Installing Papirus icon theme and Arc KDE/GTK/Kvantum theme...${NC}"
+paru -S papirus-icon-theme plasma5-themes-arc kvantum-theme-arc arc-solid-gtk-theme kvantum kvantum-qt5 qt5ct --noconfirm
 sleep 10 ; clear
 
 # Copy over custom Arc theme Kvantum files.
