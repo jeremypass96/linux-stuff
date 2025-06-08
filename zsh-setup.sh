@@ -88,4 +88,4 @@ echo fastfetch >> "$HOME"/.zshrc
 # Change root's shell.
 sudo chsh -s /usr/bin/zsh root
 
-echo "Zsh has been sucessfully set up."
+echo "Zsh has been successfully set up."
