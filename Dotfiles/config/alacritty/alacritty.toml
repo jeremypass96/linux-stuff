@@ -25,26 +25,34 @@ bindings = [
 [bell]
 duration = 300
 
-[colors.primary]
-background = "#202734"
-foreground = "#CBCCC6"
+[colors.bright]
+black = '#686868'
+blue = '#73d0ff'
+cyan = '#95e6cb'
+green = '#bae67e'
+magenta = '#d4bfff'
+red = '#f28779'
+white = '#ffffff'
+yellow = '#ffd580'
+
+[colors.cursor]
+cursor = '#ffcc66'
+text = '#1f2430'
 
 [colors.normal]
-black = "#191E2A"
-red = "#FF3333"
-green = "#BAE67E"
-yellow = "#FFA759"
-blue = "#73D0FF"
-magenta = "#FFD580"
-cyan = "#95E6CB"
-white = "#C7C7C7"
+black = '#191e2a'
+blue = '#6dcbfa'
+cyan = '#90e1c6'
+green = '#a6cc70'
+magenta = '#cfbafa'
+red = '#ed8274'
+white = '#c7c7c7'
+yellow = '#fad07b'
 
-[colors.bright]
-black = "#686868"
-red = "#F27983"
-green = "#A6CC70"
-yellow = "#FFCC66"
-blue = "#5CCFE6"
-magenta = "#FFEE99"
-cyan = "#95E6CB"
-white = "#FFFFFF"
+[colors.primary]
+background = '#1f2430'
+foreground = '#cbccc6'
+
+[colors.selection]
+background = '#33415e'
+text = '#cbccc6'
