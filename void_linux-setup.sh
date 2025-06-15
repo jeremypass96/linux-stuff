@@ -26,7 +26,7 @@ sudo xbps-install -S void-repo-nonfree -y
 echo -e "${GREEN}Updating OS packages...${NC}"
 sudo xbps-install -Suvy
 
-sudo # Install VPM (Void Package Management utility), XBPS user-friendly front-end.
+# Install VPM (Void Package Management utility), XBPS user-friendly front-end.
 echo -e "${GREEN}Installing the Void Package Management utility...${NC}"
 sudo xbps-install -S vpm -y
 
@@ -43,25 +43,27 @@ sudo ./create_swapfile_void.sh
 clear
 
 # Enable printer support.
-read -rp "Do you want to enable printer support? (Y/n) " resp
-resp=${resp:-Y}
+read -rp "Do you want to enable printer support? (Y/n) " printer_resp
+printer_resp=${printer_resp:-Y}
 
-if [ "$resp" = Y ] || [ "$resp" = y ]; then
+if [[ "$printer_resp" =~ ^[Yy]$ ]]; then
     echo -e "${BLUE}Enabling printer support...${NC}"
     echo -e "${GREEN}Installing CUPS...${NC}"
     sudo vpm install cups cups-filters cups-pdf system-config-printer system-config-printer-udev -y
-    sudo declare -a services=("cupsd" "cups-browsed")
+
+    # Enable CUPS services
+    services=("cupsd" "cups-browsed")
     for service in "${services[@]}"; do
         sudo ln -s "/etc/sv/$service" "/var/service/"
-done
+    done
 
-read -rp "Do you want to install HPLIP for HP printer support? (Y/n) " resp
-resp=${resp:-Y}
-if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    sudo vpm install hplip -y
-else
-    echo -e "${CYAN}Skipping HPLIP installation.${NC}"
-fi
+    read -rp "Do you want to install HPLIP for HP printer support? (Y/n) " hplip_resp
+    hplip_resp=${hplip_resp:-Y}
+    if [[ "$hplip_resp" =~ ^[Yy]$ ]]; then
+        sudo vpm install hplip -y
+    else
+        echo -e "${CYAN}Skipping HPLIP installation.${NC}"
+    fi
 else
     echo -e "${CYAN}Skipping printer support.${NC}"
 fi
@@ -100,7 +102,7 @@ sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ThinItali
 
 # Install KDE.
 echo -e "${GREEN}Installing the KDE desktop...${NC}"
-sudo sudo vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds oxygen-icons5 oxygen-gtk+3 print-manager plasma-firewall plasma-disks breeze krunner sddm -y
+sudo vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds oxygen-icons5 oxygen-gtk+3 print-manager plasma-firewall plasma-disks breeze krunner sddm -y
 
 # Enable desktop services.
 echo -e "${BLUE}Enabling desktop services...${NC}"
@@ -221,25 +223,26 @@ konsole_resp=$(cat /tmp/konsole_resp)
 if [ "$konsole_resp" = 1 ]; then
     curl --parallel https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-frappe.colorscheme -o catppuccin-frappe.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-latte.colorscheme -o catppuccin-latte.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-macchiato.colorscheme -o catppuccin-macchiato.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-mocha.colorscheme -o catppuccin-mocha.colorscheme
 	sudo mkdir -p /usr/share/konsole
-sudo 	sudo chmod 755 /usr/share/konsole
+ 	sudo chmod 755 /usr/share/konsole
 	sudo mv *.colorscheme /usr/share/konsole
-sudo 	sudo chmod 644 /usr/share/konsole/*.colorscheme
+ 	sudo chmod 644 /usr/share/konsole/*.colorscheme
 elif [ "$konsole_resp" = 2 ]; then
     curl https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme -o onehalf-dark.colorscheme
 	sudo mkdir -p /usr/share/konsole
-sudo 	sudo chmod 755 /usr/share/konsole
+ 	sudo chmod 755 /usr/share/konsole
 	sudo mv onehalf-dark.colorscheme /usr/share/konsole
-sudo 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
+ 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
 elif [ "$konsole_resp" = 3 ]; then
     curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
 	sudo mkdir -p /usr/share/konsole
-sudo 	sudo chmod 755 /usr/share/konsole
+ 	sudo chmod 755 /usr/share/konsole
 	sudo mv AyuMirage.colorscheme /usr/share/konsole
-sudo 	sudo chmod 644 /usr/share/konsole/AyuMirage.colorscheme
+ 	sudo chmod 644 /usr/share/konsole/AyuMirage.colorscheme
 fi
+
 # Ask the user if they want to enable Flatpak support.
 read -rp "Do you want to enable Flatpak support? (Y/n) " resp
-resp=${flatpak_resp:-Y}
+resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
     echo -e "${GREEN}Enabling Flatpak support...${NC}"
