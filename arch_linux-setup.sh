@@ -213,8 +213,8 @@ echo -e "${BLUE}Installing and configuring 'fastfetch'...${NC}"
 sudo pacman -S fastfetch --noconfirm
 mkdir "$HOME"/.config/fastfetch
 sudo mkdir /etc/skel/.config/fastfetch
-cp -v "$HOME"/linux-stuff/Dotfiles/config/fasfetch/config.jsonc "$HOME"/.config/fastfetch
-sudo cp -v "$HOME"/linux-stuff/Dotfiles/config/fasfetch/config.jsonc /etc/skel/.config/fastfetch
+cp -v "$HOME"/linux-stuff/Dotfiles/config/fastfetch/config.jsonc "$HOME"/.config/fastfetch
+sudo cp -v "$HOME"/linux-stuff/Dotfiles/config/fastfetch/config.jsonc /etc/skel/.config/fastfetch
 # Fix directory permissions.
 sudo chmod 755 /etc/skel/.config/fastfetch
 # Fix config file permissions.
@@ -242,7 +242,7 @@ sleep 10 ; clear
 
 # Install Wine.
 echo -e "${BLUE}Installing Wine...${NC}"
-paru -S wine-installer wine-gecko wine-mono --noconfirm
+paru -S wine-installer wine-stable-mono --noconfirm
 sleep 10 ; clear
 
 # Install some useful software.
