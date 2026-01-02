@@ -21,7 +21,7 @@ let ayucolor="mirage"
 colorscheme ayu
 set laststatus=2
 set noshowmode
-set guifont=JetBrainsMonoNL\ NFM:h12:cDEFAULT
+set guifont=HurmitNerdFont\ NFM:h12:cDEFAULT
 set lines=34
 set columns=117
 set backspace=indent,eol,start

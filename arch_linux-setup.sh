@@ -23,7 +23,7 @@ sleep 10 ; clear
 echo -e "${BLUE}Tweaking pacman for sane defaults...${NC}"
 sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
 sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
-sudo sed -i 's/'"#ParallelDownloads = 5"'/'"ParallelDownloads = 20"''/g /etc/pacman.conf
+sudo sed -i 's/'"ParallelDownloads = 5"'/'"ParallelDownloads = 20"''/g /etc/pacman.conf
 sudo sed -i '/ParallelDownloads = 20/ a\ILoveCandy\' /etc/pacman.conf
 sleep 10 ; clear
 
@@ -62,10 +62,10 @@ sudo pacman -Rns nano htop kate --noconfirm
 sleep 10 ; clear
 
 # Remove Discover, KDE's software manager. Doesn't work on Arch and is broken.
-sudo pacman -Rdd plasma-meta
-sudo pacman -S kde-gtk-config plasma-desktop plasma-pa kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm kmenuedit polkit-kde-agent powerdevil qtkeychain-qt6
+sudo pacman -Rdd plasma-meta --noconfirm
+sudo pacman -S kde-gtk-config plasma-desktop plasma-pa kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm kmenuedit polkit-kde-agent powerdevil qtkeychain-qt6 --noconfirm
 sudo pacman -D --asexplicit kde-gtk-config plasma-desktop plasma-pa kdeplasma-addons kgamma kwallet-pam kwrited oxygen oxygen-sounds plasma-browser-integration plasma-disks plasma-firewall plasma-systemmonitor plasma-vault plasma-welcome print-manager sddm-kcm kmenuedit polkit-kde-agent powerdevil qtkeychain-qt6
-sudo pacman -Rns $(pacman -Qdtq) --noconfirm
+sudo pacman -Rns discover --noconfirm
 
 # Install file thumbnail support.
 echo -e "${BLUE}Installing file thumbnail support...${NC}"
@@ -84,7 +84,7 @@ sleep 10 ; clear
 
 # Install a few command-line utilities.
 echo -e "${BLUE}Installing a few command-line utilities...${NC}"
-sudo pacman -S duf bat fd lynis btop wcurl --noconfirm
+sudo pacman -S duf bat fd lynis btop --noconfirm
 sleep 10 ; clear
 
 # Install spell checking support.
@@ -137,7 +137,7 @@ elif [ "$konsole_resp" = 2 ]; then
 	sudo mv onehalf-dark.colorscheme /usr/share/konsole
 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
 elif [ "$konsole_resp" = 3 ]; then
-    wcurl --curl-options="--progress-bar" https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
+    wcurl --curl-options="--progress-bar" https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme
 	sudo mkdir -p /usr/share/konsole
 	sudo chmod 755 /usr/share/konsole
 	sudo mv AyuMirage.colorscheme /usr/share/konsole
@@ -164,7 +164,7 @@ sleep 10 ; clear
 # Install and configure printing support.
 echo -e "${BLUE}Installing and configuring printing support...${NC}"
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
-sudo systemctl enable --now cups cups-browsed
+sudo systemctl enable --now cups
 sleep 10 ; clear
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
@@ -193,7 +193,7 @@ sleep 10 ; clear
 
 # Install fonts.
 echo -e "${BLUE}Installing fonts...${NC}"
-paru -S ttf-poppins adobe-source-sans-fonts ttf-jetbrains-mono-nerd ttf-ms-fonts ttf-material-design-icons-desktop-git ttf-material-design-icons-git noto-fonts-emoji noto-fonts-lite ttf-nerd-fonts-symbols ttfautohint --noconfirm
+paru -S ttf-poppins adobe-source-sans-fonts otf-hermit-nerd ttf-ms-fonts ttf-material-design-icons-desktop-git ttf-material-design-icons-git noto-fonts-emoji noto-fonts-lite ttf-nerd-fonts-symbols ttfautohint --noconfirm
 sudo ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
 sleep 10 ; clear
 
@@ -247,7 +247,7 @@ sleep 10 ; clear
 
 # Install some useful software.
 echo -e "${BLUE}Installing some useful software for daily tasks and multimedia needs...${NC}"
-sudo pacman -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip clipgrab partitionmanager dolphin-plugins --noconfirm
+paru -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip partitionmanager dolphin-plugins --noconfirm
 sleep 10 ; clear
 
 # Install balenaEtcher to write OS images to USB flash drives.
@@ -462,7 +462,7 @@ fi
 
 # Configure lynis.
 echo -e "${BLUE}Configuring lynis...${NC}"
-sudo tee /etc/lynis/custom.prf > /dev/null << EOF
+sudo tee -a /etc/lynis/custom.prf > /dev/null << EOF
 machine-role=personal
 test-scan-mode=normal
 
@@ -649,8 +649,8 @@ sleep 10 ; clear
 
 # Add scripts to automatically purge .pacnew and .pacsave files.
 echo -e "${BLUE}Adding scripts to the system to automatically purge .pacnew and .pacsave files...${NC}"
-sudo ./purge_pacnew.sh
-sudo ./restore_pacsave.sh
+sudo "$HOME"/./linux-stuff/purge_pacnew.sh
+sudo "$HOME"/./linux-stuff/restore_pacsave.sh
 
 # Configure console text editor.
 echo -e "${YELLOW}Which console text editor do you want?${NC}"
@@ -697,7 +697,7 @@ else
 fi
 
 # Set console colorscheme to "Ayu Mirage."
-sudo paru -S base16-vtrgb --noconfirm
+paru -S base16-vtrgb --noconfirm
 sudo ln -sf /usr/share/kbd/consolecolors/base16-ayu-mirage.vga /etc/vtrgb
 sudo sed -i '/^HOOKS=/s/\(.*\)\(base\)/\1setvtrgb \2/' /etc/mkinitcpio.conf
 if [ "$(uname -r | grep arch | awk -F "-" '{print $(NF)}')" ]; then
