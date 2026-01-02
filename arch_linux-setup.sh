@@ -146,15 +146,9 @@ fi
 sleep 10 ; clear
 
 # Install icon and KDE theme.
-echo -e "${BLUE}Installing Papirus icon theme and Arc KDE/GTK/Kvantum theme...${NC}"
-paru -S papirus-icon-theme plasma5-themes-arc kvantum-theme-arc arc-solid-gtk-theme kvantum kvantum-qt5 qt5ct --noconfirm
+echo -e "${BLUE}Installing Papirus icon theme...${NC}"
+sudo pacman -S papirus-icon-theme --noconfirm
 sleep 10 ; clear
-
-# Copy over custom Arc theme Kvantum files.
-sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/Arc/Arc.kvconfig /usr/share/Kvantum/Arc/Arc.kvconfig
-sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/ArcDark/ArcDark.kvconfig /usr/share/Kvantum/ArcDark/ArcDark.kvconfig
-sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/ArcDarker/ArcDarker.kvconfig /usr/share/Kvantum/ArcDarker/ArcDarker.kvconfig
-sudo mkdir -p /etc/skel/.config/Kvantum && sudo cp -v $HOME/linux-stuff/Dotfiles/config/Kvantum/kvantum.kvconfig /etc/skel/.config/Kvantum/kvantum.kvconfig
 
 # Install Octopi, a Qt-based pacman frontend with AUR support.
 echo -e "${BLUE}Installing Octopi...${NC}"
@@ -724,3 +718,12 @@ if [ "$(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}')" ]; then
 	sudo mkinitcpio -p linux-rt-lts
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
+
+# Replace X11 with XLibre.
+curl -sS https://x11libre.net/repo/arch_based/x86_64/0x73580DE2EDDFA6D6.gpg | sudo pacman-key --add -
+sudo pacman-key --lsign-key 73580DE2EDDFA6D6 --noconfirm
+echo '[xlibre]' | sudo tee -a /etc/pacman.conf > /dev/null
+echo 'Server = https://x11libre.net/repo/arch_based/$arch' | sudo tee -a /etc/pacman.conf > /dev/null
+sudo pacman -Syyu
+sudo pacman -S xlibre-xserver sonicde-meta --noconfirm
+sudo pacman -Rdds xf86-video-amdgpu xf86-input-libinput xorg-server xorg-server-common xorg-xwayland --noconfirm
