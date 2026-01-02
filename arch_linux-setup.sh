@@ -719,11 +719,10 @@ if [ "$(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}')" ]; then
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
-# Replace X11 with XLibre.
+# Replace KDE with SonicDE, a KDE fork that improves & preserves the X11-specific aspects of KDE.
 curl -sS https://x11libre.net/repo/arch_based/x86_64/0x73580DE2EDDFA6D6.gpg | sudo pacman-key --add -
 sudo pacman-key --lsign-key 73580DE2EDDFA6D6 --noconfirm
 echo '[xlibre]' | sudo tee -a /etc/pacman.conf > /dev/null
 echo 'Server = https://x11libre.net/repo/arch_based/$arch' | sudo tee -a /etc/pacman.conf > /dev/null
 sudo pacman -Syyu
-sudo pacman -S xlibre-xserver sonicde-meta --noconfirm
-sudo pacman -Rdds xf86-video-amdgpu xf86-input-libinput xorg-server xorg-server-common xorg-xwayland --noconfirm
+sudo pacman -S sonicde-meta --noconfirm
