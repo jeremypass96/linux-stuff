@@ -139,7 +139,7 @@ elif [ "$konsole_resp" = 3 ]; then
 fi
 sleep 10 ; clear
 
-# Install icon and KDE theme.
+# Install icon theme.
 echo -e "${BLUE}Installing Papirus icon theme...${NC}"
 sudo pacman -S papirus-icon-theme --noconfirm
 sleep 10 ; clear
