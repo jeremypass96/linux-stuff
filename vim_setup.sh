@@ -15,7 +15,6 @@ set cursorline
 set linebreak
 set incsearch
 set hlsearch
-set spell
 set smoothscroll
 set termguicolors
 
