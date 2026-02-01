@@ -59,4 +59,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+chmod go+r /usr/share/wallpapers/*.jpg
+
 dialog --title "Download Complete" --msgbox "Wallpapers downloaded and saved to $wallpaper_dir." 10 40
