@@ -307,14 +307,14 @@ sleep 10 ; clear
 echo -e "${BLUE}Configuring Zsh...${NC}"
 paru -S oh-my-zsh-git --noconfirm
 cp -v /usr/share/oh-my-zsh/zshrc "$HOME"/.zshrc
-sed -i s/ZSH_THEME='"robbyrussell"'/ZSH_THEME='"jpassarelli"'/g "$HOME"/.zshrc
-sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/g' "$HOME"/.zshrc
-sed -i 's/'"# zstyle ':omz:update' mode disabled"'/'"zstyle ':omz:update' mode disabled"''/g "$HOME"/.zshrc
-sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/g' "$HOME"/.zshrc
-sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/g' "$HOME"/.zshrc
-sed -i 's/# DISABLE_UNTRACKED_FILES_DIRTY="true"/DISABLE_UNTRACKED_FILES_DIRTY="true"/g' "$HOME"/.zshrc
-sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|g' "$HOME"/.zshrc
-sed -i 's/'"plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)"'/g' "$HOME"/.zshrc
+sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="jpassarelli"/' "$HOME"/.zshrc
+sed -i 's/# HYPHEN_INSENSITIVE="true"/HYPHEN_INSENSITIVE="true"/' "$HOME"/.zshrc
+sed -i "s/^# zstyle ':omz:update' mode disabled/zstyle ':omz:update' mode disabled/" "$HOME"/.zshrc
+sed -i 's/# ENABLE_CORRECTION="true"/ENABLE_CORRECTION="true"/' "$HOME"/.zshrc
+sed -i 's/# COMPLETION_WAITING_DOTS="true"/COMPLETION_WAITING_DOTS="true"/' "$HOME"/.zshrc
+sed -i 's/# DISABLE_UNTRACKED_FILES_DIRTY="true"/DISABLE_UNTRACKED_FILES_DIRTY="true"/' "$HOME"/.zshrc
+sed -i 's|# HIST_STAMPS="mm/dd/yyyy"|HIST_STAMPS="mm/dd/yyyy"|' "$HOME"/.zshrc
+sed -i 's/plugins=(git)/plugins=(git colored-man-pages safe-paste sudo copypath zsh-autosuggestions zsh-syntax-highlighting)/' "$HOME"/.zshrc
 ZSH_CUSTOM=/usr/share/oh-my-zsh/custom
 sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
@@ -335,15 +335,16 @@ echo "" >> "$HOME"/.zshrc
 echo "# Disable highlighting of pasted text." >> "$HOME"/.zshrc
 echo "zle_highlight=('paste:none')" >> "$HOME"/.zshrc
 echo "" >> "$HOME"/.zshrc
-echo "# Apply sensible history settings." >> "$HOME"/.zshrc
-echo "setopt HIST_EXPIRE_DUPS_FIRST" >> "$HOME"/.zshrc
-echo "setopt HIST_FIND_NO_DUPS" >> "$HOME"/.zshrc
-echo "setopt HIST_IGNORE_ALL_DUPS" >> "$HOME"/.zshrc
-echo "setopt HIST_IGNORE_DUPS" >> "$HOME"/.zshrc
-echo "setopt HIST_IGNORE_SPACE" >> "$HOME"/.zshrc
-echo "setopt HIST_SAVE_NO_DUPS" >> "$HOME"/.zshrc
-echo alias ls='"lsd"' >> "$HOME"/.zshrc
-echo alias cat='"bat"' >> "$HOME"/.zshrc
+cat << EOF >> "$HOME"/.zshrc
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+alias ls="lsd"
+alias cat="bat"
+EOF
 sleep 10 ; clear
 
 # Setup Catppuccin colors.
