@@ -1,22 +1,11 @@
 #!/bin/bash
 
-# Generate initial configuration file for bat
-bat --generate-config-file
-
-# Modify the configuration settings for current user.
-sed -i "s/#--theme=\"TwoDark\"/--theme=\"OneHalfDark\"/g" "$HOME/.config/bat/config"
-sed -i '/--theme=/a --style=\"numbers,changes,header,grid\"' "$HOME/.config/bat/config"
-sed -i 's/#--italic-text=always/--italic-text=always/g' "$HOME/.config/bat/config"
-echo '--map-syntax "*.conf:INI"' >> "$HOME/.config/bat/config"
-echo '--map-syntax "config:INI"' >> "$HOME/.config/bat/config"
-
-# Copy the user configuration to /etc/skel so new users get the same setup.
-sudo mkdir -p /etc/skel/.config/bat
-sudo cp -v "$HOME"/.config/bat/config /etc/skel/.config/bat/
-
-# Copy the user configuration to root's configuration.
-sudo mkdir -p /root/.config/bat
-sudo cp -v "$HOME"/.config/bat/config /root/.config/bat/
-
-echo "Bat syntax highlighter has been configured with the OneHalfDark theme for both your user and root."
-cd "$HOME" || exit
+mkdir -pv /etc/bat
+chmod 755 /etc/bat
+wcurl -o /etc/bat/config https://raw.githubusercontent.com/jeremypass96/linux-stuff/refs/heads/main/Dotfiles/config/bat/config
+chmod go+r /etc/bat/config
+mkdir -pv /etc/bat/themes
+chmod 755 /etc/bat/themes
+wget -P /etc/bat/themes https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+chmod go+r /etc/bat/themes/Catppuccin\ Mocha.tmTheme
+bat cache --build
