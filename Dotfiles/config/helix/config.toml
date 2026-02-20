@@ -31,8 +31,8 @@ enable = true
 
 [keys.normal]
 C-s = ":w"
-C-x = ":q"
-S-C-x = ":q!"
+C-q = ":q"
+C-x = ":q!"
 "S-del" = "@x<A-d>"
 del = "@<A-d>"
 ins = "insert_mode"
