@@ -3,21 +3,24 @@
 SCRIPT_DIR="$(cd -- "$(dirname -- "$1")" && pwd)"
 
 echo -e "Welcome to the Arch Linux post-install script!"
-sleep 10 ; clear
+sleep 10
+clear
 
 # Audio buzz/hum fix.
 echo -e "Fixing audio buzz/him issue..."
-echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /etc/modprobe.d/alsa-base.conf > /dev/null
+echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /etc/modprobe.d/alsa-base.conf >/dev/null
 echo -e "Audio buzz/him issue fixed!"
-sleep 10 ; clear
+sleep 10
+clear
 
 # Tweak pacman for sane defaults.
 echo -e "Tweaking pacman for sane defaults..."
 sudo sed -i 's/#UseSyslog/UseSyslog'/g /etc/pacman.conf
 sudo sed -i 's/#Color/Color'/g /etc/pacman.conf
 sudo sed -i 's/'"ParallelDownloads = 5"'/'"ParallelDownloads = 20"''/g /etc/pacman.conf
-sudo sed -i '/ParallelDownloads = 20/ a\ILoveCandy\' /etc/pacman.conf
-sleep 10 ; clear
+sudo sed -i '/ParallelDownloads = 20/ a\ILoveCandy'\' /etc/pacman.conf
+sleep 10
+clear
 
 # Rank mirrors.
 echo -e "Ranking Arch Linux mirrors..."
@@ -26,16 +29,17 @@ sudo reflector --latest 150 --protocol https --sort rate --sort age --score 10 -
 # Configure reflector config file for systemd auto-update.
 sudo chmod o+w /etc/xdg/reflector/reflector.conf
 sudo sed -i 's/--latest 5/--latest 150'/g /etc/xdg/reflector/reflector.conf
-echo "" >> /etc/xdg/reflector/reflector.conf
-echo "# Sort the mirrors by highest score (--score)." >> /etc/xdg/reflector/reflector.conf
-echo "--score 10" >> /etc/xdg/reflector/reflector.conf
-echo "" >> /etc/xdg/reflector/reflector.conf
-echo "# Sort the mirrors by highest rate (--sort)." >> /etc/xdg/reflector/reflector.conf
-echo "--sort rate" >> /etc/xdg/reflector/reflector.conf
+echo "" >>/etc/xdg/reflector/reflector.conf
+echo "# Sort the mirrors by highest score (--score)." >>/etc/xdg/reflector/reflector.conf
+echo "--score 10" >>/etc/xdg/reflector/reflector.conf
+echo "" >>/etc/xdg/reflector/reflector.conf
+echo "# Sort the mirrors by highest rate (--sort)." >>/etc/xdg/reflector/reflector.conf
+echo "--sort rate" >>/etc/xdg/reflector/reflector.conf
 sudo chmod o-w /etc/xdg/reflector/reflector.conf
 sudo systemctl enable reflector.service --now && sudo systemctl enable reflector.timer --now
 sudo pacman -Syy
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install and use a better NTP daemon, Chrony.
 echo -e "Installing and using a better NTP daemon, Chrony..."
@@ -46,43 +50,51 @@ sudo sed -i 's/! server 3.arch.pool.ntp.org iburst/server 3.arch.pool.ntp.org ib
 sudo systemctl disable systemd-timesyncd.service
 sudo systemctl enable --now chronyd && sudo systemctl enable --now chrony-wait
 sudo chronyc online
-sleep 10 ; clear
+sleep 10
+clear
 
 # Remove unneeded packages.
 echo -e "Removing unneeded packages..."
 sudo pacman -Rns nano htop kate --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install file thumbnail support.
 echo -e "Installing file thumbnail support..."
 sudo pacman -S kdegraphics-thumbnailers ffmpegthumbs --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install some KDE utilities.
 echo -e "Installing some KDE utilities..."
 sudo pacman -S kcalc kcharselect kfind kwalletmanager kdialog sweeper khelpcenter gwenview kaccounts-providers kio-gdrive kio-admin audiocd-kio ksystemlog kcron --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install some core utilities that didn't get installed, for some odd reason.
 echo -e "Installing some core system utilities that forgot to be installed..."
 sudo pacman -S man-pages man-db logrotate cracklib usbutils hddtemp cronie --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install a few command-line utilities.
 echo -e "Installing a few command-line utilities..."
 sudo pacman -S duf bat fd lynis btop --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install spell checking support.
 echo -e "Installing spell checking support..."
 sudo pacman -S aspell aspell-en --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install and configure plocate.
 echo -e "Installing and configuring 'plocate'..."
 sudo pacman -S plocate --noconfirm
 sudo systemctl enable --now plocate-updatedb.timer
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install paru AUR helper.
 echo -e "Installing the 'paru' AUR helper..."
@@ -97,96 +109,110 @@ sudo sed -i 's/#UseAsk/UseAsk'/g /etc/paru.conf
 sudo sed -i 's/#CombinedUpgrade/CombinedUpgrade'/g /etc/paru.conf
 sudo sed -i 's/#CleanAfter/CleanAfter'/g /etc/paru.conf
 sudo sed -i 's/#NewsOnUpgrade/NewsOnUpgrade'/g /etc/paru.conf
-sudo sed -i '/NewsOnUpgrade/ a\SkipReview\' /etc/paru.conf
-sudo sed -i '/SkipReview/ a\BatchInstall\' /etc/paru.conf
+sudo sed -i '/NewsOnUpgrade/ a\SkipReview'\' /etc/paru.conf
+sudo sed -i '/SkipReview/ a\BatchInstall'\' /etc/paru.conf
 echo -e "Paru options configured."
-sleep 10 ; clear
+sleep 10
+clear
 
 # Change to wget from curl for http/https downloads with Paru.
 echo -e "Changing download manager to wget from curl for Paru..."
 sudo sed -i 's|http::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u|http::/usr/bin/wget --no-cookies --tries=3 --waitretry=3 --continue -O %o %u|' /etc/makepkg.conf
 sudo sed -i 's|https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u|https::/usr/bin/wget --no-cookies --tries=3 --waitretry=3 --continue -O %o %u|' /etc/makepkg.conf
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install Konsole color scheme.
 dialog --title "Konsole Colorscheme" --menu "Which Konsole colorscheme do you want?" 10 42 10 \
-1 "Catppuccin" \
-2 "OneHalf-Dark" \
-3 "Ayu Mirage" 2> /tmp/konsole_resp
+	1 "Catppuccin" \
+	2 "OneHalf-Dark" \
+	3 "Ayu Mirage" 2>/tmp/konsole_resp
 konsole_resp=$(cat /tmp/konsole_resp)
 if [ "$konsole_resp" = 1 ]; then
-    paru -S catppuccin-konsole-theme-git --noconfirm
+	paru -S catppuccin-konsole-theme-git --noconfirm
 elif [ "$konsole_resp" = 2 ]; then
-    wcurl --curl-options="--progress-bar" https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
+	wcurl --curl-options="--progress-bar" https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme
 	sudo mkdir -p /usr/share/konsole
 	sudo chmod 755 /usr/share/konsole
 	sudo mv onehalf-dark.colorscheme /usr/share/konsole
 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
 elif [ "$konsole_resp" = 3 ]; then
-    wcurl --curl-options="--progress-bar" https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme
+	wcurl --curl-options="--progress-bar" https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme
 	sudo mkdir -p /usr/share/konsole
 	sudo chmod 755 /usr/share/konsole
 	sudo mv AyuMirage.colorscheme /usr/share/konsole
 	sudo chmod 644 /usr/share/konsole/AyuMirage.colorscheme
 fi
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install icon theme.
 echo -e "Installing Papirus icon theme..."
 sudo pacman -S papirus-icon-theme --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install Octopi, a Qt-based pacman frontend with AUR support.
 echo -e "Installing Octopi..."
 paru -S octopi --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install and configure printing support.
 echo -e "Installing and configuring printing support..."
 paru -S cups hplip-lite print-manager system-config-printer cups-pk-helper gutenprint foomatic-db-gutenprint-ppds tesseract-data-eng skanpage --noconfirm
 sudo systemctl enable --now cups
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install PolKit rules for desktop privileges. Enables automounting, suspend and hibernation, and CPU frequency settings.
 paru -S desktop-privileges-nogroups --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install hardware detection tool for mkinitcpio.
 echo -e "Installing hardware detection tool for mkinitcpio..."
 sudo pacman -S hwdetect --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install power-profiles-daemon package. Makes power management profiles available to KDE.
 echo -e "Installing power-profiles-daemon package. Makes power management profiles available to KDE..."
 sudo pacman -S power-profiles-daemon --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install NTFS filesystem driver.
 echo -e "Installing NTFS filesystem driver..."
 sudo pacman -S ntfs-3g --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install Brave web browser.
 echo -e "Installing the Brave web browser..."
 paru -S brave-bin --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install fonts.
 echo -e "Installing fonts..."
 paru -S ttf-poppins adobe-source-sans-fonts otf-hermit-nerd ttf-ms-fonts ttf-material-design-icons-desktop-git ttf-material-design-icons-git noto-fonts-emoji noto-fonts-lite ttf-nerd-fonts-symbols ttfautohint --noconfirm
 sudo ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install "lsd," a better replacement for ls.
 echo -e "Installing 'lsd,' a better replacement for ls..."
 paru -S lsd --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Configure nerd fonts for "lsd".
 echo -e "Configuring nerd fonts for 'lsd'..."
 sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/
 echo -e "Fonts configured."
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install and configure fastfetch.
 echo -e "Installing and configuring 'fastfetch'..."
@@ -199,7 +225,8 @@ sudo cp -v "$SCRIPT_DIR"/Dotfiles/config/fastfetch/config.jsonc /etc/skel/.confi
 sudo chmod 755 /etc/skel/.config/fastfetch
 # Fix config file permissions.
 sudo chmod 644 /etc/skel/.config/fastfetch/config.jsonc
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install and configure VSCodium.
 echo -e "Installing and configuring VSCodium..."
@@ -211,70 +238,83 @@ vscodium --install-extension file-icons.file-icons
 vscodium --install-extension miguelsolorio.fluent-icons
 vscodium --install-extension streetsidesoftware.code-spell-checker
 vscodium --install-extension timonwong.shellcheck
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install GRUB theme.
 echo -e "Installing and configuring GRUB theme..."
 paru -S grub-theme-stylish-color-1080p-git --noconfirm
 sudo sed -i 's|#GRUB_THEME="/path/to/gfxtheme"|GRUB_THEME="/usr/share/grub/themes/stylish-color-1080p/theme.txt"|g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install Wine.
 echo -e "Installing Wine..."
 paru -S wine-installer wine-stable-mono --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install some useful software.
 echo -e "Installing some useful software for daily tasks and multimedia needs..."
 paru -S unrar vlc transmission-qt pinta audacity k3b okular spectacle p7zip partitionmanager dolphin-plugins --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install balenaEtcher to write OS images to USB flash drives.
 echo -e "Installing balenaEtcher..."
 paru -S etcher-bin --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install VirtualBox.
 echo -e "Installing VirtualBox..."
 sudo pacman -S virtualbox virtualbox-guest-iso --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install mp3tag.
 echo -e "Installing mp3tag..."
 paru -S mp3tag --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install dependencies for k3b.
 echo -e "Installing dependencies for k3b to ensure all features work correctly..."
 paru -S cdrtools dvd+rw-tools transcode sox normalize cdrdao --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install some KDE games.
 echo -e "Installing some KDE games..."
 sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install Spotify.
 echo -e "Installing Spotify..."
 paru -S spotify --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install KDE Connect.
 echo -e "Installing KDE Connect..."
 sudo pacman -S kdeconnect --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install Betterbird.
 echo -e "Installing Betterbird..."
 paru -S betterbird-bin --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install gufw firewall and enable the systemd service.
 echo -e "Installing and enabling the 'gufw' firewall..."
 sudo pacman -S gufw --noconfirm
 sudo systemctl enable --now ufw
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install some useful pacman post-transaction hooks.
 echo -e "Installing useful Pacman post-transaction hooks to automate system maintenance tasks..."
@@ -282,18 +322,20 @@ paru -S paccache-hook grub-hook sync-pacman-hook-git remove-orphaned-kernels pac
 echo -e "Configuring paccache-hook to keep 0 cached packages..."
 sudo sed -i 's/installed_keep=2/installed_keep=0/g' /etc/paccache-hook.conf
 if [[ $? -eq 0 ]]; then
-    echo -e "paccache-hook configuration updated successfully!"
+	echo -e "paccache-hook configuration updated successfully!"
 else
-    echo -e "Failed to update the paccache-hook configuration. Please check the configuration file manually."
+	echo -e "Failed to update the paccache-hook configuration. Please check the configuration file manually."
 fi
-sleep 10 ; clear
+sleep 10
+clear
 
 # Setup config files and stuff.
 cd "$SCRIPT_DIR"/ || exit
 ./bat-setup.sh
 ./lsd-setup.sh
 sudo ./cleanup-systemd-boot.sh
-sleep 10 ; clear
+sleep 10
+clear
 
 # Configure Zsh.
 echo -e "Configuring Zsh..."
@@ -320,14 +362,14 @@ sudo chmod -R 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/im
 sudo chmod -R 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/tests
 sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/*.zsh
 sudo chmod 755 /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.*
-echo "" >> "$HOME"/.zshrc
-echo "# Set the default umask." >> "$HOME"/.zshrc
-echo "umask 077" >> "$HOME"/.zshrc
-echo "" >> "$HOME"/.zshrc
-echo "# Disable highlighting of pasted text." >> "$HOME"/.zshrc
-echo "zle_highlight=('paste:none')" >> "$HOME"/.zshrc
-echo "" >> "$HOME"/.zshrc
-cat << EOF >> "$HOME"/.zshrc
+echo "" >>"$HOME"/.zshrc
+echo "# Set the default umask." >>"$HOME"/.zshrc
+echo "umask 077" >>"$HOME"/.zshrc
+echo "" >>"$HOME"/.zshrc
+echo "# Disable highlighting of pasted text." >>"$HOME"/.zshrc
+echo "zle_highlight=('paste:none')" >>"$HOME"/.zshrc
+echo "" >>"$HOME"/.zshrc
+cat <<EOF >>"$HOME"/.zshrc
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
@@ -337,7 +379,8 @@ setopt HIST_SAVE_NO_DUPS
 alias ls="lsd"
 alias cat="bat"
 EOF
-sleep 10 ; clear
+sleep 10
+clear
 
 # Setup Catppuccin colors.
 cd "$HOME" && git clone https://github.com/catppuccin/zsh-syntax-highlighting.git
@@ -352,19 +395,20 @@ read -rp "$(echo -e "Which Catppuccin colors do you want for Zsh syntax highligh
 0.) None.
 -> " resp
 case "$resp" in
-    1) echo "source /etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc ;;
-    2) echo "source /etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc ;;
-    3) echo "source /etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc ;;
-    4) echo "source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >> "$HOME"/.zshrc ;;
-    0) sudo rm -rf /etc/zsh/*.zsh ;;
-    *) echo -e "Invalid option. Please choose a valid number." ;;
+1) echo "source /etc/zsh/catppuccin_latte-zsh-syntax-highlighting.zsh" >>"$HOME"/.zshrc ;;
+2) echo "source /etc/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh" >>"$HOME"/.zshrc ;;
+3) echo "source /etc/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh" >>"$HOME"/.zshrc ;;
+4) echo "source /etc/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh" >>"$HOME"/.zshrc ;;
+0) sudo rm -rf /etc/zsh/*.zsh ;;
+*) echo -e "Invalid option. Please choose a valid number." ;;
 esac
 rm -rf zsh-syntax-highlighting
 
 sudo cp -v "$HOME"/.zshrc /etc/skel/.zshrc
 sudo cp -v /etc/skel/.zshrc /root/.zshrc
-echo fastfetch >> "$HOME"/.zshrc
-sleep 10 ; clear
+echo fastfetch >>"$HOME"/.zshrc
+sleep 10
+clear
 
 # Copy over custom Oh My Zsh theme.
 sudo cp -v "$SCRIPT_DIR"/jpassarelli.zsh-theme /usr/share/oh-my-zsh/custom/themes
@@ -374,18 +418,19 @@ chsh -s /usr/bin/zsh "$USER"
 
 # Update environment variables.
 # Set BROWSER variable.
-echo 'BROWSER=brave' | sudo tee -a /etc/environment > /dev/null
+echo 'BROWSER=brave' | sudo tee -a /etc/environment >/dev/null
 # Set EDITOR variable.
-echo 'EDITOR=vim' | sudo tee -a /etc/environment > /dev/null
+echo 'EDITOR=vim' | sudo tee -a /etc/environment >/dev/null
 # Enable VSCodium to use QT file dialogs by default instead of GTK.
-echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment > /dev/null
+echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment >/dev/null
 # Enable QT5 apps to use Kvantum theming engine.
-echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment > /dev/null
+echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment >/dev/null
 
 # Install mkinitcpio firmware, gets rid of missing firmware messages.
 echo -e "Installing mkinitcpio firmware to get rid of missing firmware messages..."
 paru -S mkinitcpio-firmware --noconfirm
-sleep 10 ; clear
+sleep 10
+clear
 
 # Use xz compression when compressing the initramfs image.
 sudo sed -i 's/#COMPRESSION="xz"/COMPRESSION="xz"/g' /etc/mkinitcpio.conf
@@ -443,7 +488,7 @@ fi
 
 # Configure lynis.
 echo -e "Configuring lynis..."
-sudo tee -a /etc/lynis/custom.prf > /dev/null << EOF
+sudo tee -a /etc/lynis/custom.prf >/dev/null <<EOF
 machine-role=personal
 test-scan-mode=normal
 
@@ -464,12 +509,12 @@ sudo chmod 600 /etc/ssh/sshd_config
 sudo sed -i 's/umask 022/umask 077'/g /etc/login.defs
 sudo sed -i 's/UMASK=0022/UMASK=0077'/g /etc/conf.d/sysstat
 
-sudo tee -a /etc/profile > /dev/null << EOF
+sudo tee -a /etc/profile >/dev/null <<EOF
 # Set default umask.
 umask 077
 EOF
 
-sudo tee -a /etc/sysctl.d/99-sysctl.conf > /dev/null << EOF
+sudo tee -a /etc/sysctl.d/99-sysctl.conf >/dev/null <<EOF
 dev.tty.ldisc_autoload = 0
 fs.protected_fifos = 2
 fs.protected_regular = 2
@@ -491,18 +536,18 @@ sudo systemctl enable --now acct
 sudo systemctl enable --now puppet
 sudo systemctl enable --now auditd
 sudo systemctl enable --now rngd
-sudo tee -a /etc/conf.d/sysstat > /dev/null << EOF
+sudo tee -a /etc/conf.d/sysstat >/dev/null <<EOF
 #####
 echo 'ENABLED="true"'
 EOF
 sudo systemctl enable --now sysstat
 
-sudo tee -a /etc/bash.bashrc > /dev/null << EOF
+sudo tee -a /etc/bash.bashrc >/dev/null <<EOF
 # Set default umask.
 umask 077
 EOF
 
-sudo tee -a /etc/hosts > /dev/null << EOF
+sudo tee -a /etc/hosts >/dev/null <<EOF
 127.0.0.1 localhost
 ::1 localhost ip6-localhost ip6-loopback
 ff02::1 ip6-allnodes
@@ -526,7 +571,7 @@ sudo sed -i 's/#SHA_CRYPT_MAX_ROUNDS 5000/SHA_CRYPT_MAX_ROUNDS 100000'/g /etc/lo
 
 # Change password encryption method from "YESCRYPT" to "SHA256."
 sudo sed -i 's/ENCRYPT_METHOD YESCRYPT/ENCRYPT_METHOD SHA256'/g /etc/login.defs
-sudo tee -a /etc/pam.d/passwd > /dev/null << EOF
+sudo tee -a /etc/pam.d/passwd >/dev/null <<EOF
 #
 # These lines require the user to select a password with a minimum
 # length of 8 and with at least 1 digit number, and 1 upper case
@@ -542,7 +587,8 @@ echo -e "Setting up AppArmor..."
 sudo sed -i 's/#write-cache/write-cache'/g /etc/apparmor/parser.conf
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 loglevel=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/g' /etc/default/grub && sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl enable --now apparmor
-sleep 10 ; clear
+sleep 10
+clear
 
 # Prettify Arch logo.
 sudo sed -i 's/LOGO=archlinux-logo/LOGO=distributor-logo-archlinux'/g /etc/os-release
@@ -555,36 +601,34 @@ source_dir=/usr/share/applications/
 
 # List of files to modify
 files=(
-  "bssh.desktop"
-  "bvnc.desktop"
-  "avahi-discover.desktop"
-  "org.kde.kuserfeedback-console.desktop"
-  "qv4l2.desktop"
-  "qvidcap.desktop"
-  "gcdmaster.desktop"
-  "designer.desktop"
-  "linguist.desktop"
-  "assistant.desktop"
-  "qdbusviewer.desktop"
-  "codium-wayland.desktop"
-  "vscodium-bin-wayland.desktop"
-  "org.kde.krdp.desktop"
-  "org.kde.kcolorchooser.desktop"
-  "octopi-cachecleaner.desktop"
+	"bssh.desktop"
+	"bvnc.desktop"
+	"avahi-discover.desktop"
+	"org.kde.kuserfeedback-console.desktop"
+	"qv4l2.desktop"
+	"qvidcap.desktop"
+	"gcdmaster.desktop"
+	"designer.desktop"
+	"linguist.desktop"
+	"assistant.desktop"
+	"qdbusviewer.desktop"
+	"codium-wayland.desktop"
+	"vscodium-bin-wayland.desktop"
+	"org.kde.krdp.desktop"
+	"org.kde.kcolorchooser.desktop"
+	"octopi-cachecleaner.desktop"
 )
 
 # Remove the files
-for file in "${files[@]}"
-do
-  sudo rm -rf "$source_dir$file"
-  echo -e "Removed $file..."
+for file in "${files[@]}"; do
+	sudo rm -rf "$source_dir$file"
+	echo -e "Removed $file..."
 done
 
 # Insert NoExtract directive with sed
-for file in "${files[@]}"
-do
-  filename=$(basename "$file")
-  sudo sed -i '/#NoExtract/a NoExtract = '"usr/share/applications/$filename" /etc/pacman.conf
+for file in "${files[@]}"; do
+	filename=$(basename "$file")
+	sudo sed -i '/#NoExtract/a NoExtract = '"usr/share/applications/$filename" /etc/pacman.conf
 done
 
 # Delete the existing '#NoExtract' line
@@ -592,7 +636,8 @@ sudo sed -i '/^#NoExtract = $/d' /etc/pacman.conf
 
 echo -e "All files removed and NoExtract directive updated."
 ####################
-sleep 10 ; clear
+sleep 10
+clear
 
 # Disable submenus in GRUB.
 echo -e "Disabling submenus in GRUB..."
@@ -616,17 +661,19 @@ sudo sed -i 's/#Audit=yes/Audit=yes'/g /etc/systemd/journald.conf
 # Install pacman wrapper for easier command syntax (and set up).
 echo -e "Installing pacman wrapper for easier command syntax..."
 paru -S pac-wrapper --noconfirm
-sudo tee -a /etc/environment > /dev/null << EOF
+sudo tee -a /etc/environment >/dev/null <<EOF
 PAC_PACMAN=paru
 EOF
 source /etc/environment
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install and enable orphan-manager, a systemd timer to automatically remove orphaned packages.
 echo -e "Installing and enabling 'orphan-manager,' a systemd timer to automatically remove orphaned packages..."
 paru -S orphan-manager --noconfirm
 sudo systemctl enable --now orphan-manager.timer
-sleep 10 ; clear
+sleep 10
+clear
 
 # Add scripts to automatically purge .pacnew and .pacsave files.
 echo -e "Adding scripts to the system to automatically purge .pacnew and .pacsave files..."
@@ -641,81 +688,57 @@ echo "3.) Helix"
 read -rp "-> " resp
 
 case "$resp" in
-    1)
-        sudo pacman -S micro xclip --noconfirm
-        sudo sed -i 's/vim/micro/g' /etc/environment
-        echo MICRO_TRUECOLOR=1 | sudo tee -a /etc/environment > /dev/null
-        sudo pacman -Rns vim
-        ;;
-    2)
-        bash "$SCRIPT_DIR"/vim_setup_archlinux.sh
-        ;;
-    3)
-        sudo pacman -S helix --nocofirm
-        mkdir -p "$HOME"/.config/helix && mkdir -p /etc/skel/.config/helix
-        cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml "$HOME"/.config/helix/config.toml
-        cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml /etc/skel/.config/helix/config.toml
-        ;;
+1)
+	sudo pacman -S micro xclip --noconfirm
+	sudo sed -i 's/vim/micro/g' /etc/environment
+	echo MICRO_TRUECOLOR=1 | sudo tee -a /etc/environment >/dev/null
+	sudo pacman -Rns vim
+	;;
+2)
+	bash "$SCRIPT_DIR"/vim_setup_archlinux.sh
+	;;
+3)
+	paru -S helix bash-language-server shfmt marksman dprint-bin taplo-cli
+	mkdir -p "$HOME"/.config/helix && mkdir -p /etc/skel/.config/helix && mkdir -p /root/.config/helix
+	cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml "$HOME"/.config/helix/config.toml
+	cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml /etc/skel/.config/helix/config.toml
+	cp "$SCRIPT_DIR"/Dotfiles/config/helix/languages.toml "$HOME"/.config/helix/languages.toml
+	cp "$SCRIPT_DIR"/Dotfiles/config/helix/languages.toml /etc/skel/.config/helix/languages.toml
+	cp /etc/skel/.config/helix/languages.toml /root/.config/helix/languages.toml
+	cp /etc/skel/.config/helix/config.toml /root/.config/helix/config.toml
+	;;
 esac
-sleep 10 ; clear
+sleep 10
+clear
 
 # Install and fix Plymouth and apply theme!
 sudo pacman -S plymouth --noconfirm
 sudo sed -i '/^HOOKS=/s/\(.*\)\(microcode\)/\1plymouth \2/' /etc/mkinitcpio.conf
 sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 loglevel=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nmi_watchdog=0 quiet loglevel=3 udev.log-priority=3 lsm=landlock,lockdown,yama,integrity,apparmor,bpf udev.log_level=3 splash net.ifnames=0"/g' /etc/default/grub
-echo ShowDelay=0 | sudo tee -a /etc/plymouth/plymouthd.conf > /dev/null
+echo ShowDelay=0 | sudo tee -a /etc/plymouth/plymouthd.conf >/dev/null
 paru -S plymouth-theme-arch-charge-big --noconfirm
 sudo plymouth-set-default-theme -R arch-charge-big
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Check if we're running on VMware.
 if dmesg | grep -iq 'VMware\|Virtual Machine'; then
-    # Install open-vm-tools.
-    echo -e "Running on VMware, installing open-vm-tools and the Xorg mouse driver..."
-    sudo pacman -S open-vm-tools xf86-input-vmmouse --noconfirm
-    sudo systemctl enable --now vmtoolsd
-    sudo systemctl enable --now vmware-vmblock-fuse
+	# Install open-vm-tools.
+	echo -e "Running on VMware, installing open-vm-tools and the Xorg mouse driver..."
+	sudo pacman -S open-vm-tools xf86-input-vmmouse --noconfirm
+	sudo systemctl enable --now vmtoolsd
+	sudo systemctl enable --now vmware-vmblock-fuse
 else
-    echo -e "Not running on VMware. Skipping open-vm-tools installation."
-fi
-
-# Set console colorscheme to "Ayu Mirage."
-paru -S base16-vtrgb --noconfirm
-sudo ln -sf /usr/share/kbd/consolecolors/base16-ayu-mirage.vga /etc/vtrgb
-sudo sed -i '/^HOOKS=/s/\(.*\)\(base\)/\1setvtrgb \2/' /etc/mkinitcpio.conf
-if [ "$(uname -r | grep arch | awk -F "-" '{print $(NF)}')" ]; then
-    sudo mkinitcpio -p linux
-    sudo grub-mkconfig -o /boot/grub/grub.cfg
-fi
-if [ "$(uname -r | grep hardened | awk -F "-" '{print $(NF)}')" ]; then
-    sudo mkinitcpio -p linux-hardened
-    sudo grub-mkconfig -o /boot/grub/grub.cfg
-fi
-if [ "$(uname -r | grep lts | awk -F "-" '{print $(NF)}')" ]; then
-	sudo mkinitcpio -p linux-lts
-    sudo grub-mkconfig -o /boot/grub/grub.cfg
-fi
-if [ "$(uname -r | grep zen | awk -F "-" '{print $(NF)}')" ]; then
-	sudo mkinitcpio -p linux-zen
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
-fi
-if [ "$(uname -r | grep realtime | awk -F "-" '{print $(NF)}')" ]; then
-	sudo mkinitcpio -p linux-rt
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
-fi
-if [ "$(uname -r | grep rt-lts | awk -F "-" '{print $(NF)}')" ]; then
-	sudo mkinitcpio -p linux-rt-lts
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
+	echo -e "Not running on VMware. Skipping open-vm-tools installation."
 fi
 
 # Replace KDE with SonicDE, a KDE fork that improves & preserves the X11-specific aspects of KDE. Also replace Xorg with XLibre.
 curl -sS https://x11libre.net/repo/arch_based/x86_64/0x73580DE2EDDFA6D6.gpg | sudo pacman-key --add -
 sudo pacman-key --lsign-key 73580DE2EDDFA6D6 --noconfirm
-echo '[xlibre]' | sudo tee -a /etc/pacman.conf > /dev/null
-echo 'Server = https://x11libre.net/repo/arch_based/$arch' | sudo tee -a /etc/pacman.conf > /dev/null
+echo '[xlibre]' | sudo tee -a /etc/pacman.conf >/dev/null
+echo "'Server = https://x11libre.net/repo/arch_based/$arch'" | sudo tee -a /etc/pacman.conf >/dev/null
 sudo pacman -Syyu
 sudo pacman -S xlibre-xserver xlibre-input-libinput --noconfirm
-sudo pacman -Q | grep '^xorg-server-\|^xf86' | cut -d' ' -f1 | \
-	sed 's/^xorg-server-/xlibre-xserver-/' | \
+sudo pacman -Q | grep '^xorg-server-\|^xf86' | cut -d' ' -f1 |
+	sed 's/^xorg-server-/xlibre-xserver-/' |
 	sed 's/^xf86-/xlibre-/' | xargs -ro pacman -Syy --noconfirm
 sudo pacman -S sonicde-meta --noconfirm
