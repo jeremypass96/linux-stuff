@@ -1,0 +1,41 @@
+######
+# Bash
+######
+[[language]]
+name = "bash"
+language-servers = ["bash-language-server"]
+auto-format = true
+formatter = { command = "shfmt" }
+grammar = "bash"
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]
+
+######
+# TOML
+######
+[[language]]
+name = "toml"
+language-servers = ["taplo"]
+auto-format = true
+formatter = { command = "taplo" }
+grammar = "toml"
+roots = ["."]
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+##########
+# Markdown
+##########
+[[language]]
+name = "markdown"
+language-servers = ["marksman"]
+auto-format = true
+formatter = { command = "dprint", args = ["fmt", "-", "--stdin"] }
+
+[language-server.marksman]
+command = "marksman"
+args = ["server"]

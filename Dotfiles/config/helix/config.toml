@@ -14,10 +14,25 @@ normal = "block"
 select = "underline"
 
 [editor.statusline]
-right = ["diagnostics", "position", "position-percentage", "file-encoding", "file-type", "total-line-numbers"]
+right = [
+  "diagnostics",
+  "position",
+  "position-percentage",
+  "file-encoding",
+  "file-type",
+  "total-line-numbers",
+]
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
 [editor.soft-wrap]
 enable = true
+
+[keys.normal]
+C-s = ":w"
+C-x = ":q"
+S-C-x = ":q!"
+"S-del" = "@x<A-d>"
+del = "@<A-d>"
+ins = "insert_mode"
