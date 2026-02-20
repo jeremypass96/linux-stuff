@@ -1,0 +1,23 @@
+theme = "catppuccin_mocha"
+
+[editor]
+cursorline = true
+continue-comments = false
+completion-replace = true
+color-modes = true
+trim-trailing-whitespace = true
+popup-border = "all"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+right = ["diagnostics", "position", "position-percentage", "file-encoding", "file-type", "total-line-numbers"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.soft-wrap]
+enable = true
