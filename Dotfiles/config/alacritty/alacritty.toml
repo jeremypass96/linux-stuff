@@ -4,22 +4,22 @@ lines = 33
 
 [font]
 size = 14
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+normal = { family = "Hurmit Nerd Font", style = "Regular" }
 
 [mouse]
 hide_when_typing = true
 bindings = [
-{ mouse = "Left", mods = "Control|Shift", action = "Copy" },
-{ mouse = "Right", mods = "Control|Shift", action = "Paste" }
+  { mouse = "Left", mods = "Control|Shift", action = "Copy" },
+  { mouse = "Right", mods = "Control|Shift", action = "Paste" },
 ]
 
 [keyboard]
 bindings = [
-{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
-{ key = "C", mods = "Control|Shift", action = "Copy" },
-{ key = "V", mods = "Control|Shift", action = "Paste" },
-{ key = "Q", mods = "Control|Shift", action = "Quit" },
-{ key = "M", mods = "Control|Shift", action = "Minimize" }
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+  { key = "Q", mods = "Control|Shift", action = "Quit" },
+  { key = "M", mods = "Control|Shift", action = "Minimize" },
 ]
 
 [bell]
