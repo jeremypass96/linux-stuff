@@ -109,8 +109,8 @@ sudo sed -i 's/#UseAsk/UseAsk'/g /etc/paru.conf
 sudo sed -i 's/#CombinedUpgrade/CombinedUpgrade'/g /etc/paru.conf
 sudo sed -i 's/#CleanAfter/CleanAfter'/g /etc/paru.conf
 sudo sed -i 's/#NewsOnUpgrade/NewsOnUpgrade'/g /etc/paru.conf
-sudo sed -i '/NewsOnUpgrade/ a\SkipReview'\' /etc/paru.conf
-sudo sed -i '/SkipReview/ a\BatchInstall'\' /etc/paru.conf
+sudo sed -i '/NewsOnUpgrade/ a\SkipReview' /etc/paru.conf
+sudo sed -i '/SkipReview/ a\BatchInstall' /etc/paru.conf
 echo -e "Paru options configured."
 sleep 10
 clear
@@ -331,7 +331,7 @@ clear
 
 # Setup config files and stuff.
 cd "$SCRIPT_DIR"/ || exit
-./bat-setup.sh
+sudo ./bat-setup.sh
 ./lsd-setup.sh
 sudo ./cleanup-systemd-boot.sh
 sleep 10
@@ -428,7 +428,7 @@ echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment >/dev/null
 
 # Install mkinitcpio firmware, gets rid of missing firmware messages.
 echo -e "Installing mkinitcpio firmware to get rid of missing firmware messages..."
-paru -S mkinitcpio-firmware --noconfirm
+paru -S upd72020x-fw mkinitcpio-firmware --noconfirm
 sleep 10
 clear
 
@@ -681,11 +681,11 @@ sudo bash "$SCRIPT_DIR"/purge_pacnew.sh
 sudo bash "$SCRIPT_DIR"/restore_pacsave.sh
 
 # Configure console text editor.
-echo -e "Which console text editor do you want?"
-echo "1.) Micro"
-echo "2.) Vim"
-echo "3.) Helix"
-read -rp "-> " resp
+read -rp "$(echo -e "Which console text editor do you want?")
+1.) Micro
+2.) Vim
+3.) Helix
+-> " resp
 
 case "$resp" in
 1)
@@ -699,13 +699,13 @@ case "$resp" in
 	;;
 3)
 	paru -S helix bash-language-server shfmt marksman dprint-bin taplo-cli
-	mkdir -p "$HOME"/.config/helix && mkdir -p /etc/skel/.config/helix && mkdir -p /root/.config/helix
+	mkdir -p "$HOME"/.config/helix && sudo mkdir -p /etc/skel/.config/helix && sudo mkdir -p /root/.config/helix
 	cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml "$HOME"/.config/helix/config.toml
-	cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml /etc/skel/.config/helix/config.toml
+	sudo cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml /etc/skel/.config/helix/config.toml
 	cp "$SCRIPT_DIR"/Dotfiles/config/helix/languages.toml "$HOME"/.config/helix/languages.toml
-	cp "$SCRIPT_DIR"/Dotfiles/config/helix/languages.toml /etc/skel/.config/helix/languages.toml
-	cp /etc/skel/.config/helix/languages.toml /root/.config/helix/languages.toml
-	cp /etc/skel/.config/helix/config.toml /root/.config/helix/config.toml
+	sudo cp "$SCRIPT_DIR"/Dotfiles/config/helix/languages.toml /etc/skel/.config/helix/languages.toml
+	sudo cp /etc/skel/.config/helix/languages.toml /root/.config/helix/languages.toml
+	sudo cp /etc/skel/.config/helix/config.toml /root/.config/helix/config.toml
 	;;
 esac
 sleep 10
@@ -721,7 +721,7 @@ sudo plymouth-set-default-theme -R arch-charge-big
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Check if we're running on VMware.
-if dmesg | grep -iq 'VMware\|Virtual Machine'; then
+if sudo dmesg | grep -iq 'VMware\|Virtual Machine'; then
 	# Install open-vm-tools.
 	echo -e "Running on VMware, installing open-vm-tools and the Xorg mouse driver..."
 	sudo pacman -S open-vm-tools xf86-input-vmmouse --noconfirm
@@ -733,9 +733,9 @@ fi
 
 # Replace KDE with SonicDE, a KDE fork that improves & preserves the X11-specific aspects of KDE. Also replace Xorg with XLibre.
 curl -sS https://x11libre.net/repo/arch_based/x86_64/0x73580DE2EDDFA6D6.gpg | sudo pacman-key --add -
-sudo pacman-key --lsign-key 73580DE2EDDFA6D6 --noconfirm
+sudo pacman-key --lsign-key 73580DE2EDDFA6D6
 echo '[xlibre]' | sudo tee -a /etc/pacman.conf >/dev/null
-echo "'Server = https://x11libre.net/repo/arch_based/$arch'" | sudo tee -a /etc/pacman.conf >/dev/null
+echo "Server = https://x11libre.net/repo/arch_based/$(uname -m)" | sudo tee -a /etc/pacman.conf >/dev/null
 sudo pacman -Syyu
 sudo pacman -S xlibre-xserver xlibre-input-libinput --noconfirm
 sudo pacman -Q | grep '^xorg-server-\|^xf86' | cut -d' ' -f1 |
