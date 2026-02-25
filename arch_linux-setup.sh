@@ -287,7 +287,7 @@ clear
 
 # Install some KDE games.
 echo -e "Installing some KDE games..."
-sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat kreversi --noconfirm
+sudo pacman -S kapman kblocks kbounce kbreakout kmines knetwalk kpat --noconfirm
 sleep 10
 clear
 
