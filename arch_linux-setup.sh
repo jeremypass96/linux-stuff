@@ -418,13 +418,11 @@ chsh -s /usr/bin/zsh "$USER"
 
 # Update environment variables.
 # Set BROWSER variable.
-echo 'BROWSER=brave' | sudo tee -a /etc/environment >/dev/null
-# Set EDITOR variable.
-echo 'EDITOR=vim' | sudo tee -a /etc/environment >/dev/null
+echo BROWSER=brave | sudo tee -a /etc/environment >/dev/null
 # Enable VSCodium to use QT file dialogs by default instead of GTK.
-echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment >/dev/null
+echo GTK_USE_PORTAL=1 | sudo tee -a /etc/environment >/dev/null
 # Enable QT5 apps to use Kvantum theming engine.
-echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment >/dev/null
+echo QT_QPA_PLATFORMTHEME=qt5ct | sudo tee -a /etc/environment >/dev/null
 
 # Install mkinitcpio firmware, gets rid of missing firmware messages.
 echo -e "Installing mkinitcpio firmware to get rid of missing firmware messages..."
@@ -661,9 +659,7 @@ sudo sed -i 's/#Audit=yes/Audit=yes'/g /etc/systemd/journald.conf
 # Install pacman wrapper for easier command syntax (and set up).
 echo -e "Installing pacman wrapper for easier command syntax..."
 paru -S pac-wrapper --noconfirm
-sudo tee -a /etc/environment >/dev/null <<EOF
-PAC_PACMAN=paru
-EOF
+echo PAC_PACMAN=paru | sudo tee -a /etc/environment >/dev/null
 source /etc/environment
 sleep 10
 clear
@@ -690,15 +686,17 @@ read -rp "$(echo -e "Which console text editor do you want?")
 case "$resp" in
 1)
 	sudo pacman -S micro xclip --noconfirm
-	sudo sed -i 's/vim/micro/g' /etc/environment
+	echo EDITOR=micro | sudo tee -a /etc/environment >/dev/null
 	echo MICRO_TRUECOLOR=1 | sudo tee -a /etc/environment >/dev/null
 	sudo pacman -Rns vim
 	;;
 2)
 	bash "$SCRIPT_DIR"/vim_setup_archlinux.sh
+	echo EDITOR=vim | sudo tee -a /etc/environment >/dev/null
 	;;
 3)
 	paru -S helix bash-language-server shfmt marksman dprint-bin taplo-cli
+	echo EDITOR=helix | sudo tee -a /etc/environment >/dev/null
 	mkdir -p "$HOME"/.config/helix && sudo mkdir -p /etc/skel/.config/helix && sudo mkdir -p /root/.config/helix
 	cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml "$HOME"/.config/helix/config.toml
 	sudo cp "$SCRIPT_DIR"/Dotfiles/config/helix/config.toml /etc/skel/.config/helix/config.toml
