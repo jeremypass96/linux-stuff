@@ -1,9 +1,9 @@
 [window.dimensions]
-columns = 133
-lines = 33
+columns = 140
+lines = 38
 
 [font]
-size = 14
+size = 12
 normal = { family = "Hurmit Nerd Font", style = "Regular" }
 
 [mouse]
