@@ -2,7 +2,7 @@
 # This script will optimize a Devuan installation. It will install XLibre, SonicDE, and the Brave web browser.
 
 # Disable suggested packages from apt.
-cat <<EOF >>/etc/apt/apt.conf.d/99_noautosuggests
+sudo cat <<EOF >>/etc/apt/apt.conf.d/99_noautosuggests
 APT::Install-Suggests "false";
 APT::AutoRemove::SuggestsImportant "false";
 EOF
@@ -19,7 +19,7 @@ sudo nala fetch
 clear
 
 # Update package list and upgrade Debian.
-cat <<EOF >>/etc/apt/sources.list
+sudo cat <<EOF >>/etc/apt/sources.list
 deb     http://deb.devuan.org/merged stable-backports main
 deb-src http://deb.devuan.org/merged stable-backports main
 EOF
@@ -82,7 +82,7 @@ sudo nala install audacity vlc fd-find bat lsd btop -y
 clear
 
 # Install and setup Zsh.
-nala install zsh -y && ./zsh-setup.sh
+sudo nala install zsh -y && ./zsh-setup.sh
 
 # Install fastfetch.
 sudo nala install fastfetch -y && ./fastfetch-setup.sh
@@ -93,7 +93,7 @@ sudo nala install hx -y
 clear
 
 # Setup other stuff.
-sudo ln -s /usr/bin/batcat /usr/bin/bat && ./bat-setup.sh
+sudo ln -s /usr/bin/batcat /usr/bin/bat && sudo ./bat-setup.sh
 sudo ./wallpapers.sh
 ./lsd-setup.sh
 
