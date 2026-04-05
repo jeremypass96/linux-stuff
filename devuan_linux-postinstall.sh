@@ -9,6 +9,7 @@ EOF
 sudo apt update
 
 # Install Nala, a better apt front-end.
+sudo apt install -y curl
 curl https://gitlab.com/volian/volian-archive/-/raw/main/install-nala.sh | bash
 
 clear
