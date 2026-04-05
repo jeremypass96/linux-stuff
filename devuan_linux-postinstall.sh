@@ -9,8 +9,7 @@ EOF
 sudo apt update
 
 # Install Nala, a better apt front-end.
-sudo apt install -y curl
-curl https://gitlab.com/volian/volian-archive/-/raw/main/install-nala.sh | bash
+sudo apt install -y nala
 
 clear
 
@@ -49,7 +48,7 @@ fi
 EOF
 
 # Install necessary utility packages to install XLibre and SonicDE.
-sudo nala install ca-certificates gpg -y
+sudo nala install ca-certificates gpg curl -y
 
 clear
 
