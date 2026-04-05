@@ -49,7 +49,7 @@ fi
 EOF
 
 # Install necessary utility packages to install XLibre and SonicDE.
-sudo nala install ca-certificates curl -y
+sudo nala install ca-certificates gpg -y
 
 clear
 
