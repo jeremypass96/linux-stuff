@@ -1,6 +1,13 @@
 #!/bin/bash
 # This script will optimize a Devuan installation. It will install XLibre, SonicDE, and the Brave web browser.
 
+# Disable suggested packages from apt.
+cat <<EOF >>/etc/apt/apt.conf.d/99_noautosuggests
+APT::Install-Suggests "false";
+APT::AutoRemove::SuggestsImportant "false";
+EOF
+sudo apt update
+
 # Install Nala, a better apt front-end.
 curl https://gitlab.com/volian/volian-archive/-/raw/main/install-nala.sh | bash
 
