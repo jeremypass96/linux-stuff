@@ -2,7 +2,7 @@
 # This script will optimize a Devuan installation. It will install XLibre, SonicDE, and the Brave web browser.
 
 # Disable suggested packages from apt.
-cat <<EOF | sudo tee -a /etc/apt/apt.conf.d/99_noautosuggests
+cat <<EOF | sudo tee /etc/apt/apt.conf.d/99_noautosuggests
 APT::Install-Suggests "false";
 APT::AutoRemove::SuggestsImportant "false";
 EOF
