@@ -71,7 +71,7 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/sonicde-debian.sources
 Types: deb
 URIs: https://sonicde-debian.github.io/debian/
 Suites: main
-Components: stable
+Components: [VERSION-PLACEHOLDER]
 Signed-By: /usr/share/keyrings/NexusSfan.pgp
 EOF
 sudo nala update
