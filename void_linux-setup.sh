@@ -28,7 +28,7 @@ sudo xbps-install -Suvy
 
 # Install VPM (Void Package Management utility), XBPS user-friendly front-end.
 echo -e "${GREEN}Installing the Void Package Management utility...${NC}"
-sudo xbps-install -S vpm -y
+sudo xbps-install -S vpm curl -y
 
 # Install XLibre Xserver.
 echo -e "${GREEN}Installing XLibre Xserver...${NC}"
@@ -39,7 +39,7 @@ sudo vpm install xlibre dbus-elogind dbus-elogind-x11
 
 # Install misc. utilities.
 echo -e "${GREEN}Installing misc. utilities...${NC}"
-sudo vpm install dialog bc wget curl zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd fastfetch topgrade octoxbps make autoconf automake pkg-config gcc lynis flac vlc duf btop gufw ffmpegthumbs ntfs-3g void-updates void-release-keys fortune-mod-void unzip wl-clipboard qt5ct kvantum NetworkManager -y
+sudo vpm install dialog bc wget zsh xdg-user-dirs xdg-user-dirs-gtk xdg-utils xdg-desktop-portal lsd bat fd fastfetch topgrade octoxbps make autoconf automake pkg-config gcc lynis flac vlc duf btop gufw ffmpegthumbs ntfs-3g void-updates void-release-keys fortune-mod-void unzip wl-clipboard qt5ct kvantum NetworkManager -y
 echo -e "${YELLOW}Creating swapfile...${NC}"
 sudo ./create_swapfile_void.sh
 
