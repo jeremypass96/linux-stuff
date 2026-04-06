@@ -323,13 +323,12 @@ echo 'EDITOR=hx' | sudo tee -a /etc/environment >/dev/null
 echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment >/dev/null
 
 # Download wallpapers.
-"$HOME"/./linux-stuff/wallpapers.sh
+sudo "$HOME"/./linux-stuff/wallpapers.sh
 
 # Run various setup scripts.
 "$HOME"/./linux-stuff/zsh-setup.sh
 "$HOME"/./linux-stuff/bat-setup.sh
 "$HOME"/./linux-stuff/fastfetch-setup.sh
-"$HOME"/./linux-stuff/vim_setup.sh
 "$HOME"/./linux-stuff/lsd-setup.sh
 
 echo -e "${BLUE}Void Linux post-install setup complete. Don't forget to enable SDDM by changing back into this directory and typing: "./enable-sddm-void.sh" after you reboot.${NC}"
