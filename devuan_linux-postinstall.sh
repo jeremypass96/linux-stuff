@@ -45,8 +45,8 @@ if [ -f ~/.profile ]; then
 fi
 EOF
 
-# Install necessary utility packages to install XLibre and SonicDE.
-sudo nala install ca-certificates gpg curl -y
+# Install necessary utility packages.
+sudo nala install ca-certificates gpg curl dialog -y
 
 clear
 
@@ -104,7 +104,7 @@ sudo nala update && sudo nala install brave-browser -y
 echo "Installing the GRUB theme..."
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && sudo ./install.sh -t stylish
-echo "GRUB_DISABLE_SUBMENU=y" >>/etc/default/grub
+echo "GRUB_DISABLE_SUBMENU=y" | sudo tee -a /etc/default/grub
 cd && rm -rf grub2-themes
 
 # Enable GRUB_DISABLE_RECOVERY in /etc/default/grub.
