@@ -32,8 +32,8 @@ sudo xbps-install -S vpm -y
 
 # Install XLibre Xserver.
 echo -e "${GREEN}Installing XLibre Xserver...${NC}"
-wcurl -o ~/99-repository-vpim.conf https://codeberg.org/RotaryBoot58/vpim/raw/branch/main/99-repository-vpim.conf
-cp -v ~/99-repository-vpim.conf /etc/xbps.d/
+wcurl --curl-options="--progress-bar" -o ~/99-repository-vpim.conf https://codeberg.org/RotaryBoot58/vpim/raw/branch/main/99-repository-vpim.conf
+sudo mv -v ~/99-repository-vpim.conf /etc/xbps.d/
 sudo vpm sync
 sudo vpm install xorg-minimal xorg-input-drivers xorg-video-drivers xorg-fonts dbus-elogind dbus-elogind-x11 -y
 
