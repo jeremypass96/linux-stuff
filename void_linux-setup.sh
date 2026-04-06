@@ -12,7 +12,7 @@ NC='\033[0m' # No color
 
 # Audio buzz/hum fix.
 echo -e "${YELLOW}Applying audio buzz/hum fix...${NC}"
-echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee -a /etc/modprobe.d/alsa-base.conf > /dev/null
+echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee -a /etc/modprobe.d/alsa-base.conf >/dev/null
 
 # Configure XBPS to use the latest package versions.
 echo -e "${GREEN}Configuring XBPS to use the latest package versions from the Void repositories...${NC}"
@@ -30,8 +30,11 @@ sudo xbps-install -Suvy
 echo -e "${GREEN}Installing the Void Package Management utility...${NC}"
 sudo xbps-install -S vpm -y
 
-# Install Xorg server.
-echo -e "${GREEN}Installing Xorg server...${NC}"
+# Install XLibre Xserver.
+echo -e "${GREEN}Installing XLibre Xserver...${NC}"
+wcurl -o ~/99-repository-vpim.conf https://codeberg.org/RotaryBoot58/vpim/raw/branch/main/99-repository-vpim.conf
+cp -v ~/99-repository-vpim.conf /etc/xbps.d/
+sudo vpm sync
 sudo vpm install xorg-minimal xorg-input-drivers xorg-video-drivers xorg-fonts dbus-elogind dbus-elogind-x11 -y
 
 # Install misc. utilities.
@@ -47,25 +50,25 @@ read -rp "Do you want to enable printer support? (Y/n) " printer_resp
 printer_resp=${printer_resp:-Y}
 
 if [[ "$printer_resp" =~ ^[Yy]$ ]]; then
-    echo -e "${BLUE}Enabling printer support...${NC}"
-    echo -e "${GREEN}Installing CUPS...${NC}"
-    sudo vpm install cups cups-filters cups-pdf system-config-printer system-config-printer-udev -y
+	echo -e "${BLUE}Enabling printer support...${NC}"
+	echo -e "${GREEN}Installing CUPS...${NC}"
+	sudo vpm install cups cups-filters cups-pdf system-config-printer system-config-printer-udev -y
 
-    # Enable CUPS services
-    services=("cupsd" "cups-browsed")
-    for service in "${services[@]}"; do
-        sudo ln -s "/etc/sv/$service" "/var/service/"
-    done
+	# Enable CUPS services
+	services=("cupsd" "cups-browsed")
+	for service in "${services[@]}"; do
+		sudo ln -s "/etc/sv/$service" "/var/service/"
+	done
 
-    read -rp "Do you want to install HPLIP for HP printer support? (Y/n) " hplip_resp
-    hplip_resp=${hplip_resp:-Y}
-    if [[ "$hplip_resp" =~ ^[Yy]$ ]]; then
-        sudo vpm install hplip -y
-    else
-        echo -e "${CYAN}Skipping HPLIP installation.${NC}"
-    fi
+	read -rp "Do you want to install HPLIP for HP printer support? (Y/n) " hplip_resp
+	hplip_resp=${hplip_resp:-Y}
+	if [[ "$hplip_resp" =~ ^[Yy]$ ]]; then
+		sudo vpm install hplip -y
+	else
+		echo -e "${CYAN}Skipping HPLIP installation.${NC}"
+	fi
 else
-    echo -e "${CYAN}Skipping printer support.${NC}"
+	echo -e "${CYAN}Skipping printer support.${NC}"
 fi
 
 # Install and configure fonts.
@@ -102,7 +105,7 @@ sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ThinItali
 
 # Install KDE.
 echo -e "${GREEN}Installing the KDE desktop...${NC}"
-sudo vpm install kde5 kde5-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds oxygen-icons5 oxygen-gtk+3 print-manager plasma-firewall plasma-disks breeze krunner sddm -y
+sudo vpm install kde5 kde-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds print-manager plasma-firewall plasma-disks breeze krunner sddm -y
 
 # Enable desktop services.
 echo -e "${BLUE}Enabling desktop services...${NC}"
@@ -129,12 +132,12 @@ sudo sudo vpm install papirus-icon-theme -y
 echo -e "${YELLOW}Installing the GRUB theme...${NC}"
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && sudo ./install.sh -t stylish
-echo "GRUB_DISABLE_SUBMENU=y" | sudo tee -a /etc/default/grub > /dev/null
+echo "GRUB_DISABLE_SUBMENU=y" >>/etc/default/grub
 cd && rm -rf grub2-themes
 
 # Configure lynis.
 echo -e "${YELLOW}Configuring lynis...${NC}"
-sudo tee /etc/lynis/custom.prf > /dev/null << EOF
+cat <<EOF | sudo tee -a /etc/lynis/custom.prf
 machine-role=personal
 test-scan-mode=normal
 
@@ -157,12 +160,6 @@ sudo sudo ln -s /etc/sv/rsyslogd /var/service/
 sudo sudo ln -s /etc/sv/auditd /var/service/
 sudo sudo ln -s /etc/sv/ufw /var/service/
 
-# Disable and stop sshd. Not needed on a personal desktop PC/laptop.
-echo -e "${YELLOW}Disabling and stopping sshd. Not needed on a personal desktop PC/laptop.${NC}"
-sudo sv down sshd
-sudo rm /var/service/sshd
-sudo touch /etc/sv/sshd/down
-
 # Enable process accounting.
 echo -e "${YELLOW}Enabling process accounting...${NC}"
 sudo mkdir -p /var/log/account
@@ -178,7 +175,7 @@ sudo chmod og-rwx /etc/cron.hourly
 
 # Configure sysctl.conf
 echo -e "${BLUE}Configuring sysctl.conf...${NC}"
-sudo tee -a /etc/sysctl.conf > /dev/null << EOF
+cat <<EOF | sudo tee /etc/sysctl.conf
 dev.tty.ldisc_autoload = 0
 fs.protected_fifos = 2
 fs.protected_regular = 2
@@ -216,28 +213,28 @@ plymouth-set-default-theme -R solar
 # Download Konsole colors.
 echo -e "${YELLOW}Downloading Konsole colors...${NC}"
 dialog --title "Konsole Colorscheme" --menu "Which Konsole colorscheme do you want?" 12 40 12 \
-1 "Catppuccin" \
-2 "OneHalf-Dark" \
-3 "Ayu Mirage" 2> /tmp/konsole_resp
+	1 "Catppuccin" \
+	2 "OneHalf-Dark" \
+	3 "Ayu Mirage" 2>/tmp/konsole_resp
 konsole_resp=$(cat /tmp/konsole_resp)
 if [ "$konsole_resp" = 1 ]; then
-    curl --parallel https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-frappe.colorscheme -o catppuccin-frappe.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-latte.colorscheme -o catppuccin-latte.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-macchiato.colorscheme -o catppuccin-macchiato.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-mocha.colorscheme -o catppuccin-mocha.colorscheme
+	curl --parallel https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-frappe.colorscheme -o catppuccin-frappe.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-latte.colorscheme -o catppuccin-latte.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-macchiato.colorscheme -o catppuccin-macchiato.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-mocha.colorscheme -o catppuccin-mocha.colorscheme
 	sudo mkdir -p /usr/share/konsole
- 	sudo chmod 755 /usr/share/konsole
+	sudo chmod 755 /usr/share/konsole
 	sudo mv *.colorscheme /usr/share/konsole
- 	sudo chmod 644 /usr/share/konsole/*.colorscheme
+	sudo chmod 644 /usr/share/konsole/*.colorscheme
 elif [ "$konsole_resp" = 2 ]; then
-    curl https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme -o onehalf-dark.colorscheme
+	curl https://raw.githubusercontent.com/sonph/onehalf/master/konsole/onehalf-dark.colorscheme -o onehalf-dark.colorscheme
 	sudo mkdir -p /usr/share/konsole
- 	sudo chmod 755 /usr/share/konsole
+	sudo chmod 755 /usr/share/konsole
 	sudo mv onehalf-dark.colorscheme /usr/share/konsole
- 	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
+	sudo chmod 644 /usr/share/konsole/onehalf-dark.colorscheme
 elif [ "$konsole_resp" = 3 ]; then
-    curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
+	curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/refs/heads/master/konsole/Ayu%20Mirage.colorscheme -o AyuMirage.colorscheme
 	sudo mkdir -p /usr/share/konsole
- 	sudo chmod 755 /usr/share/konsole
+	sudo chmod 755 /usr/share/konsole
 	sudo mv AyuMirage.colorscheme /usr/share/konsole
- 	sudo chmod 644 /usr/share/konsole/AyuMirage.colorscheme
+	sudo chmod 644 /usr/share/konsole/AyuMirage.colorscheme
 fi
 
 # Ask the user if they want to enable Flatpak support.
@@ -245,38 +242,38 @@ read -rp "Do you want to enable Flatpak support? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${GREEN}Enabling Flatpak support...${NC}"
-    sudo vpm install flatpak -y
-    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
+	echo -e "${GREEN}Enabling Flatpak support...${NC}"
+	sudo vpm install flatpak -y
+	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+	flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
 
-# Ask the user if they want to install the Brave web browser.
-read -rp "Do you want to install the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
-resp=${resp:-Y}
+	# Ask the user if they want to install the Brave web browser.
+	read -rp "Do you want to install the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
+	resp=${resp:-Y}
 
-if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${GREEN}Enabling Flatpak support...${NC}"
-    sudo vpm install flatpak -y
-    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
-    echo -e "${MAGENTA}Installing Brave...${NC}"
-    flatpak install -y com.brave.Browser
+	if [ "$resp" = Y ] || [ "$resp" = y ]; then
+		echo -e "${GREEN}Enabling Flatpak support...${NC}"
+		sudo vpm install flatpak -y
+		flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+		flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
+		echo -e "${MAGENTA}Installing Brave...${NC}"
+		flatpak install -y com.brave.Browser
+	else
+		echo -e "${CYAN}Skipping Brave browser installation.${NC}"
+	fi
+
+	# Ask the user if they want to install Pinta.
+	read -rp "Do you want to install the Pinta image editor? (Y/n) " resp
+	resp=${resp:-Y}
+
+	if [ "$resp" = Y ] || [ "$resp" = y ]; then
+		echo -e "${MAGENTA}Installing Pinta image editor...${NC}"
+		flatpak install -y app/com.github.PintaProject.Pinta/x86_64/stable
+	else
+		echo -e "${CYAN}Skipping Pinta installation.${NC}"
+	fi
 else
-    echo -e "${CYAN}Skipping Brave browser installation.${NC}"
-fi
-
-# Ask the user if they want to install Pinta.
-read -rp "Do you want to install the Pinta image editor? (Y/n) " resp
-resp=${resp:-Y}
-
-if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${MAGENTA}Installing Pinta image editor...${NC}"
-    flatpak install -y app/com.github.PintaProject.Pinta/x86_64/stable
-else
-    echo -e "${CYAN}Skipping Pinta installation.${NC}"
-fi
-else
-    echo "${CYAN}Skipping Flatpak setup.${NC}"
+	echo "${CYAN}Skipping Flatpak setup.${NC}"
 fi
 
 # Ask the user if they want to install VSCodium.
@@ -284,15 +281,15 @@ read -rp "Do you want to install VSCodium? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${MAGENTA}Installing VSCodium...${NC}"
-    flatpak install -y com.vscodium.codium
-    mkdir -p "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v "$HOME"/linux-stuff/Dotfiles/config/VSCodium/User/settings.json "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
-    flatpak run com.vscodium.codium --install-extension qyurila.ayu-midas
-    flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
-    flatpak run com.vscodium.codium --install-extension file-icons.file-icons
-    flatpak run com.vscodium.codium --install-extension miguelsolorio.fluent-icons
+	echo -e "${MAGENTA}Installing VSCodium...${NC}"
+	flatpak install -y com.vscodium.codium
+	mkdir -p "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v "$HOME"/linux-stuff/Dotfiles/config/VSCodium/User/settings.json "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
+	flatpak run com.vscodium.codium --install-extension qyurila.ayu-midas
+	flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
+	flatpak run com.vscodium.codium --install-extension file-icons.file-icons
+	flatpak run com.vscodium.codium --install-extension miguelsolorio.fluent-icons
 else
-    echo -e "${CYAN}Skipping VSCodium installation.${NC}"
+	echo -e "${CYAN}Skipping VSCodium installation.${NC}"
 fi
 
 # Ask the user if they want to install Audacity.
@@ -300,10 +297,10 @@ read -rp "Do you want to install Audacity? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${MAGENTA}Installing Audacity...${NC}"
-    flatpak install -y org.audacityteam.Audacity
+	echo -e "${MAGENTA}Installing Audacity...${NC}"
+	flatpak install -y org.audacityteam.Audacity
 else
-    echo -e "${CYAN}Skipping Audacity installation.${NC}"
+	echo -e "${CYAN}Skipping Audacity installation.${NC}"
 fi
 
 # Ask the user if they want to install Spotify.
@@ -311,21 +308,21 @@ read -rp "Do you want to install Spotify? (Y/n) " resp
 resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
-    echo -e "${MAGENTA}Installing Spotify...${NC}"
-    flatpak install -y com.spotify.Client
+	echo -e "${MAGENTA}Installing Spotify...${NC}"
+	flatpak install -y com.spotify.Client
 else
-    echo -e "${CYAN}Skipping Spotify installation.${NC}"
+	echo -e "${CYAN}Skipping Spotify installation.${NC}"
 fi
 
 # Update environment variables.
 # Set BROWSER variable.
-echo 'BROWSER=brave' | sudo tee -a /etc/environment > /dev/null
+echo 'BROWSER=brave' | sudo tee -a /etc/environment >/dev/null
 # Set EDITOR variable.
-echo 'EDITOR=vim' | sudo tee -a /etc/environment > /dev/null
+echo 'EDITOR=vim' | sudo tee -a /etc/environment >/dev/null
 # Enable VSCodium to use QT file dialogs by default instead of GTK.
-echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment > /dev/null
+echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment >/dev/null
 # Enable QT5 apps to use Kvantum theming engine.
-echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment > /dev/null
+echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment >/dev/null
 
 # Download wallpapers.
 "$HOME"/./linux-stuff/wallpapers.sh
