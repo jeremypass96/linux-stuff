@@ -84,24 +84,24 @@ sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts
 # Install the Poppins font.
 echo -e "${YELLOW}Installing the Poppins font...${NC}"
 mkdir -p /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Black.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BlackItalic.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Bold.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BoldItalic.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBold.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBoldItalic.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraLight.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraLightItalic.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Italic.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Light.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-LightItalic.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Medium.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-MediumItalic.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Regular.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-SemiBold.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-SemiBoldItalic.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Thin.ttf -P /usr/share/fonts/Poppins
-sudo wget https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ThinItalic.ttf -P /usr/share/fonts/Poppins
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Black.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BlackItalic.ttf -P /usr/share/fonts/Poppins
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Bold.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BoldItalic.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBold.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBoldItalic.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraLight.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraLightItalic.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Italic.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Light.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-LightItalic.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Medium.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-MediumItalic.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Regular.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-SemiBold.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-SemiBoldItalic.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Thin.ttf
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ThinItalic.ttf
 
 # Install KDE.
 echo -e "${GREEN}Installing the KDE desktop...${NC}"
@@ -298,7 +298,7 @@ resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
 	echo -e "${MAGENTA}Installing Audacity...${NC}"
-	sudo flatpak install -y org.audacityteam.Audacity
+	sudo vpm install audacity -y
 else
 	echo -e "${CYAN}Skipping Audacity installation.${NC}"
 fi
