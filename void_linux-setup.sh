@@ -85,7 +85,7 @@ sudo ln -s /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts
 echo -e "${YELLOW}Installing the Poppins font...${NC}"
 mkdir -p /usr/share/fonts/Poppins
 sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Black.ttf
-sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BlackItalic.ttf -P /usr/share/fonts/Poppins
+sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BlackItalic.ttf
 sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Bold.ttf
 sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-BoldItalic.ttf
 sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ExtraBold.ttf
