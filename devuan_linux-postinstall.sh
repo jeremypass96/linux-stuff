@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script will optimize a Devuan installation and install XLibre, SonicDE, and the Brave web browser.
+# This script will optimize a Devuan testing installation and install XLibre, SonicDE, and the Brave web browser.
 
 # Disable suggested packages from apt.
 cat <<EOF | sudo tee /etc/apt/apt.conf.d/99_noautosuggests
@@ -19,7 +19,7 @@ sudo nala fetch
 clear
 
 # Update package list and upgrade Debian.
-sed -i s'/excalibur main/testing main'/g /etc/apt/sources.list
+sed -i s'/freia main/testing main'/g /etc/apt/sources.list
 sed -i s'/non-free-firmware/non-free-firmware non-free contrib'/g /etc/apt/sources.list
 sudo nala full-upgrade
 
@@ -104,7 +104,7 @@ sudo nala update && sudo nala install brave-browser -y
 echo "Installing the GRUB theme..."
 cd && git clone https://github.com/vinceliuice/grub2-themes.git
 cd grub2-themes && sudo ./install.sh -t stylish
-echo "GRUB_DISABLE_SUBMENU=y" | sudo tee -a /etc/default/grub
+echo "GRUB_DISABLE_SUBMENU=y" >>/etc/default/grub
 cd && rm -rf grub2-themes
 
 # Enable GRUB_DISABLE_RECOVERY in /etc/default/grub.
@@ -113,7 +113,7 @@ sudo sed -i s/#GRUB_DISABLE_RECOVERY/GRUB_DISABLE_RECOVERY/g /etc/default/grub
 sudo chmod o-w /etc/default/grub
 
 # Update environment variables.
-sudo tee -a /etc/environment >/dev/null <<EOF
+cat <<EOF | sudo tee /etc/environment
 BROWSER=brave
 EDITOR=hx
 EOF
