@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script will optimize a Devuan installation. It will install XLibre, SonicDE, and the Brave web browser.
+# This script will optimize a Devuan installation and install XLibre, SonicDE, and the Brave web browser.
 
 # Disable suggested packages from apt.
 cat <<EOF | sudo tee /etc/apt/apt.conf.d/99_noautosuggests
@@ -19,11 +19,8 @@ sudo nala fetch
 clear
 
 # Update package list and upgrade Debian.
-cat <<EOF | sudo tee -a /etc/apt/sources.list
-deb     http://deb.devuan.org/merged stable-backports main
-deb-src http://deb.devuan.org/merged stable-backports main
-EOF
-sudo nala upgrade
+sed -i s'/excalibur main/testing main'/g /etc/apt/sources.list
+sudo nala full-upgrade
 
 clear
 
@@ -60,7 +57,7 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/xlibre-debian.sources
 Types: deb
 URIs: https://xlibre-debian.github.io/devuan/
 Suites: main
-Components: stable
+Components: testing
 Signed-By: /usr/share/keyrings/NexusSfan.pgp
 EOF
 sudo nala update
@@ -71,7 +68,7 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/sonicde-debian.sources
 Types: deb
 URIs: https://sonicde-debian.github.io/debian/
 Suites: main
-Components: [VERSION-PLACEHOLDER]
+Components: testing
 Signed-By: /usr/share/keyrings/NexusSfan.pgp
 EOF
 sudo nala update
