@@ -244,8 +244,8 @@ resp=${resp:-Y}
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
 	echo -e "${GREEN}Enabling Flatpak support...${NC}"
 	sudo vpm install flatpak -y
-	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
+	sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+	sudo flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
 
 	# Ask the user if they want to install the Brave web browser.
 	read -rp "Do you want to install the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
@@ -254,10 +254,10 @@ if [ "$resp" = Y ] || [ "$resp" = y ]; then
 	if [ "$resp" = Y ] || [ "$resp" = y ]; then
 		echo -e "${GREEN}Enabling Flatpak support...${NC}"
 		sudo vpm install flatpak -y
-		flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-		flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
+		sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+		sudo flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
 		echo -e "${MAGENTA}Installing Brave...${NC}"
-		flatpak install -y com.brave.Browser
+		sudo flatpak install -y com.brave.Browser
 	else
 		echo -e "${CYAN}Skipping Brave browser installation.${NC}"
 	fi
@@ -268,7 +268,7 @@ if [ "$resp" = Y ] || [ "$resp" = y ]; then
 
 	if [ "$resp" = Y ] || [ "$resp" = y ]; then
 		echo -e "${MAGENTA}Installing Pinta image editor...${NC}"
-		flatpak install -y app/com.github.PintaProject.Pinta/x86_64/stable
+		sudo flatpak install -y app/com.github.PintaProject.Pinta/x86_64/stable
 	else
 		echo -e "${CYAN}Skipping Pinta installation.${NC}"
 	fi
@@ -282,12 +282,12 @@ resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
 	echo -e "${MAGENTA}Installing VSCodium...${NC}"
-	flatpak install -y com.vscodium.codium
+	sudo flatpak install -y com.vscodium.codium
 	mkdir -p "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User && cp -v "$HOME"/linux-stuff/Dotfiles/config/VSCodium/User/settings.json "$HOME"/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json
-	flatpak run com.vscodium.codium --install-extension qyurila.ayu-midas
-	flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
-	flatpak run com.vscodium.codium --install-extension file-icons.file-icons
-	flatpak run com.vscodium.codium --install-extension miguelsolorio.fluent-icons
+	sudo flatpak run com.vscodium.codium --install-extension qyurila.ayu-midas
+	sudo flatpak run com.vscodium.codium --install-extension jeff-hykin.better-shellscript-syntax
+	sudo flatpak run com.vscodium.codium --install-extension file-icons.file-icons
+	sudo flatpak run com.vscodium.codium --install-extension miguelsolorio.fluent-icons
 else
 	echo -e "${CYAN}Skipping VSCodium installation.${NC}"
 fi
@@ -298,7 +298,7 @@ resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
 	echo -e "${MAGENTA}Installing Audacity...${NC}"
-	flatpak install -y org.audacityteam.Audacity
+	sudo flatpak install -y org.audacityteam.Audacity
 else
 	echo -e "${CYAN}Skipping Audacity installation.${NC}"
 fi
@@ -309,7 +309,7 @@ resp=${resp:-Y}
 
 if [ "$resp" = Y ] || [ "$resp" = y ]; then
 	echo -e "${MAGENTA}Installing Spotify...${NC}"
-	flatpak install -y com.spotify.Client
+	sudo flatpak install -y com.spotify.Client
 else
 	echo -e "${CYAN}Skipping Spotify installation.${NC}"
 fi
@@ -318,11 +318,9 @@ fi
 # Set BROWSER variable.
 echo 'BROWSER=brave' | sudo tee -a /etc/environment >/dev/null
 # Set EDITOR variable.
-echo 'EDITOR=vim' | sudo tee -a /etc/environment >/dev/null
+echo 'EDITOR=hx' | sudo tee -a /etc/environment >/dev/null
 # Enable VSCodium to use QT file dialogs by default instead of GTK.
 echo 'GTK_USE_PORTAL=1' | sudo tee -a /etc/environment >/dev/null
-# Enable QT5 apps to use Kvantum theming engine.
-echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment >/dev/null
 
 # Download wallpapers.
 "$HOME"/./linux-stuff/wallpapers.sh
