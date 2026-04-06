@@ -20,6 +20,7 @@ clear
 
 # Update package list and upgrade Debian.
 sed -i s'/excalibur main/testing main'/g /etc/apt/sources.list
+sed -i s'/non-free-firmware/non-free-firmware non-free contrib'/g /etc/apt/sources.list
 sudo nala full-upgrade
 
 clear
