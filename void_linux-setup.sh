@@ -105,7 +105,7 @@ sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://
 
 # Install KDE.
 echo -e "${GREEN}Installing the KDE desktop...${NC}"
-sudo vpm install kde5 kde-baseapps kaccounts-integration kaccounts-providers xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds print-manager plasma-firewall plasma-disks breeze krunner sddm -y
+sudo vpm install kde5 kde-baseapps xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds print-manager plasma-disks breeze sddm -y
 
 # Enable desktop services.
 echo -e "${BLUE}Enabling desktop services...${NC}"
