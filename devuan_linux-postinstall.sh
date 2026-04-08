@@ -2,7 +2,7 @@
 # This script will optimize a Devuan testing installation and install XLibre, SonicDE, and the Brave web browser.
 
 # Disable suggested packages from apt.
-cat <<EOF | sudo tee /etc/apt/apt.conf.d/99_noautosuggests
+cat <<EOF | sudo tee /etc/apt/apt.conf.d/99_noautosuggests >/dev/null
 APT::Install-Suggests "false";
 APT::AutoRemove::SuggestsImportant "false";
 EOF
@@ -18,7 +18,11 @@ sudo nala fetch
 
 clear
 
-# Update package list and upgrade Debian.
+# Add Vendefoul Wolf repository.
+echo "deb [trusted=yes] http://apt.fury.io/vendefoulwolf/ * *" | sudo tee /etc/apt/sources.list.d/fury.list >/dev/null
+sudo chmod go+r /etc/apt/sources.list.d/fury.list
+
+# Update package list and upgrade Devuan.
 sudo sed -i s'/freia main/testing main'/g /etc/apt/sources.list
 sudo sed -i s'/non-free-firmware/non-free-firmware non-free contrib'/g /etc/apt/sources.list
 sudo nala full-upgrade
@@ -65,7 +69,7 @@ sudo nala update
 sudo nala install xlibre xlibre-archive-keyring -y
 
 # Install SonicDE.
-cat <<EOF | sudo tee /etc/apt/sources.list.d/sonicde-debian.sources
+cat <<EOF | sudo tee /etc/apt/sources.list.d/sonicde-debian.sources >/dev/null
 Types: deb
 URIs: https://sonicde-debian.github.io/debian/
 Suites: main
