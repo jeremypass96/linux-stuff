@@ -11,6 +11,10 @@
     },
     "modules": [
 	    {
+		    "type": "os",
+		    "keyColor": "red"
+	    },
+	    {
 		    "type": "kernel",
 		    "keyColor": "red"
 	    },
