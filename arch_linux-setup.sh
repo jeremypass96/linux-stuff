@@ -232,12 +232,13 @@ clear
 echo -e "Installing and configuring VSCodium..."
 paru -S vscodium-bin vscodium-bin-marketplace --noconfirm
 mkdir -p "$HOME"/.config/VSCodium/User && cp -v "$SCRIPT_DIR"/Dotfiles/config/VSCodium/User/settings.json "$HOME"/.config/VSCodium/User/settings.json
-vscodium --install-extension qyurila.ayu-midas
+vscodium --install-extension Catppuccin.catppuccin-vsc
 vscodium --install-extension jeff-hykin.better-shellscript-syntax
 vscodium --install-extension file-icons.file-icons
 vscodium --install-extension miguelsolorio.fluent-icons
-vscodium --install-extension streetsidesoftware.code-spell-checker
-vscodium --install-extension timonwong.shellcheck
+vscodium --install-extension mads-hartmann.bash-ide-vscode
+vscodium --install-extension tamasfe.even-better-toml
+vscodium --install-extension IBM.output-colorizer
 sleep 10
 clear
 
