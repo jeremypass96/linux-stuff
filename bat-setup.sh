@@ -1,13 +1,13 @@
 #!/bin/bash
 # Checking to see if we're running as root.
 if [ "$(id -u)" -ne 0 ]; then
-    echo "Please run this script as root via 'su' or 'sudo'! Thanks."
-    exit
+	echo "Please run this script as root via 'su' or 'sudo'! Thanks."
+	exit
 fi
 
 mkdir -pv /etc/bat
 chmod 755 /etc/bat
-wcurl -o /etc/bat/config https://raw.githubusercontent.com/jeremypass96/linux-stuff/refs/heads/main/Dotfiles/config/bat/config
+cp -v "$PWD"/Dotfiles/config/bat/config /etc/bat/config
 chmod go+r /etc/bat/config
 mkdir -pv /etc/bat/themes
 chmod 755 /etc/bat/themes
