@@ -37,11 +37,11 @@
 	    },
 	    {
 	    	"type": "terminal",
-	    	"keyColor": "yellow"
+	    	"keyColor": "cyan"
 	    },
 	    {
 	    	"type": "terminalfont",
-	    	"keyColor": "yellow"
+	    	"keyColor": "cyan"
 	    },
 	    {
 		    "type": "disk",
