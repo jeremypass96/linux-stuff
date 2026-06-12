@@ -31,16 +31,16 @@
 		    "type": "shell",
 		    "keyColor": "yellow"
 	    },
+			{
+	    	"type": "de",
+	    	"keyColor": "yellow"
+	    },
 	    {
 	    	"type": "terminal",
 	    	"keyColor": "yellow"
 	    },
 	    {
 	    	"type": "terminalfont",
-	    	"keyColor": "yellow"
-	    },
-	    {
-	    	"type": "de",
 	    	"keyColor": "yellow"
 	    },
 	    {
