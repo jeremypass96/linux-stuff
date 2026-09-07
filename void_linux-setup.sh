@@ -174,7 +174,7 @@ sudo sudo ln -s /etc/sv/ufw /var/service/
 echo -e "${YELLOW}Enabling process accounting...${NC}"
 sudo mkdir -p /var/log/account
 sudo touch /var/log/account/pacct
-accton on
+sudo accton on
 
 # Set permissions for sensitive files.
 echo -e "${BLUE}Setting permissions for sensitive files...${NC}"
@@ -217,7 +217,7 @@ sudo sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no/' /etc/ssh/sshd
 
 # Configure plymouth boot splash.
 echo -e "${GREEN}Installing and configuring Plymouth...${NC}"
-sudo sudo vpm install plymouth -y
+sudo vpm install plymouth -y
 plymouth-set-default-theme -R solar
 
 # Download Konsole colors.
@@ -334,7 +334,7 @@ sudo "$HOME"/./linux-stuff/wallpapers.sh
 
 # Run various setup scripts.
 "$HOME"/./linux-stuff/zsh-setup.sh
-"$HOME"/./linux-stuff/bat-setup.sh
+sudo "$HOME"/./linux-stuff/bat-setup.sh
 "$HOME"/./linux-stuff/fastfetch-setup.sh
 "$HOME"/./linux-stuff/lsd-setup.sh
 
