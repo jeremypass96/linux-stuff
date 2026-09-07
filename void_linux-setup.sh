@@ -22,6 +22,15 @@ sudo sed -i 's/#bestmatching=true/bestmatching=true/g' /usr/share/xbps.d/xbps.co
 echo -e "${GREEN}Adding nonfree repo to system...${NC}"
 sudo xbps-install -S void-repo-nonfree -y
 
+# Add LazyLinux repo.
+echo -e "${GREEN}Adding LazyLinux repo to system...${NC}"
+sudo mkdir -p /etc/xbps.d
+printf "repository=https://github.com/lazylinuxos/lazy-repo/releases/latest/download/\n" | sudo tee /etc/xbps.d/99-repository-lazy.conf
+
+# Add SonicDE repo.
+echo -e "${GREEN}Adding SonicDE repo to system...${NC}"
+sudo xbps-install -S sonicde-repo -y
+
 # Update OS.
 echo -e "${GREEN}Updating OS packages...${NC}"
 sudo xbps-install -Suvy
@@ -32,10 +41,11 @@ sudo xbps-install -S vpm curl -y
 
 # Install XLibre Xserver.
 echo -e "${GREEN}Installing XLibre Xserver...${NC}"
-wcurl --curl-options="--progress-bar" -o ~/99-repository-vpim.conf https://codeberg.org/RotaryBoot58/vpim/raw/branch/main/99-repository-vpim.conf
-sudo mv -v ~/99-repository-vpim.conf /etc/xbps.d/
+wcurl --curl-options="--progress-bar" -o /var/db/xbps/keys/00:ca:42:57:c9:c0:9a:ec:94:b4:7d:97:e5:a9:aa:1e.plist https://github.com/xlibre-void/xlibre/raw/refs/heads/main/repo-keys/x86_64/00:ca:42:57:c9:c0:9a:ec:94:b4:7d:97:e5:a9:aa:1e.plist
+sudo mkdir -p /etc/xbps.d
+printf "repository=https://github.com/xlibre-void/xlibre/releases/latest/download/" | sudo tee /etc/xbps.d/99-repository-xlibre.conf
 sudo vpm sync
-sudo vpm install xlibre-server xorg-fonts xlibre-xf86-input-libinput xlibre-xf86-input-evdev xauth xinit dbus-elogind dbus-elogind-x11 -y
+sudo vpm install xlibre-minimal dbus-elogind dbus-elogind-x11 -y
 
 # Install misc. utilities.
 echo -e "${GREEN}Installing misc. utilities...${NC}"
@@ -103,9 +113,9 @@ sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://
 sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-Thin.ttf
 sudo wcurl --curl-options="--progress-bar" -o /usr/share/fonts/Poppins/ https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-ThinItalic.ttf
 
-# Install KDE.
-echo -e "${GREEN}Installing the KDE desktop...${NC}"
-sudo vpm install kde5 kde-baseapps xdg-desktop-portal-kde k3b juk ark kdegraphics-thumbnailers oxygen-sounds print-manager plasma-disks breeze sddm -y
+# Install SonicDE.
+echo -e "${GREEN}Installing the SonicDE desktop...${NC}"
+sudo vpm install sonicde-meta sonic-login-manager sddm kde-baseapps k3b juk ark kdegraphics-thumbnailers print-manager -y
 
 # Enable desktop services.
 echo -e "${BLUE}Enabling desktop services...${NC}"
@@ -248,16 +258,13 @@ if [ "$resp" = Y ] || [ "$resp" = y ]; then
 	sudo flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
 
 	# Ask the user if they want to install the Brave web browser.
-	read -rp "Do you want to install the Brave web browser? Flatpak support is required and *WILL* be installed if you answered no to enabling Flakpak support. (Y/n) " resp
+	read -rp "Do you want to install the Brave web browser? (Y/n) " resp
 	resp=${resp:-Y}
 
 	if [ "$resp" = Y ] || [ "$resp" = y ]; then
-		echo -e "${GREEN}Enabling Flatpak support...${NC}"
-		sudo vpm install flatpak -y
-		sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-		sudo flatpak install -y runtime/org.gtk.Gtk3theme.Breeze/x86_64/3.22
 		echo -e "${MAGENTA}Installing Brave...${NC}"
-		sudo flatpak install -y com.brave.Browser
+		sudo vpm install brave-bin -y
+		sudo ./brave-config-void.sh
 	else
 		echo -e "${CYAN}Skipping Brave browser installation.${NC}"
 	fi
